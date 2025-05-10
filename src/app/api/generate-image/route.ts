@@ -17,7 +17,7 @@ The penguin should have cartoonish, simplified features with no change in postur
 Its expression should be neutral and friendly.
 `;
 
-export async function POST(req: Request) {
+/* export async function POST(req: Request) {
   const body = await req.json();
   const { uid } = body;
 
@@ -122,4 +122,4 @@ export async function POST(req: Request) {
       { status: 500 }
     );
   }
-}
+} */
