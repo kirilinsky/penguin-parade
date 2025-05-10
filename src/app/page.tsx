@@ -1,8 +1,20 @@
+"use client";
+
+import { userNameAtom } from "@/atoms/user/user.atom";
+import { useAtomValue } from "jotai";
+
 export default function Home() {
+  const username = useAtomValue(userNameAtom);
   return (
     <div>
-      link <a href="/main">to main</a>
-      link <a href="/mylibrary">to MyLibraryPage</a>
+      <h1>🐧 Penguin Parade</h1>
+      {username ? (
+        <p>welcome, {username}!</p>
+      ) : (
+        <p>
+          please <a href="/login">login</a>
+        </p>
+      )}
     </div>
   );
 }
