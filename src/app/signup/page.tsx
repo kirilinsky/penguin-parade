@@ -2,7 +2,7 @@
 
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import React, { useState } from "react";
-import { auth, firestore } from "../../../firebase";
+import { auth, firestore } from "../../firebase";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 
 const SignUpPage = () => {

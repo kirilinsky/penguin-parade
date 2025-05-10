@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth, firestore } from "../../../firebase";
+import { auth, firestore } from "../../firebase";
 import { useRouter } from "next/navigation";
 import { useSetAtom } from "jotai";
-import { userNameAtom } from "@/atoms/user/user.atom";
+import { loggedInAtom, userIdAtom, userNameAtom } from "@/atoms/user/user.atom";
 import { doc, getDoc } from "firebase/firestore";
 
 export default function Login() {
@@ -13,6 +13,8 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const setUsername = useSetAtom(userNameAtom);
+  const setUserId = useSetAtom(userIdAtom);
+  const setLoggedIn = useSetAtom(loggedInAtom);
 
   const router = useRouter();
 
@@ -28,6 +30,8 @@ export default function Login() {
       const username = userDoc.exists() ? userDoc.data().username : null;
 
       setUsername(username);
+      setUserId(uid);
+      setLoggedIn(true);
 
       router.push("/");
     } catch (err: any) {
