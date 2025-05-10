@@ -9,6 +9,8 @@ const HeaderComponent = () => {
       <HeaderLinks>
         <a href="/main">main</a>
         <a href="/mylibrary">my library</a>
+        <a href="/signup">sign up</a>
+        <a href="/login">login</a>
       </HeaderLinks>
     </HeaderWrapper>
   );
