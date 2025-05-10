@@ -17,7 +17,7 @@ export default function RootLayout({
       <body>
         <HeaderComponent />
         {children}
-        v0.1.0
+        {process.env.NEXT_PUBLIC_APP_VERSION ?? "nv"}
       </body>
     </html>
   );
