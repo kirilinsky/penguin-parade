@@ -10,10 +10,12 @@
   },
   "dependencies": {
     "firebase": "^11.7.1",
+    "firebase-admin": "^13.3.0",
     "jotai": "^2.12.4",
     "next": "15.3.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-parallax-tilt": "^1.7.295",
     "styled-components": "^6.1.18"
   },
   "devDependencies": {
