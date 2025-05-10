@@ -22,7 +22,7 @@ const HeaderComponent = () => {
     <HeaderWrapper>
       <HeaderLinks>
         <Link href="/">home</Link>
-        <Link href="/main">countdown</Link>
+        <Link href="/countdown">countdown</Link>
         <Link href="/mylibrary">my library</Link>
         {loggedIn ? (
           <Link onClick={logOutHandler} href="/">

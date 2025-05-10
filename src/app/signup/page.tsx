@@ -25,14 +25,16 @@ const SignUpPage = () => {
       await updateProfile(user, {
         displayName: username,
       });
-
+      // TODO: auto login for new user
       await setDoc(doc(firestore, "users", user.uid), {
         email: user.email,
         username,
         createdAt: serverTimestamp(),
+        lastGeneratedAt: null,
       });
 
       alert("Welcome");
+
       setEmail("");
       setPassword("");
       setUsername("");
