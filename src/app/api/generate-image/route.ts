@@ -111,7 +111,6 @@ export async function POST(req: Request) {
       downloadURL: urlData.publicUrl,
       title: settings.t,
       settings,
-      prompt,
       id: docRef.id,
     });
   } catch (err) {

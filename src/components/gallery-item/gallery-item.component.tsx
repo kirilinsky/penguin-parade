@@ -1,18 +1,36 @@
-import { ImageItem } from "@/app/mylibrary/page";
-import React from "react";
+import React, { useMemo } from "react";
 import Tilt from "react-parallax-tilt";
-import { GalleryItemImage } from "./gallery-item.component.styled";
+import {
+  GalleryItemContent,
+  GalleryItemImage,
+} from "./gallery-item.component.styled";
+import { ImageItem } from "@/types/image.types";
+import { getBaseColorByScale } from "@/helpers/get-base-color-by-rarity/get-base-color-by-rarity";
+import GalleryItemScaleComponent from "../gallery-item-scale/gallery-item-scale.component";
 
 const GalleryItemComponent = ({ img }: { img: ImageItem }) => {
+  const baseColor = useMemo(() => {
+    return getBaseColorByScale(img.settings.rarity);
+  }, [img.settings.rarity]);
   return (
-    <div>
-      <Tilt scale={1.12} key={img.id}>
-        <GalleryItemImage src={img.imageUrl} width={225} alt={img.title} />
-        <p>
-          {img.title} - {img.settings.rarity}
-        </p>
-      </Tilt>
-    </div>
+    <Tilt
+      scale={1.13}
+      key={img.id}
+      glareEnable={true}
+      glareMaxOpacity={0.8}
+      glarePosition="all"
+      glareColor={baseColor}
+      glareBorderRadius="20px"
+    >
+      <GalleryItemContent>
+        <GalleryItemScaleComponent
+          baseColor={baseColor}
+          scale={img.settings.rarity}
+        />
+        <GalleryItemImage src={img.imageUrl} width={215} alt={img.title} />
+        <p>{img.title}</p>
+      </GalleryItemContent>
+    </Tilt>
   );
 };
 

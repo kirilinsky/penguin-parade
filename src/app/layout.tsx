@@ -1,7 +1,8 @@
-import type { Metadata } from "next";
 import "./globals.css";
-import HeaderComponent from "@/components/header/header.component";
 import { Provider as JotaiProvider } from "jotai";
+import ClientHeaderWrapper from "@/components/client-header-wrapper/client-header-wrapper.component";
+import FooterComponent from "@/components/footer/footer.component";
+import { PageWrapperStyled } from "@/components/page-wrapper/page-wrapper.component.styled";
 
 export const metadata = {
   title: "Penguin Parade",
@@ -14,14 +15,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body>
-        <JotaiProvider>
-          <HeaderComponent />
-          {children}
-        </JotaiProvider>
-        {process.env.NEXT_PUBLIC_APP_VERSION ?? "nv"}
-      </body>
-    </html>
+    <JotaiProvider>
+      <html suppressHydrationWarning lang="en">
+        {/* TODO: fix suppressHydrationWarning */}
+        <body suppressHydrationWarning>
+          <ClientHeaderWrapper />
+          <PageWrapperStyled>{children}</PageWrapperStyled>
+          <FooterComponent />
+        </body>
+      </html>
+    </JotaiProvider>
   );
 }

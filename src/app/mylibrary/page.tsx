@@ -4,19 +4,11 @@ import { userIdAtom } from "@/atoms/user/user.atom";
 import GalleryItemComponent from "@/components/gallery-item/gallery-item.component";
 import GalleryComponent from "@/components/gallery/gallery.component";
 import { firestore } from "@/firebase";
+import { ImageItem } from "@/types/image.types";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import { useAtomValue } from "jotai";
 import React, { useEffect, useState } from "react";
 
-export interface ImageItem {
-  id: string;
-  imageUrl: string;
-  title: string;
-  createdAt: any;
-  settings: {
-    rarity: string;
-  };
-}
 const MyLibraryPage = () => {
   const uid = useAtomValue(userIdAtom);
   const [images, setImages] = useState<ImageItem[]>([]);
@@ -50,7 +42,7 @@ const MyLibraryPage = () => {
       <h1>library</h1>
       <GalleryComponent>
         {images.map((img: ImageItem) => (
-          <GalleryItemComponent img={img} />
+          <GalleryItemComponent key={img.id} img={img} />
         ))}
       </GalleryComponent>
     </div>

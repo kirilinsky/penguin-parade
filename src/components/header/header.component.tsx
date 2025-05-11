@@ -21,19 +21,18 @@ const HeaderComponent = () => {
   return (
     <HeaderWrapper>
       <HeaderLinks>
-        <Link href="/">home</Link>
         {loggedIn ? (
           <>
-            <Link href="/countdown">Countdown</Link>
+            <Link href="/countdown">Generate!</Link>
             <Link href="/mylibrary">My library</Link>
             <Link onClick={logOutHandler} href="/">
-              log out
+              Log out
             </Link>
           </>
         ) : (
           <>
-            <Link href="/signup">sign up</Link>
-            <Link href="/login">login</Link>
+            <Link href="/signup">Sign up</Link>
+            <Link href="/login">Login</Link>
           </>
         )}
       </HeaderLinks>

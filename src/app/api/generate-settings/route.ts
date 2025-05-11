@@ -34,6 +34,7 @@ Current scale: ${rarity}
 Keys:
 { 
   "bg": (what’s behind penguin — for common: something simple),
+  "shadow": color of box shadow (hex),
   "theme": (main visual color theme),
   "beak": (сolor of penguin beak),
   "breast": (сolor of penguin breast),
