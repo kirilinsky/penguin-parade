@@ -6,23 +6,22 @@ import {
   doc,
   setDoc,
   serverTimestamp,
-} from "firebase/firestore"; 
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+} from "firebase/firestore";
+import { supabase } from "@/supabase";
+import { v4 as uuidv4 } from "uuid";
+import Replicate from "replicate";
+
+const replicate = new Replicate({ auth: process.env.REPLICATE_API_TOKEN });
+const model =
+  "lucataco/sdxl-controlnet:06d6fae3b75ab68a28cd2900afa6033166910dd09fd9751047043a5bbb4c184b";
+const templateImageUrl = "https://i.ibb.co/B55bD3mh/template.png"; // или Supabase URL
 
 const basePrompt = `
-Generate a 2D digital illustration of a penguin, always centered in the middle of the frame. 
-The penguin should remain the same in appearance with smooth lines, a clean white belly, black back, and orange beak. 
-The penguin should have cartoonish, simplified features with no change in posture, size, or shape. 
-Its expression should be neutral and friendly.
-`;
+Generate a 2D digital cartoon-style portrait of a penguin character, centered in the image. Keep the penguin's pose, proportions, and expression exactly the same as in the reference image. Do not alter the penguin's structure.`;
 
-/* export async function POST(req: Request) {
-  const body = await req.json();
-  const { uid } = body;
-
-  if (!uid) {
-    return NextResponse.json({ error: "Missing uid" }, { status: 400 });
-  }
+export async function POST(req: Request) {
+  const { uid } = await req.json();
+  if (!uid) return NextResponse.json({ error: "Missing uid" }, { status: 400 });
 
   try {
     const settingsRes = await fetch(
@@ -31,69 +30,71 @@ Its expression should be neutral and friendly.
         method: "POST",
       }
     );
-
+    if (!settingsRes.ok) {
+      return NextResponse.json(
+        { error: "Failed to get settings" },
+        { status: 500 }
+      );
+    }
     const { settings } = await settingsRes.json();
 
     const description = [
-      settings.bg && `Background: ${settings.bg}.`,
-      settings.acc && `Wearing: ${settings.acc}.`,
+      settings.bg && `Background: ${settings.bg}`,
+      settings.acc && `Penguin is wearing: ${settings.acc}`,
+      settings.beak && `Penguin Beak color: ${settings.beak}`,
+      settings.breast && `Penguin breast color: ${settings.breast}`,
+      settings.back && `Penguin back color: ${settings.back}`,
       settings.fx &&
         settings.fx.toLowerCase() !== "none" &&
-        `Effect: ${settings.fx}.`,
-      settings.theme && `Visual theme: ${settings.theme}.`,
-      settings.body && `Penguin body color: ${settings.body}.`,
-      settings.rarity && `Rarity of picture: ${settings.rarity}.`,
+        `Effect: ${settings.fx}`,
+      settings.theme && `Color mood: ${settings.theme}`,
+      settings.eyes && `eyes color: ${settings.eyes}`,
+      settings.rarity && `Rarity: ${settings.rarity}`,
     ]
       .filter(Boolean)
-      .join(" ");
+      .join(", ");
 
-    const fullPrompt = `${basePrompt.trim()} ${description}`.trim();
+    const prompt = `${basePrompt.trim()} ${description}`.trim();
 
-    const dalleRes = await fetch(
-      "https://api.openai.com/v1/images/generations",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
-        },
-        body: JSON.stringify({
-          model: "dall-e-3",
-          prompt: fullPrompt,
-          n: 1,
-          size: "1024x1024",
-        }),
-      }
-    );
+    const output = await replicate.run(model, {
+      input: {
+        image: templateImageUrl,
+        prompt,
+        seed: Math.floor(Math.random() * 100000),
+        strength: 0.4,
+        guidance_scale: 7,
+        num_inference_steps: 50,
+      },
+    });
 
-    const dalleData = await dalleRes.json();
-    const imageUrl = dalleData?.data?.[0]?.url;
-
+    const imageUrl = Array.isArray(output) ? output[0] : output;
     if (!imageUrl) {
-      console.error("DALL·E error:", dalleData);
       return NextResponse.json(
-        { error: "Failed to generate image" },
+        { error: "No image generated" },
         { status: 500 }
       );
     }
 
     const imageRes = await fetch(imageUrl);
-    const imageBuffer = await imageRes.arrayBuffer();
-    const imageBytes = new Uint8Array(imageBuffer);
+    const buffer = await imageRes.arrayBuffer();
+    const imageBytes = new Uint8Array(buffer);
 
-    const timestamp = Date.now();
-    const filename = `users/${uid}/images/${timestamp}.jpg`;
+    const filename = `users/${uid}/images/${Date.now()}_${uuidv4()}.png`;
+    const { data, error } = await supabase.storage
+      .from("penguins")
+      .upload(filename, imageBytes, {
+        contentType: "image/png",
+        upsert: false,
+      });
+    if (error) throw new Error(error.message);
 
-    const imageRef = ref(storage, filename);
-    await uploadBytes(imageRef, imageBytes, {
-      contentType: "image/jpeg",
-    });
-
-    const downloadURL = await getDownloadURL(imageRef);
+    const { data: urlData } = supabase.storage
+      .from("penguins")
+      .getPublicUrl(filename);
+    if (!urlData?.publicUrl) throw new Error("Failed to get image URL");
 
     const docRef = await addDoc(collection(firestore, `users/${uid}/images`), {
-      imageUrl: downloadURL,
-      prompt: fullPrompt,
+      imageUrl: urlData.publicUrl,
       title: settings.t || "Untitled",
       settings,
       createdAt: serverTimestamp(),
@@ -101,24 +102,23 @@ Its expression should be neutral and friendly.
 
     await setDoc(
       doc(firestore, "users", uid),
-      {
-        lastGeneratedAt: new Date(),
-      },
+      { lastGeneratedAt: new Date() },
       { merge: true }
     );
 
     return NextResponse.json({
       success: true,
-      downloadURL,
+      downloadURL: urlData.publicUrl,
       title: settings.t,
       settings,
+      prompt,
       id: docRef.id,
     });
   } catch (err) {
     console.error("Image generation failed:", err);
     return NextResponse.json(
-      { error: "Internal server error" + err },
+      { error: "Internal server error", details: String(err) },
       { status: 500 }
     );
   }
-} */
+}

@@ -22,12 +22,14 @@ const HeaderComponent = () => {
     <HeaderWrapper>
       <HeaderLinks>
         <Link href="/">home</Link>
-        <Link href="/countdown">countdown</Link>
-        <Link href="/mylibrary">my library</Link>
         {loggedIn ? (
-          <Link onClick={logOutHandler} href="/">
-            log out
-          </Link>
+          <>
+            <Link href="/countdown">Countdown</Link>
+            <Link href="/mylibrary">My library</Link>
+            <Link onClick={logOutHandler} href="/">
+              log out
+            </Link>
+          </>
         ) : (
           <>
             <Link href="/signup">sign up</Link>

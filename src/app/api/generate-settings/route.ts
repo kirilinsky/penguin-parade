@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-let mock = {
+/* let mock = {
   success: true,
   settings: {
     t: "Valley Kid",
@@ -11,41 +11,39 @@ let mock = {
     acc: "Fancy glass",
     rarity: "rare",
   },
-};
+}; */
 
 export async function POST() {
-  return NextResponse.json(mock);
-}
-
-/* export async function POST() {
   const randomNumber = Math.floor(Math.random() * 1000);
 
   const rarity =
-    randomNumber < 2
+    randomNumber < 5
       ? "divine"
-      : randomNumber < 15
+      : randomNumber < 20
       ? "legendary"
-      : randomNumber < 75
+      : randomNumber < 111
       ? "epic"
-      : randomNumber < 150
+      : randomNumber < 333
       ? "rare"
       : "common";
   const systemPrompt = `
-You are penguin variation generator. Respond with JSON object (no intro, no explanation).
-Scales: common, rare, epic, legendary, divine.
-Current scale: ${rarity}
-
+You are a penguin variation generator. Respond with a JSON object only. No intro or explanation.
+Penguins can appear in any stylized, imaginative environment — not limited to snow or ice. any variations.
+  Scales of penguin: common, rare, epic, legendary, divine. 
+Current scale: ${rarity} 
 Keys:
-{
-  
-  "bg": (what’s behind penguin — for common: plain or poor),
+{ 
+  "bg": (what’s behind penguin — for common: something simple),
   "theme": (main visual color theme),
-  "body": (penguin body color — for common: natural),
-  "fx": (visual or ambient effect — none for common, rich for another),
-  "acc": (optional accessory — for common: simple, no wealth),
-  "t": (title, ≤3 words, linked to bg and acc)
+  "beak": (сolor of penguin beak),
+  "breast": (сolor of penguin breast),
+  "back": (сolor of penguin back),
+  "eyes": (penguin eyes color),
+  "fx": (visual or ambient effect — none for common, rich for another scales),
+  "acc": (optional accessory, clothe, stuff— for common: none or smth simple, no wealth),
+  "t": (title, ≤3 words, linked to bg and acc and theme)
 } 
-Use plain English.Values should be short and visual. Return **only** JSON.`;
+Use plain English. Use different themes and combinations. Values should be short and visual. Return **only** JSON.`;
 
   try {
     const res = await fetch("https://api.openai.com/v1/chat/completions", {
@@ -85,7 +83,7 @@ Use plain English.Values should be short and visual. Return **only** JSON.`;
     }
 
     let parsed = JSON.parse(jsonMatch[0]);
-    parsed = {...parsed, rarity}
+    parsed = { ...parsed, rarity };
     return NextResponse.json({ success: true, settings: parsed });
   } catch (err: any) {
     console.error("Error [settings generator]:", err);
@@ -95,4 +93,3 @@ Use plain English.Values should be short and visual. Return **only** JSON.`;
     );
   }
 }
- */
