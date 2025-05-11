@@ -6,6 +6,8 @@ import { getUserLastGeneratedAt } from "@/helpers/get-user-last-generated-at/get
 import { GenerateImageReposne } from "@/types/api.types";
 import { useAtomValue } from "jotai";
 import Link from "next/link";
+import Image from "next/image";
+
 import React, { useEffect, useState } from "react";
 
 type GenerationResult = {
@@ -76,7 +78,23 @@ const CountDownPage = () => {
       {canGenerate && !loading && <button onClick={generate}>Generate</button>}
 
       {/* TODO: Create loader */}
-      {loading && <p>Generating penguin...</p>}
+      {loading && (
+        <div
+          style={{
+            background: "#3a5770",
+            padding: "45px",
+          }}
+        >
+          <Image
+            src="/loader.gif"
+            alt="Loading..."
+            width={90}
+            height={90}
+            priority
+          />
+          <p>Generating penguin...</p>
+        </div>
+      )}
       {result && (
         <div style={{ marginTop: "2rem" }}>
           <h2>
@@ -88,6 +106,7 @@ const CountDownPage = () => {
             alt={result.title}
             style={{ width: 255, borderRadius: 8, padding: 4 }}
           />
+          <br />
           <span>{result.rarity}</span>
           <br />
           <Link href="/mylibrary">Go to my Library</Link>
