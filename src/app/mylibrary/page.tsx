@@ -7,6 +7,7 @@ import { firestore } from "@/firebase";
 import { ImageItem } from "@/types/image.types";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import { useAtomValue } from "jotai";
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
 const MyLibraryPage = () => {
@@ -39,9 +40,17 @@ const MyLibraryPage = () => {
     <div>
       <h1>library</h1>
       <GalleryComponent>
-        {images.map((img: ImageItem) => (
-          <GalleryItemComponent key={img.id} img={img} />
-        ))}
+        {images.length ? (
+          images.map((img: ImageItem) => (
+            <GalleryItemComponent key={img.id} img={img} />
+          ))
+        ) : (
+          <div>
+            <p>Seems you don't have Penguins yet.</p>
+            <br />
+            <Link href={"/countdown"}>Go and Generate first!</Link>
+          </div>
+        )}
       </GalleryComponent>
     </div>
   );
