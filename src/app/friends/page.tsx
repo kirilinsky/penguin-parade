@@ -16,12 +16,14 @@ const FriendsPage = () => {
 
   const handleSearch = async () => {
     if (!search.trim()) return;
+    const lowercase_search = search.toLowerCase();
 
     const usersRef = collection(firestore, "users");
+    /* TODO: filter existing friends */
     const q = query(
       usersRef,
-      where("username", ">=", search),
-      where("username", "<=", search + "\uf8ff")
+      where("username_lowercase", ">=", lowercase_search),
+      where("username_lowercase", "<=", lowercase_search + "\uf8ff")
     );
     const snap = await getDocs(q);
     const results = snap.docs.map((doc) => ({
@@ -29,7 +31,6 @@ const FriendsPage = () => {
       ...doc.data(),
     })) as User[];
     setSearchResults(results);
-    console.log(results, "results1");
   };
 
   useEffect(() => {
@@ -67,7 +68,10 @@ const FriendsPage = () => {
           <h2>Search Results</h2>
           <ul>
             {searchResults.map((user) => (
-              <li key={user.id} style={{ marginBottom: "1rem" }}>
+              <li
+                key={user.id}
+                style={{ display: "flex", marginBottom: "1rem" }}
+              >
                 <Image
                   src={user.avatar ?? "/template.png"}
                   alt={user.username}
@@ -77,6 +81,7 @@ const FriendsPage = () => {
                 />
                 <div>
                   <strong>{user.username}</strong>
+                  <button>add friend</button>
                 </div>
               </li>
             ))}

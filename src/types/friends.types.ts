@@ -10,6 +10,7 @@ export type Friend = {
 export type User = {
   id: string;
   username: string;
+  username_lowercase: string;
   avatar: string | null;
   createdAt: Date;
   email: string;
