@@ -35,8 +35,6 @@ const MyLibraryPage = () => {
     fetchImages();
   }, [uid]);
 
-  console.log(images, "images");
-
   return (
     <div>
       <h1>library</h1>

@@ -33,8 +33,7 @@ Penguins can appear in any stylized, imaginative environment — not limited to 
 Current scale: ${rarity} 
 Keys:
 { 
-  "bg": (what’s behind penguin — for common: something simple),
-  "shadow": color of box shadow (hex),
+  "bg": (what’s behind penguin — for common: something simple), 
   "theme": (main visual color theme),
   "beak": (сolor of penguin beak),
   "breast": (сolor of penguin breast),

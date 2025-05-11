@@ -14,7 +14,6 @@ export interface ImageItemSettings {
   breast: string;
   eyes: string;
   fx: string;
-  rarity: string;
-  shadow: string;
+  rarity: string; 
   theme: string;
 }
