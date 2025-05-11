@@ -14,7 +14,7 @@ import Replicate from "replicate";
 const replicate = new Replicate({ auth: process.env.REPLICATE_API_TOKEN });
 const model =
   "lucataco/sdxl-controlnet:06d6fae3b75ab68a28cd2900afa6033166910dd09fd9751047043a5bbb4c184b";
-const templateImageUrl = "https://i.ibb.co/B55bD3mh/template.png"; // или Supabase URL
+const templateImageUrl = "https://i.ibb.co/B55bD3mh/template.png";
 
 const basePrompt = `
 Generate a 2D digital cartoon-style portrait of a penguin character, centered in the image. Keep the penguin's pose, proportions, and expression exactly the same as in the reference image. Do not alter the penguin's structure.`;
