@@ -19,11 +19,11 @@ export async function POST() {
   const rarity =
     randomNumber < 5
       ? "divine"
-      : randomNumber < 20
+      : randomNumber < 45
       ? "legendary"
-      : randomNumber < 111
+      : randomNumber < 150
       ? "epic"
-      : randomNumber < 333
+      : randomNumber < 444
       ? "rare"
       : "common";
   const systemPrompt = `
@@ -37,8 +37,7 @@ Keys:
   "theme": (main visual color theme, for divine its huge diamonds),
   "beak": (сolor of penguin beak),
   "breast": (сolor of penguin breast),
-  "back": (сolor of penguin back),
-  "eyes": (penguin eyes color),
+  "back": (сolor of penguin back), 
   "fx": (visual or ambient effect — none for common, rich for another scales),
   "acc": (optional clothe and/or hat — for common: none or smth simple, no wealth),
   "t": (title, ≤3 words, linked to bg and acc and theme)

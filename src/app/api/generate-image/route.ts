@@ -47,8 +47,7 @@ export async function POST(req: Request) {
       settings.fx &&
         settings.fx.toLowerCase() !== "none" &&
         `Effect: ${settings.fx}`,
-      settings.theme && `Color mood: ${settings.theme}`,
-      settings.eyes && `eyes color: ${settings.eyes}`,
+      settings.theme && `Color mood: ${settings.theme}`, 
       settings.rarity && `Rarity: ${settings.rarity}`,
     ]
       .filter(Boolean)

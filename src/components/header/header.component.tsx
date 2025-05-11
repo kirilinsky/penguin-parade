@@ -25,6 +25,7 @@ const HeaderComponent = () => {
           <>
             <Link href="/countdown">Generate!</Link>
             <Link href="/mylibrary">My library</Link>
+            <Link href="/friends">Friends</Link>
             <Link onClick={logOutHandler} href="/">
               Log out
             </Link>
