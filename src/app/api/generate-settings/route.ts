@@ -34,13 +34,13 @@ Current scale: ${rarity}
 Keys:
 { 
   "bg": (what’s behind penguin — for common: something simple), 
-  "theme": (main visual color theme),
+  "theme": (main visual color theme, for divine its huge diamonds),
   "beak": (сolor of penguin beak),
   "breast": (сolor of penguin breast),
   "back": (сolor of penguin back),
   "eyes": (penguin eyes color),
   "fx": (visual or ambient effect — none for common, rich for another scales),
-  "acc": (optional accessory, clothe, stuff— for common: none or smth simple, no wealth),
+  "acc": (optional clothe and/or hat — for common: none or smth simple, no wealth),
   "t": (title, ≤3 words, linked to bg and acc and theme)
 } 
 Use plain English. Use different themes and combinations. Values should be short and visual. Return **only** JSON.`;

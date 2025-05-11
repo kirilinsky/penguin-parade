@@ -62,7 +62,7 @@ export async function POST(req: Request) {
         prompt,
         seed: Math.floor(Math.random() * 100000),
         strength: 0.4,
-        guidance_scale: 7,
+        guidance_scale: 10,
         num_inference_steps: 50,
       },
     });
