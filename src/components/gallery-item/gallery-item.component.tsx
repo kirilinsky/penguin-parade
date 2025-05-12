@@ -27,7 +27,12 @@ const GalleryItemComponent = ({ img }: { img: ImageItem }) => {
           baseColor={baseColor}
           scale={img.settings.rarity}
         />
-        <GalleryItemImage src={img.imageUrl} width={215} alt={img.title} />
+        <GalleryItemImage
+          src={img.imageUrl}
+          width={200}
+          height={200}
+          alt={img.title}
+        />
         <p>{img.title}</p>
       </GalleryItemContent>
     </Tilt>

@@ -5,8 +5,10 @@ import { HeaderLinks, HeaderWrapper } from "./header.component.styled";
 import Link from "next/link";
 import { useAtomValue, useSetAtom } from "jotai";
 import { loggedInAtom, userIdAtom, userNameAtom } from "@/atoms/user/user.atom";
+import HeaderBioComponent from "../header-bio/header-bio.component";
 
 const HeaderComponent = () => {
+  const username = useAtomValue(userNameAtom);
   const loggedIn = useAtomValue(loggedInAtom);
   const setUserName = useSetAtom(userNameAtom);
   const setLoggedIn = useSetAtom(loggedInAtom);
@@ -37,6 +39,7 @@ const HeaderComponent = () => {
           </>
         )}
       </HeaderLinks>
+      {loggedIn && <HeaderBioComponent username={username} />}
     </HeaderWrapper>
   );
 };

@@ -5,10 +5,10 @@ import { evaluateGenerationState } from "@/helpers/evaluate-generation-state/eva
 import { getUserLastGeneratedAt } from "@/helpers/get-user-last-generated-at/get-user-last-generated-at";
 import { GenerateImageReposne } from "@/types/api.types";
 import { useAtomValue } from "jotai";
-import Link from "next/link";
 import Image from "next/image";
 
 import React, { useEffect, useState } from "react";
+import { LinkStyled } from "@/components/link/link.component.styled";
 
 type GenerationResult = {
   downloadURL: string;
@@ -109,7 +109,7 @@ const CountDownPage = () => {
           <br />
           <span>{result.rarity}</span>
           <br />
-          <Link href="/mylibrary">Go to my Library</Link>
+          <LinkStyled href="/mylibrary">Go to my Library</LinkStyled>
         </div>
       )}
     </div>

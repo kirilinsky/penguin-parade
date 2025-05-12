@@ -3,11 +3,11 @@
 import { userIdAtom } from "@/atoms/user/user.atom";
 import GalleryItemComponent from "@/components/gallery-item/gallery-item.component";
 import GalleryComponent from "@/components/gallery/gallery.component";
+import { LinkStyled } from "@/components/link/link.component.styled";
 import { firestore } from "@/firebase";
 import { ImageItem } from "@/types/image.types";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import { useAtomValue } from "jotai";
-import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
 const MyLibraryPage = () => {
@@ -48,7 +48,7 @@ const MyLibraryPage = () => {
           <div>
             <p>Seems you don't have Penguins yet.</p>
             <br />
-            <Link href={"/countdown"}>Go and Generate first!</Link>
+            <LinkStyled href={"/countdown"}>Go and Generate first!</LinkStyled>
           </div>
         )}
       </GalleryComponent>

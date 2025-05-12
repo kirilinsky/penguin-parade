@@ -4,7 +4,7 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import React, { useState } from "react";
 import { auth, firestore } from "../../firebase";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
-import Link from "next/link";
+import { LinkStyled } from "@/components/link/link.component.styled";
 
 const SignUpPage = () => {
   const [email, setEmail] = useState("");
@@ -50,7 +50,7 @@ const SignUpPage = () => {
     <div>
       <h1>Sign up and collect Penguins</h1>
       {success ? (
-        <Link href={"/login"}>Go to Login page</Link>
+        <LinkStyled href={"/login"}>Go to Login page</LinkStyled>
       ) : (
         <form onSubmit={handleSignUp}>
           <input

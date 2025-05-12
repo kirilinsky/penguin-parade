@@ -1,8 +1,8 @@
 "use client";
 
 import { userNameAtom } from "@/atoms/user/user.atom";
+import { LinkStyled } from "@/components/link/link.component.styled";
 import { useAtomValue } from "jotai";
-import Link from "next/link";
 
 export default function Home() {
   const username = useAtomValue(userNameAtom);
@@ -14,7 +14,7 @@ export default function Home() {
           <p>Welcome, {username}!</p>
           <span>Here you can collect unique Penguins.</span>
           <br />
-          <Link href={"/countdown"}>Generate new!</Link>
+          <LinkStyled title="generate new" href={"/countdown"}>Generate new!</LinkStyled>
         </div>
       ) : (
         <p>

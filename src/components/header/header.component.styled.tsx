@@ -2,10 +2,10 @@ import styled from "styled-components";
 
 export const HeaderWrapper = styled.header`
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
-  height: 79px;
-  background-color: #b4c5af;
+  height: 77px;
+  background-color: #608156d6;
 `;
 
 export const HeaderLinks = styled.div`
