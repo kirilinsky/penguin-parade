@@ -1,7 +1,5 @@
 export type Friend = {
   id: string;
-  name: string;
-  avatar: string | null;
   gifted: number;
   exchanged: number;
   addedAt: Date;
@@ -15,4 +13,9 @@ export type User = {
   createdAt: Date;
   email: string;
   lastGeneratedAt: Date;
+};
+
+export type RequestRecord = {
+  id: string;
+  sentAt: Date;
 };

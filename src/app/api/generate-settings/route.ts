@@ -30,7 +30,8 @@ export async function POST() {
       : "common";
   const systemPrompt = `
 You are a penguin variation generator. Respond with a JSON object only. No intro or explanation.
-Penguins can appear in any stylized, imaginative environment — not limited to snow or ice or forest. any variations.
+Penguins can appear in any stylized, imaginative environment — not limited to snow or ice or forest. any variations, as example you can use some of:
+ Space, Fantasy, Pirate, Retro, Urban, Mythology, Tech/Futuristic, Ancient World, Food, Psychedelic, Underwater, Video Game, Jungle, Steampunk, Minimalist, Carnival, Mythical Creatures, Robots/AI, Nostalgia, Floral/Plant World, Superhero, Cyberpunk, Winter Wonderland, Circus, Vintage. Or create new.
   Scales of penguin: common, rare, epic, legendary, divine and ghost. 
 Current scale: ${rarity} 
 Keys:

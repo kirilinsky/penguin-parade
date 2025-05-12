@@ -1,9 +1,19 @@
 "use client";
 
-import { userIdAtom } from "@/atoms/user/user.atom";
+import { userIdAtom, userNameAtom } from "@/atoms/user/user.atom";
 import { firestore } from "@/firebase";
-import { Friend, User } from "@/types/friends.types";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { Friend, RequestRecord, User } from "@/types/friends.types";
+import {
+  arrayRemove,
+  arrayUnion,
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  updateDoc,
+  where,
+} from "firebase/firestore";
 import { useAtomValue } from "jotai";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
@@ -13,6 +23,8 @@ const FriendsPage = () => {
   const [friends, setFriends] = useState<Friend[]>([]);
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState<User[]>([]);
+  const [sentRequests, setSentRequests] = useState<any[]>([]);
+  const [incomingRequests, setIncomingRequests] = useState<any[]>([]);
 
   const handleSearch = async () => {
     if (!search.trim()) return;
@@ -33,20 +45,78 @@ const FriendsPage = () => {
     setSearchResults(results);
   };
 
+  const handleCancelRequest = async (user: User) => {
+    if (!uid || !user) return;
+
+    const currentUserRef = doc(firestore, "users", uid);
+    await updateDoc(currentUserRef, {
+      sentRequests: sentRequests.filter((req) => req.id !== user.id),
+    });
+
+    const firendRef = doc(firestore, "users", user.id);
+    await updateDoc(firendRef, {
+      friendRequests: arrayRemove({ id: uid }),
+    });
+  };
+
+  const hasSentRequest = (userId: string) => {
+    return sentRequests.some((req) => req.id === userId);
+  };
+
+  const initFriendsPage = async () => {
+    if (!uid) return;
+    const friendsSnap = await getDocs(
+      collection(firestore, `users/${uid}/friends`)
+    );
+    const friendRecords: Friend[] = friendsSnap.docs.map((d) => {
+      const data = d.data();
+      return {
+        id: d.id,
+        gifted: data.gifted,
+        exchanged: data.exchanged,
+        addedAt: data.addedAt.toDate(),
+      };
+    });
+    setFriends(friendRecords);
+
+    const userDoc = await getDoc(doc(firestore, "users", uid));
+    const userData = userDoc.data();
+    console.log(userData, "userData");
+
+    if (userData) {
+      setSentRequests(userData.sentRequests ?? []);
+      setIncomingRequests(userData.friendRequests ?? []);
+    }
+  };
+
+  const handleAddFriend = async (user: any) => {
+    if (!uid) return;
+    console.log(user, "user selected");
+
+    const timestamp = new Date();
+
+    const targetUserRef = doc(firestore, "users", user.id);
+
+    await updateDoc(targetUserRef, {
+      friendRequests: arrayUnion({ id: uid, sentAt: timestamp }),
+    });
+
+    const currentUserRef = doc(firestore, "users", uid);
+
+    await updateDoc(currentUserRef, {
+      sentRequests: arrayUnion({
+        id: user.id,
+        sentAt: timestamp,
+      }),
+    });
+
+    initFriendsPage();
+  };
+
   useEffect(() => {
     if (!uid) return;
 
-    const fetchFriends = async () => {
-      const ref = collection(firestore, `users/${uid}/friends`);
-      const snap = await getDocs(ref);
-      const data = snap.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      })) as Friend[];
-      setFriends(data);
-    };
-
-    fetchFriends();
+    initFriendsPage();
   }, [uid]);
 
   return (
@@ -81,7 +151,19 @@ const FriendsPage = () => {
                 />
                 <div>
                   <strong>{user.username}</strong>
-                  <button>add friend</button>
+                  {hasSentRequest(user.id) ? (
+                    <>
+                      <span>requested</span>
+                      <br />
+                      <button onClick={() => handleCancelRequest(user)}>
+                        Cancel Request
+                      </button>
+                    </>
+                  ) : (
+                    <button onClick={() => handleAddFriend(user)}>
+                      Add Friend
+                    </button>
+                  )}
                 </div>
               </li>
             ))}
@@ -97,14 +179,14 @@ const FriendsPage = () => {
               TODO: create avatars
                */}
               <Image
-                src={friend.avatar ?? "/template.png"}
-                alt={friend.name}
+                src={"/template.png"}
+                alt={friend.id}
                 width={44}
                 height={44}
                 style={{ borderRadius: "50%" }}
               />
               <div>
-                <strong>{friend.name}</strong>
+                <strong>{friend.id}</strong>
                 <p>Gifted: {friend.gifted}</p>
                 <p>Exchanged: {friend.exchanged}</p>
               </div>
@@ -116,6 +198,39 @@ const FriendsPage = () => {
           <p>you don't have friends yet!</p>
         </div>
       )}
+
+      <hr />
+      <h2>Friend requests</h2>
+      <div>
+        <h3>Sent Requests ({sentRequests.length})</h3>
+        <ul>
+          {sentRequests.map((req) => (
+            <li key={req.id} style={{ marginBottom: "1rem" }}>
+              <img
+                src={req.avatar}
+                alt={req.username}
+                style={{ width: 50, height: 50, borderRadius: "50%" }}
+              />
+              <div>
+                <strong>{req.username}</strong>
+                <p>Sent: {req.sentAt?.toDate?.().toLocaleString?.() || "-"}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <h3>Incoming Requests ({incomingRequests.length})</h3>
+        <ul>
+          {incomingRequests.map((req) => (
+            <li key={req.id} style={{ marginBottom: "1rem" }}>
+              <strong>{req.username}</strong>
+              <p>Sent: {req.sentAt?.toDate?.().toLocaleString?.() || "-"}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };

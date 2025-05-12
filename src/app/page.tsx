@@ -14,7 +14,9 @@ export default function Home() {
           <p>Welcome, {username}!</p>
           <span>Here you can collect unique Penguins.</span>
           <br />
-          <LinkStyled title="generate new" href={"/countdown"}>Generate new!</LinkStyled>
+          <LinkStyled title="generate new" href={"/countdown"}>
+            Generate new!
+          </LinkStyled>
         </div>
       ) : (
         <p>
@@ -22,17 +24,14 @@ export default function Home() {
         </p>
       )}
 
+      <div>last generated:</div>
+      <div>total count:</div>
+      <div>friends:</div>
+      <div>auction:</div>
       <div>
-        last generated:
-      </div>
-       <div>
-        total count:
-      </div>
-       <div>
-        friends:
-      </div>
-        <div>
-        auction:
+        Current Avatar:
+        <br />
+        <button>reset</button>
       </div>
     </div>
   );
