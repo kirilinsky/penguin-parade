@@ -21,6 +21,19 @@ export default function Home() {
           please <a href="/login">login</a>
         </p>
       )}
+
+      <div>
+        last generated:
+      </div>
+       <div>
+        total count:
+      </div>
+       <div>
+        friends:
+      </div>
+        <div>
+        auction:
+      </div>
     </div>
   );
 }
