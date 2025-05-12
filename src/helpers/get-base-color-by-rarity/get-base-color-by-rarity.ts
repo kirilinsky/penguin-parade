@@ -10,6 +10,8 @@ export function getBaseColorByScale(scale: string): string {
       return "red";
     case "divine":
       return "gold";
+    case "ghost":
+      return "green";
     default:
       return "gray";
   }

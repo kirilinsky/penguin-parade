@@ -17,9 +17,11 @@ export async function POST() {
   const randomNumber = Math.floor(Math.random() * 1000);
 
   const rarity =
-    randomNumber < 4
+    randomNumber < 3
+      ? "ghost"
+      : randomNumber < 10
       ? "divine"
-      : randomNumber < 33
+      : randomNumber < 44
       ? "legendary"
       : randomNumber < 111
       ? "epic"
@@ -29,12 +31,12 @@ export async function POST() {
   const systemPrompt = `
 You are a penguin variation generator. Respond with a JSON object only. No intro or explanation.
 Penguins can appear in any stylized, imaginative environment — not limited to snow or ice or forest. any variations.
-  Scales of penguin: common, rare, epic, legendary, divine. 
+  Scales of penguin: common, rare, epic, legendary, divine and ghost. 
 Current scale: ${rarity} 
 Keys:
 { 
   "bg": (what’s behind penguin — for common: something simple), 
-  "theme": (main visual color theme, for divine its huge diamonds),
+  "theme": (main visual color theme, for divine its huge diamonds, for ghost its mystic and scary),
   "beak": (сolor of penguin beak),
   "breast": (сolor of penguin breast),
   "back": (сolor of penguin back), 
