@@ -124,6 +124,19 @@ const FriendsPage = () => {
     });
 
     const friendRef = doc(firestore, "users", user.id);
+
+    const targetUserRef = doc(firestore, "users", user.id);
+
+    const targetUserSnap = await getDoc(targetUserRef);
+    const targetUserData = targetUserSnap.data();
+
+    const cleanedIncoming = (targetUserData?.friendRequests || []).filter(
+      (req: any) => req.id !== user.id
+    );
+
+    await updateDoc(currentUserRef, {
+      friendRequests: cleanedIncoming,
+    });
     await updateDoc(friendRef, {
       friendRequests: arrayRemove({ id: uid }),
     });
