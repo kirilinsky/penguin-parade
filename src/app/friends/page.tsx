@@ -4,16 +4,19 @@ import { userIdAtom } from "@/atoms/user/user.atom";
 import FriendsListBlockComponent from "@/components/friends-list-block/friends-list-block.component";
 import { PageContentBlockStyled } from "@/components/page-content-block/page-content-block.component.styled";
 import { PageContentWrapperComponent } from "@/components/page-content-wrapper/page-content-wrapper.component";
+import UserListItemComponent from "@/components/user-list-item/user-list-item.component";
 import { firestore } from "@/firebase";
-import { Friend, User } from "@/types/friends.types";
+import { Friend, FriendData, RequestRecord, User } from "@/types/friends.types";
 import {
   arrayRemove,
   arrayUnion,
   collection,
   doc,
+  documentId,
   getDoc,
   getDocs,
   query,
+  setDoc,
   updateDoc,
   where,
 } from "firebase/firestore";
@@ -21,20 +24,52 @@ import { useAtomValue } from "jotai";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
+function extractUniqueUserIds(
+  incoming: { id: string }[],
+  sent: { id: string }[],
+  friends: { id: string }[]
+): string[] {
+  const allIds = [...incoming, ...sent, ...friends].map((r) => r.id);
+  return Array.from(new Set(allIds));
+}
+
+async function fetchUsersByIds(uids: string[]) {
+  const chunks = [];
+  const users: Record<string, User> = {};
+
+  for (let i = 0; i < uids.length; i += 10) {
+    const chunk = uids.slice(i, i + 10);
+    const q = query(
+      collection(firestore, "users"),
+      where(documentId(), "in", chunk)
+    );
+    chunks.push(getDocs(q));
+  }
+
+  const snapshots = await Promise.all(chunks);
+
+  snapshots.forEach((snap) => {
+    snap.docs.forEach((doc) => {
+      users[doc.id] = { id: doc.id, ...doc.data() } as User;
+    });
+  });
+
+  return users;
+}
+
 const FriendsPage = () => {
   const uid = useAtomValue(userIdAtom);
   const [friends, setFriends] = useState<Friend[]>([]);
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState<User[]>([]);
-  const [sentRequests, setSentRequests] = useState<any[]>([]);
-  const [incomingRequests, setIncomingRequests] = useState<any[]>([]);
+  const [sentRequests, setSentRequests] = useState<FriendData[]>([]);
+  const [incomingRequests, setIncomingRequests] = useState<FriendData[]>([]);
 
   const handleSearch = async () => {
     if (!search.trim()) return;
     const lowercase_search = search.toLowerCase();
 
     const usersRef = collection(firestore, "users");
-    /* TODO: filter existing friends */
     const q = query(
       usersRef,
       where("username_lowercase", ">=", lowercase_search),
@@ -56,74 +91,124 @@ const FriendsPage = () => {
       sentRequests: sentRequests.filter((req) => req.id !== user.id),
     });
 
-    const firendRef = doc(firestore, "users", user.id);
-    await updateDoc(firendRef, {
+    const friendRef = doc(firestore, "users", user.id);
+    await updateDoc(friendRef, {
       friendRequests: arrayRemove({ id: uid }),
     });
+
+    initFriendsPage();
+  };
+
+  const handleDeclineRequest = async (user: User) => {
+    if (!uid || !user) return;
+
+    const currentUserRef = doc(firestore, "users", uid);
+    await updateDoc(currentUserRef, {
+      friendRequests: sentRequests.filter((req) => req.id !== user.id),
+    });
+
+    const friendRef = doc(firestore, "users", user.id);
+    await updateDoc(friendRef, {
+      sentRequests: arrayRemove({ id: uid }),
+    });
+
+    initFriendsPage();
+  };
+
+  const handleAcceptRequest = async (user: User) => {
+    if (!uid || !user) return;
+
+    const now = new Date();
+
+    const currentUserRef = doc(firestore, "users", uid);
+    const friendRef = doc(firestore, "users", user.id);
+
+    await updateDoc(currentUserRef, {
+      friendRequests: incomingRequests.filter((req) => req.id !== user.id),
+    });
+
+    await updateDoc(friendRef, {
+      sentRequests: arrayRemove({ id: uid }),
+    });
+
+    const myFriendsRef = doc(firestore, `users/${uid}/friends/${user.id}`);
+    const theirFriendsRef = doc(firestore, `users/${user.id}/friends/${uid}`);
+
+    const friendData = {
+      gifted: 0,
+      exchanged: 0,
+      addedAt: now,
+    };
+
+    await Promise.all([
+      setDoc(myFriendsRef, friendData),
+      setDoc(theirFriendsRef, friendData),
+    ]);
+
+    initFriendsPage();
   };
 
   const hasSentRequest = (userId: string) => {
     return sentRequests.some((req) => req.id === userId);
   };
 
-  const initFriendsPage = async () => {
+  const handleAddFriend = async (user: User) => {
     if (!uid) return;
-    const friendsSnap = await getDocs(
-      collection(firestore, `users/${uid}/friends`)
-    );
-    const friendRecords: Friend[] = friendsSnap.docs.map((d) => {
-      const data = d.data();
-      return {
-        id: d.id,
-        gifted: data.gifted,
-        exchanged: data.exchanged,
-        addedAt: data.addedAt.toDate(),
-      };
-    });
-    setFriends(friendRecords);
-
-    const userDoc = await getDoc(doc(firestore, "users", uid));
-    const userData = userDoc.data();
-
-    if (userData) {
-      setSentRequests(userData.sentRequests ?? []);
-      setIncomingRequests(userData.friendRequests ?? []);
-    }
-  };
-
-  const handleAddFriend = async (user: any) => {
-    if (!uid) return;
-    console.log(user, "user selected");
 
     const timestamp = new Date();
 
     const targetUserRef = doc(firestore, "users", user.id);
-
     await updateDoc(targetUserRef, {
       friendRequests: arrayUnion({ id: uid, sentAt: timestamp }),
     });
 
     const currentUserRef = doc(firestore, "users", uid);
-
     await updateDoc(currentUserRef, {
-      sentRequests: arrayUnion({
-        id: user.id,
-        sentAt: timestamp,
-      }),
+      sentRequests: arrayUnion({ id: user.id, sentAt: timestamp }),
     });
 
     initFriendsPage();
   };
 
-  useEffect(() => {
+  const initFriendsPage = async () => {
     if (!uid) return;
 
-    initFriendsPage();
+    const friendsSnap = await getDocs(
+      collection(firestore, `users/${uid}/friends`)
+    );
+    const friendRecords: Friend[] = friendsSnap.docs.map((d) => ({
+      id: d.id,
+      gifted: d.data().gifted,
+      exchanged: d.data().exchanged,
+      addedAt: d.data().addedAt.toDate(),
+    }));
+
+    const userDoc = await getDoc(doc(firestore, "users", uid));
+    const userData = userDoc.data();
+
+    const incoming = userData?.friendRequests ?? [];
+    const sent = userData?.sentRequests ?? [];
+
+    const allIds = extractUniqueUserIds(incoming, sent, friendRecords);
+    const usersMap = await fetchUsersByIds(allIds);
+
+    setIncomingRequests(
+      incoming.map((r: RequestRecord) => ({ ...r, ...usersMap[r.id] }))
+    );
+    setSentRequests(
+      sent.map((r: RequestRecord) => ({ ...r, ...usersMap[r.id] }))
+    );
+    setFriends(friendRecords.map((f) => ({ ...f, ...usersMap[f.id] })));
+  };
+
+  useEffect(() => {
+    if (uid) initFriendsPage();
   }, [uid]);
 
   return (
     <PageContentWrapperComponent>
       <FriendsListBlockComponent friends={friends} />
+
       <PageContentBlockStyled>
         <h2>Add new Friend</h2>
         <input
@@ -173,32 +258,35 @@ const FriendsPage = () => {
           </div>
         )}
       </PageContentBlockStyled>
+
       <PageContentBlockStyled>
         <h2>Incoming Requests ({incomingRequests.length})</h2>
         <ul>
           {incomingRequests.map((req) => (
-            <li key={req.id} style={{ marginBottom: "1rem" }}>
-              <strong>{req.username}</strong>
-              <p>Sent: {req.sentAt?.toDate?.().toLocaleString?.() || "-"}</p>
-            </li>
+            <UserListItemComponent
+              onCancel={() => handleCancelRequest(req)}
+              onDecline={() => handleDeclineRequest(req)}
+              onAccept={() => handleAcceptRequest(req)}
+              key={req.id}
+              incoming={true}
+              user={req}
+            />
           ))}
         </ul>
       </PageContentBlockStyled>
+
       <PageContentBlockStyled>
         <h2>Sent Friend Requests ({sentRequests.length})</h2>
         <ul>
           {sentRequests.map((req) => (
-            <li key={req.id} style={{ marginBottom: "1rem" }}>
-              <img
-                src={req.avatar}
-                alt={req.username}
-                style={{ width: 50, height: 50, borderRadius: "50%" }}
-              />
-              <div>
-                <strong>{req.username}</strong>
-                <p>Sent: {req.sentAt?.toDate?.().toLocaleString?.() || "-"}</p>
-              </div>
-            </li>
+            <UserListItemComponent
+              onCancel={() => handleCancelRequest(req)}
+              onDecline={() => handleDeclineRequest(req)}
+              onAccept={() => handleAcceptRequest(req)}
+              key={req.id}
+              incoming={false}
+              user={req}
+            />
           ))}
         </ul>
       </PageContentBlockStyled>

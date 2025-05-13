@@ -1,3 +1,5 @@
+import { Timestamp } from "firebase/firestore";
+
 export type Friend = {
   id: string;
   gifted: number;
@@ -19,5 +21,7 @@ export type User = {
 
 export type RequestRecord = {
   id: string;
-  sentAt: Date;
+  sentAt: Timestamp;
 };
+
+export type FriendData = RequestRecord & User;

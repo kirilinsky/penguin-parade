@@ -1,5 +1,5 @@
-import { doc, getDoc, Timestamp } from "firebase/firestore";
-import { firestore } from "@/firebase"; // путь адаптируй под себя
+import { doc, getDoc } from "firebase/firestore";
+import { firestore } from "@/firebase";
 
 export async function getUserAllowCraftedAt(uid: string): Promise<number> {
   const userDoc = await getDoc(doc(firestore, "users", uid));

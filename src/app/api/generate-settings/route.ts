@@ -69,8 +69,6 @@ Use plain English. Use different themes and combinations. Values should be short
     const data = await res.json();
     const message = data.choices?.[0]?.message?.content;
 
-    console.log("OpenAI raw response:", JSON.stringify(data, null, 2));
-
     if (!message) {
       return NextResponse.json(
         { error: "Empty response from ChatGPT" },
