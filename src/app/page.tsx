@@ -37,7 +37,7 @@ export default function Home() {
       <div>
         Scales:
         <br />
-        <Image width='220' height="330" src="/scales.png" alt="scales" />
+        <Image width='220' height="330" src="/scales.jpg" alt="scales" />
       </div>
     </div>
   );
