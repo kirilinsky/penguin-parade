@@ -10,9 +10,11 @@ export type User = {
   username: string;
   username_lowercase: string;
   avatar: string | null;
+  avatarScale: string | null;
   createdAt: Date;
   email: string;
   lastGeneratedAt: Date;
+  allowCraftAt: Date;
 };
 
 export type RequestRecord = {

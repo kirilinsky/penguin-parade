@@ -37,22 +37,19 @@ const MyLibraryPage = () => {
   }, [uid]);
 
   return (
-    <div>
-      <h1>library</h1>
-      <GalleryComponent>
-        {images.length ? (
-          images.map((img: ImageItem) => (
-            <GalleryItemComponent key={img.id} img={img} />
-          ))
-        ) : (
-          <div>
-            <p>Seems you don't have Penguins yet.</p>
-            <br />
-            <LinkStyled href={"/countdown"}>Go and Generate first!</LinkStyled>
-          </div>
-        )}
-      </GalleryComponent>
-    </div>
+    <GalleryComponent>
+      {images.length ? (
+        images.map((img: ImageItem) => (
+          <GalleryItemComponent key={img.id} img={img} />
+        ))
+      ) : (
+        <div>
+          <p>Seems you don't have Penguins yet.</p>
+          <br />
+          <LinkStyled href={"/countdown"}>Go and Craft first!</LinkStyled>
+        </div>
+      )}
+    </GalleryComponent>
   );
 };
 

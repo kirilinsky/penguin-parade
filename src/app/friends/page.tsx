@@ -1,8 +1,11 @@
 "use client";
 
-import { userIdAtom, userNameAtom } from "@/atoms/user/user.atom";
+import { userIdAtom } from "@/atoms/user/user.atom";
+import FriendsListBlockComponent from "@/components/friends-list-block/friends-list-block.component";
+import { PageContentBlockStyled } from "@/components/page-content-block/page-content-block.component.styled";
+import { PageContentWrapperComponent } from "@/components/page-content-wrapper/page-content-wrapper.component";
 import { firestore } from "@/firebase";
-import { Friend, RequestRecord, User } from "@/types/friends.types";
+import { Friend, User } from "@/types/friends.types";
 import {
   arrayRemove,
   arrayUnion,
@@ -81,7 +84,6 @@ const FriendsPage = () => {
 
     const userDoc = await getDoc(doc(firestore, "users", uid));
     const userData = userDoc.data();
-    console.log(userData, "userData");
 
     if (userData) {
       setSentRequests(userData.sentRequests ?? []);
@@ -120,90 +122,70 @@ const FriendsPage = () => {
   }, [uid]);
 
   return (
-    <div>
-      <h1>Your Friends</h1>
-      <p>add new</p>
-      <div style={{ marginBottom: "1rem" }}>
+    <PageContentWrapperComponent>
+      <FriendsListBlockComponent friends={friends} />
+      <PageContentBlockStyled>
+        <h2>Add new Friend</h2>
         <input
           type="text"
-          style={{ padding: "10px" }}
+          style={{ padding: "10px", marginBlock: "10px" }}
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search users by name"
         />
         <button onClick={handleSearch}>Search</button>
-      </div>
 
-      {searchResults.length > 0 && (
-        <div>
-          <h2>Search Results</h2>
-          <ul>
-            {searchResults.map((user) => (
-              <li
-                key={user.id}
-                style={{ display: "flex", marginBottom: "1rem" }}
-              >
-                <Image
-                  src={user.avatar ?? "/template.png"}
-                  alt={user.username}
-                  width={44}
-                  height={44}
-                  style={{ borderRadius: "50%" }}
-                />
-                <div>
-                  <strong>{user.username}</strong>
-                  {hasSentRequest(user.id) ? (
-                    <>
-                      <span>requested</span>
-                      <br />
-                      <button onClick={() => handleCancelRequest(user)}>
-                        Cancel Request
+        {searchResults.length > 0 && (
+          <div>
+            <h2>Search Results</h2>
+            <ul>
+              {searchResults.map((user) => (
+                <li
+                  key={user.id}
+                  style={{ display: "flex", marginBottom: "1rem" }}
+                >
+                  <Image
+                    src={user.avatar ?? "/template.png"}
+                    alt={user.username}
+                    width={44}
+                    height={44}
+                    style={{ borderRadius: "50%" }}
+                  />
+                  <div>
+                    <strong>{user.username}</strong>
+                    {hasSentRequest(user.id) ? (
+                      <>
+                        <span>requested</span>
+                        <br />
+                        <button onClick={() => handleCancelRequest(user)}>
+                          Cancel Request
+                        </button>
+                      </>
+                    ) : (
+                      <button onClick={() => handleAddFriend(user)}>
+                        Add Friend
                       </button>
-                    </>
-                  ) : (
-                    <button onClick={() => handleAddFriend(user)}>
-                      Add Friend
-                    </button>
-                  )}
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-      <hr />
-      {friends.length ? (
+                    )}
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </PageContentBlockStyled>
+      <PageContentBlockStyled>
+        <h2>Incoming Requests ({incomingRequests.length})</h2>
         <ul>
-          {friends.map((friend) => (
-            <li key={friend.id} style={{ marginBottom: "1rem" }}>
-              {/*
-              TODO: create avatars
-               */}
-              <Image
-                src={"/template.png"}
-                alt={friend.id}
-                width={44}
-                height={44}
-                style={{ borderRadius: "50%" }}
-              />
-              <div>
-                <strong>{friend.id}</strong>
-                <p>Gifted: {friend.gifted}</p>
-                <p>Exchanged: {friend.exchanged}</p>
-              </div>
+          {incomingRequests.map((req) => (
+            <li key={req.id} style={{ marginBottom: "1rem" }}>
+              <strong>{req.username}</strong>
+              <p>Sent: {req.sentAt?.toDate?.().toLocaleString?.() || "-"}</p>
             </li>
           ))}
         </ul>
-      ) : (
-        <div>
-          <p>you don't have friends yet!</p>
-        </div>
-      )}
-
-      <hr />
-      <h2>Friend requests</h2>
-      <div>
-        <h3>Sent Requests ({sentRequests.length})</h3>
+      </PageContentBlockStyled>
+      <PageContentBlockStyled>
+        <h2>Sent Friend Requests ({sentRequests.length})</h2>
         <ul>
           {sentRequests.map((req) => (
             <li key={req.id} style={{ marginBottom: "1rem" }}>
@@ -219,20 +201,8 @@ const FriendsPage = () => {
             </li>
           ))}
         </ul>
-      </div>
-
-      <div>
-        <h3>Incoming Requests ({incomingRequests.length})</h3>
-        <ul>
-          {incomingRequests.map((req) => (
-            <li key={req.id} style={{ marginBottom: "1rem" }}>
-              <strong>{req.username}</strong>
-              <p>Sent: {req.sentAt?.toDate?.().toLocaleString?.() || "-"}</p>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
+      </PageContentBlockStyled>
+    </PageContentWrapperComponent>
   );
 };
 

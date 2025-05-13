@@ -1,12 +1,25 @@
-export function evaluateGenerationState(lastGeneratedAt: Date | null) {
-  if (!lastGeneratedAt) return { canGenerate: true, remainingMs: 0 };
+import { Timestamp } from "firebase/firestore";
 
-  const now = new Date();
-  const diff = now.getTime() - lastGeneratedAt.getTime();
-  const DAY_MS = 24 * 60 * 60 * 1000;
+type GenerationCheckResult = {
+  isAllowed: boolean;
+  timeLeft: number;
+};
 
-  const canGenerate = diff >= DAY_MS;
-  const remainingMs = canGenerate ? 0 : DAY_MS - diff;
+export function evaluateGenerationState(
+  time: Timestamp | number | Date
+): GenerationCheckResult {
+  const target =
+    time instanceof Timestamp
+      ? time.toMillis()
+      : time instanceof Date
+      ? time.getTime()
+      : time;
 
-  return { canGenerate, remainingMs };
+  const now = Date.now();
+  const timeLeft = Math.max(target - now, 0);
+
+  return {
+    isAllowed: now >= target,
+    timeLeft,
+  };
 }

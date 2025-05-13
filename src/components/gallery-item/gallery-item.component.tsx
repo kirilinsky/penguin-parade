@@ -15,13 +15,21 @@ const orbitron = Orbitron({
   display: "swap",
 });
 
-const GalleryItemComponent = ({ img }: { img: ImageItem }) => {
+const GalleryItemComponent = ({
+  img,
+  slim = false,
+  scalable = true,
+}: {
+  img: ImageItem;
+  slim?: boolean;
+  scalable?: boolean;
+}) => {
   const baseColor = useMemo(() => {
     return getBaseColorByScale(img.settings.rarity);
   }, [img.settings.rarity]);
   return (
     <Tilt
-      scale={1.13}
+      scale={scalable ? 1.14 : 1}
       key={img.id}
       glareEnable={true}
       glareMaxOpacity={0.8}
@@ -37,8 +45,8 @@ const GalleryItemComponent = ({ img }: { img: ImageItem }) => {
         />
         <GalleryItemImage
           src={img.imageUrl}
-          width={200}
-          height={200}
+          width={slim ? 165 : 200}
+          height={slim ? 165 : 200}
           alt={img.title}
         />
         <p className={orbitron.className}>{img.title}</p>

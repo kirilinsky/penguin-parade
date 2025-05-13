@@ -31,8 +31,11 @@ const SignUpPage = () => {
       await setDoc(doc(firestore, "users", user.uid), {
         email: user.email,
         username,
+        avatarScale: null,
+        avatar: null,
         username_lowercase: username.toLowerCase(),
         createdAt: serverTimestamp(),
+        allowCraftAt: new Date(),
         lastGeneratedAt: null,
       });
 

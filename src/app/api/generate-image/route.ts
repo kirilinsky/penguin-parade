@@ -6,10 +6,13 @@ import {
   doc,
   setDoc,
   serverTimestamp,
+  getDoc,
 } from "firebase/firestore";
 import { supabase } from "@/supabase";
 import { v4 as uuidv4 } from "uuid";
 import Replicate from "replicate";
+import { getUserAllowCraftedAt } from "@/helpers/get-user-allow-crafted-at/get-user-allow-crafted-at";
+import { evaluateGenerationState } from "@/helpers/evaluate-generation-state/evaluate-generation-state";
 
 const replicate = new Replicate({ auth: process.env.REPLICATE_API_TOKEN });
 const model =
@@ -22,6 +25,11 @@ Generate a 2D digital cartoon-style portrait of a penguin character, centered in
 export async function POST(req: Request) {
   const { uid } = await req.json();
   if (!uid) return NextResponse.json({ error: "Missing uid" }, { status: 400 });
+  const allowUserCraftedAt = await getUserAllowCraftedAt(uid);
+  const { isAllowed } = evaluateGenerationState(allowUserCraftedAt);
+  if (!isAllowed) {
+    return NextResponse.json({ error: "Not able to craft!" }, { status: 500 });
+  }
 
   try {
     const settingsRes = await fetch(
@@ -47,7 +55,7 @@ export async function POST(req: Request) {
       settings.fx &&
         settings.fx.toLowerCase() !== "none" &&
         `Effect: ${settings.fx}`,
-      settings.theme && `Color mood: ${settings.theme}`, 
+      settings.theme && `Color mood: ${settings.theme}`,
       settings.rarity && `Rarity: ${settings.rarity}`,
     ]
       .filter(Boolean)
@@ -99,9 +107,11 @@ export async function POST(req: Request) {
       createdAt: serverTimestamp(),
     });
 
+    const DAY_MS = 24 * 60 * 60 * 1000;
+    const allowCraftAt = new Date(new Date().getTime() + DAY_MS);
     await setDoc(
       doc(firestore, "users", uid),
-      { lastGeneratedAt: new Date() },
+      { allowCraftAt, lastGeneratedAt: new Date() },
       { merge: true }
     );
 
