@@ -7,6 +7,13 @@ import {
 import { ImageItem } from "@/types/image.types";
 import { getBaseColorByScale } from "@/helpers/get-base-color-by-rarity/get-base-color-by-rarity";
 import GalleryItemScaleComponent from "../gallery-item-scale/gallery-item-scale.component";
+import { Orbitron } from "next/font/google";
+
+const orbitron = Orbitron({
+  subsets: ["latin"],
+  weight: ["400"],
+  display: "swap",
+});
 
 const GalleryItemComponent = ({ img }: { img: ImageItem }) => {
   const baseColor = useMemo(() => {
@@ -26,6 +33,7 @@ const GalleryItemComponent = ({ img }: { img: ImageItem }) => {
         <GalleryItemScaleComponent
           baseColor={baseColor}
           scale={img.settings.rarity}
+          className={orbitron.className}
         />
         <GalleryItemImage
           src={img.imageUrl}
@@ -33,7 +41,7 @@ const GalleryItemComponent = ({ img }: { img: ImageItem }) => {
           height={200}
           alt={img.title}
         />
-        <p>{img.title}</p>
+        <p className={orbitron.className}>{img.title}</p>
       </GalleryItemContent>
     </Tilt>
   );

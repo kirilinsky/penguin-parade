@@ -3,6 +3,7 @@
 import { userNameAtom } from "@/atoms/user/user.atom";
 import { LinkStyled } from "@/components/link/link.component.styled";
 import { useAtomValue } from "jotai";
+import Image from "next/image";
 
 export default function Home() {
   const username = useAtomValue(userNameAtom);
@@ -32,6 +33,11 @@ export default function Home() {
         Current Avatar:
         <br />
         <button>reset</button>
+      </div>
+      <div>
+        Scales:
+        <br />
+        <Image width='220' height="330" src="/scales.png" alt="scales" />
       </div>
     </div>
   );
