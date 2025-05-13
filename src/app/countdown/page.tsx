@@ -124,6 +124,8 @@ const CountDownPage = () => {
             <span>{result.rarity}</span>
             <br />
             <LinkStyled href={`/library/${uid}`}>Go to my Library</LinkStyled>
+            {/* TODO: add share functionality  */}
+            <button>share this</button>
           </PageContentBlockFlex>
         )}
       </PageContentBlockStyled>
