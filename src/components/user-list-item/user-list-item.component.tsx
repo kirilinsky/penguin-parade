@@ -1,7 +1,7 @@
 import { FriendData } from "@/types/friends.types";
-import Image from "next/image";
 import React from "react";
 import {
+  UserListItemAvatar,
   UserListItemButtons,
   UserListItemContainer,
   UserListItemContent,
@@ -23,7 +23,7 @@ const UserListItemComponent = ({
 }) => {
   return (
     <UserListItemContainer>
-      <Image
+      <UserListItemAvatar
         src={user.avatar ?? "/template.png"}
         alt={user.username}
         width={95}
@@ -37,11 +37,11 @@ const UserListItemComponent = ({
         <UserListItemButtons>
           {incoming ? (
             <>
-              <button>Accept</button>
-              <button>Decline</button>
+              <button onClick={onAccept}>Accept</button>
+              <button onClick={onDecline}>Decline</button>
             </>
           ) : (
-            <button>Cancel</button>
+            <button onClick={onCancel}>Cancel</button>
           )}
         </UserListItemButtons>
       </UserListItemContent>

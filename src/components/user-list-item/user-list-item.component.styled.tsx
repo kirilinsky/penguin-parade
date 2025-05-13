@@ -1,12 +1,14 @@
+import Image from "next/image";
 import styled from "styled-components";
 
 export const UserListItemContainer = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  border: 1px solid #fff;
-  padding: 5px;
-  border-radius: 10px;
+  border: 0 solid #fff;
+  border-bottom-width: 1px;
+  padding: 15px; 
+  gap: 15px;
   margin-block: 10px;
   transition: linear 0.3s;
   &:hover {
@@ -34,4 +36,9 @@ export const UserListItemButtons = styled.div`
   align-items: center;
   gap: 5px;
   padding: 5px;
+`;
+
+export const UserListItemAvatar = styled(Image)`
+  border: 1px solid #fff;
+  box-shadow: 0 0 7px #fff;
 `;
