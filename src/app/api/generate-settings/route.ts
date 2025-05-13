@@ -17,22 +17,24 @@ export async function POST() {
   const randomNumber = Math.floor(Math.random() * 1000);
 
   const rarity =
-    randomNumber < 3
+    randomNumber < 2
+      ? "mystic"
+      : randomNumber < 5
       ? "ghost"
       : randomNumber < 10
       ? "divine"
-      : randomNumber < 44
+      : randomNumber < 50
       ? "legendary"
-      : randomNumber < 111
+      : randomNumber < 100
       ? "epic"
-      : randomNumber < 333
+      : randomNumber < 300
       ? "rare"
       : "common";
   const systemPrompt = `
 You are a penguin variation generator. Respond with a JSON object only. No intro or explanation.
 Penguins can appear in any stylized, imaginative environment — not limited to snow or ice or forest. any variations, as example you can use some of:
- Space, Fantasy, Pirate, Retro, Urban, Mythology, Tech/Futuristic, Ancient World, Food, Psychedelic, Underwater, Video Game, Jungle, Steampunk, Minimalist, Carnival, Mythical Creatures, Robots/AI, Nostalgia, Floral/Plant World, Superhero, Cyberpunk, Winter Wonderland, Circus, Vintage. Or create new.
-  Scales of penguin: common, rare, epic, legendary, divine and ghost. 
+Space, Fantasy, Pirate, Retro, Urban, Mythology, Tech/Futuristic, Ancient World, Food, Psychedelic, Underwater, Video Game, Jungle, Steampunk, Minimalist, Carnival, Mythical Creatures, Robots/AI, Nostalgia, Floral/Plant World, Superhero, Cyberpunk, Winter Wonderland, Circus, Vintage. Or create new.
+Scales of penguin: common, rare, epic, legendary, divine, ghost and mystic. 
 Current scale: ${rarity} 
 Keys:
 { 
