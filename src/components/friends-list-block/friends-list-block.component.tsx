@@ -7,14 +7,19 @@ import FriendListItemComponent from "../friend-list-item/friend-list-item.compon
 const FriendsListBlockComponent = ({
   friends,
   onRemove,
+  friendsLoading,
 }: {
   onRemove: (targetId: string) => Promise<void>;
   friends: Friend[];
+  friendsLoading: boolean;
 }) => {
   return (
     <PageContentBlockStyled>
       <h2>Your Friends</h2>
-      {friends.length ? (
+      {/* TODO: add spinner */}
+      {friendsLoading ? (
+        "ffriends loading"
+      ) : friends.length ? (
         <ul>
           {friends.map((friend) => (
             <FriendListItemComponent

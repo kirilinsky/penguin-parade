@@ -61,6 +61,7 @@ async function fetchUsersByIds(uids: string[]) {
 const FriendsPage = () => {
   const uid = useAtomValue(userIdAtom);
   const [friends, setFriends] = useState<Friend[]>([]);
+  const [friendsLoading, setFriendsLoading] = useState<boolean>(false);
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState<User[]>([]);
   const [sentRequests, setSentRequests] = useState<FriendData[]>([]);
@@ -86,7 +87,7 @@ const FriendsPage = () => {
 
   const initFriendsPage = async () => {
     if (!uid) return;
-
+    setFriendsLoading(true);
     const friendsSnap = await getDocs(
       collection(firestore, `users/${uid}/friends`)
     );
@@ -113,6 +114,7 @@ const FriendsPage = () => {
       sent.map((r: RequestRecord) => ({ ...r, ...usersMap[r.id] }))
     );
     setFriends(friendRecords.map((f) => ({ ...f, ...usersMap[f.id] })));
+    setFriendsLoading(false);
   };
 
   const handleCancelRequest = async (user: User) => {
@@ -249,6 +251,7 @@ const FriendsPage = () => {
       <FriendsListBlockComponent
         onRemove={handleRemoveFriend}
         friends={friends}
+        friendsLoading={friendsLoading}
       />
       <PageContentBlockStyled>
         <h2>Add new Friend</h2>
