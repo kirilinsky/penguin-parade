@@ -95,7 +95,7 @@ const CountDownPage = () => {
             )}
           </PageContentBlockFlex>
         )}
-        {!loading && !result && (
+        {loading && !result && (
           <PageContentBlockFlex>
             <Image
               src="/loader.gif"
@@ -106,6 +106,7 @@ const CountDownPage = () => {
               priority
             />
             <p>Generating penguin...</p>
+            <span> please wait</span>
           </PageContentBlockFlex>
         )}
         {!loading && result && (
