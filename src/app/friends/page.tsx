@@ -11,6 +11,7 @@ import {
   arrayRemove,
   arrayUnion,
   collection,
+  deleteDoc,
   doc,
   documentId,
   getDoc,
@@ -83,6 +84,37 @@ const FriendsPage = () => {
     setSearchResults(results);
   };
 
+  const initFriendsPage = async () => {
+    if (!uid) return;
+
+    const friendsSnap = await getDocs(
+      collection(firestore, `users/${uid}/friends`)
+    );
+    const friendRecords: Friend[] = friendsSnap.docs.map((d) => ({
+      id: d.id,
+      gifted: d.data().gifted,
+      exchanged: d.data().exchanged,
+      addedAt: d.data().addedAt.toDate(),
+    }));
+
+    const userDoc = await getDoc(doc(firestore, "users", uid));
+    const userData = userDoc.data();
+
+    const incoming = userData?.friendRequests ?? [];
+    const sent = userData?.sentRequests ?? [];
+
+    const allIds = extractUniqueUserIds(incoming, sent, friendRecords);
+    const usersMap = await fetchUsersByIds(allIds);
+
+    setIncomingRequests(
+      incoming.map((r: RequestRecord) => ({ ...r, ...usersMap[r.id] }))
+    );
+    setSentRequests(
+      sent.map((r: RequestRecord) => ({ ...r, ...usersMap[r.id] }))
+    );
+    setFriends(friendRecords.map((f) => ({ ...f, ...usersMap[f.id] })));
+  };
+
   const handleCancelRequest = async (user: User) => {
     if (!uid || !user) return;
 
@@ -116,23 +148,37 @@ const FriendsPage = () => {
   };
 
   const handleAcceptRequest = async (user: User) => {
-    if (!uid || !user) return;
+    if (!uid || !user?.id) return;
 
     const now = new Date();
 
     const currentUserRef = doc(firestore, "users", uid);
-    const friendRef = doc(firestore, "users", user.id);
+    const targetUserRef = doc(firestore, "users", user.id);
+
+    const currentUserSnap = await getDoc(currentUserRef);
+    const currentData = currentUserSnap.data();
+
+    const cleanedIncoming = (currentData?.friendRequests || []).filter(
+      (req: any) => req.id !== user.id
+    );
 
     await updateDoc(currentUserRef, {
-      friendRequests: incomingRequests.filter((req) => req.id !== user.id),
+      friendRequests: cleanedIncoming,
     });
 
-    await updateDoc(friendRef, {
-      sentRequests: arrayRemove({ id: uid }),
+    const targetUserSnap = await getDoc(targetUserRef);
+    const targetData = targetUserSnap.data();
+
+    const cleanedSent = (targetData?.sentRequests || []).filter(
+      (req: any) => req.id !== uid
+    );
+
+    await updateDoc(targetUserRef, {
+      sentRequests: cleanedSent,
     });
 
-    const myFriendsRef = doc(firestore, `users/${uid}/friends/${user.id}`);
-    const theirFriendsRef = doc(firestore, `users/${user.id}/friends/${uid}`);
+    const myFriendDoc = doc(firestore, `users/${uid}/friends/${user.id}`);
+    const theirFriendDoc = doc(firestore, `users/${user.id}/friends/${uid}`);
 
     const friendData = {
       gifted: 0,
@@ -141,8 +187,8 @@ const FriendsPage = () => {
     };
 
     await Promise.all([
-      setDoc(myFriendsRef, friendData),
-      setDoc(theirFriendsRef, friendData),
+      setDoc(myFriendDoc, friendData),
+      setDoc(theirFriendDoc, friendData),
     ]);
 
     initFriendsPage();
@@ -170,35 +216,15 @@ const FriendsPage = () => {
     initFriendsPage();
   };
 
-  const initFriendsPage = async () => {
-    if (!uid) return;
+  const handleRemoveFriend = async (targetId: string) => {
+    if (!uid || !targetId) return;
 
-    const friendsSnap = await getDocs(
-      collection(firestore, `users/${uid}/friends`)
-    );
-    const friendRecords: Friend[] = friendsSnap.docs.map((d) => ({
-      id: d.id,
-      gifted: d.data().gifted,
-      exchanged: d.data().exchanged,
-      addedAt: d.data().addedAt.toDate(),
-    }));
+    const myFriendRef = doc(firestore, `users/${uid}/friends/${targetId}`);
+    const theirFriendRef = doc(firestore, `users/${targetId}/friends/${uid}`);
 
-    const userDoc = await getDoc(doc(firestore, "users", uid));
-    const userData = userDoc.data();
+    await Promise.all([deleteDoc(myFriendRef), deleteDoc(theirFriendRef)]);
 
-    const incoming = userData?.friendRequests ?? [];
-    const sent = userData?.sentRequests ?? [];
-
-    const allIds = extractUniqueUserIds(incoming, sent, friendRecords);
-    const usersMap = await fetchUsersByIds(allIds);
-
-    setIncomingRequests(
-      incoming.map((r: RequestRecord) => ({ ...r, ...usersMap[r.id] }))
-    );
-    setSentRequests(
-      sent.map((r: RequestRecord) => ({ ...r, ...usersMap[r.id] }))
-    );
-    setFriends(friendRecords.map((f) => ({ ...f, ...usersMap[f.id] })));
+    initFriendsPage();
   };
 
   useEffect(() => {
@@ -207,8 +233,10 @@ const FriendsPage = () => {
 
   return (
     <PageContentWrapperComponent>
-      <FriendsListBlockComponent friends={friends} />
-
+      <FriendsListBlockComponent
+        onRemove={handleRemoveFriend}
+        friends={friends}
+      />
       <PageContentBlockStyled>
         <h2>Add new Friend</h2>
         <input

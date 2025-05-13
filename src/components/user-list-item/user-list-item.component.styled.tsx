@@ -7,15 +7,9 @@ export const UserListItemContainer = styled.div`
   align-items: center;
   border: 0 solid #fff;
   border-bottom-width: 1px;
-  padding: 15px; 
+  padding: 15px;
   gap: 15px;
   margin-block: 10px;
-  transition: linear 0.3s;
-  &:hover {
-    box-shadow: 0 0 16px #3441d2;
-
-    transition: linear 0.3s;
-  }
 `;
 
 export const UserListItemContent = styled.div`
