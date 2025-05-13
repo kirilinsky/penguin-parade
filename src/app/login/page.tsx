@@ -44,6 +44,7 @@ export default function Login() {
       <h1>Login</h1>
       <form onSubmit={handleLogin}>
         <input
+          style={{ padding: "10px" }}
           type="email"
           placeholder="Email"
           value={email}
@@ -52,6 +53,7 @@ export default function Login() {
         />
         <br />
         <input
+          style={{ padding: "10px" }}
           type="password"
           placeholder="Password"
           value={password}

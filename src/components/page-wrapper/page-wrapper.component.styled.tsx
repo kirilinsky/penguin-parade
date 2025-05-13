@@ -3,5 +3,5 @@
 import styled from "styled-components";
 
 export const PageWrapperStyled = styled.div`
-  min-height: 80vh;
+  min-height: 100vh;
 `;

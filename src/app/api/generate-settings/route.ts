@@ -33,12 +33,12 @@ export async function POST() {
   const systemPrompt = `
 You are a penguin variation generator. Respond with a JSON object only. No intro or explanation.
 Penguins can appear in any stylized, imaginative environment — not limited to snow or ice or forest. any variations, as example you can use some of:
-Space, Fantasy, Pirate, Retro, Urban, Mythology, Tech/Futuristic, Ancient World, Food, Psychedelic, Underwater, Video Game, Jungle, Steampunk, Minimalist, Carnival, Mythical Creatures, Robots/AI, Nostalgia, Floral/Plant World, Superhero, Cyberpunk, Winter Wonderland, Circus, Vintage. Or create new.
+Space, Fantasy, Village, Cowboy, Balkan, Arabic, Pirate, Retro, Urban, Mythology, Tech/Futuristic, Ancient World, Food, Psychedelic, Underwater, Video Game, Jungle, Steampunk, Minimalist, Carnival, Mythical Creatures, Robots/AI, Nostalgia, Floral/Plant World, Superhero, Cyberpunk, Winter Wonderland, Circus, Vintage. Or create new.
 Scales of penguin: common, rare, epic, legendary, divine, ghost and mystic. 
 Current scale: ${rarity} 
 Keys:
 { 
-  "bg": (what’s behind penguin — for common: something simple), 
+  "bg": (what’s behind penguin — for common: something simple, smth about ancient Greece for divine), 
   "theme": (main visual color theme, for divine its huge diamonds, for ghost its mystic and scary),
   "beak": (сolor of penguin beak),
   "breast": (сolor of penguin breast),

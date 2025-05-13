@@ -126,6 +126,7 @@ const FriendsPage = () => {
       <div style={{ marginBottom: "1rem" }}>
         <input
           type="text"
+          style={{ padding: "10px" }}
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search users by name"

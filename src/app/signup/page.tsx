@@ -55,6 +55,7 @@ const SignUpPage = () => {
         <form onSubmit={handleSignUp}>
           <input
             type="email"
+            style={{ padding: "10px" }}
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -63,6 +64,7 @@ const SignUpPage = () => {
           <br />
           <input
             type="text"
+            style={{ padding: "10px" }}
             placeholder="User Name"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
@@ -73,6 +75,7 @@ const SignUpPage = () => {
             type="password"
             placeholder="Pass"
             value={password}
+            style={{ padding: "10px" }}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
