@@ -8,19 +8,25 @@ import { firestore } from "@/firebase";
 import { ImageItem } from "@/types/image.types";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import { useAtomValue } from "jotai";
+import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 const MyLibraryPage = () => {
+  const { id: pageId } = useParams();
   const uid = useAtomValue(userIdAtom);
   const [images, setImages] = useState<ImageItem[]>([]);
   const [loading, setLoading] = useState(true);
+  const [isMyPage, setIsMyPage] = useState(false);
 
   useEffect(() => {
     async function fetchImages() {
-      if (!uid) return;
+      const idIsEqual = pageId === uid;
+      setIsMyPage(idIsEqual);
+      const id = idIsEqual ? uid : pageId;
+      if (!id) return;
       setLoading(true);
       try {
-        const ref = collection(firestore, `users/${uid}/images`);
+        const ref = collection(firestore, `users/${id}/images`);
         const q = query(ref, orderBy("createdAt", "desc"));
         const snapshot = await getDocs(q);
         const list = snapshot.docs.map(
@@ -34,7 +40,7 @@ const MyLibraryPage = () => {
       }
     }
     fetchImages();
-  }, [uid]);
+  }, [uid, pageId]);
 
   return (
     <GalleryComponent>

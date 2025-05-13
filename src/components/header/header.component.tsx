@@ -10,6 +10,7 @@ import HeaderBioComponent from "../header-bio/header-bio.component";
 const HeaderComponent = () => {
   const username = useAtomValue(userNameAtom);
   const loggedIn = useAtomValue(loggedInAtom);
+  const uid = useAtomValue(userIdAtom);
   const setUserName = useSetAtom(userNameAtom);
   const setLoggedIn = useSetAtom(loggedInAtom);
   const setUserId = useSetAtom(userIdAtom);
@@ -26,7 +27,7 @@ const HeaderComponent = () => {
         {loggedIn ? (
           <>
             <Link href="/countdown">Craft!</Link>
-            <Link href="/mylibrary">My Penguins</Link>
+            <Link href={`/library/${uid}`}>My Penguins</Link>
             <Link href="/friends">Friends</Link>
             <Link onClick={logOutHandler} href="/">
               Log out

@@ -123,7 +123,7 @@ const CountDownPage = () => {
             <br />
             <span>{result.rarity}</span>
             <br />
-            <LinkStyled href="/mylibrary">Go to my Library</LinkStyled>
+            <LinkStyled href={`/library/${uid}`}>Go to my Library</LinkStyled>
           </PageContentBlockFlex>
         )}
       </PageContentBlockStyled>

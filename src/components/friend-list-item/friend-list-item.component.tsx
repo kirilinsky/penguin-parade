@@ -7,6 +7,7 @@ import {
 import { Friend } from "@/types/friends.types";
 import { doc, getDoc } from "firebase/firestore";
 import { firestore } from "@/firebase";
+import { useRouter } from "next/navigation";
 
 const FriendListItemComponent = ({
   friend,
@@ -15,6 +16,7 @@ const FriendListItemComponent = ({
   onRemove: (id: string) => void;
   friend: Friend;
 }) => {
+  const router = useRouter();
   const [friendAvatar, setFriendAvatar] = useState<null | string>(null);
   const [friendUserName, setFriendUserName] = useState<null | string>(null);
   const fetchFriendData = async () => {
@@ -47,6 +49,9 @@ const FriendListItemComponent = ({
           <p>Exchanged: {friend.exchanged}</p>
         </div>
         <button onClick={() => onRemove(friend.id)}>remove</button>
+        <button onClick={() => router.push(`/library/${friend.id}`)}>
+          visit
+        </button>
       </FriendListItemContent>
     </FriendListItemContainer>
   );
