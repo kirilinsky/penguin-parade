@@ -39,13 +39,15 @@ Current scale: ${rarity}
 Keys:
 { 
   "bg": (what’s behind penguin — for common: something simple, smth about ancient Greece for divine), 
-  "theme": (main visual color theme, for divine its huge diamonds, for ghost its mystic and scary),
+  "theme": (main visual color theme, for divine its huge diamonds, for ghost its mystic and scary, for divine white marble and gold colors),
   "beak": (сolor of penguin beak),
   "breast": (сolor of penguin breast),
   "back": (сolor of penguin back), 
   "fx": (visual or ambient effect — none for common, rich for another scales),
-  "acc": (optional clothe and/or hat — for common: none or smth simple, no wealth),
-  "t": (title, ≤3 words, linked to bg and acc and theme)
+  "acc": (optional clothe and/or hat — for common: none or smth simple, for mystic something scary, and for divine greek olive Greek olive wreath),
+  "t": (title, ≤3 words, linked to bg and acc and theme),
+  "des": short story about this penguin based on given theme,title, acc, bg (max 25 words)
+  "ability":some trait or ability based on theme nd title
 } 
 Use plain English. Use different themes and combinations. Values should be short and visual. Return **only** JSON.`;
 
