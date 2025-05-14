@@ -12,7 +12,7 @@ export const FriendListItemContent = styled.div`
   gap: 5px;
 `;
 
-export const FriendListItemAvatar = styled(Image)`
+export const FriendListItemAvatar = styled.img`
   border: 1px solid #fff;
   box-shadow: 0 0 7px #fff;
 `;
