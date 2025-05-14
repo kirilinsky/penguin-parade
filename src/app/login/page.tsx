@@ -5,7 +5,13 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth, firestore } from "../../firebase";
 import { useRouter } from "next/navigation";
 import { useSetAtom } from "jotai";
-import { loggedInAtom, userIdAtom, userNameAtom } from "@/atoms/user/user.atom";
+import {
+  avatarAtom,
+  avatarScaleAtom,
+  loggedInAtom,
+  userIdAtom,
+  userNameAtom,
+} from "@/atoms/user/user.atom";
 import { doc, getDoc } from "firebase/firestore";
 
 export default function Login() {
@@ -15,6 +21,8 @@ export default function Login() {
   const setUsername = useSetAtom(userNameAtom);
   const setUserId = useSetAtom(userIdAtom);
   const setLoggedIn = useSetAtom(loggedInAtom);
+  const setAvatar = useSetAtom(avatarAtom);
+  const setAvatarScale = useSetAtom(avatarScaleAtom);
 
   const router = useRouter();
 
@@ -28,10 +36,14 @@ export default function Login() {
       alert("Success!");
       const userDoc = await getDoc(doc(firestore, "users", uid));
       const username = userDoc.exists() ? userDoc.data().username : null;
+      const avatar = userDoc.exists() ? userDoc.data().avatar : null;
+      const avatarScale = userDoc.exists() ? userDoc.data().avatarScale : null;
 
       setUsername(username);
       setUserId(uid);
       setLoggedIn(true);
+      setAvatar(avatar);
+      setAvatarScale(avatarScale);
 
       router.push("/");
     } catch (err: any) {

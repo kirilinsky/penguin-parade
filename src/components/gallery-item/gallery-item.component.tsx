@@ -17,10 +17,12 @@ const orbitron = Orbitron({
 
 const GalleryItemComponent = ({
   img,
+  onClick = () => {},
   slim = false,
   scalable = true,
 }: {
   img: ImageItem;
+  onClick?: (img: ImageItem) => void;
   slim?: boolean;
   scalable?: boolean;
 }) => {
@@ -37,7 +39,7 @@ const GalleryItemComponent = ({
       glareColor={baseColor}
       glareBorderRadius="20px"
     >
-      <GalleryItemContent>
+      <GalleryItemContent onClick={() => onClick(img)}>
         <GalleryItemScaleComponent
           baseColor={baseColor}
           scale={img.settings.rarity}

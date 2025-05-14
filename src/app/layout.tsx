@@ -1,4 +1,5 @@
 import "./globals.css";
+import "./rodal.css";
 import { Provider as JotaiProvider } from "jotai";
 import ClientHeaderWrapper from "@/components/client-header-wrapper/client-header-wrapper.component";
 import FooterComponent from "@/components/footer/footer.component";

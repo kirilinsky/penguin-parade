@@ -12,8 +12,10 @@ export interface ImageItemSettings {
   beak: string;
   bg: string;
   breast: string;
+  des: string;
+  ability: string;
   eyes: string;
   fx: string;
-  rarity: string; 
+  rarity: string;
   theme: string;
 }

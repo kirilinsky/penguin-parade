@@ -1,22 +1,56 @@
 "use client";
 
-import { userIdAtom } from "@/atoms/user/user.atom";
+import {
+  avatarAtom,
+  avatarScaleAtom,
+  userIdAtom,
+} from "@/atoms/user/user.atom";
+import GalleryItemModalComponent from "@/components/gallery-item-modal/gallery-item-modal.component";
 import GalleryItemComponent from "@/components/gallery-item/gallery-item.component";
 import GalleryComponent from "@/components/gallery/gallery.component";
 import { LinkStyled } from "@/components/link/link.component.styled";
 import { firestore } from "@/firebase";
 import { ImageItem } from "@/types/image.types";
-import { collection, getDocs, orderBy, query } from "firebase/firestore";
-import { useAtomValue } from "jotai";
+import {
+  collection,
+  doc,
+  getDocs,
+  orderBy,
+  query,
+  setDoc,
+} from "firebase/firestore";
+import { useAtomValue, useSetAtom } from "jotai";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import Rodal from "rodal";
 
 const MyLibraryPage = () => {
   const { id: pageId } = useParams();
   const uid = useAtomValue(userIdAtom);
+  const currentAvatar = useAtomValue(avatarAtom);
+
+  const setAvatar = useSetAtom(avatarAtom);
+  const setAvatarScale = useSetAtom(avatarScaleAtom);
   const [images, setImages] = useState<ImageItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [isMyPage, setIsMyPage] = useState(false);
+  const [detailsImage, setDetailsImage] = useState<ImageItem | null>(null);
+
+  const handleOnClick = (img: ImageItem) => {
+    setDetailsImage(img);
+    console.log(img, "123");
+  };
+
+  const setAvatarAction = async (avatar: string, avatarScale: string) => {
+    if (!uid) return;
+    await setDoc(
+      doc(firestore, "users", uid),
+      { avatar, avatarScale },
+      { merge: true }
+    );
+    setAvatar(avatar);
+    setAvatarScale(avatarScale);
+  };
 
   useEffect(() => {
     async function fetchImages() {
@@ -44,9 +78,21 @@ const MyLibraryPage = () => {
 
   return (
     <GalleryComponent>
+      <Rodal visible={!!detailsImage} onClose={() => setDetailsImage(null)}>
+        <GalleryItemModalComponent
+          isMyPage={isMyPage}
+          currentAvatar={currentAvatar}
+          setAvatar={setAvatarAction}
+          img={detailsImage}
+        />
+      </Rodal>
       {images.length ? (
         images.map((img: ImageItem) => (
-          <GalleryItemComponent key={img.id} img={img} />
+          <GalleryItemComponent
+            onClick={handleOnClick}
+            key={img.id}
+            img={img}
+          />
         ))
       ) : (
         <div>

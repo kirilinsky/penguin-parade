@@ -32,24 +32,28 @@ export async function POST() {
       : "common";
   const systemPrompt = `
 You are a penguin variation generator. Respond with a JSON object only. No intro or explanation.
-Penguins can appear in any stylized, imaginative environment — not limited to snow or ice or forest. any variations, as example you can use some of:
-Space, Fantasy, Village, Cowboy, Balkan, Arabic, Pirate, Retro, Urban, Mythology, Tech/Futuristic, Ancient World, Food, Psychedelic, Underwater, Video Game, Jungle, Steampunk, Minimalist, Carnival, Mythical Creatures, Robots/AI, Nostalgia, Floral/Plant World, Superhero, Cyberpunk, Winter Wonderland, Circus, Vintage. Or create new.
-Scales of penguin: common, rare, epic, legendary, divine, ghost and mystic. 
-Current scale: ${rarity} 
-Keys:
-{ 
-  "bg": (what’s behind penguin — for common: something simple, smth about ancient Greece for divine), 
-  "theme": (main visual color theme, for divine its huge diamonds, for ghost its mystic and scary, for divine white marble and gold colors),
-  "beak": (сolor of penguin beak),
-  "breast": (сolor of penguin breast),
-  "back": (сolor of penguin back), 
-  "fx": (visual or ambient effect — none for common, rich for another scales),
-  "acc": (optional clothe and/or hat — for common: none or smth simple, for mystic something scary, and for divine greek olive Greek olive wreath),
-  "t": (title, ≤3 words, linked to bg and acc and theme),
-  "des": short story about this penguin based on given theme,title, acc, bg (max 25 words)
-  "ability":some trait or ability based on theme nd title
-} 
-Use plain English. Use different themes and combinations. Values should be short and visual. Return **only** JSON.`;
+
+Penguins can appear in any stylized, wildly imaginative environment — do not stick to forests, ice, or ocean unless scale suggests it.  
+Think in terms of fantasy, folklore, sci-fi, mythology, urban fantasy, surrealism, retro worlds, game universes, alien civilizations, dream logic, cultural mashups, ancient empires, elemental worlds, magical realism.
+
+Scales of penguin: common, rare, epic, legendary, divine, ghost, mystic.  
+Current scale: ${rarity}
+
+Return an object with:
+{
+  "bg": (the world or place behind the penguin — grounded or strange, depending on scale. For ghost: something eerie. For divine: ancient celestial temples or white-gold grandeur),
+  "theme": (visual color mood or vibe — be playful or symbolic. For divine: marble, gold, diamond. For ghost: shadows, haunted glow. For mystic: arcane colors, forbidden light),
+  "beak": (beak color — can be symbolic or surprising),
+  "breast": (chest color — match or contrast theme),
+  "back": (back color — expressive, not dull),
+  "fx": (ambient effect around penguin — common: none or soft; rare+: glow, particles, aura, flickers, anomalies),
+  "acc": (accessory like hat, mask, gear — minimal/simple for common; rare+: expressive and unusual; ghost: cursed; divine: godlike),
+  "t": (title — max 3 words, poetic or iconic, themed),
+  "des": (max 25 words — short tale about this penguin’s role, appearance, or legend based on theme, bg, acc),
+  "ability": (short: 1–4 words, special trait linked to theme/title)
+}
+
+Be bold and original. Combine unexpected genres. Create mood. Return only JSON.`;
 
   try {
     const res = await fetch("https://api.openai.com/v1/chat/completions", {
