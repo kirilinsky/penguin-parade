@@ -34,7 +34,21 @@ export default function Home() {
             <h2>Total count</h2>
           </PageContentBlockStyled>
           <PageContentBlockStyled>
-            <h2>Friends</h2>
+            <h2>Road map</h2>
+            <ul>
+              <li>Avatars</li>
+              <li>Improve generation rules</li>
+              <li>Gifts</li>
+              <li>Evolution</li>
+              <li>Funds system</li>
+              <li>Auction</li>
+              <li>Friends updates</li>
+              <li>Tutorial page</li>
+              <li>I18n</li>
+            </ul>
+          </PageContentBlockStyled>
+          <PageContentBlockStyled>
+            <h2>News</h2>
           </PageContentBlockStyled>
           <PageContentBlockStyled>
             <h2>Auction</h2>
