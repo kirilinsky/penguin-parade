@@ -3,6 +3,7 @@ import { PageContentBlockStyled } from "../page-content-block/page-content-block
 import { Friend } from "@/types/friends.types";
 import Image from "next/image";
 import FriendListItemComponent from "../friend-list-item/friend-list-item.component";
+import { FriendsListBlockGrid } from "./friends-list-block.component.styled";
 
 const FriendsListBlockComponent = ({
   friends,
@@ -20,7 +21,7 @@ const FriendsListBlockComponent = ({
       {friendsLoading ? (
         "ffriends loading"
       ) : friends.length ? (
-        <ul>
+        <FriendsListBlockGrid>
           {friends.map((friend) => (
             <FriendListItemComponent
               onRemove={onRemove}
@@ -28,7 +29,7 @@ const FriendsListBlockComponent = ({
               friend={friend}
             />
           ))}
-        </ul>
+        </FriendsListBlockGrid>
       ) : (
         <>
           <p>You don't have friends yet! Try to find someone.</p>

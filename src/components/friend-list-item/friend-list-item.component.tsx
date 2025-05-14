@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import {
   FriendListItemAvatar,
+  FriendListItemButtons,
   FriendListItemContainer,
   FriendListItemContent,
+  FriendListItemName,
 } from "./friend-list-item.component.styled";
 import { Friend } from "@/types/friends.types";
 import { doc, getDoc } from "firebase/firestore";
@@ -43,15 +45,17 @@ const FriendListItemComponent = ({
         style={{ borderRadius: "50%" }}
       />
       <FriendListItemContent>
-        <p>{friendUserName}</p>
+        <FriendListItemName>{friendUserName}</FriendListItemName>
         <div>
           <p>Gifted: {friend.gifted}</p>
           <p>Exchanged: {friend.exchanged}</p>
         </div>
-        <button onClick={() => onRemove(friend.id)}>remove</button>
-        <button onClick={() => router.push(`/library/${friend.id}`)}>
-          visit
-        </button>
+        <FriendListItemButtons>
+          <button onClick={() => router.push(`/library/${friend.id}`)}>
+            visit
+          </button>
+          <button onClick={() => onRemove(friend.id)}>remove</button>
+        </FriendListItemButtons>
       </FriendListItemContent>
     </FriendListItemContainer>
   );
