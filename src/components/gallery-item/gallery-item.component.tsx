@@ -48,6 +48,7 @@ const GalleryItemComponent = ({
           width={slim ? 165 : 200}
           height={slim ? 165 : 200}
           alt={img.title}
+          color={baseColor}
         />
         <p className={orbitron.className}>{img.title}</p>
       </GalleryItemContent>
