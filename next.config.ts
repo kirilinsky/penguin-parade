@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import path from "path";
 
 const nextConfig: NextConfig = {
   compiler: {
@@ -6,6 +7,16 @@ const nextConfig: NextConfig = {
   },
   images: {
     domains: ["jbvhrvmqvrgtlwxvabih.supabase.co"],
+  },
+  webpack(config) {
+    config.resolve = {
+      ...(config.resolve || {}),
+      alias: {
+        ...(config.resolve?.alias || {}),
+        "@": path.resolve(__dirname, "src"),
+      },
+    };
+    return config;
   },
 };
 
