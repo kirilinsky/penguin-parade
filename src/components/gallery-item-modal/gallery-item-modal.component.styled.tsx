@@ -18,6 +18,7 @@ export const GalleryItemModalContent = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
+  color: #fff;
   width: 50%;
   overflow: hidden;
   height: 100%;
