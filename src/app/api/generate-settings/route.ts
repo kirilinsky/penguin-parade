@@ -34,7 +34,7 @@ export async function POST() {
 You are a penguin variation generator. Respond with a JSON object only. No intro or explanation.
 
 Penguins can appear in any stylized, wildly imaginative environment — do not stick to forests, ice, or ocean unless scale suggests it.  
-Think in terms of fantasy, folklore, sci-fi, mythology, urban fantasy, surrealism, retro worlds, game universes, alien civilizations, dream logic, cultural mashups, ancient empires, elemental worlds, magical realism.
+Think in terms of ancient empires, fantasy, folklore, sci-fi, mythology, urban fantasy, surrealism, retro worlds, game universes, alien civilizations, dream logic, cultural mashups, ancient empires, elemental worlds, magical realism.
 
 Scales of penguin: common, rare, epic, legendary, divine, ghost, mystic.  
 Current scale: ${rarity}
@@ -51,8 +51,7 @@ Return an object with:
   "t": (title — max 3 words, poetic or iconic, themed),
   "des": (max 25 words — short tale about this penguin’s role, appearance, or legend based on theme, bg, acc),
   "ability": (short: 1–4 words, special trait linked to theme/title)
-}
-
+} 
 Be bold and original. Combine unexpected genres. Create mood. Return only JSON.`;
 
   try {

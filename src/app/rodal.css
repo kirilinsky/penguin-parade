@@ -21,8 +21,8 @@
 /* -- dialog -- */
 .rodal-dialog {
   position: absolute;
-  width: 90vw !important;
-  height: 85vh !important; 
+  width: 85vw !important;
+  height: 85vh !important;
   top: 0;
   left: 0;
   right: 0;
@@ -52,7 +52,7 @@
 .rodal-close:before,
 .rodal-close:after {
   position: absolute;
-  content: '';
+  content: "";
   height: 2px;
   width: 100%;
   top: 50%;

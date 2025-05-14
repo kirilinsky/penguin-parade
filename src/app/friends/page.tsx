@@ -34,30 +34,6 @@ function extractUniqueUserIds(
   return Array.from(new Set(allIds));
 }
 
-async function fetchUsersByIds(uids: string[]) {
-  const chunks = [];
-  const users: Record<string, User> = {};
-
-  for (let i = 0; i < uids.length; i += 10) {
-    const chunk = uids.slice(i, i + 10);
-    const q = query(
-      collection(firestore, "users"),
-      where(documentId(), "in", chunk)
-    );
-    chunks.push(getDocs(q));
-  }
-
-  const snapshots = await Promise.all(chunks);
-
-  snapshots.forEach((snap) => {
-    snap.docs.forEach((doc) => {
-      users[doc.id] = { id: doc.id, ...doc.data() } as User;
-    });
-  });
-
-  return users;
-}
-
 const FriendsPage = () => {
   const uid = useAtomValue(userIdAtom);
   const [friends, setFriends] = useState<Friend[]>([]);
@@ -66,6 +42,30 @@ const FriendsPage = () => {
   const [searchResults, setSearchResults] = useState<User[]>([]);
   const [sentRequests, setSentRequests] = useState<FriendData[]>([]);
   const [incomingRequests, setIncomingRequests] = useState<FriendData[]>([]);
+
+  async function fetchUsersByIds(uids: string[]) {
+    const chunks = [];
+    const users: Record<string, User> = {};
+
+    for (let i = 0; i < uids.length; i += 10) {
+      const chunk = uids.slice(i, i + 10);
+      const q = query(
+        collection(firestore, "users"),
+        where(documentId(), "in", chunk)
+      );
+      chunks.push(getDocs(q));
+    }
+
+    const snapshots = await Promise.all(chunks);
+
+    snapshots.forEach((snap) => {
+      snap.docs.forEach((doc) => {
+        users[doc.id] = { id: doc.id, ...doc.data() } as User;
+      });
+    });
+
+    return users;
+  }
 
   const handleSearch = async () => {
     if (!search.trim()) return;
