@@ -5,7 +5,7 @@ export const HeaderWrapper = styled.header`
   justify-content: space-around;
   align-items: center;
   height: 77px;
-  background-color: #608156d6;
+  background-color: #214d26d4;
 `;
 
 export const HeaderLinks = styled.div`
