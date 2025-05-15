@@ -4,13 +4,19 @@ import Link from "next/link";
 import { Orbitron } from "next/font/google";
 import { ImageItem } from "@/types/image.types";
 import { getBaseColorByScale } from "@/helpers/get-base-color-by-rarity/get-base-color-by-rarity";
-import { Metadata } from "next";
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { userId: string; picture: string };
-}): Promise<Metadata> {
+import { Metadata, ResolvingMetadata } from "next";
+
+type PageProps = {
+  params: {
+    userId: string;
+    picture: string;
+  };
+};
+export async function generateMetadata(
+  { params }: PageProps,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
   const { userId, picture } = params;
 
   const ref = doc(firestore, `users/${userId}/images/${picture}`);
@@ -55,11 +61,7 @@ const orbitron = Orbitron({
   weight: ["400", "700"],
 });
 
-export default async function SharePage({
-  params,
-}: {
-  params: { userId: string; picture: string };
-}) {
+export default async function SharePage({ params }: PageProps) {
   const { userId, picture } = params;
 
   const ref = doc(firestore, `users/${userId}/images/${picture}`);
