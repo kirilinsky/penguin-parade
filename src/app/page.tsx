@@ -36,9 +36,8 @@ export default function Home() {
           <PageContentBlockStyled>
             <h2>Road map</h2>
             <ul>
-              <li>Avatar scale (box shadow)</li>
-              <li>Improve generation rules</li>
               <li>Gifts</li>
+              <li>Improve generation rules</li>
               <li>Evolution</li>
               <li>Funds system</li>
               <li>Auction</li>

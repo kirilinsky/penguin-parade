@@ -4,12 +4,13 @@ import React from "react";
 import { HeaderLinks, HeaderWrapper } from "./header.component.styled";
 import Link from "next/link";
 import { useAtomValue, useSetAtom } from "jotai";
-import { avatarAtom, loggedInAtom, userIdAtom, userNameAtom } from "@/atoms/user/user.atom";
+import { avatarAtom, avatarScaleAtom, loggedInAtom, userIdAtom, userNameAtom } from "@/atoms/user/user.atom";
 import HeaderBioComponent from "../header-bio/header-bio.component";
 
 const HeaderComponent = () => {
   const username = useAtomValue(userNameAtom);
   const avatar = useAtomValue(avatarAtom);
+  const avatarScale = useAtomValue(avatarScaleAtom);
   const loggedIn = useAtomValue(loggedInAtom);
   const uid = useAtomValue(userIdAtom);
   const setUserName = useSetAtom(userNameAtom);
@@ -41,7 +42,7 @@ const HeaderComponent = () => {
           </>
         )}
       </HeaderLinks>
-      {loggedIn && <HeaderBioComponent avatar={avatar} username={username} />}
+      {loggedIn && <HeaderBioComponent avatarScale={avatarScale} avatar={avatar} username={username} />}
     </HeaderWrapper>
   );
 };

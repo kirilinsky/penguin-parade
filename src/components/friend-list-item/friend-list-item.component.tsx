@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
-  FriendListItemAvatar,
   FriendListItemButtons,
   FriendListItemContainer,
   FriendListItemContent,
@@ -10,6 +9,8 @@ import { Friend } from "@/types/friends.types";
 import { doc, getDoc } from "firebase/firestore";
 import { firestore } from "@/firebase";
 import { useRouter } from "next/navigation";
+import { getBaseColorByScale } from "@/helpers/get-base-color-by-rarity/get-base-color-by-rarity";
+import AvatarComponent from "../avatar-component/avatar-component";
 
 const FriendListItemComponent = ({
   friend,
@@ -20,6 +21,9 @@ const FriendListItemComponent = ({
 }) => {
   const router = useRouter();
   const [friendAvatar, setFriendAvatar] = useState<null | string>(null);
+  const [friendAvatarScale, setFriendAvatarScale] = useState<null | string>(
+    null
+  );
   const [friendUserName, setFriendUserName] = useState<null | string>(null);
   const fetchFriendData = async () => {
     const friendRef = await getDoc(doc(firestore, "users", friend.id));
@@ -27,6 +31,7 @@ const FriendListItemComponent = ({
     if (!friendRef.exists()) return;
     if (friendDataFetched) {
       setFriendAvatar(friendDataFetched.avatar);
+      setFriendAvatarScale(friendDataFetched.avatarScale);
       setFriendUserName(friendDataFetched.username);
     }
   };
@@ -36,13 +41,10 @@ const FriendListItemComponent = ({
   }, [friend]);
   return (
     <FriendListItemContainer>
-      {/*  TODO: create avatars   */}
-      <FriendListItemAvatar
-        src={friendAvatar ?? "/template.png"}
-        alt={friend.id}
-        width={95}
-        height={95}
-        style={{ borderRadius: "50%" }}
+      <AvatarComponent
+        id={friend.id}
+        avatarUrl={friendAvatar}
+        avatarScale={friendAvatarScale}
       />
       <FriendListItemContent>
         <FriendListItemName>{friendUserName}</FriendListItemName>

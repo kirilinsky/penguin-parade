@@ -1,4 +1,5 @@
-export function getBaseColorByScale(scale: string): string {
+export function getBaseColorByScale(scale: string | null): string {
+  if (!scale) return "black";
   switch (scale.toLowerCase()) {
     case "common":
       return "gray";

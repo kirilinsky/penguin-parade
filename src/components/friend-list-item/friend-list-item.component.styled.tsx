@@ -1,5 +1,6 @@
-import Image from "next/image";
 import styled from "styled-components";
+
+
 
 export const FriendListItemContainer = styled.div`
   display: flex;
@@ -22,8 +23,4 @@ export const FriendListItemButtons = styled.div`
 
 export const FriendListItemName = styled.p`
   font-weight: bold;
-`;
-export const FriendListItemAvatar = styled.img`
-  border: 1px solid #fff;
-  box-shadow: 0 0 7px #fff;
 `;
