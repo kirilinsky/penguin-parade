@@ -48,7 +48,7 @@ Return an object with:
   "back": (back color — expressive, not dull),
   "fx": (ambient effect around penguin — common: none or soft; rare+: glow, particles, aura, flickers, anomalies),
   "acc": (accessory like hat, mask, gear — minimal/simple for common; rare+: expressive and unusual; ghost: cursed; divine: godlike),
-  "t": (title — max 3 words, poetic or iconic, themed, avoid fancy and paphos for common scale),
+  "t": (title — max 3 words, poetic or iconic, themed, avoid fancy and paphos for common scale. dont use Sovereign or royal for common scale!),
   "des": (max 25 words — short tale about this penguin’s role, appearance, or legend based on theme, bg, acc),
   "ability": (short: 1–4 words, special trait linked to theme/title)
 } 
