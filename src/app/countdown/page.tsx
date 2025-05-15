@@ -28,6 +28,7 @@ const CountDownPage = () => {
   const [loading, setLoading] = useState(false);
   const [leftTimestamp, setLeftTimestamp] = useState<number>(0);
   const [result, setResult] = useState<GenerationResult | null>(null);
+  const [shareLink, setShareLink] = useState<string | null>(null);
 
   const checkUserStatus = async () => {
     if (!uid) return;
@@ -59,6 +60,11 @@ const CountDownPage = () => {
           title: data.title,
           rarity: data.settings.rarity,
         });
+        setShareLink(
+          encodeURIComponent(
+            `${location.origin}/share/${uid}/${data.downloadURL}`
+          )
+        );
         setCanCraft(false);
       } else {
         console.error("Generation failed:", data);
@@ -125,10 +131,18 @@ const CountDownPage = () => {
             <br />
             <LinkStyled href={`/library/${uid}`}>Go to my Library</LinkStyled>
             {/* TODO: add share functionality  */}
-            <button>share this</button>
+            <a
+              target="_blank"
+              href={`https://t.me/share/url?url=${shareLink}&text=${encodeURIComponent(
+                `Look at my new penguin: ${result.title} 🐧\nCrafted on Penguin Parade!`
+              )}`}
+            >
+              <button>Share this</button>
+            </a>
           </PageContentBlockFlex>
         )}
       </PageContentBlockStyled>
+
       <LastCraftedBlockComponent uid={uid} />
     </PageContentWrapperComponent>
   );
