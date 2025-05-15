@@ -64,6 +64,8 @@ const GalleryItemModalComponent = ({
 
         <span>Ability: {img.settings.ability}</span>
 
+        <span>Loot: {img.settings.acc}</span>
+
         {isMyPage && currentAvatar !== img.imageUrl && (
           <GalleryItemModalButtonsContainer>
             <button
