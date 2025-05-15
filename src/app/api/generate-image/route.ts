@@ -20,7 +20,7 @@ const model =
 const templateImageUrl = "https://i.ibb.co/B55bD3mh/template.png";
 
 const basePrompt = `
-Generate a 2D digital cartoon-style portrait of a penguin character, centered in the image. Keep the penguin's pose, proportions, and expression exactly the same as in the reference image. Do not alter the penguin's structure.`;
+Generate a 2D digital cartoon-style portrait of a penguin character, centered in the image. Keep the penguin's pose, proportions, and expression exactly the same as in the reference image. Do not alter the penguin's structure. But you can experiment with clothes and stuff.`;
 
 export async function POST(req: Request) {
   const { uid } = await req.json();
@@ -47,6 +47,7 @@ export async function POST(req: Request) {
     const { settings } = await settingsRes.json();
 
     const description = [
+      settings.t && `Penguin is ${settings.t}`,
       settings.bg && `Background: ${settings.bg}`,
       settings.acc && `Penguin is wearing: ${settings.acc}`,
       settings.beak && `Penguin Beak color: ${settings.beak}`,
@@ -56,7 +57,6 @@ export async function POST(req: Request) {
         settings.fx.toLowerCase() !== "none" &&
         `Effect: ${settings.fx}`,
       settings.theme && `Color mood: ${settings.theme}`,
-      settings.rarity && `Rarity: ${settings.rarity}`,
     ]
       .filter(Boolean)
       .join(", ");

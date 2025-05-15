@@ -30,28 +30,133 @@ export async function POST() {
       : randomNumber < 300
       ? "rare"
       : "common";
+  const presetsObject = {
+    common:
+      'Keep it grounded or lightly stylized. Environments may be familiar (small villages, nature, festivals). Themes should feel soft, cozy, or playful. Effects minimal. Accessories simple or absent. No grandiose titles (avoid "king", "emperor", "sovereign", etc). Keep ability low-key but clever.',
+    rare: "Introduce more distinct fantasy elements, brighter themes, glow, colorful accessories, surreal backdrops. Abilities become unique but not overpowered.",
+    epic: "Strong visual contrasts, elemental magic, steampunk, space-fantasy, historical/heroic crossover. Accessories and environments can be bold. Give penguin an aura. Title should sound iconic.",
+    legendary:
+      "Large-scale energy, symbols of greatness, celestial or ancient ruins, effects like fire, stardust, runes. Titles may sound mythic. Ability is powerful and themed.",
+    divine:
+      "High fantasy or godlike, ancient Greece. Temples in the sky, golden marble cities, massive gems. Theme can include light, sacred metal, or purity. Accessories divine (e.g. olive wreath, cosmic armor).",
+    ghost:
+      "Eerie, shadowy, cursed, or decayed. Themes like forgotten crypts, haunted carnival, lost realms. Fog, chains, glow from within. Ability must sound haunting. Title should not be heroic.",
+    mystic:
+      "Surreal, dreamlike, arcane. Environment can defy logic (floating pyramids, shifting sky forests). Colors may be dark or glowing. Themes strange, forgotten, whispered. Title is cryptic. Ability must feel ancient and secret.",
+  };
+
+  const settingsObject = {
+    common: {
+      bg: "Use familiar or cozy places: small village, snow hill, grassy path, cozy cabin.",
+      theme:
+        "Keep visual themes soft, pastel, or nature-inspired — nothing intense.",
+      beak: "Simple colors: orange, black, yellow, brown.",
+      breast: "Natural tones: white, gray, soft blue, light brown.",
+      back: "Earthy or calm colors. Avoid neon or metallic.",
+      fx: "None or subtle: light breeze, falling leaves, soft glow.",
+      acc: "Minimal or playful: scarf, wool hat, tiny backpack, or none.",
+      t: "Avoid grand words. Use playful or descriptive titles like 'Snow Scout' or 'Berry Walker'.",
+      des: "Describe a simple daily life or small adventure in < 25 words.",
+      ability:
+        "Use modest or quirky traits: 'fast feet', 'good memory', 'berry finder'.",
+    },
+    rare: {
+      bg: "Add fantasy or surreal elements: floating rocks, glowing forest, unusual village.",
+      theme:
+        "Brighter palettes or symbolic color pairings (e.g. fire and frost).",
+      beak: "Allow contrast or rare tones like teal, indigo, or rose gold.",
+      breast: "Start to introduce vibrant or glowing options.",
+      back: "Stronger colors allowed, possibly two-tone or textured.",
+      fx: "Soft magic: glow, floating particles, glowing butterflies.",
+      acc: "Expressive but grounded: enchanted satchel, gem brooch, elemental cape.",
+      t: "Use short symbolic or elemental titles: 'Fire Trail', 'Crystal Bloom'.",
+      des: "Slightly mythic or magical actions: watching stars, healing saplings, taming wind.",
+      ability: "One strong word or a combo like 'Petal shield', 'Moon jump'.",
+    },
+    epic: {
+      bg: "Bold environments: sky kingdoms, lava plains, arcane towers, lost cities.",
+      theme: "Contrasting or elemental: stormfire, neon frost, ancient rust.",
+      beak: "Unique materials allowed: obsidian, chrome, glowing stone.",
+      breast: "Vivid and powerful tones: magma red, starlight white.",
+      back: "High contrast or textured (e.g. cracked stone, glowing metal).",
+      fx: "Visible energy: runes, sparks, magic circles, light trails.",
+      acc: "Heroic or magical: flaming mask, mechanical arm, battle sash.",
+      t: "Bold and symbolic: 'Blaze Herald', 'Sky Warden', 'Echo Breaker'.",
+      des: "Hint at quests or major roles in fantasy or battle settings.",
+      ability: "Elemental or mythical powers: 'Thunder cry', 'Starlit charge'.",
+    },
+    legendary: {
+      bg: "Ancient epic settings: collapsed temples, star gates, frozen time islands.",
+      theme: "Celestial, divine chaos, volcanic ice — large scale energies.",
+      beak: "Mythic material: gold, lava, ethereal crystal.",
+      breast: "Regal or glowing colors: cosmic gold, obsidian light.",
+      back: "Sacred contrast: sunburst violet, silver storm.",
+      fx: "Strong aura, particles orbiting, or burning sigils.",
+      acc: "Ancient relics: crown of stars, obsidian wings, crystal helm.",
+      t: "Use mythic words: 'Rune King', 'Starblade', 'Vault Flame'.",
+      des: "Describe feats, prophecy, or legendary moments.",
+      ability: "Powerful concepts: 'Reality bend', 'Celestial surge'.",
+    },
+    divine: {
+      bg: "Heavenly realms: marble citadels, floating temples, golden skies.",
+      theme: "Light, purity, gold, marble, diamond reflections.",
+      beak: "Divine tones: glowing white, gold, silver crystal.",
+      breast: "White-gold, pearlescent pink, radiant violet.",
+      back: "Clean or jewel-like colors: white marble, golden bronze.",
+      fx: "Radiance: beam halos, wings of light, divine particles.",
+      acc: "Sacred icons: olive wreath, divine mantle, temple circlet.",
+      t: "Elevated but graceful titles: 'Marble Bloom', 'Sunkeeper', 'Light Weaver'.",
+      des: "Depict a divine mission or a blessing moment.",
+      ability: "Sacred traits: 'Blessing touch', 'Sunshield', 'Aura field'.",
+    },
+    ghost: {
+      bg: "Creepy or lost worlds: foggy graveyards, haunted circus, decayed thrones.",
+      theme: "Dark faded tones: haunted glow, blood rust, cursed ash.",
+      beak: "Withered or spectral tones: bone white, ash black, fading blue.",
+      breast: "Ghostly textures: misty gray, void white, faded purple.",
+      back: "Tattered or decayed hues, rusty brown, shadow blue.",
+      fx: "Mist, ghost trails, blinking lights, broken light particles.",
+      acc: "Cursed gear: cracked mask, chains, stitched cloth.",
+      t: "Dark or eerie titles: 'Hollow Watcher', 'Curse Born', 'Fog Eye'.",
+      des: "Suggest unfinished stories, hauntings, ancient warnings.",
+      ability:
+        "Haunting traits: 'Soul drain', 'Phantom step', 'Night whisper'.",
+    },
+    mystic: {
+      bg: "Illogical or dreamlike: colorless deserts, upside-down temples, memory forests.",
+      theme: "Forbidden hues: arcane violet, liquid green, prism shadow.",
+      beak: "Unreal materials: glowing quartz, floating copper.",
+      breast: "breast color, Layered or flickering colors: galaxy fold, arcane mist.",
+      back: "Dream logic palette: static teal, drifting ink.",
+      fx: "Strange energy: shifting patterns, light loops, runes that change.",
+      acc: "Unusual: mask with no face, ancient pendant, levitating halo.",
+      t: "Cryptic names examples: 'Silent Thread', 'Sigil Bloom', 'Ink Veil'.",
+      des: "Describe mystic functions, paradoxes, or symbols.",
+      ability: "Enigmatic powers: 'Mind echo', 'Sigil blink', 'Fold jump'.",
+    },
+  };
+  const currentSettings = settingsObject[rarity];
+
   const systemPrompt = `
 You are a penguin variation generator. Respond with a JSON object only. No intro or explanation.
-
-Penguins can appear in any stylized, wildly imaginative environment — do not stick to forests, ice, or ocean unless scale suggests it.  
-Think in terms of ancient empires, fantasy, folklore, sci-fi, mythology, urban fantasy, surrealism, retro worlds, game universes, alien civilizations, dream logic, cultural mashups, ancient empires, elemental worlds, magical realism.
-
-Scales of penguin: common, rare, epic, legendary, divine, ghost, mystic.  
-Current scale: ${rarity}
-
+Penguins can appear in any stylized, wildly imaginative environment — do not stick to forests, ice, or ocean unless scale suggests it.
+Think in terms of ancient empires, fantasy, folklore, sci-fi, mythology, urban fantasy, surrealism, retro worlds, video game logic, alien civilizations, dream logic, elemental dimensions, magical realism, or even complete absurdity.
+ Current scale: ${rarity}
+${presetsObject[rarity]}
+ 
 Return an object with:
 {
-  "bg": (the world or place behind the penguin — grounded or strange, depending on scale. For ghost: something eerie. For divine: ancient celestial temples or white-gold grandeur),
-  "theme": (visual color mood or vibe — be playful or symbolic. For divine: marble, gold, diamond. For ghost: shadows, haunted glow. For mystic: arcane colors, forbidden light),
-  "beak": (beak color — can be symbolic or surprising),
-  "breast": (chest color — match or contrast theme),
-  "back": (back color — expressive, not dull),
-  "fx": (ambient effect around penguin — common: none or soft; rare+: glow, particles, aura, flickers, anomalies),
-  "acc": (accessory like hat, mask, gear — minimal/simple for common; rare+: expressive and unusual; ghost: cursed; divine: godlike),
-  "t": (title — max 3 words, poetic or iconic, themed, avoid fancy and paphos for common scale. dont use Sovereign or royal for common scale!),
-  "des": (max 25 words — short tale about this penguin’s role, appearance, or legend based on theme, bg, acc),
-  "ability": (short: 1–4 words, special trait linked to theme/title)
-} 
+  "bg": ${currentSettings.bg},
+  "theme": ${currentSettings.theme},
+  "beak":  ${currentSettings.beak},
+  "breast": ${currentSettings.breast},
+  "back": ${currentSettings.back},
+  "fx": ${currentSettings.fx},
+  "acc": ${currentSettings.acc},
+  "t": max 3 words, ${currentSettings.t},
+  "des": story in 20-25 words, ${currentSettings.des},
+  "ability":1-3 words, ${currentSettings.ability}
+}
 Be bold and original. Combine unexpected genres. Create mood. Return only JSON.`;
 
   try {
