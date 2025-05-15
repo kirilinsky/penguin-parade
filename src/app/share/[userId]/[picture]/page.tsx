@@ -7,7 +7,7 @@ import { getBaseColorByScale } from "@/helpers/get-base-color-by-rarity/get-base
 
 import { Metadata } from "next";
 
-export async function generateMetadata(context: {
+/* export async function generateMetadata(context: {
   params: { userId: string; picture: string };
 }): Promise<Metadata> {
   const { userId, picture } = context.params;
@@ -49,10 +49,12 @@ export async function generateMetadata(context: {
     },
   };
 }
+*/
 const orbitron = Orbitron({
   subsets: ["latin"],
   weight: ["400", "700"],
 });
+
 
 export default async function SharePage({
   params,
