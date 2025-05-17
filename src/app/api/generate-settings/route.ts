@@ -86,14 +86,14 @@ export async function POST() {
       ability: "Elemental or mythical powers: 'Thunder cry', 'Starlit charge'.",
     },
     legendary: {
-      bg: "Ancient epic settings: collapsed temples, star gates, frozen time islands.",
+      t: "Use mythic words: 'Rune King', 'Starblade', 'Vault Flame' etc. but not 'Sovereign'",
+      bg: "Ancient epic settings: collapsed temples, star gates, frozen time islands, comets.",
       theme: "Celestial, divine chaos, volcanic ice — large scale energies.",
       beak: "Mythic material: gold, lava, ethereal crystal.",
       breast: "Regal or glowing colors: cosmic gold, obsidian light.",
       back: "Sacred contrast: sunburst violet, silver storm.",
       fx: "Strong aura, particles orbiting, or burning sigils.",
-      acc: "Ancient relics: crown of stars, obsidian wings, crystal helm.",
-      t: "Use mythic words: 'Rune King', 'Starblade', 'Vault Flame'.",
+      acc: "Ancient relics: crown of stars, obsidian wings, crystal helm, weapon.",
       des: "Describe feats, prophecy, or legendary moments.",
       ability: "Powerful concepts: 'Reality bend', 'Celestial surge'.",
     },
@@ -140,8 +140,8 @@ export async function POST() {
 
   const systemPrompt = `
 You are a penguin variation generator. Respond with a JSON object only. No intro or explanation.
-Penguins can appear in any stylized, wildly imaginative environment — do not stick to forests, ice, or ocean unless scale suggests it.
-Think in terms of ancient empires, fantasy, folklore, sci-fi, mythology, urban fantasy, surrealism, retro worlds, video game logic, alien civilizations, dream logic, elemental dimensions, magical realism, or even complete absurdity.
+Penguins can appear in any stylized, wildly imaginative environment — do not stick to forests, ice, space, or ocean unless scale suggests it.
+Think in terms of ancient empires,historical context, fantasy and pop culture is ok, folklore, sci-fi, mythology, urban fantasy, surrealism, retro worlds, video game logic, alien civilizations, dream logic, elemental dimensions, magical realism, or even complete absurdity.
  Current scale: ${rarity}. 
 ${presetsObject[rarity]}
 Return an object with:
