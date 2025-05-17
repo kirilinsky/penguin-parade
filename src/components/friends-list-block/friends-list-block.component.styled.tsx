@@ -4,7 +4,7 @@ export const FriendsListBlockGrid = styled.div`
   display: grid;
   padding: 10px;
   width: 100%;
-  max-height: 70vh;
+  max-height: 40vh;
   gap: 15px;
   grid-template-columns: repeat(2, 1fr);
   overflow-y: auto;

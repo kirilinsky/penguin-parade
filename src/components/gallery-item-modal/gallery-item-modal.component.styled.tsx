@@ -23,7 +23,7 @@ export const GalleryItemModalContent = styled.div<{ $frameColor?: string }>`
   overflow: hidden;
   height: 100%;
   gap: 10px;
-  border-radius: 10px;
+  border-radius: 1em;
   padding: 10px;
   border: 1.5px solid ${({ $frameColor }) => $frameColor};
   box-shadow: 0 0 10px ${({ $frameColor }) => $frameColor};

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const GalleryItemImage = styled.img<{ color: string }>`
-  border-radius: 15px;
+  border-radius: 1em;
   z-index: 15;
   margin-block: 5px;
   border: 1px solid ${({ color }) => color};
