@@ -4,7 +4,13 @@ import React from "react";
 import { HeaderLinks, HeaderWrapper } from "./header.component.styled";
 import Link from "next/link";
 import { useAtomValue, useSetAtom } from "jotai";
-import { avatarAtom, avatarScaleAtom, loggedInAtom, userIdAtom, userNameAtom } from "@/atoms/user/user.atom";
+import {
+  avatarAtom,
+  avatarScaleAtom,
+  loggedInAtom,
+  userIdAtom,
+  userNameAtom,
+} from "@/atoms/user/user.atom";
 import HeaderBioComponent from "../header-bio/header-bio.component";
 
 const HeaderComponent = () => {
@@ -22,7 +28,7 @@ const HeaderComponent = () => {
     setLoggedIn(false);
     setUserName(null);
   };
-
+  // TODO: add dynamic routes
   return (
     <HeaderWrapper>
       <HeaderLinks>
@@ -31,6 +37,7 @@ const HeaderComponent = () => {
             <Link href="/countdown">Craft!</Link>
             <Link href={`/library/${uid}`}>My Penguins</Link>
             <Link href="/friends">Friends</Link>
+            <Link href="/evolve">Evolve</Link>
             <Link onClick={logOutHandler} href="/">
               Log out
             </Link>
@@ -42,7 +49,13 @@ const HeaderComponent = () => {
           </>
         )}
       </HeaderLinks>
-      {loggedIn && <HeaderBioComponent avatarScale={avatarScale} avatar={avatar} username={username} />}
+      {loggedIn && (
+        <HeaderBioComponent
+          avatarScale={avatarScale}
+          avatar={avatar}
+          username={username}
+        />
+      )}
     </HeaderWrapper>
   );
 };
