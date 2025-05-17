@@ -6,7 +6,6 @@ import {
   doc,
   setDoc,
   serverTimestamp,
-  getDoc,
 } from "firebase/firestore";
 import { supabase } from "@/supabase";
 import { v4 as uuidv4 } from "uuid";
@@ -25,6 +24,7 @@ Generate a 2D digital cartoon-style portrait of a penguin character, centered in
 
 export async function POST(req: Request) {
   const authHeader = req.headers.get("Authorization") || "";
+
   const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
 
   if (!token) {
@@ -50,10 +50,10 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Not able to craft!" }, { status: 500 });
   }
 
-  const { scale } = await req.json();
+  /*  const { scale } = await req.json();
   if (scale) {
     return NextResponse.json({ error: "scale :" + scale }, { status: 500 });
-  }
+  } */
 
   try {
     const settingsRes = await fetch(

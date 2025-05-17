@@ -16,6 +16,7 @@ import LastCraftedBlockComponent from "@/components/last-crafted-block/last-craf
 import { getUserAllowCraftedAt } from "@/helpers/get-user-allow-crafted-at/get-user-allow-crafted-at";
 import { ArcadeButtonStyled } from "@/components/arcade-button/arcade-button.component.styled";
 import NeonButtonComponent from "@/components/neon-button/neon-button.component";
+import { getAuth, sendEmailVerification } from "firebase/auth";
 
 type GenerationResult = {
   downloadURL: string;
@@ -41,14 +42,28 @@ const CountDownPage = () => {
   };
 
   const craft = async () => {
-    if (!uid) return;
+    const auth = getAuth();
+    const user = auth.currentUser;
+    if (!uid || !user) return;
+
+    await user.reload();
+    if (!user.emailVerified) {
+      await sendEmailVerification(user);
+      alert(
+        `Please verify your email (${user.email}) before crafting a penguin.`
+      );
+      return;
+    }
+
+    const token = await user.getIdToken(true);
 
     setLoading(true);
     try {
       const res = await fetch("/api/generate-image", {
         method: "POST",
-        body: JSON.stringify({ uid }),
+        body: JSON.stringify({ scale: "scale test" }),
         headers: {
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       });
