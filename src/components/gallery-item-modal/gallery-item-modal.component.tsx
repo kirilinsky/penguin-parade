@@ -14,6 +14,7 @@ import GalleryItemScaleComponent from "../gallery-item-scale/gallery-item-scale.
 import { getBaseColorByScale } from "@/helpers/get-base-color-by-rarity/get-base-color-by-rarity";
 import { useAtomValue } from "jotai";
 import { avatarAtom } from "@/atoms/user/user.atom";
+import NeonButtonComponent from "../neon-button/neon-button.component";
 
 const orbitron = Orbitron({
   subsets: ["latin"],
@@ -39,7 +40,7 @@ const GalleryItemModalComponent = ({
   }, [img.settings.rarity]);
   return (
     <GalleryItemModalContainer>
-      <GalleryItemModalContent>
+      <GalleryItemModalContent $frameColor={baseColor}>
         <GalleryItemModalImage
           alt={img.title}
           src={img.imageUrl}
@@ -66,13 +67,16 @@ const GalleryItemModalComponent = ({
 
         <span>Loot: {img.settings.acc}</span>
 
-        {isMyPage && currentAvatar !== img.imageUrl && (
+        {isMyPage && (
           <GalleryItemModalButtonsContainer>
-            <button
-              onClick={() => setAvatar(img.imageUrl, img.settings.rarity)}
-            >
-              Set as avatar
-            </button>
+            {currentAvatar !== img.imageUrl && (
+              <NeonButtonComponent
+                title="Set as avatar"
+                onClick={() => setAvatar(img.imageUrl, img.settings.rarity)}
+              />
+            )}
+            <NeonButtonComponent title="Give a friend" subtitle="soon" />
+            <NeonButtonComponent title="Sell on auction" subtitle="soon" />
           </GalleryItemModalButtonsContainer>
         )}
       </GalleryItemModalContent>

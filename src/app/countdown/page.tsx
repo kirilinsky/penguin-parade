@@ -15,6 +15,7 @@ import {
 import LastCraftedBlockComponent from "@/components/last-crafted-block/last-crafted-block.component";
 import { getUserAllowCraftedAt } from "@/helpers/get-user-allow-crafted-at/get-user-allow-crafted-at";
 import { ArcadeButtonStyled } from "@/components/arcade-button/arcade-button.component.styled";
+import NeonButtonComponent from "@/components/neon-button/neon-button.component";
 
 type GenerationResult = {
   downloadURL: string;
@@ -137,7 +138,7 @@ const CountDownPage = () => {
                 `Look at my new penguin: ${result.title} 🐧\nCrafted on Penguin Parade!`
               )}`}
             >
-              <button>Share this</button>
+              <NeonButtonComponent title="Share this" subtitle="soon" />
             </a>
           </PageContentBlockFlex>
         )}

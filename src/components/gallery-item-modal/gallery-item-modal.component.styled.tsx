@@ -14,7 +14,7 @@ export const GalleryItemModalContainer = styled.div`
   }
 `;
 
-export const GalleryItemModalContent = styled.div`
+export const GalleryItemModalContent = styled.div<{ $frameColor?: string }>`
   display: flex;
   flex-direction: column;
   position: relative;
@@ -23,14 +23,18 @@ export const GalleryItemModalContent = styled.div`
   overflow: hidden;
   height: 100%;
   gap: 10px;
+  border-radius: 10px;
+  padding: 10px;
+  border: 1.5px solid ${({ $frameColor }) => $frameColor};
+  box-shadow: 0 0 10px ${({ $frameColor }) => $frameColor};
   @media (max-width: 768px) {
     width: 95%;
     min-height: 55vh;
+    margin-bottom: 15px;
   }
 `;
 
 export const GalleryItemModalImage = styled(Image)`
-  border-radius: 10px;
   transition: linear 1s;
   &:hover {
     transform: scale(1.05);
@@ -57,4 +61,5 @@ export const GalleryItemModalScale = styled.h3`
 
 export const GalleryItemModalButtonsContainer = styled.div`
   display: flex;
+  gap: 10px;
 `;

@@ -262,7 +262,7 @@ const FriendsPage = () => {
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search users by name"
         />
-        <button onClick={handleSearch}>Search</button>
+        <button onClick={handleSearch}>Search Friend</button>
 
         {searchResults.length > 0 && (
           <div>
@@ -276,12 +276,13 @@ const FriendsPage = () => {
                   <Image
                     src={user.avatar ?? "/template.png"}
                     alt={user.username}
-                    width={44}
-                    height={44}
+                    width={45}
+                    height={45}
                     style={{ borderRadius: "50%" }}
                   />
                   <div>
                     <strong>{user.username}</strong>
+                    <br />
                     {hasSentRequest(user.id) ? (
                       <>
                         <span>requested</span>

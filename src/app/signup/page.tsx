@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { auth, firestore } from "../../firebase";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 import { LinkStyled } from "@/components/link/link.component.styled";
+import NeonButtonComponent from "@/components/neon-button/neon-button.component";
 
 const SignUpPage = () => {
   const [email, setEmail] = useState("");
@@ -84,7 +85,11 @@ const SignUpPage = () => {
           />
           {error && <p style={{ color: "red" }}>{error}</p>}
           <br />
-          <button type="submit">Sign up</button>
+          <NeonButtonComponent
+            title="Sign up"
+            subtitle="Sign up"
+            type="submit"
+          />
         </form>
       )}
     </div>

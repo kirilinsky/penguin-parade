@@ -13,6 +13,7 @@ import {
   userNameAtom,
 } from "@/atoms/user/user.atom";
 import { doc, getDoc } from "firebase/firestore";
+import NeonButtonComponent from "@/components/neon-button/neon-button.component";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -74,7 +75,11 @@ export default function Login() {
         />
         <br />
         {error && <p style={{ color: "red" }}>{error}</p>}
-        <button type="submit">Login</button>
+        <NeonButtonComponent
+          title="Login"
+          subtitle="logging in"
+          type="submit"
+        />
       </form>
     </div>
   );
