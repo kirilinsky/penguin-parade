@@ -7,6 +7,25 @@ export type Friend = {
   addedAt: Date;
 };
 
+export type UserStatistics = {
+  evolutions: number;
+  totalGiftsSent: number;
+  totalGiftsReceived: number;
+  /* TODO: add totalAmount stat */
+  totalAmount: Record<string, number>;
+  totalCoinsEarned: number;
+  lastEvolutionAt: Date;
+  lastGiftSentAt: Date;
+  lastLoginAt: Date;
+  lastAuctionPurchaseAt: Date;
+};
+
+export type UserSettings = {
+  showGalleryPublic: boolean;
+  /* TODO: add public stat */
+  showStatsPublic: boolean;
+};
+
 export type User = {
   id: string;
   username: string;
@@ -14,7 +33,13 @@ export type User = {
   avatar: string | null;
   avatarScale: string | null;
   createdAt: Date;
+  /* TODO: add stat */
+  /* TODO: add settings */
+  /* TODO: add coins */
+  coins: number;
   email: string;
+  /* TODO: add xp system */
+  xp: number;
   lastGeneratedAt: Date;
   allowCraftAt: Date;
 };

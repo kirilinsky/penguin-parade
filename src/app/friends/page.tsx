@@ -68,7 +68,7 @@ const FriendsPage = () => {
   }
 
   const handleSearch = async () => {
-    if (!search.trim()) return;
+    if (!search.trim() || !uid) return;
     const lowercase_search = search.toLowerCase();
 
     const usersRef = collection(firestore, "users");
