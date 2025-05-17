@@ -1,3 +1,11 @@
+import React from "react";
+
+const Page = () => {
+  return <div>soon</div>;
+};
+
+export default Page;
+
 /* import { doc, getDoc } from "firebase/firestore";
 import { firestore } from "@/firebase";
 import Link from "next/link";
