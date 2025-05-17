@@ -1,3 +1,4 @@
+import { themes } from "@/data/themes";
 import { NextResponse } from "next/server";
 
 /* let mock = {
@@ -14,35 +15,39 @@ import { NextResponse } from "next/server";
 }; */
 
 export async function POST() {
-  const randomNumber = Math.floor(Math.random() * 1000);
+  const randomNumber = Math.floor(Math.random() * 1200);
+  const randomSettings = Math.floor(Math.random() * themes.length - 1);
+
+  const randomlyUpdatedTheme = themes[randomSettings];
 
   const rarity =
     randomNumber < 2
       ? "mystic"
       : randomNumber < 5
       ? "ghost"
-      : randomNumber < 10
+      : randomNumber < 9
       ? "divine"
-      : randomNumber < 50
+      : randomNumber < 49
       ? "legendary"
-      : randomNumber < 100
+      : randomNumber < 111
       ? "epic"
       : randomNumber < 300
       ? "rare"
       : "common";
+
   const presetsObject = {
     common:
-      'Keep it grounded or lightly stylized. Environments may be familiar (small villages, nature, festivals). Themes should feel soft, cozy, or playful. Effects minimal. Accessories simple or absent. No grandiose titles (avoid "king", "emperor", "sovereign", etc). Keep ability low-key but clever.',
-    rare: "Introduce more distinct fantasy elements, brighter themes, glow, colorful accessories, surreal backdrops. Abilities become unique but not overpowered.",
-    epic: "Strong visual contrasts, elemental magic, steampunk, space-fantasy, historical/heroic crossover. Accessories and environments can be bold. Give penguin an aura. Title should sound iconic.",
+      "Keep it grounded or lightly stylized. Backgrounds may include cozy cottages, campfires, village squares, wooden bridges, or garden paths. Themes should feel soft, playful, or nostalgic. Effects minimal — perhaps some falling leaves or laundry in the breeze. Accessories simple or absent. No grandiose titles (avoid 'king', 'emperor', etc). Abilities should be subtle and clever.",
+    rare: "Introduce distinct fantasy elements: glowing mushrooms, crystal flowers, enchanted glades, or surreal sunsets. Backgrounds may include floating islands, rainbow-lit waterfalls, or celestial gardens. Accessories may glow or shimmer. Abilities become unique but not overpowered.",
+    epic: "Strong visual contrasts and striking scenes. Environments may feature elemental chaos — volcano temples, storm altars, overgrown mechs, or desert ruins powered by arcane energy. Include magical effects like lightning trails or glowing glyphs. Give the penguin an aura. Titles should feel iconic and epic.",
     legendary:
-      "Large-scale energy, symbols of greatness, celestial or ancient ruins, effects like fire, stardust, runes. Titles may sound mythic. Ability is powerful and themed.",
+      "Grand and symbolic. Backgrounds may include shattered moons, celestial maps, giant statues, or forgotten kingdoms ablaze with runes. Effects like fire halos, stardust rain, or radiant wings. Themes evoke ancient greatness. Title may sound mythic or eternal. Ability is powerful and thematically rich.",
     divine:
-      "High fantasy or godlike, ancient Greece. Temples in the sky, golden marble cities, massive gems. Theme can include light, sacred metal, or purity. Accessories divine (e.g. olive wreath, cosmic armor).",
+      "High fantasy meets celestial architecture. Temples above the clouds, golden marble roads, divine obelisks, or glowing altars surrounded by doves or spirits. Use light rays, halos, and sacred gems. The environment may reflect godlike serenity. Accessories may include olive wreaths or star-forged armor.",
     ghost:
-      "Eerie, shadowy, cursed, or decayed. Themes like forgotten crypts, haunted carnival, lost realms. Fog, chains, glow from within. Ability must sound haunting. Title should not be heroic.",
+      "Eerie and decayed. Include haunted mansions, shadowy forests, broken mirrors, or carnival ruins wrapped in fog. Details like flickering lanterns, floating chains, whispering gravestones, or black flame torches. Glows come from within or unseen sources. Ability must feel cursed or spectral. Title should sound mysterious, not heroic.",
     mystic:
-      "Surreal, dreamlike, arcane. Environment can defy logic (floating pyramids, shifting sky forests). Colors may be dark or glowing. Themes strange, forgotten, whispered. Title is cryptic. Ability must feel ancient and secret.",
+      "Surreal, ancient, and dreamlike. Backgrounds may include floating pyramids, inverted temples, moving sky-forests, or libraries with sentient books. Colors can shift or glow strangely. Environments should feel secretive and impossible — arcane symbols in the sky, living shadows, or fractured light. Title is cryptic. Ability must feel ancient and whispered.",
   };
 
   const settingsObject = {
@@ -140,10 +145,11 @@ export async function POST() {
 
   const systemPrompt = `
 You are a penguin variation generator. Respond with a JSON object only. No intro or explanation.
-Penguins can appear in any stylized, wildly imaginative environment — do not stick to forests, ice, space, or ocean unless scale suggests it.
-Think in terms of ancient empires,historical context, fantasy and pop culture is ok, folklore, sci-fi, mythology, urban fantasy, surrealism, retro worlds, video game logic, alien civilizations, dream logic, elemental dimensions, magical realism, or even complete absurdity.
- Current scale: ${rarity}. 
+There are few scales of rarity: common, rare, epic, legendary, divine (greek gods),ghost(casper like) and mystic (scary and creepy)
+Current scale is ${rarity} and current reference is ${randomlyUpdatedTheme}. So mix it up togeter with 
+
 ${presetsObject[rarity]}
+
 Return an object with:
 {
   "bg": (smth from ${currentSettings.bg}),
@@ -157,7 +163,7 @@ Return an object with:
   "des": story in 20-25 words, ${currentSettings.des},
   "ability": max 1-3 words, ${currentSettings.ability}
 }
-Be bold and original. Combine unexpected genres. Create mood. Return only JSON.`;
+Be bold and original. You can combine and mix combinations. Create mood. Return only JSON.`;
 
   try {
     const res = await fetch("https://api.openai.com/v1/chat/completions", {
