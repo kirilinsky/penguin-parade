@@ -8,7 +8,7 @@ export const EvolutionGridItemStyled = styled.div<{
     value ? `url(${value}) center/cover no-repeat` : "#281919"};
   aspect-ratio: 1 / 1;
   border-radius: 2em;
-  opacity: ${({ value }) => (value ? 1 : 0.8)};
+  opacity: ${({ value }) => (value ? 1 : 0.95)};
   display: grid;
   place-items: center;
   border: 1px solid #fff;
