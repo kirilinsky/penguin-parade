@@ -13,6 +13,7 @@ import { v4 as uuidv4 } from "uuid";
 import Replicate from "replicate";
 import { getUserAllowCraftedAt } from "@/helpers/get-user-allow-crafted-at/get-user-allow-crafted-at";
 import { evaluateGenerationState } from "@/helpers/evaluate-generation-state/evaluate-generation-state";
+import { adminAuth } from "@/fireBase-admin";
 
 const replicate = new Replicate({ auth: process.env.REPLICATE_API_TOKEN });
 const model =
@@ -23,12 +24,35 @@ const basePrompt = `
 Generate a 2D digital cartoon-style portrait of a penguin character, centered in the image. Keep the penguin's pose, proportions, and expression exactly the same as in the reference image. Do not alter the penguin's structure. But you can experiment with clothes and stuff.`;
 
 export async function POST(req: Request) {
-  const { uid } = await req.json();
+  const authHeader = req.headers.get("Authorization") || "";
+  const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
+
+  if (!token) {
+    return NextResponse.json({ error: "No token provided" }, { status: 401 });
+  }
+
+  let decoded;
+  try {
+    decoded = await adminAuth.verifyIdToken(token);
+  } catch (err) {
+    return NextResponse.json({ error: "Invalid token" }, { status: 401 });
+  }
+
+  if (!decoded.email_verified) {
+    return NextResponse.json({ error: "Email not verified" }, { status: 403 });
+  }
+
+  const uid = decoded.uid;
   if (!uid) return NextResponse.json({ error: "Missing uid" }, { status: 400 });
   const allowUserCraftedAt = await getUserAllowCraftedAt(uid);
   const { isAllowed } = evaluateGenerationState(allowUserCraftedAt);
   if (!isAllowed) {
     return NextResponse.json({ error: "Not able to craft!" }, { status: 500 });
+  }
+
+  const { scale } = await req.json();
+  if (scale) {
+    return NextResponse.json({ error: "scale :" + scale }, { status: 500 });
   }
 
   try {

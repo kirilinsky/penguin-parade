@@ -1,6 +1,10 @@
 "use client";
 
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+  updateProfile,
+} from "firebase/auth";
 import React, { useState } from "react";
 import { auth, firestore } from "../../firebase";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
@@ -28,13 +32,18 @@ const SignUpPage = () => {
       await updateProfile(user, {
         displayName: username,
       });
+      await sendEmailVerification(user);
+
       // TODO: auto login for new user
+
+      // TODO: add default object, add statistics ans settings
       await setDoc(doc(firestore, "users", user.uid), {
         email: user.email,
         username,
+        username_lowercase: username.toLowerCase(),
         avatarScale: null,
         avatar: null,
-        username_lowercase: username.toLowerCase(),
+        coins: 0,
         createdAt: serverTimestamp(),
         allowCraftAt: new Date(),
         lastGeneratedAt: null,
