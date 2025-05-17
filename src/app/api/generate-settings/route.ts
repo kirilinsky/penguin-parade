@@ -47,15 +47,15 @@ export async function POST() {
 
   const settingsObject = {
     common: {
-      bg: "Use familiar or cozy places: small village, snow hill, grassy path, cozy cabin.",
+      bg: "Use familiar or cozy places, not amazed: small village, snow hill, grassy path, cozy cabin.",
       theme:
-        "Keep visual themes soft, pastel, or nature-inspired — nothing intense.",
+        "Keep visual themes soft, pastel, or nature-inspired — nothing intense. Can use some fun and cute themes.",
       beak: "Simple colors: orange, black, yellow, brown.",
       breast: "Natural tones: white, gray, soft blue, light brown.",
       back: "Earthy or calm colors. Avoid neon or metallic.",
       fx: "None or subtle: light breeze, falling leaves, soft glow.",
       acc: "Minimal or playful: scarf, wool hat, tiny backpack, or none.",
-      t: "Avoid grand words. Use playful or descriptive titles like 'Snow Scout' or 'Berry Walker'.",
+      t: "Avoid grand words. Can use some fun and cute names. Use playful or descriptive titles like 'Snow Scout' or 'Berry Walker'.",
       des: "Describe a simple daily life or small adventure in < 25 words.",
       ability:
         "Use modest or quirky traits: 'fast feet', 'good memory', 'berry finder'.",
@@ -126,7 +126,8 @@ export async function POST() {
       bg: "Illogical or dreamlike: colorless deserts, upside-down temples, memory forests.",
       theme: "Forbidden hues: arcane violet, liquid green, prism shadow.",
       beak: "Unreal materials: glowing quartz, floating copper.",
-      breast: "breast color, Layered or flickering colors: galaxy fold, arcane mist.",
+      breast:
+        "breast color, Layered or flickering colors: galaxy fold, arcane mist.",
       back: "Dream logic palette: static teal, drifting ink.",
       fx: "Strange energy: shifting patterns, light loops, runes that change.",
       acc: "Unusual: mask with no face, ancient pendant, levitating halo.",
@@ -141,21 +142,20 @@ export async function POST() {
 You are a penguin variation generator. Respond with a JSON object only. No intro or explanation.
 Penguins can appear in any stylized, wildly imaginative environment — do not stick to forests, ice, or ocean unless scale suggests it.
 Think in terms of ancient empires, fantasy, folklore, sci-fi, mythology, urban fantasy, surrealism, retro worlds, video game logic, alien civilizations, dream logic, elemental dimensions, magical realism, or even complete absurdity.
- Current scale: ${rarity}
+ Current scale: ${rarity}. 
 ${presetsObject[rarity]}
- 
 Return an object with:
 {
-  "bg": ${currentSettings.bg},
-  "theme": ${currentSettings.theme},
-  "beak":  ${currentSettings.beak},
-  "breast": ${currentSettings.breast},
-  "back": ${currentSettings.back},
-  "fx": ${currentSettings.fx},
-  "acc": ${currentSettings.acc},
-  "t": max 3 words, ${currentSettings.t},
+  "bg": (smth from ${currentSettings.bg}),
+  "theme": (smth from ${currentSettings.theme}),
+  "beak":  smth from ${currentSettings.beak},
+  "breast": smth from ${currentSettings.breast},
+  "back": smth from ${currentSettings.back},
+  "fx": smth from ${currentSettings.fx},
+  "acc": (max 1-3 words, create smth from ${currentSettings.acc}),
+  "t": (max 3 words, ${currentSettings.t}, be original),
   "des": story in 20-25 words, ${currentSettings.des},
-  "ability":1-3 words, ${currentSettings.ability}
+  "ability": max 1-3 words, ${currentSettings.ability}
 }
 Be bold and original. Combine unexpected genres. Create mood. Return only JSON.`;
 

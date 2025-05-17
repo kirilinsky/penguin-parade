@@ -1,4 +1,4 @@
-import { doc, getDoc } from "firebase/firestore";
+/* import { doc, getDoc } from "firebase/firestore";
 import { firestore } from "@/firebase";
 import Link from "next/link";
 import { Orbitron } from "next/font/google";
@@ -7,7 +7,7 @@ import { getBaseColorByScale } from "@/helpers/get-base-color-by-rarity/get-base
 
 import { Metadata } from "next";
 
-/* export async function generateMetadata(context: {
+export async function generateMetadata(context: {
   params: { userId: string; picture: string };
 }): Promise<Metadata> {
   const { userId, picture } = context.params;
@@ -49,19 +49,15 @@ import { Metadata } from "next";
     },
   };
 }
-*/
 const orbitron = Orbitron({
   subsets: ["latin"],
   weight: ["400", "700"],
 });
 
-
-export default async function SharePage({
-  params,
-}: {
-  params: { userId: string; picture: string };
-}) {
+export default async function SharePage({ params }: any) {
   const { userId, picture } = params;
+  console.log(picture,'params params',userId);
+  
 
   const ref = doc(firestore, `users/${userId}/images/${picture}`);
   const snap = await getDoc(ref);
@@ -105,3 +101,4 @@ export default async function SharePage({
     </div>
   );
 }
+ */
