@@ -38,7 +38,6 @@ const MyLibraryPage = () => {
 
   const handleOnClick = (img: ImageItem) => {
     setDetailsImage(img);
-    console.log(img, "123");
   };
 
   const setAvatarAction = async (avatar: string, avatarScale: string) => {
