@@ -1,26 +1,118 @@
 "use client";
 
+import { userIdAtom } from "@/atoms/user/user.atom";
 import EvolutionGridContainer from "@/components/evolution-grid-container/evolution-grid-container.component";
 import EvolutionGridItem from "@/components/evolution-grid-item/evolution-grid-item.component";
-import NeonButtonComponent from "@/components/neon-button/neon-button.component";
-import React from "react";
-import styled from "styled-components";
+import { fetchImages } from "@/helpers/api/fetch-images/fetch-images";
+import { ImageItem } from "@/types/image.types";
+import { useAtomValue } from "jotai";
+import React, { useEffect, useState } from "react";
+import Rodal from "rodal";
 
+type EvolutionSlot = ImageItem | null;
+
+const evolutionListDefault: Record<string, EvolutionSlot> = {
+  tla: null,
+  tc: null,
+  tra: null,
+  mlc: null,
+  mrc: null,
+  bla: null,
+  bc: null,
+  bra: null,
+};
 const EvolvePage = () => {
+  const uid = useAtomValue(userIdAtom);
+  const [evolutionList, setEvolutionList] =
+    useState<Record<string, EvolutionSlot>>(evolutionListDefault);
+  const [images, setImages] = useState<ImageItem[]>([]);
+  const [filteredImages, setFilteredIMages] = useState<ImageItem[]>([]);
+  const [currentRarityScale, setCurrentRarityScale] = useState<string | null>(
+    null
+  );
+  const [currentKey, setCurrentKey] = useState<string | null>(null);
+  const [showLibraryModal, setShowLibraryModal] = useState<boolean>(false);
+  const evolutionKeys = Object.keys(evolutionListDefault);
+
+  const onLoad = async (uid: string) => {
+    const result = await fetchImages(uid);
+    if (result) {
+      setImages(result.list);
+      setFilteredIMages(result.list);
+    }
+  };
+
+  const onImageClick = (img: ImageItem) => {
+    if (!currentRarityScale) {
+      setCurrentRarityScale(img.settings.rarity);
+    }
+    if (!currentKey) return;
+    const filteredImagesDraft = [...filteredImages].filter(
+      (item) => item.id !== img.id
+    );
+    const evolutionListDraft = { ...evolutionList };
+    evolutionListDraft[currentKey] = img;
+    setFilteredIMages(filteredImagesDraft);
+    setEvolutionList(evolutionListDraft);
+    setShowLibraryModal(false);
+  };
+
+  useEffect(() => {
+    if (!currentRarityScale) return;
+    const filteredImagesDraft = [...filteredImages].filter(
+      (img) => img.settings.rarity === currentRarityScale
+    );
+    setFilteredIMages(filteredImagesDraft);
+  }, [currentRarityScale]);
+
+  useEffect(() => {
+    uid && onLoad(uid);
+  }, [uid]);
+
+  const onItemClick = (e: any) => {
+    e.stopPropagation();
+    setShowLibraryModal(true);
+    setCurrentKey(e.target.id);
+  };
+
   return (
     <>
+      <Rodal
+        visible={showLibraryModal}
+        onClose={() => setShowLibraryModal(false)}
+      >
+        <div>Choose Candidate</div>
+        <span>for {currentKey} </span>
+        <span>{currentRarityScale} - rarity</span>
+        <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+          {filteredImages.map((img: ImageItem) => (
+            <div
+              onClick={() => onImageClick(img)}
+              key={img.id}
+              style={{
+                maxWidth: "20%",
+                display: "flex",
+                alignItems: "center",
+                flexDirection: "column",
+                border: "1px dashed green",
+              }}
+            >
+              <img width={55} height={55} src={img.imageUrl} />
+              <b>{img.title}</b>
+            </div>
+          ))}
+        </div>
+      </Rodal>
       <EvolutionGridContainer>
-        <EvolutionGridItem gridarea="tla"> </EvolutionGridItem>
-        <EvolutionGridItem gridarea="tc"> </EvolutionGridItem>
-        <EvolutionGridItem gridarea="tra"> </EvolutionGridItem>
-        <EvolutionGridItem gridarea="mlc"> </EvolutionGridItem>
-        <EvolutionGridItem gridarea="c">
-          <NeonButtonComponent title="Evolve" />
-        </EvolutionGridItem>
-        <EvolutionGridItem gridarea="mrc"> </EvolutionGridItem>
-        <EvolutionGridItem gridarea="bla"> </EvolutionGridItem>
-        <EvolutionGridItem gridarea="bc"> </EvolutionGridItem>
-        <EvolutionGridItem gridarea="bra"> </EvolutionGridItem>
+        {evolutionKeys.map((key) => (
+          <EvolutionGridItem
+            value={evolutionList[key] ? evolutionList[key].imageUrl : null}
+            onClick={onItemClick}
+            key={key}
+            gridarea={key}
+          />
+        ))}
+        <EvolutionGridItem gridarea="c"></EvolutionGridItem>
       </EvolutionGridContainer>
     </>
   );

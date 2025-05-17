@@ -1,10 +1,14 @@
 import styled from "styled-components";
 
-export const EvolutionGridItemStyled = styled.div<{ gridarea: string }>`
-  background: #1a1a2e;
+export const EvolutionGridItemStyled = styled.div<{
+  gridarea: string;
+  value: string | null;
+}>`
+  background: ${({ value }) =>
+    value ? `url(${value}) center/cover no-repeat` : "#281919"};
   aspect-ratio: 1 / 1;
   border-radius: 2em;
-  opacity: 0.9;
+  opacity: ${({ value }) => (value ? 1 : 0.8)};
   display: grid;
   place-items: center;
   border: 1px solid #fff;
@@ -49,7 +53,7 @@ export const EvolutionGridItemStyled = styled.div<{ gridarea: string }>`
   }};
   &:hover {
     transform: scale(1.04);
-    transition: linear .2s;
+    transition: linear 0.2s;
     cursor: pointer;
   }
 `;

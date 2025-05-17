@@ -4,12 +4,23 @@ import { EvolutionGridItemStyled } from "./evolution-grid-item.component.styled"
 const EvolutionGridItem = ({
   children,
   gridarea,
+  value = null,
+  onClick,
+  ...rest
 }: Readonly<{
-  children: React.ReactNode;
   gridarea: string;
+  value?: string | null;
+  onClick?: (e: any) => void;
+  children?: React.ReactNode;
 }>) => {
   return (
-    <EvolutionGridItemStyled gridarea={gridarea}>
+    <EvolutionGridItemStyled
+      onClick={onClick}
+      id={gridarea}
+      gridarea={gridarea}
+      value={value}
+      {...rest}
+    >
       {children}
     </EvolutionGridItemStyled>
   );
