@@ -115,6 +115,7 @@ export async function POST(req: Request) {
       .from("penguins")
       .upload(filename, imageBytes, {
         contentType: "image/png",
+        cacheControl: "3600",
         upsert: false,
       });
     if (error) throw new Error(error.message);

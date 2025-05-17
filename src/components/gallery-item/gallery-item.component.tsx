@@ -1,8 +1,9 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import Tilt from "react-parallax-tilt";
 import {
   GalleryItemContent,
   GalleryItemImage,
+  GalleryItemSkeleton,
 } from "./gallery-item.component.styled";
 import { ImageItem } from "@/types/image.types";
 import { getBaseColorByScale } from "@/helpers/get-base-color-by-rarity/get-base-color-by-rarity";
@@ -26,6 +27,8 @@ const GalleryItemComponent = ({
   slim?: boolean;
   scalable?: boolean;
 }) => {
+  const [loaded, setLoaded] = useState(false);
+
   const baseColor = useMemo(() => {
     return getBaseColorByScale(img.settings.rarity);
   }, [img.settings.rarity]);
@@ -45,12 +48,16 @@ const GalleryItemComponent = ({
           scale={img.settings.rarity}
           className={orbitron.className}
         />
+        <GalleryItemSkeleton loaded={loaded} />
         <GalleryItemImage
           src={img.imageUrl}
           width={slim ? 165 : 200}
           height={slim ? 165 : 200}
           alt={img.title}
           color={baseColor}
+          loaded={loaded}
+          onLoad={() => setLoaded(true)}
+          loading="lazy"
         />
         <p className={orbitron.className}>{img.title}</p>
       </GalleryItemContent>

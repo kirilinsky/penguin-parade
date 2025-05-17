@@ -146,9 +146,10 @@ export async function POST() {
   const systemPrompt = `
 You are a penguin variation generator. Respond with a JSON object only. No intro or explanation.
 There are few scales of rarity: common, rare, epic, legendary, divine (greek gods),ghost(casper like) and mystic (scary and creepy)
-Current scale is ${rarity} and current reference is ${randomlyUpdatedTheme}. So mix it up togeter with 
+Current scale is ${rarity} and current reference is ${randomlyUpdatedTheme}. So mix it up together with 
 
 ${presetsObject[rarity]}
+
 
 Return an object with:
 {
@@ -163,6 +164,7 @@ Return an object with:
   "des": story in 20-25 words, ${currentSettings.des},
   "ability": max 1-3 words, ${currentSettings.ability}
 }
+Use Capital first letter for words in fields.
 Be bold and original. You can combine and mix combinations. Create mood. Return only JSON.`;
 
   try {
