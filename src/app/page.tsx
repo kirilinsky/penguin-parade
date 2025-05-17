@@ -5,6 +5,7 @@ import LastCraftedBlockComponent from "@/components/last-crafted-block/last-craf
 import { LinkStyled } from "@/components/link/link.component.styled";
 import { PageContentBlockStyled } from "@/components/page-content-block/page-content-block.component.styled";
 import { PageContentWrapperComponent } from "@/components/page-content-wrapper/page-content-wrapper.component";
+import TotalCountBlockComponent from "@/components/total-count-block/total-count-block.component";
 import { useAtomValue } from "jotai";
 import Image from "next/image";
 
@@ -30,9 +31,7 @@ export default function Home() {
             </LinkStyled>
           </PageContentBlockStyled>
           <LastCraftedBlockComponent uid={uid} />
-          <PageContentBlockStyled>
-            <h2>Total count</h2>
-          </PageContentBlockStyled>
+          <TotalCountBlockComponent />
           <PageContentBlockStyled>
             <h2>Road map</h2>
             <ul>
