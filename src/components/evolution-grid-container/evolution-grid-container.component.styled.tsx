@@ -6,7 +6,7 @@ export const EvolveGridContainerStyled = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
-  background-image: url("/evo_bg.png");
+  background-image: url("/evo_bg.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
