@@ -78,20 +78,20 @@ export async function POST(req: Request) {
     }
     const { settings } = await settingsRes.json();
 
-    const description = [
-      settings.t && `Penguin is ${settings.t}`,
-      settings.bg && `Background: ${settings.bg}`,
-      settings.acc && `Penguin is wearing: ${settings.acc}`,
-      settings.beak && `Penguin Beak color: ${settings.beak}`,
-      settings.breast && `Penguin breast color: ${settings.breast}`,
-      settings.back && `Penguin back color: ${settings.back}`,
-      settings.fx &&
-        settings.fx.toLowerCase() !== "none" &&
-        `Effect: ${settings.fx}`,
-      settings.theme && `Color mood: ${settings.theme}`,
-    ]
-      .filter(Boolean)
-      .join(", ");
+    const fxDescription = `with a visible effect of ${settings.fx} at picture`;
+
+    const descriptionParts = [
+      `A penguin titled "${settings.t}"`,
+      `stands in a setting with ${settings.bg.toLowerCase()}`,
+      `wearing ${settings.acc}`,
+      `with a ${settings.beak.toLowerCase()} beak`,
+      `a ${settings.breast.toLowerCase()} chest`,
+      `and ${settings.back.toLowerCase()} on its back`,
+      fxDescription && `— ${fxDescription}`,
+      settings.theme && `The color mood is ${settings.theme.toLowerCase()}`,
+    ];
+
+    const description = descriptionParts.filter(Boolean).join(", ") + ".";
 
     const prompt = `${basePrompt.trim()} ${description}`.trim();
 

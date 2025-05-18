@@ -23,7 +23,7 @@ export async function POST() {
 
   const presetsObject = {
     common:
-      "Keep it grounded or lightly stylized. Backgrounds may include cozy cottages, campfires, village squares, wooden bridges, or garden paths. Themes should feel soft, playful, or nostalgic. Effects minimal — perhaps some falling leaves or laundry in the breeze. Accessories simple or absent. No grandiose titles (avoid 'king', 'emperor', etc). Abilities should be subtle and clever.",
+      "Keep it grounded or lightly stylized. Backgrounds may include cozy cottages, campfires, village squares, wooden bridges, or garden paths. Themes should feel soft, playful, or nostalgic. Effects minimal — perhaps some falling leaves or laundry in the breeze. Accessories simple. No grandiose titles (avoid 'king', 'emperor', etc). Abilities should be subtle and clever.",
     rare: "Introduce distinct fantasy elements: glowing mushrooms, crystal flowers, enchanted glades, or surreal sunsets. Backgrounds may include floating islands, rainbow-lit waterfalls, or celestial gardens. Accessories may glow or shimmer. Abilities become unique but not overpowered.",
     epic: "Strong visual contrasts and striking scenes. Environments may feature elemental chaos — volcano temples, storm altars, overgrown mechs, or desert ruins powered by arcane energy. Include magical effects like lightning trails or glowing glyphs. Give the penguin an aura. Titles should feel iconic and epic.",
     legendary:
