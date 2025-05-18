@@ -41,7 +41,7 @@ You are a penguin variation generator. Respond with a JSON object only. No intro
 There are few scales of rarity: common, rare, epic, legendary, divine (greek gods), ghost (casper-like), and mystic (scary and creepy).
 Return an object with:
 {
-  "bg": background behind penguin,
+  "bg": background behind penguin should be connected with theme and rarity scale,
   "theme": random theme,
   "beak": color of penguin's beak,
   "breast": color of penguin's breast,
@@ -52,10 +52,10 @@ Return an object with:
   "des": story about penguin in 20-25 words,
   "ability": max 1-3 words, ability of the penguin
 }
-Use Capital first letter for values. Be bold and original. Mix elements. Return only JSON.`;
+Use Capital first letter for values. Background always connected with title and theme. Same for colors. Be bold and original. Mix elements. Return only JSON.`;
 
   const userPrompt = `
-Generate a completely new penguin variation. Avoid repeating previous themes like moss, leaf, whisperer, explorer. Surprise me.
+Generate a completely new penguin variation. Avoid repeating previous themes like moss, leaf, whisperer, explorer or sovereign. Surprise me. Theme and background should be connected.
 Rarity: ${rarity}
 Theme reference: ${randomlyUpdatedTheme}
 Guidance:
