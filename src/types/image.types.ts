@@ -1,6 +1,8 @@
 export interface ImageItem {
   id: string;
   imageUrl: string;
+  creatorUid: string;
+  origin: "craft" | "evolution";
   title: string;
   createdAt: Date;
   settings: ImageItemSettings;

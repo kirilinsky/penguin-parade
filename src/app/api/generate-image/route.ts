@@ -13,6 +13,7 @@ import Replicate from "replicate";
 import { getUserAllowCraftedAt } from "@/helpers/get-user-allow-crafted-at/get-user-allow-crafted-at";
 import { evaluateGenerationState } from "@/helpers/evaluate-generation-state/evaluate-generation-state";
 import { adminAuth } from "@/fireBase-admin";
+import sharp from "sharp";
 
 const replicate = new Replicate({ auth: process.env.REPLICATE_API_TOKEN });
 const model =
@@ -108,14 +109,16 @@ export async function POST(req: Request) {
 
     const imageRes = await fetch(imageUrl);
     const buffer = await imageRes.arrayBuffer();
-    const imageBytes = new Uint8Array(buffer);
+    const webpBuffer = await sharp(Buffer.from(buffer))
+      .webp({ quality: 90 })
+      .toBuffer();
 
-    const filename = `users/${uid}/images/${Date.now()}_${uuidv4()}.png`;
+    const filename = `users/${uid}/images/${Date.now()}_${uuidv4()}.webp`;
     const { data, error } = await supabase.storage
       .from("penguins")
-      .upload(filename, imageBytes, {
-        contentType: "image/png",
-        cacheControl: "31536000",
+      .upload(filename, webpBuffer, {
+        contentType: "image/webp",
+        cacheControl: "31538000",
         upsert: false,
       });
     if (error) throw new Error(error.message);
@@ -128,6 +131,8 @@ export async function POST(req: Request) {
     const docRef = await addDoc(collection(firestore, `users/${uid}/images`), {
       imageUrl: urlData.publicUrl,
       title: settings.t || "Untitled",
+      creatorUid: uid,
+      origin: "craft",
       settings,
       createdAt: serverTimestamp(),
     });
