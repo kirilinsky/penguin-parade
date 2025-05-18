@@ -2,8 +2,8 @@ import { Timestamp } from "firebase/firestore";
 
 export type Friend = {
   id: string;
-  gifted: number;
-  exchanged: number;
+  giftsReceived: number;
+  giftsSent: number;
   addedAt: Date;
 };
 

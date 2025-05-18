@@ -9,7 +9,6 @@ import { Friend } from "@/types/friends.types";
 import { doc, getDoc } from "firebase/firestore";
 import { firestore } from "@/firebase";
 import { useRouter } from "next/navigation";
-import { getBaseColorByScale } from "@/helpers/get-base-color-by-rarity/get-base-color-by-rarity";
 import AvatarComponent from "../avatar-component/avatar-component";
 
 const FriendListItemComponent = ({
@@ -49,8 +48,8 @@ const FriendListItemComponent = ({
       <FriendListItemContent>
         <FriendListItemName>{friendUserName}</FriendListItemName>
         <div>
-          <p>Gifted: {friend.gifted}</p>
-          <p>Exchanged: {friend.exchanged}</p>
+          <p>Gifts Received: {friend.giftsReceived}</p>
+          <p>Gifts Sent: {friend.giftsSent}</p>
         </div>
         <FriendListItemButtons>
           <button onClick={() => router.push(`/library/${friend.id}`)}>

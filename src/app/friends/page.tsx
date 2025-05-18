@@ -93,8 +93,8 @@ const FriendsPage = () => {
     );
     const friendRecords: Friend[] = friendsSnap.docs.map((d) => ({
       id: d.id,
-      gifted: d.data().gifted,
-      exchanged: d.data().exchanged,
+      giftsReceived: d.data().giftsReceived, 
+      giftsSent: d.data().giftsSent,
       addedAt: d.data().addedAt.toDate(),
     }));
 
@@ -191,8 +191,8 @@ const FriendsPage = () => {
     const theirFriendDoc = doc(firestore, `users/${user.id}/friends/${uid}`);
 
     const friendData = {
-      gifted: 0,
-      exchanged: 0,
+      giftsReceived: 0,
+      giftsSent: 0,
       addedAt: now,
     };
 
