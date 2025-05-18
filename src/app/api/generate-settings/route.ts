@@ -16,7 +16,7 @@ import { NextResponse } from "next/server";
 
 export async function POST() {
   const randomNumber = Math.floor(Math.random() * 1200);
-  const randomSettings = Math.floor(Math.random() * themes.length - 1);
+  const randomSettings = Math.floor(Math.random() * themes.length);
 
   const randomlyUpdatedTheme = themes[randomSettings];
 
@@ -146,26 +146,28 @@ export async function POST() {
   const systemPrompt = `
 You are a penguin variation generator. Respond with a JSON object only. No intro or explanation.
 There are few scales of rarity: common, rare, epic, legendary, divine (greek gods),ghost(casper like) and mystic (scary and creepy)
-Current scale is ${rarity} and current reference is ${randomlyUpdatedTheme}. So mix it up together with 
-
-${presetsObject[rarity]}
-
-
 Return an object with:
 {
-  "bg": (smth from ${currentSettings.bg}),
-  "theme": (smth from ${currentSettings.theme}),
-  "beak":  smth from ${currentSettings.beak},
-  "breast": smth from ${currentSettings.breast},
-  "back": smth from ${currentSettings.back},
-  "fx": smth from ${currentSettings.fx},
-  "acc": (max 1-3 words, create smth from ${currentSettings.acc}),
-  "t": (max 3 words, ${currentSettings.t}, be original),
-  "des": story in 20-25 words, ${currentSettings.des},
-  "ability": max 1-3 words, ${currentSettings.ability}
+  "bg": (backround behind penguin),
+  "theme": (random theme),
+  "beak":  color of penguins beak,
+  "breast": color of penguins breast,
+  "back": color of penguins back,
+  "fx": picture effects, 
+  "acc": (max 1-3 words, clothe, hat or another penguins belongings),
+  "t": (max 3 words, Title of this penguin,),
+  "des": story about penguin in 20-25 words
+  "ability": max 1-3 words, ability of this Penguin
 }
 Use Capital first letter for words in fields.
 Be bold and original. You can combine and mix combinations. Create mood. Return only JSON.`;
+
+  const userPrompt = `
+Give me one fresh, unexpected and imaginative penguin variant in a new setting, completely different from the previous ones.
+Current scale of rarity is ${rarity} and current theme reference is ${randomlyUpdatedTheme}. So apply this theme to these settings:
+${presetsObject[rarity]} 
+You can combine and mix combinations. Create mood. Return only JSON.
+`;
 
   try {
     const res = await fetch("https://api.openai.com/v1/chat/completions", {
@@ -178,9 +180,12 @@ Be bold and original. You can combine and mix combinations. Create mood. Return 
         model: "gpt-3.5-turbo",
         messages: [
           { role: "system", content: systemPrompt },
-          { role: "user", content: "Generate one new variant." },
+          {
+            role: "user",
+            content: userPrompt,
+          },
         ],
-        temperature: 0.8,
+        temperature: 1.0,
       }),
     });
 
