@@ -159,7 +159,7 @@ Return an object with:
   "des": story about penguin in 20-25 words
   "ability": max 1-3 words, ability of this Penguin
 }
-Use Capital first letter for words in fields.
+Use Capital first letter for words in fields (for values, not keys, keys are always lower case).
 Be bold and original. You can combine and mix combinations. Create mood. Return only JSON.`;
 
   const userPrompt = `
