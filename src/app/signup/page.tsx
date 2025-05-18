@@ -97,6 +97,8 @@ const SignUpPage = () => {
           />
           {error && <p style={{ color: "red" }}>{error}</p>}
           <br />
+          <br />
+
           <NeonButtonComponent title="Sign up" type="submit" />
         </form>
       )}
