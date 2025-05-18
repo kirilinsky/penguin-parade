@@ -2,7 +2,7 @@ import Image from "next/image";
 import styled from "styled-components";
 
 export const GalleryItemModalContainer = styled.div`
-  margin-block: 20px;
+  margin-block: 25px;
   display: flex;
   gap: 15px;
   height: calc(100% - 40px);
@@ -62,4 +62,7 @@ export const GalleryItemModalScale = styled.h3`
 export const GalleryItemModalButtonsContainer = styled.div`
   display: flex;
   gap: 10px;
+  @media (max-width: 1008px) {
+    flex-direction: column;
+  }
 `;

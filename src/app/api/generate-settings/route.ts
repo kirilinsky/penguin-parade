@@ -58,8 +58,8 @@ export async function POST() {
       beak: "Simple colors: orange, black, yellow, brown.",
       breast: "Natural tones: white, gray, soft blue, light brown.",
       back: "Earthy or calm colors. Avoid neon or metallic.",
-      fx: "None or subtle: light breeze, falling leaves, soft glow.",
-      acc: "Minimal or playful: scarf, wool hat, tiny backpack, or none.",
+      fx: "None or subtle: light breeze, falling leaves, soft glow, lights.",
+      acc: "Minimal or playful and related to theme: scarf, wool hat, tiny backpack, or none.",
       t: "Avoid grand words. Can use some fun and cute names. Use playful or descriptive titles like 'Snow Scout' or 'Berry Walker'.",
       des: "Describe a simple daily life or small adventure in < 25 words.",
       ability:
