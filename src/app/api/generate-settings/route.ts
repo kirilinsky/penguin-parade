@@ -75,7 +75,7 @@ ${presetsObject[rarity]}
           { role: "system", content: systemPrompt },
           { role: "user", content: userPrompt },
         ],
-        temperature: 1.2,
+        temperature: 1.3,
         top_p: 0.9,
       }),
     });

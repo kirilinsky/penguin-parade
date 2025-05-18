@@ -81,14 +81,14 @@ export async function POST(req: Request) {
     const fxDescription = `with a visible effect of ${settings.fx} at picture`;
 
     const descriptionParts = [
+      settings.theme && `The color mood is ${settings.theme.toLowerCase()}`,
       `A penguin titled "${settings.t}"`,
       `stands in a setting with ${settings.bg.toLowerCase()}`,
       `wearing ${settings.acc}`,
-      `with a ${settings.beak.toLowerCase()} beak`,
-      `a ${settings.breast.toLowerCase()} chest`,
-      `and ${settings.back.toLowerCase()} on its back`,
+      `with a ${settings.beak.toLowerCase()} color of penguin beak`,
+      `a ${settings.breast.toLowerCase()} color chest`,
+      `and ${settings.back.toLowerCase()} color on its back`,
       fxDescription && `— ${fxDescription}`,
-      settings.theme && `The color mood is ${settings.theme.toLowerCase()}`,
     ];
 
     const description = descriptionParts.filter(Boolean).join(", ") + ".";
