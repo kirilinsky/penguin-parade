@@ -1,10 +1,12 @@
+import { Timestamp } from "firebase-admin/firestore";
+
 export interface ImageItem {
   id: string;
   imageUrl: string;
   creatorUid: string;
   origin: "craft" | "evolution";
   title: string;
-  createdAt: Date;
+  createdAt: Timestamp;
   settings: ImageItemSettings;
 }
 

@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.49.4",
+    "date-fns": "^4.1.0",
     "firebase": "^11.7.1",
     "firebase-admin": "^13.4.0",
     "jotai": "^2.12.4",

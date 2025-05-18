@@ -12,9 +12,9 @@ import {
 import { Orbitron } from "next/font/google";
 import GalleryItemScaleComponent from "../gallery-item-scale/gallery-item-scale.component";
 import { getBaseColorByScale } from "@/helpers/get-base-color-by-rarity/get-base-color-by-rarity";
-import { useAtomValue } from "jotai";
-import { avatarAtom } from "@/atoms/user/user.atom";
+
 import NeonButtonComponent from "../neon-button/neon-button.component";
+import { format } from "date-fns";
 
 const orbitron = Orbitron({
   subsets: ["latin"],
@@ -38,6 +38,7 @@ const GalleryItemModalComponent = ({
   const baseColor = useMemo(() => {
     return getBaseColorByScale(img.settings.rarity);
   }, [img.settings.rarity]);
+
   return (
     <GalleryItemModalContainer>
       <GalleryItemModalContent $frameColor={baseColor}>
@@ -67,6 +68,15 @@ const GalleryItemModalComponent = ({
 
         <span>Loot: {img.settings.acc}</span>
 
+        <span>Origin: {img.origin}</span>
+
+        <span>Breast: {img.settings.breast}</span>
+
+        <span>Beak: {img.settings.beak}</span>
+
+        <span>Back: {img.settings.back}</span>
+
+        <span>Created: {format(img.createdAt.toDate(), "dd.MM.yy")}</span>
         {isMyPage && (
           <GalleryItemModalButtonsContainer>
             {currentAvatar !== img.imageUrl && (

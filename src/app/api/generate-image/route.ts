@@ -11,9 +11,9 @@ import { supabase } from "@/supabase";
 import { v4 as uuidv4 } from "uuid";
 import Replicate from "replicate";
 import { getUserAllowCraftedAt } from "@/helpers/get-user-allow-crafted-at/get-user-allow-crafted-at";
-import { evaluateGenerationState } from "@/helpers/evaluate-generation-state/evaluate-generation-state";
 import { adminAuth } from "@/fireBase-admin";
 import sharp from "sharp";
+import { isBefore } from "date-fns";
 
 const replicate = new Replicate({ auth: process.env.REPLICATE_API_TOKEN });
 const model =
@@ -46,9 +46,16 @@ export async function POST(req: Request) {
   const uid = decoded.uid;
   if (!uid) return NextResponse.json({ error: "Missing uid" }, { status: 400 });
   const allowUserCraftedAt = await getUserAllowCraftedAt(uid);
-  const { isAllowed } = evaluateGenerationState(allowUserCraftedAt);
-  if (!isAllowed) {
-    return NextResponse.json({ error: "Not able to craft!" }, { status: 500 });
+
+  if (allowUserCraftedAt) {
+    const allowedDate = allowUserCraftedAt.toDate();
+    const allowed = isBefore(allowedDate, new Date());
+    if (!allowed) {
+      return NextResponse.json(
+        { error: "Not able to craft!" },
+        { status: 500 }
+      );
+    }
   }
 
   /*  const { scale } = await req.json();

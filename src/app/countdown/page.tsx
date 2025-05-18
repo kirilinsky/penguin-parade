@@ -1,7 +1,6 @@
 "use client";
 
 import { userIdAtom } from "@/atoms/user/user.atom";
-import { evaluateGenerationState } from "@/helpers/evaluate-generation-state/evaluate-generation-state";
 import { GenerateImageReposne } from "@/types/api.types";
 import { useAtomValue } from "jotai";
 import Image from "next/image";
@@ -17,6 +16,7 @@ import { getUserAllowCraftedAt } from "@/helpers/get-user-allow-crafted-at/get-u
 import { ArcadeButtonStyled } from "@/components/arcade-button/arcade-button.component.styled";
 import NeonButtonComponent from "@/components/neon-button/neon-button.component";
 import { getAuth, sendEmailVerification } from "firebase/auth";
+import { formatDuration, intervalToDuration, isBefore } from "date-fns";
 
 type GenerationResult = {
   downloadURL: string;
@@ -28,17 +28,27 @@ const CountDownPage = () => {
   const uid = useAtomValue(userIdAtom);
   const [canCraft, setCanCraft] = useState<boolean>(false);
   const [loading, setLoading] = useState(false);
-  const [leftTimestamp, setLeftTimestamp] = useState<number>(0);
+  const [leftTime, setLeftTime] = useState<string>("");
   const [result, setResult] = useState<GenerationResult | null>(null);
   const [shareLink, setShareLink] = useState<string | null>(null);
 
   const checkUserStatus = async () => {
     if (!uid) return;
     const allowUserCraftedAt = await getUserAllowCraftedAt(uid);
-    const { isAllowed, timeLeft } = evaluateGenerationState(allowUserCraftedAt);
+    if (allowUserCraftedAt) {
+      const allowedDate = allowUserCraftedAt.toDate();
+      const allowed = isBefore(allowedDate, new Date());
+      setCanCraft(allowed);
+      const duration = intervalToDuration({
+        start: new Date(),
+        end: allowedDate,
+      });
 
-    setLeftTimestamp(timeLeft);
-    setCanCraft(isAllowed);
+      const formattedDate = formatDuration(duration, {
+        format: ["days", "hours", "minutes"],
+      });
+      setLeftTime(formattedDate);
+    }
   };
 
   const craft = async () => {
@@ -112,7 +122,7 @@ const CountDownPage = () => {
             ) : (
               <>
                 <p>Sorry, you can craft only once in a day.</p>
-                <p>come tomorrow</p>
+                come back in {leftTime}
               </>
             )}
           </PageContentBlockFlex>
@@ -122,13 +132,13 @@ const CountDownPage = () => {
             <Image
               src="/loader.gif"
               alt="Loading..."
-              width={165}
-              height={165}
+              width={167}
+              height={167}
               style={{ borderRadius: "50%" }}
               priority
             />
             <p>Generating penguin...</p>
-            <span> please wait</span>
+            <span>please wait</span>
           </PageContentBlockFlex>
         )}
         {!loading && result && (
@@ -140,21 +150,22 @@ const CountDownPage = () => {
             <img
               src={result.downloadURL}
               alt={result.title}
-              style={{ width: 225, borderRadius: 8, padding: 4 }}
+              style={{ width: 225, borderRadius: 8, padding: 4, margin: 10 }}
             />
             <br />
             <span>{result.rarity}</span>
             <br />
             <LinkStyled href={`/library/${uid}`}>Go to my Library</LinkStyled>
             {/* TODO: add share functionality  */}
-            <a
+            <NeonButtonComponent title="Share this (TBA)" />
+            {/*   <a
               target="_blank"
               href={`https://t.me/share/url?url=${shareLink}&text=${encodeURIComponent(
                 `Look at my new penguin: ${result.title} 🐧\nCrafted on Penguin Parade!`
               )}`}
             >
-              <NeonButtonComponent title="Share this (TBA)" />
-            </a>
+              
+            </a> */}
           </PageContentBlockFlex>
         )}
       </PageContentBlockStyled>
