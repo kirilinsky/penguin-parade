@@ -75,8 +75,8 @@ const GalleryItemModalComponent = ({
                 onClick={() => setAvatar(img.imageUrl, img.settings.rarity)}
               />
             )}
-            <NeonButtonComponent title="Give a friend" subtitle="soon" />
-            <NeonButtonComponent title="Sell on auction" subtitle="soon" />
+            <NeonButtonComponent title="Give a friend (TBA)" />
+            <NeonButtonComponent title="Sell on auction (TBA)" />
           </GalleryItemModalButtonsContainer>
         )}
       </GalleryItemModalContent>

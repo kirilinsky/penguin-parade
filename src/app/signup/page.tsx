@@ -49,7 +49,10 @@ const SignUpPage = () => {
         lastGeneratedAt: null,
       });
 
-      alert("Welcome");
+      alert(
+        "Welcome, please follow log in page and don't forget to verify email " +
+          user.email
+      );
       setSuccess(true);
 
       setEmail("");
@@ -94,11 +97,7 @@ const SignUpPage = () => {
           />
           {error && <p style={{ color: "red" }}>{error}</p>}
           <br />
-          <NeonButtonComponent
-            title="Sign up"
-            subtitle="Sign up"
-            type="submit"
-          />
+          <NeonButtonComponent title="Sign up" type="submit" />
         </form>
       )}
     </div>

@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
 export const NeonButtonStyled = styled.button`
-  width: 130px;
-  height: 40px;
-  padding: 10px 25px;
+  padding: 10px 15px;
+  min-width: 150px;
+  max-width: max-content;
   font-family: "Lato", sans-serif;
   font-weight: 500;
   background: transparent;
@@ -12,56 +12,11 @@ export const NeonButtonStyled = styled.button`
   position: relative;
   display: inline-block;
   color: #0bf4f3;
-  right: 20px;
-  bottom: 20px;
-  border: none;
-  line-height: 40px;
-  -webkit-perspective: 230px;
-  perspective: 230px;
-  &:hover {
-    span:nth-child(1) {
-      transform: rotateX(0deg);
-    }
-    span:nth-child(2) {
-      background: #000;
-      color: #000;
-      box-shadow: 0 0 5px #0bf4f3, 0 0 5px #0bf4f3 inset;
-      -webkit-transform: rotateX(-90deg);
-      -moz-transform: rotateX(-90deg);
-      transform: rotateX(-90deg);
-    }
-  }
-`;
-
-export const NeonButtonSubtitleStyled = styled.span`
-  display: block;
-  position: absolute;
-  width: 130px;
-  height: 40px;
   border: 1px solid #0bf4f3;
-  box-shadow: 0 0 5px #0bf4f3, 0 0 5px #0bf4f3 inset;
-  margin: 0;
-  text-align: center;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  -webkit-transition: all 0.3s;
-  transition: all 0.3s;
-  &:nth-child(1) {
-    box-shadow: 0 0 5px #0bf4f3, 0 0 5px #0bf4f3 inset;
-    -webkit-transform: rotateX(90deg);
-    -moz-transform: rotateX(90deg);
-    transform: rotateX(90deg);
-    -webkit-transform-origin: 50% 50% -20px;
-    -moz-transform-origin: 50% 50% -20px;
-    transform-origin: 50% 50% -20px;
-  }
-  &:nth-child(2) {
-    -webkit-transform: rotateX(0deg);
-    -moz-transform: rotateX(0deg);
-    transform: rotateX(0deg);
-    -webkit-transform-origin: 50% 50% -20px;
-    -moz-transform-origin: 50% 50% -20px;
-    transform-origin: 50% 50% -20px;
+
+  line-height: 20px;
+  &:hover {
+    box-shadow: 0 0 10px #28eded, 0 0 9px #38fbfb inset;
+    border: 1px solid #97f9f9;
   }
 `;

@@ -153,7 +153,7 @@ const CountDownPage = () => {
                 `Look at my new penguin: ${result.title} 🐧\nCrafted on Penguin Parade!`
               )}`}
             >
-              <NeonButtonComponent title="Share this" subtitle="soon" />
+              <NeonButtonComponent title="Share this (TBA)" />
             </a>
           </PageContentBlockFlex>
         )}

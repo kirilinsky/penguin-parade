@@ -75,11 +75,7 @@ export default function Login() {
         />
         <br />
         {error && <p style={{ color: "red" }}>{error}</p>}
-        <NeonButtonComponent
-          title="Login"
-          subtitle="logging in"
-          type="submit"
-        />
+        <NeonButtonComponent title="Login" type="submit" />
       </form>
     </div>
   );
