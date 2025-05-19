@@ -1,5 +1,15 @@
+export const runtime = "nodejs";
+
 import { NextResponse } from "next/server";
-import { firestore, FieldValue, adminAuth } from "@/fireBase-admin";
+import { adminAuth } from "@/fireBase-admin";
+import { firestore } from "@/firebase"; // client-side firestore instance
+import {
+  doc,
+  getDoc,
+  updateDoc,
+  increment,
+  serverTimestamp,
+} from "firebase/firestore";
 
 export async function POST(req: Request) {
   const authHeader = req.headers.get("Authorization") || "";
@@ -20,24 +30,18 @@ export async function POST(req: Request) {
   const { toUid, imageId } = await req.json();
 
   if (!fromUid || !toUid || !imageId) {
-    return NextResponse.json(
-      { error: "Missing required fields" },
-      { status: 400 }
-    );
+    return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
   }
 
   if (fromUid === toUid) {
-    return NextResponse.json(
-      { error: "Cannot gift to yourself" },
-      { status: 400 }
-    );
+    return NextResponse.json({ error: "Cannot gift to yourself" }, { status: 400 });
   }
 
   try {
-    const imageRef = firestore.doc(`images/${imageId}`);
-    const imageSnap = await imageRef.get();
+    const imageRef = doc(firestore, "images", imageId);
+    const imageSnap = await getDoc(imageRef);
 
-    if (!imageSnap.exists) {
+    if (!imageSnap.exists()) {
       return NextResponse.json({ error: "Image not found" }, { status: 404 });
     }
 
@@ -55,42 +59,42 @@ export async function POST(req: Request) {
       date: Date.now(),
     });
 
-    await imageRef.update({
+    await updateDoc(imageRef, {
       ownerId: toUid,
       gift: true,
       giftedHistory,
     });
 
-    const fromUserRef = firestore.doc(`users/${fromUid}`);
-    const toUserRef = firestore.doc(`users/${toUid}`);
+    const fromUserRef = doc(firestore, "users", fromUid);
+    const toUserRef = doc(firestore, "users", toUid);
 
     await Promise.all([
-      fromUserRef.update({
-        "statistics.totalGiftsSent": FieldValue.increment(1),
-        "statistics.lastGiftSentAt": FieldValue.serverTimestamp(),
+      updateDoc(fromUserRef, {
+        "statistics.totalGiftsSent": increment(1),
+        "statistics.lastGiftSentAt": serverTimestamp(),
       }),
-      toUserRef.update({
-        "statistics.totalGiftsReceived": FieldValue.increment(1),
+      updateDoc(toUserRef, {
+        "statistics.totalGiftsReceived": increment(1),
       }),
     ]);
 
-    const friendRef = firestore.doc(`users/${fromUid}/friends/${toUid}`);
-    const reverseFriendRef = firestore.doc(`users/${toUid}/friends/${fromUid}`);
+    const friendRef = doc(firestore, `users/${fromUid}/friends/${toUid}`);
+    const reverseFriendRef = doc(firestore, `users/${toUid}/friends/${fromUid}`);
 
     const [friendSnap, reverseSnap] = await Promise.all([
-      friendRef.get(),
-      reverseFriendRef.get(),
+      getDoc(friendRef),
+      getDoc(reverseFriendRef),
     ]);
 
-    if (friendSnap.exists) {
-      await friendRef.update({
-        giftsSent: FieldValue.increment(1),
+    if (friendSnap.exists()) {
+      await updateDoc(friendRef, {
+        giftsSent: increment(1),
       });
     }
 
-    if (reverseSnap.exists) {
-      await reverseFriendRef.update({
-        giftsReceived: FieldValue.increment(1),
+    if (reverseSnap.exists()) {
+      await updateDoc(reverseFriendRef, {
+        giftsReceived: increment(1),
       });
     }
 
