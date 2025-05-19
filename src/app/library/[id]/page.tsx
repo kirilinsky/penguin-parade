@@ -19,6 +19,7 @@ import {
   orderBy,
   query,
   setDoc,
+  where,
 } from "firebase/firestore";
 import { useAtomValue, useSetAtom } from "jotai";
 import { useParams } from "next/navigation";
@@ -112,9 +113,10 @@ const MyLibraryPage = () => {
     if (!id) return;
     setLoading(true);
     try {
-      const ref = collection(firestore, `users/${id}/images`);
-      const q = query(ref, orderBy("createdAt", "desc"));
+      const ref = collection(firestore, "images");
+      const q = query(ref, where("ownerId", "==", uid));
       const snapshot = await getDocs(q);
+
       const list = snapshot.docs.map(
         (doc) => ({ id: doc.id, ...doc.data() } as ImageItem)
       );

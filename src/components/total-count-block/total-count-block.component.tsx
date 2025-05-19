@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { PageContentBlockStyled } from "../page-content-block/page-content-block.component.styled";
 import { useAtomValue } from "jotai";
-import { userIdAtom } from "@/atoms/user/user.atom";
-import { collection, getDocs, query } from "firebase/firestore";
-import { firestore } from "@/firebase";
-import { ImageItem } from "@/types/image.types";
+import { userIdAtom } from "@/atoms/user/user.atom"; 
 import { fetchImages } from "@/helpers/api/fetch-images/fetch-images";
 
 const TotalCountBlockComponent = () => {

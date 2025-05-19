@@ -12,4 +12,4 @@ if (!admin.apps.length) {
 const firestore = admin.firestore();
 const adminAuth = admin.auth();
 
-export { adminAuth, firestore };
+export { adminAuth, admin, firestore };

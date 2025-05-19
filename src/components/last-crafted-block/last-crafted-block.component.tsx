@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { PageContentBlockStyled } from "../page-content-block/page-content-block.component.styled";
-import { collection, getDocs, limit, orderBy, query } from "firebase/firestore";
+import { collection, getDocs, limit, orderBy, query, where } from "firebase/firestore";
 import { firestore } from "@/firebase";
 import { ImageItem } from "@/types/image.types";
 import GalleryItemComponent from "../gallery-item/gallery-item.component";
@@ -10,13 +10,15 @@ import Image from "next/image";
 const LastCraftedBlockComponent = ({ uid }: { uid: string | null }) => {
   const [lastCrafted, setLastCrafted] = useState<ImageItem | null>(null);
 
+
+  // TODO: create hook get images
   useEffect(() => {
     async function fetchImages() {
       if (!uid) return;
 
       try {
-        const ref = collection(firestore, `users/${uid}/images`);
-        const q = query(ref, orderBy("createdAt", "desc"), limit(1));
+        const ref = collection(firestore, "images");
+        const q = query(ref, where("ownerId", "==", uid));
         const snapshot = await getDocs(q);
         const list = snapshot.docs.map(
           (doc) => ({ id: doc.id, ...doc.data() } as ImageItem)
