@@ -6,6 +6,7 @@ export interface ImageItem {
   creatorUid: string;
   origin: "craft" | "evolution";
   title: string;
+  gift: boolean;
   createdAt: Timestamp;
   settings: ImageItemSettings;
 }

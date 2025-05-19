@@ -45,7 +45,7 @@ const GalleryItemModalComponent = ({
   const [giftMode, setGiftMode] = useState(false);
   const [friendRecipient, setFriendRecipient] = useState<string>("");
 
-  const { friends } = useGetFriends(uid);
+  const { friends, loading } = useGetFriends(uid);
 
   const baseColor = useMemo(() => {
     return getBaseColorByScale(img.settings.rarity);
@@ -114,6 +114,7 @@ const GalleryItemModalComponent = ({
               <i>beta feature</i>
             </span>
             <h3>Choose recipient</h3>
+            <br />
             <select
               onChange={(e) => setFriendRecipient(e.target.value)}
               name="friend-recipient"
@@ -130,10 +131,12 @@ const GalleryItemModalComponent = ({
               ))}
             </select>
             <br />
+            <br />
             <GalleryItemModalButtonsContainer>
+              {loading && "please wait..."}
               <button
                 onClick={() => onSendGift(friendRecipient, img.id)}
-                disabled={!friendRecipient}
+                disabled={!friendRecipient || loading}
               >
                 send
               </button>

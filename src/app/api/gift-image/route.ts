@@ -64,6 +64,7 @@ export async function POST(req: Request) {
 
     const newDoc = {
       ...data,
+      gift: true,
       giftedHistory,
     };
 

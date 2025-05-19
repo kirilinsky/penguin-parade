@@ -140,6 +140,7 @@ export async function POST(req: Request) {
       title: settings.t || "Untitled",
       creatorUid: uid,
       origin: "craft",
+      gift: false,
       settings,
       createdAt: serverTimestamp(),
     });
