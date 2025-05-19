@@ -56,6 +56,7 @@ const MyLibraryPage = () => {
     const auth = getAuth();
     const user = auth.currentUser;
     if (!uid || !user) return;
+    setLoading(true);
 
     if (!user.emailVerified) {
       await sendEmailVerification(user);
@@ -88,12 +89,17 @@ const MyLibraryPage = () => {
       if (data.success) {
         alert("Gift has been sent");
       } else {
+        console.log(toUid, "toUid");
+        console.log(imageId, "imageId");
+        console.log(uid, "uid (form atom)");
+
         console.error("Gift process failed:", data);
       }
     } catch (err) {
       console.error("Error during gift process:", err);
     } finally {
       setDetailsImage(null);
+      setLoading(false);
       const imagesDraft = [...images];
       setImages(imagesDraft.filter((img) => img.id !== imageId));
     }
@@ -131,6 +137,7 @@ const MyLibraryPage = () => {
           uid={uid}
           isMyPage={isMyPage}
           onSendGift={sendGift}
+          loading={loading}
           currentAvatar={currentAvatar}
           setAvatar={setAvatarAction}
           img={detailsImage}

@@ -83,30 +83,38 @@ export async function POST(req: Request) {
     const oldPath = new URL(imageUrl).pathname.split(
       "/storage/v1/object/public/penguins/"
     )[1];
-
     const filename = oldPath.split("/").pop();
     const newPath = `users/${toUid}/images/${filename}`;
 
-    console.log("🔁 Copying image from", oldPath, "to", newPath);
-
-    const copyRes = await supabaseServer.storage
-      .from(BUCKET)
-      .copy(oldPath, newPath);
-
-    if (copyRes.error) {
-      console.error("❌ Supabase copy error:", copyRes.error.message);
+    // 🟡 Download original file manually
+    const imageRes = await fetch(imageUrl);
+    if (!imageRes.ok) {
       return NextResponse.json(
-        { error: "Failed to copy image", details: copyRes.error.message },
+        { error: "Failed to download image" },
         { status: 500 }
       );
     }
 
-    await new Promise((res) => setTimeout(res, 300)); // Ждём CDN
+    const buffer = await imageRes.arrayBuffer();
+    const bytes = new Uint8Array(buffer);
 
+    const uploadRes = await supabaseServer.storage
+      .from(BUCKET)
+      .upload(newPath, bytes, {
+        contentType: "image/webp",
+      });
+
+    if (uploadRes.error) {
+      return NextResponse.json(
+        { error: "Upload failed", details: uploadRes.error.message },
+        { status: 500 }
+      );
+    }
+
+    // ✅ Get public URL
     const { data: publicUrlData } = supabaseServer.storage
       .from(BUCKET)
       .getPublicUrl(newPath);
-
     const newImageUrl = publicUrlData?.publicUrl;
 
     if (!newImageUrl) {
@@ -116,21 +124,15 @@ export async function POST(req: Request) {
       );
     }
 
-    const head = await fetch(newImageUrl, { method: "HEAD" });
-    if (!head.ok) {
-      return NextResponse.json(
-        { error: "Copied file not available via CDN", status: head.status },
-        { status: 502 }
-      );
-    }
-
     const toDocRef = await firestore
       .collection(`users/${toUid}/images`)
       .add({ ...newDoc, imageUrl: newImageUrl });
 
+    // ❌ Delete old document and file
     await fromDocRef.delete();
     await supabaseServer.storage.from(BUCKET).remove([oldPath]);
 
+    // 📊 Update stats
     const fromUserRef = firestore.doc(`users/${fromUid}`);
     const toUserRef = firestore.doc(`users/${toUid}`);
 
@@ -169,7 +171,7 @@ export async function POST(req: Request) {
       newImageUrl,
     });
   } catch (err) {
-    console.error("❌ Gift error:", err);
+    console.error("Gift error:", err);
     return NextResponse.json(
       { error: "Server error", details: String(err) },
       { status: 500 }

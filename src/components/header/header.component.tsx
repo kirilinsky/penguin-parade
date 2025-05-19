@@ -38,6 +38,7 @@ const HeaderComponent = () => {
             <Link href={`/library/${uid}`}>My Penguins</Link>
             <Link href="/friends">Friends</Link>
             <Link href="/evolve">Evolve</Link>
+            <Link href="/auction">Auction</Link>
             <Link onClick={logOutHandler} href="/">
               Log out
             </Link>

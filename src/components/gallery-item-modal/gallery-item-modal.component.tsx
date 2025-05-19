@@ -30,6 +30,7 @@ const GalleryItemModalComponent = ({
   img,
   uid,
   isMyPage,
+  loading,
   onSendGift,
   currentAvatar,
   setAvatar,
@@ -37,6 +38,7 @@ const GalleryItemModalComponent = ({
   img: ImageItem | null;
   uid: string | null;
   isMyPage: boolean;
+  loading: boolean;
   currentAvatar: string | null;
   onSendGift: (recipientId: string, imgId: string) => void;
   setAvatar: (a: string, aR: string) => void;
@@ -45,7 +47,7 @@ const GalleryItemModalComponent = ({
   const [giftMode, setGiftMode] = useState(false);
   const [friendRecipient, setFriendRecipient] = useState<string>("");
 
-  const { friends, loading } = useGetFriends(uid);
+  const { friends, loading: friendsLoading } = useGetFriends(uid);
 
   const baseColor = useMemo(() => {
     return getBaseColorByScale(img.settings.rarity);
@@ -115,21 +117,23 @@ const GalleryItemModalComponent = ({
             </span>
             <h3>Choose recipient</h3>
             <br />
-            <select
-              onChange={(e) => setFriendRecipient(e.target.value)}
-              name="friend-recipient"
-              id="friends-list"
-              value={friendRecipient}
-            >
-              <option value={""} disabled>
-                Choose friend
-              </option>
-              {friends.map((friend) => (
-                <option value={friend.id} key={friend.id}>
-                  {friend.username}
+            {friendsLoading && (
+              <select
+                onChange={(e) => setFriendRecipient(e.target.value)}
+                name="friend-recipient"
+                id="friends-list"
+                value={friendRecipient}
+              >
+                <option value={""} disabled>
+                  Choose friend
                 </option>
-              ))}
-            </select>
+                {friends.map((friend) => (
+                  <option value={friend.id} key={friend.id}>
+                    {friend.username}
+                  </option>
+                ))}
+              </select>
+            )}
             <br />
             <br />
             <GalleryItemModalButtonsContainer>
