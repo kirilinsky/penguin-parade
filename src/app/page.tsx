@@ -35,7 +35,6 @@ export default function Home() {
           <PageContentBlockStyled>
             <h2>Road map</h2>
             <ul>
-              <li>Gifts</li>
               <li>Improve generation rules</li>
               <li>Evolution</li>
               <li>Funds system</li>

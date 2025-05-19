@@ -8,9 +8,10 @@ export const GalleryItemModalContainer = styled.div`
   height: calc(100% - 40px);
   @media (max-width: 768px) {
     flex-direction: column;
-    gap: 10px;
+    gap: 3px;
     align-items: center;
     overflow-y: auto;
+    margin-block: 20px;
   }
 `;
 
@@ -28,9 +29,12 @@ export const GalleryItemModalContent = styled.div<{ $frameColor?: string }>`
   border: 1.5px solid ${({ $frameColor }) => $frameColor};
   box-shadow: 0 0 10px ${({ $frameColor }) => $frameColor};
   @media (max-width: 768px) {
-    width: 95%;
+    width: 99%;
     min-height: 55vh;
-    margin-bottom: 15px;
+    &:nth-child(2) {
+      min-height: 100vh;
+      margin-bottom: 12px;
+    }
   }
 `;
 
@@ -47,6 +51,16 @@ export const GalleryItemModalTitle = styled.h2`
   margin-bottom: 10px;
   font-size: 28px;
 `;
+
+export const GalleryItemModalAccordion = styled.div<{ $expand: boolean }>`
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  transition: 0.45s linear;
+  overflow: hidden;
+  max-height: ${({ $expand }) => ($expand ? "600px" : "0")};
+`;
+
 export const GalleryItemModalDes = styled.p`
   font-size: 21px;
   @media (max-width: 768px) {
