@@ -4,8 +4,17 @@ import Replicate from "replicate";
 import sharp from "sharp";
 import { isBefore } from "date-fns";
 import { supabase } from "@/supabase";
-import { admin, adminAuth, firestore } from "@/fireBase-admin";
+import { adminAuth } from "@/fireBase-admin";
 import { getUserAllowCraftedAt } from "@/helpers/get-user-allow-crafted-at/get-user-allow-crafted-at";
+import { firestore } from "@/firebase";
+import {
+  addDoc,
+  collection,
+  doc,
+  serverTimestamp,
+  updateDoc,
+  increment,
+} from "firebase/firestore";
 
 const replicate = new Replicate({ auth: process.env.REPLICATE_API_TOKEN });
 const model =
@@ -128,7 +137,7 @@ export async function POST(req: Request) {
       );
     }
 
-    const imageDoc = await firestore.collection(GLOBAL_IMAGES_COLLECTION).add({
+    const imageDoc = await addDoc(collection(firestore, GLOBAL_IMAGES_COLLECTION), {
       imageUrl: urlData.publicUrl,
       title: settings.t || "Untitled",
       creatorUid: uid,
@@ -136,21 +145,17 @@ export async function POST(req: Request) {
       origin: "craft",
       gift: false,
       settings,
-      createdAt: admin.firestore.FieldValue.serverTimestamp(),
+      createdAt: serverTimestamp(),
     });
 
     const DAY_MS = 24 * 60 * 60 * 1000;
     const allowCraftAt = new Date(Date.now() + DAY_MS);
 
-    await firestore.doc(`users/${uid}`).update({
+    await updateDoc(doc(firestore, `users/${uid}`), {
       allowCraftAt,
       lastGeneratedAt: new Date(),
-      "statistics.totalCrafted": admin.firestore.FieldValue.increment(1),
+      "statistics.totalCrafted": increment(1),
     });
-
-    await firestore
-      .doc(`users/${uid}/images/${imageDoc.id}`)
-      .set({ id: imageDoc.id }, { merge: true });
 
     return NextResponse.json({
       success: true,
