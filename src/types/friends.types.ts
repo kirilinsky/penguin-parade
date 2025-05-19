@@ -50,3 +50,5 @@ export type RequestRecord = {
 };
 
 export type FriendData = RequestRecord & User;
+
+export type FriendWithUser = Friend & User;

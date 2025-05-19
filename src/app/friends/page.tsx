@@ -6,6 +6,7 @@ import { PageContentBlockStyled } from "@/components/page-content-block/page-con
 import { PageContentWrapperComponent } from "@/components/page-content-wrapper/page-content-wrapper.component";
 import UserListItemComponent from "@/components/user-list-item/user-list-item.component";
 import { firestore } from "@/firebase";
+import { useGetFriends } from "@/hooks/use-get-friends";
 import { Friend, FriendData, RequestRecord, User } from "@/types/friends.types";
 import {
   arrayRemove,
@@ -25,47 +26,19 @@ import { useAtomValue } from "jotai";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
-function extractUniqueUserIds(
-  incoming: { id: string }[],
-  sent: { id: string }[],
-  friends: { id: string }[]
-): string[] {
-  const allIds = [...incoming, ...sent, ...friends].map((r) => r.id);
-  return Array.from(new Set(allIds));
-}
-
 const FriendsPage = () => {
   const uid = useAtomValue(userIdAtom);
-  const [friends, setFriends] = useState<Friend[]>([]);
-  const [friendsLoading, setFriendsLoading] = useState<boolean>(false);
+
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState<User[]>([]);
-  const [sentRequests, setSentRequests] = useState<FriendData[]>([]);
-  const [incomingRequests, setIncomingRequests] = useState<FriendData[]>([]);
 
-  async function fetchUsersByIds(uids: string[]) {
-    const chunks = [];
-    const users: Record<string, User> = {};
-
-    for (let i = 0; i < uids.length; i += 10) {
-      const chunk = uids.slice(i, i + 10);
-      const q = query(
-        collection(firestore, "users"),
-        where(documentId(), "in", chunk)
-      );
-      chunks.push(getDocs(q));
-    }
-
-    const snapshots = await Promise.all(chunks);
-
-    snapshots.forEach((snap) => {
-      snap.docs.forEach((doc) => {
-        users[doc.id] = { id: doc.id, ...doc.data() } as User;
-      });
-    });
-
-    return users;
-  }
+  const {
+    friends,
+    sentRequests,
+    incomingRequests,
+    loading: friendsLoading,
+    refetch: friendsRefetch,
+  } = useGetFriends(uid);
 
   const handleSearch = async () => {
     if (!search.trim() || !uid) return;
@@ -83,38 +56,6 @@ const FriendsPage = () => {
       ...doc.data(),
     })) as User[];
     setSearchResults(results);
-  };
-
-  const initFriendsPage = async () => {
-    if (!uid) return;
-    setFriendsLoading(true);
-    const friendsSnap = await getDocs(
-      collection(firestore, `users/${uid}/friends`)
-    );
-    const friendRecords: Friend[] = friendsSnap.docs.map((d) => ({
-      id: d.id,
-      giftsReceived: d.data().giftsReceived, 
-      giftsSent: d.data().giftsSent,
-      addedAt: d.data().addedAt.toDate(),
-    }));
-
-    const userDoc = await getDoc(doc(firestore, "users", uid));
-    const userData = userDoc.data();
-
-    const incoming = userData?.friendRequests ?? [];
-    const sent = userData?.sentRequests ?? [];
-
-    const allIds = extractUniqueUserIds(incoming, sent, friendRecords);
-    const usersMap = await fetchUsersByIds(allIds);
-
-    setIncomingRequests(
-      incoming.map((r: RequestRecord) => ({ ...r, ...usersMap[r.id] }))
-    );
-    setSentRequests(
-      sent.map((r: RequestRecord) => ({ ...r, ...usersMap[r.id] }))
-    );
-    setFriends(friendRecords.map((f) => ({ ...f, ...usersMap[f.id] })));
-    setFriendsLoading(false);
   };
 
   const handleCancelRequest = async (user: User) => {
@@ -138,7 +79,7 @@ const FriendsPage = () => {
       friendRequests: cleanedIncoming,
     });
 
-    initFriendsPage();
+    friendsRefetch();
   };
 
   const handleDeclineRequest = async (user: User) => {
@@ -146,7 +87,9 @@ const FriendsPage = () => {
 
     const currentUserRef = doc(firestore, "users", uid);
     await updateDoc(currentUserRef, {
-      friendRequests: sentRequests.filter((req) => req.id !== user.id),
+      friendRequests: sentRequests.filter(
+        (req: FriendData) => req.id !== user.id
+      ),
     });
 
     const friendRef = doc(firestore, "users", user.id);
@@ -154,7 +97,7 @@ const FriendsPage = () => {
       sentRequests: arrayRemove({ id: uid }),
     });
 
-    initFriendsPage();
+    friendsRefetch();
   };
 
   const handleAcceptRequest = async (user: User) => {
@@ -201,11 +144,11 @@ const FriendsPage = () => {
       setDoc(theirFriendDoc, friendData),
     ]);
 
-    initFriendsPage();
+    friendsRefetch();
   };
 
   const hasSentRequest = (userId: string) => {
-    return sentRequests.some((req) => req.id === userId);
+    return sentRequests.some((req: FriendData) => req.id === userId);
   };
 
   const handleAddFriend = async (user: User) => {
@@ -223,7 +166,7 @@ const FriendsPage = () => {
       sentRequests: arrayUnion({ id: user.id, sentAt: timestamp }),
     });
 
-    initFriendsPage();
+    friendsRefetch();
   };
 
   const handleRemoveFriend = async (targetId: string) => {
@@ -234,12 +177,8 @@ const FriendsPage = () => {
 
     await Promise.all([deleteDoc(myFriendRef), deleteDoc(theirFriendRef)]);
 
-    initFriendsPage();
+    friendsRefetch();
   };
-
-  useEffect(() => {
-    if (uid) initFriendsPage();
-  }, [uid]);
 
   return (
     <PageContentWrapperComponent>
@@ -274,6 +213,7 @@ const FriendsPage = () => {
                     width={45}
                     height={45}
                     style={{ borderRadius: "50%" }}
+                    unoptimized={!!user.avatar}
                   />
                   <div>
                     <strong>{user.username}</strong>
