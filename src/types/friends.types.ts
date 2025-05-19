@@ -14,6 +14,7 @@ export type UserStatistics = {
   /* TODO: add totalAmount stat */
   totalAmount: Record<string, number>;
   totalCoinsEarned: number;
+  totalCrafted: number;
   lastEvolutionAt: Date;
   lastGiftSentAt: Date;
   lastLoginAt: Date;
@@ -40,6 +41,7 @@ export type User = {
   email: string;
   /* TODO: add xp system */
   xp: number;
+  imageIds: string[];
   lastGeneratedAt: Date;
   allowCraftAt: Date;
 };

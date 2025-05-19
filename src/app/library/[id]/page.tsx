@@ -114,7 +114,7 @@ const MyLibraryPage = () => {
     setLoading(true);
     try {
       const ref = collection(firestore, "images");
-      const q = query(ref, where("ownerId", "==", uid));
+      const q = query(ref, where("ownerId", "==", id));
       const snapshot = await getDocs(q);
 
       const list = snapshot.docs.map(
