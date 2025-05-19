@@ -19,6 +19,7 @@ import { getBaseColorByScale } from "@/helpers/get-base-color-by-rarity/get-base
 import NeonButtonComponent from "../neon-button/neon-button.component";
 import { format } from "date-fns";
 import { useGetFriends } from "@/hooks/use-get-friends";
+import { getPriceByScale } from "@/helpers/get-price-by-scale/get-price-by-scale";
 
 const orbitron = Orbitron({
   subsets: ["latin"],
@@ -32,6 +33,7 @@ const GalleryItemModalComponent = ({
   isMyPage,
   loading,
   onSendGift,
+  onSellImage,
   currentAvatar,
   setAvatar,
 }: {
@@ -41,6 +43,7 @@ const GalleryItemModalComponent = ({
   loading: boolean;
   currentAvatar: string | null;
   onSendGift: (recipientId: string, imgId: string) => void;
+  onSellImage: (imgId: string) => void;
   setAvatar: (a: string, aR: string) => void;
 }) => {
   if (!img) return null;
@@ -51,6 +54,10 @@ const GalleryItemModalComponent = ({
 
   const baseColor = useMemo(() => {
     return getBaseColorByScale(img.settings.rarity);
+  }, [img.settings.rarity]);
+
+  const { buy, sell } = useMemo(() => {
+    return getPriceByScale(img.settings.rarity);
   }, [img.settings.rarity]);
 
   return (
@@ -77,7 +84,7 @@ const GalleryItemModalComponent = ({
         <GalleryItemModalAccordion $expand={!giftMode}>
           <GalleryItemModalDes>{img.settings.des}</GalleryItemModalDes>
 
-          <span>Theme: {img.settings.theme}</span>
+          {/*  <span>Theme: {img.settings.theme}</span> */}
 
           <span>Ability: {img.settings.ability}</span>
 
@@ -105,7 +112,12 @@ const GalleryItemModalComponent = ({
                 onClick={() => setGiftMode(true)}
                 title="Give a friend (BETA)"
               />
-              <NeonButtonComponent title="Sell on auction (TBA)" />
+              {buy && sell && (
+                <NeonButtonComponent
+                  onClick={() => onSellImage(img.id)}
+                  title={`Sell on auction for ${sell} P$`}
+                />
+              )}
             </GalleryItemModalButtonsContainer>
           )}
         </GalleryItemModalAccordion>

@@ -45,7 +45,14 @@ const GalleryItemComponent = ({
       glareBorderRadius="20px"
     >
       <GalleryItemContent onClick={() => onClick(img)}>
-        {img.gift && <GalleryItemGiftBadge width={25} height={25} alt="gift" src="/gift_badge.webp" />}
+        {img.gift && (
+          <GalleryItemGiftBadge
+            width={25}
+            height={25}
+            alt="gift"
+            src="/gift_badge.webp"
+          />
+        )}
         <GalleryItemScaleComponent
           baseColor={baseColor}
           scale={img.settings.rarity}
@@ -63,6 +70,7 @@ const GalleryItemComponent = ({
           loading="lazy"
         />
         <p className={orbitron.className}>{img.title}</p>
+        {img.auction && <p>price - P${img.price}</p>}
       </GalleryItemContent>
     </Tilt>
   );

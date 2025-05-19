@@ -9,11 +9,20 @@ export interface ImageItem {
   origin: "craft" | "evolution";
   title: string;
   gift: boolean;
+  auction: boolean;
+  price: number;
+  soldAt: Timestamp;
   createdAt: Timestamp;
   settings: ImageItemSettings;
+  auctionHistory: ImageItemAuctionHistory[];
   giftedHistory: ImageItemGiftedHistory[];
 }
 
+export interface ImageItemAuctionHistory {
+  date: number;
+  buyerId: string;
+  price: string;
+}
 export interface ImageItemGiftedHistory {
   date: number;
   from: string;

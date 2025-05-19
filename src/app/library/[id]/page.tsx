@@ -13,15 +13,7 @@ import { firestore } from "@/firebase";
 import { useGetImages } from "@/hooks/use-get-images";
 import { ImageItem } from "@/types/image.types";
 import { getAuth, sendEmailVerification } from "firebase/auth";
-import {
-  collection,
-  doc,
-  getDocs,
-  orderBy,
-  query,
-  setDoc,
-  where,
-} from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import { useAtomValue, useSetAtom } from "jotai";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -62,7 +54,7 @@ const MyLibraryPage = () => {
     if (!user.emailVerified) {
       await sendEmailVerification(user);
       alert(
-        `Please verify your email (${user.email}) before crafting a penguin.`
+        `Please verify your email (${user.email}) before gifting a penguin.`
       );
       return;
     }
@@ -100,6 +92,52 @@ const MyLibraryPage = () => {
     }
   };
 
+  const sellImage = async (imageId: string) => {
+    const auth = getAuth();
+    const user = auth.currentUser;
+    if (!uid || !user) return;
+
+    if (!user.emailVerified) {
+      await sendEmailVerification(user);
+      alert(
+        `Please verify your email (${user.email}) before selling a penguin.`
+      );
+      return;
+    }
+
+    if (!imageId) {
+      alert(`Wrong image Id.`);
+      return;
+    }
+
+    const token = await user.getIdToken(true);
+    try {
+      const res = await fetch("/api/sold-image", {
+        method: "POST",
+        body: JSON.stringify({
+          imageId,
+        }),
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        alert("Penguin has been sold");
+        setDetailsImage(null);
+        const imagesDraft = [...images];
+        setImagesFiltered(imagesDraft.filter((img) => img.id !== imageId));
+      } else {
+        console.error("Sell process failed:", data);
+      }
+    } catch (err) {
+      console.error("Error during sell process:", err);
+    }
+  };
+
   useEffect(() => {
     setImagesFiltered(images);
   }, [images]);
@@ -116,6 +154,7 @@ const MyLibraryPage = () => {
           uid={uid}
           isMyPage={isMyPage}
           onSendGift={sendGift}
+          onSellImage={sellImage}
           loading={loading}
           currentAvatar={currentAvatar}
           setAvatar={setAvatarAction}

@@ -15,13 +15,17 @@ export type UserStatistics = {
   /* TODO: add totalAmount stat */
   totalAmount: Record<string, number>;
   totalCoinsEarned: number;
+  totalCoinsSpent: number;
   totalCrafted: number;
+  totalSold: number;
+  totalBought: number;
   lastEvolutionAt: Date;
   lastGiftSentAt: Date;
   lastLoginAt: Date;
   lastAuctionPurchaseAt: Date;
+  lastAuctionSellAt: Date;
 };
-
+/* TODO: add settings */
 export type UserSettings = {
   showGalleryPublic: boolean;
   /* TODO: add public stat */
@@ -35,8 +39,7 @@ export type User = {
   avatar: string | null;
   avatarScale: ScaleType | null;
   createdAt: Date;
-  /* TODO: add stat */
-  /* TODO: add settings */
+  /* TODO: add stat */ 
   /* TODO: add coins */
   coins: number;
   email: string;
