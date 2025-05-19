@@ -114,6 +114,7 @@ const MyLibraryPage = () => {
     setLoading(true);
     try {
       const ref = collection(firestore, "images");
+      /* TODO: sort by scale */
       const q = query(ref, where("ownerId", "==", id));
       const snapshot = await getDocs(q);
 

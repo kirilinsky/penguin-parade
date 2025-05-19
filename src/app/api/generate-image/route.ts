@@ -1,31 +1,24 @@
 import { NextResponse } from "next/server";
-import { firestore } from "@/firebase";
-import {
-  addDoc,
-  collection,
-  doc,
-  setDoc,
-  serverTimestamp,
-} from "firebase/firestore";
-import { supabase } from "@/supabase";
 import { v4 as uuidv4 } from "uuid";
 import Replicate from "replicate";
-import { getUserAllowCraftedAt } from "@/helpers/get-user-allow-crafted-at/get-user-allow-crafted-at";
-import { adminAuth } from "@/fireBase-admin";
 import sharp from "sharp";
 import { isBefore } from "date-fns";
+import { supabase } from "@/supabase";
+import { admin, adminAuth, firestore } from "@/fireBase-admin";
+import { getUserAllowCraftedAt } from "@/helpers/get-user-allow-crafted-at/get-user-allow-crafted-at";
 
 const replicate = new Replicate({ auth: process.env.REPLICATE_API_TOKEN });
 const model =
   "lucataco/sdxl-controlnet:06d6fae3b75ab68a28cd2900afa6033166910dd09fd9751047043a5bbb4c184b";
 const templateImageUrl = "https://i.ibb.co/B55bD3mh/template.png";
+const BUCKET = "penguins";
+const GLOBAL_IMAGES_COLLECTION = "images";
 
 const basePrompt = `
 Generate a 2D digital cartoon-style portrait of a penguin character, centered in the image. Keep the penguin's pose, proportions, and expression exactly the same as in the reference image. Do not alter the penguin's structure. But you can experiment with clothes and stuff.`;
 
 export async function POST(req: Request) {
   const authHeader = req.headers.get("Authorization") || "";
-
   const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
 
   if (!token) {
@@ -45,23 +38,14 @@ export async function POST(req: Request) {
 
   const uid = decoded.uid;
   if (!uid) return NextResponse.json({ error: "Missing uid" }, { status: 400 });
+
   const allowUserCraftedAt = await getUserAllowCraftedAt(uid);
-
-  if (allowUserCraftedAt) {
-    const allowedDate = allowUserCraftedAt.toDate();
-    const allowed = isBefore(allowedDate, new Date());
-    if (!allowed) {
-      return NextResponse.json(
-        { error: "Not able to craft!" },
-        { status: 500 }
-      );
-    }
+  if (
+    allowUserCraftedAt &&
+    !isBefore(allowUserCraftedAt.toDate(), new Date())
+  ) {
+    return NextResponse.json({ error: "Not able to craft!" }, { status: 403 });
   }
-
-  /*  const { scale } = await req.json();
-  if (scale) {
-    return NextResponse.json({ error: "scale :" + scale }, { status: 500 });
-  } */
 
   try {
     const settingsRes = await fetch(
@@ -82,17 +66,16 @@ export async function POST(req: Request) {
 
     const descriptionParts = [
       settings.theme && `The color mood is ${settings.theme.toLowerCase()}`,
-      `A penguin titled "${settings.t}"`,
+      `A penguin titled \"${settings.t}\"`,
       `stands in a setting with ${settings.bg.toLowerCase()}`,
       `wearing ${settings.acc}`,
       `with a ${settings.beak.toLowerCase()} color of penguin beak`,
       `a ${settings.breast.toLowerCase()} color chest`,
       `and ${settings.back.toLowerCase()} color on its back`,
-      fxDescription && `— ${fxDescription}`,
+      fxDescription,
     ];
 
     const description = descriptionParts.filter(Boolean).join(", ") + ".";
-
     const prompt = `${basePrompt.trim()} ${description}`.trim();
 
     const output = await replicate.run(model, {
@@ -120,45 +103,61 @@ export async function POST(req: Request) {
       .webp({ quality: 90 })
       .toBuffer();
 
-    const filename = `users/${uid}/images/${Date.now()}_${uuidv4()}.webp`;
-    const { data, error } = await supabase.storage
-      .from("penguins")
+    const filename = `images/${Date.now()}_${uuidv4()}.webp`;
+    const uploadRes = await supabase.storage
+      .from(BUCKET)
       .upload(filename, webpBuffer, {
         contentType: "image/webp",
-        cacheControl: "31538000",
-        upsert: false,
+        cacheControl: "31536000",
       });
-    if (error) throw new Error(error.message);
+
+    if (uploadRes.error) {
+      return NextResponse.json(
+        { error: "Upload failed", details: uploadRes.error.message },
+        { status: 500 }
+      );
+    }
 
     const { data: urlData } = supabase.storage
-      .from("penguins")
+      .from(BUCKET)
       .getPublicUrl(filename);
-    if (!urlData?.publicUrl) throw new Error("Failed to get image URL");
+    if (!urlData?.publicUrl) {
+      return NextResponse.json(
+        { error: "Failed to get image URL" },
+        { status: 500 }
+      );
+    }
 
-    const docRef = await addDoc(collection(firestore, `users/${uid}/images`), {
+    const imageDoc = await firestore.collection(GLOBAL_IMAGES_COLLECTION).add({
       imageUrl: urlData.publicUrl,
       title: settings.t || "Untitled",
       creatorUid: uid,
+      ownerId: uid,
       origin: "craft",
       gift: false,
       settings,
-      createdAt: serverTimestamp(),
+      createdAt: admin.firestore.FieldValue.serverTimestamp(),
     });
 
     const DAY_MS = 24 * 60 * 60 * 1000;
-    const allowCraftAt = new Date(new Date().getTime() + DAY_MS);
-    await setDoc(
-      doc(firestore, "users", uid),
-      { allowCraftAt, lastGeneratedAt: new Date() },
-      { merge: true }
-    );
+    const allowCraftAt = new Date(Date.now() + DAY_MS);
+
+    await firestore.doc(`users/${uid}`).update({
+      allowCraftAt,
+      lastGeneratedAt: new Date(),
+      "statistics.totalCrafted": admin.firestore.FieldValue.increment(1),
+    });
+
+    await firestore
+      .doc(`users/${uid}/images/${imageDoc.id}`)
+      .set({ id: imageDoc.id }, { merge: true });
 
     return NextResponse.json({
       success: true,
       downloadURL: urlData.publicUrl,
       title: settings.t,
       settings,
-      id: docRef.id,
+      id: imageDoc.id,
     });
   } catch (err) {
     console.error("Image generation failed:", err);
