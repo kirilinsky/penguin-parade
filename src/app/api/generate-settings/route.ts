@@ -2,7 +2,7 @@ import { themes } from "@/data/themes";
 import { NextResponse } from "next/server";
 
 export async function POST() {
-  const randomNumber = Math.floor(Math.random() * 1200);
+  const randomNumber = Math.floor(Math.random() * 1234);
   const randomSettings = Math.floor(Math.random() * themes.length);
   const randomlyUpdatedTheme = themes[randomSettings];
 

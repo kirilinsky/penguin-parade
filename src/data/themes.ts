@@ -7,6 +7,8 @@ export const themes = [
   "Steam-powered wizard academies",
   "Mayan eclipse festival",
   "Frozen Mongol warlords",
+  "Rock festival",
+  "Factory worker",
   "Interdimensional subway stations",
   "Clockwork jungle tribes",
   "Alien opera house",
