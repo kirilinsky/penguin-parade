@@ -14,6 +14,7 @@ import {
   serverTimestamp,
   updateDoc,
   increment,
+  arrayUnion,
 } from "firebase/firestore";
 
 const replicate = new Replicate({ auth: process.env.REPLICATE_API_TOKEN });
@@ -137,16 +138,19 @@ export async function POST(req: Request) {
       );
     }
 
-    const imageDoc = await addDoc(collection(firestore, GLOBAL_IMAGES_COLLECTION), {
-      imageUrl: urlData.publicUrl,
-      title: settings.t || "Untitled",
-      creatorUid: uid,
-      ownerId: uid,
-      origin: "craft",
-      gift: false,
-      settings,
-      createdAt: serverTimestamp(),
-    });
+    const imageDoc = await addDoc(
+      collection(firestore, GLOBAL_IMAGES_COLLECTION),
+      {
+        imageUrl: urlData.publicUrl,
+        title: settings.t || "Untitled",
+        creatorUid: uid,
+        ownerId: uid,
+        origin: "craft",
+        gift: false,
+        settings,
+        createdAt: serverTimestamp(),
+      }
+    );
 
     const DAY_MS = 24 * 60 * 60 * 1000;
     const allowCraftAt = new Date(Date.now() + DAY_MS);
@@ -155,6 +159,7 @@ export async function POST(req: Request) {
       allowCraftAt,
       lastGeneratedAt: new Date(),
       "statistics.totalCrafted": increment(1),
+      imageIds: arrayUnion(imageDoc.id),
     });
 
     return NextResponse.json({
