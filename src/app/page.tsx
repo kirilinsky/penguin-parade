@@ -40,8 +40,12 @@ export default function Home() {
               <li>Evolution</li>
               <li>Funds system</li>
               <li>Auction</li>
+              <li>Centralized storage</li>
+              <li>NFT Mint preparation</li>
+              <li>Images optimization</li>
               <li>Friends updates</li>
               <li>Tutorial page</li>
+              <li>SignUp/Login via gmail</li>
               <li>I18n</li>
             </ul>
           </PageContentBlockStyled>
