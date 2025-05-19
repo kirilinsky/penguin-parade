@@ -170,7 +170,7 @@ const CountDownPage = () => {
         )}
       </PageContentBlockStyled>
 
-      <LastCraftedBlockComponent uid={uid} />
+      <LastCraftedBlockComponent />
     </PageContentWrapperComponent>
   );
 };
