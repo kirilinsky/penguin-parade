@@ -117,7 +117,7 @@ const GalleryItemModalComponent = ({
             </span>
             <h3>Choose recipient</h3>
             <br />
-            {friendsLoading && (
+            {!friendsLoading && (
               <select
                 onChange={(e) => setFriendRecipient(e.target.value)}
                 name="friend-recipient"
