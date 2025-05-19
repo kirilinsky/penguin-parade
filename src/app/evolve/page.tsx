@@ -3,7 +3,7 @@
 import { userIdAtom } from "@/atoms/user/user.atom";
 import EvolutionGridContainer from "@/components/evolution-grid-container/evolution-grid-container.component";
 import EvolutionGridItem from "@/components/evolution-grid-item/evolution-grid-item.component";
-import { fetchImages } from "@/helpers/api/fetch-images/fetch-images";
+import { useGetImages } from "@/hooks/use-get-images";
 import { ImageItem } from "@/types/image.types";
 import { useAtomValue } from "jotai";
 import React, { useEffect, useState } from "react";
@@ -25,7 +25,6 @@ const EvolvePage = () => {
   const uid = useAtomValue(userIdAtom);
   const [evolutionList, setEvolutionList] =
     useState<Record<string, EvolutionSlot>>(evolutionListDefault);
-  const [images, setImages] = useState<ImageItem[]>([]);
   const [filteredImages, setFilteredIMages] = useState<ImageItem[]>([]);
   const [currentRarityScale, setCurrentRarityScale] = useState<string | null>(
     null
@@ -34,13 +33,11 @@ const EvolvePage = () => {
   const [showLibraryModal, setShowLibraryModal] = useState<boolean>(false);
   const evolutionKeys = Object.keys(evolutionListDefault);
 
-  const onLoad = async (uid: string) => {
-    const result = await fetchImages(uid);
-    if (result) {
-      setImages(result.list);
-      setFilteredIMages(result.list);
-    }
-  };
+  const { images, loading } = useGetImages();
+
+  useEffect(() => {
+    setFilteredIMages(images);
+  }, [images]);
 
   const onImageClick = (img: ImageItem) => {
     if (!currentRarityScale) {
@@ -64,10 +61,6 @@ const EvolvePage = () => {
     );
     setFilteredIMages(filteredImagesDraft);
   }, [currentRarityScale]);
-
-  useEffect(() => {
-    uid && onLoad(uid);
-  }, [uid]);
 
   const onItemClick = (e: any) => {
     e.stopPropagation();
@@ -104,14 +97,15 @@ const EvolvePage = () => {
         </div>
       </Rodal>
       <EvolutionGridContainer>
-        {evolutionKeys.map((key) => (
-          <EvolutionGridItem
-            value={evolutionList[key] ? evolutionList[key].imageUrl : null}
-            onClick={onItemClick}
-            key={key}
-            gridarea={key}
-          />
-        ))}
+        {!loading &&
+          evolutionKeys.map((key) => (
+            <EvolutionGridItem
+              value={evolutionList[key] ? evolutionList[key].imageUrl : null}
+              onClick={onItemClick}
+              key={key}
+              gridarea={key}
+            />
+          ))}
         <EvolutionGridItem gridarea="c"></EvolutionGridItem>
       </EvolutionGridContainer>
     </>

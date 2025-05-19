@@ -1,4 +1,5 @@
 import { Timestamp } from "firebase/firestore";
+import { ScaleType } from "./scale.types";
 
 export type Friend = {
   id: string;
@@ -32,7 +33,7 @@ export type User = {
   username: string;
   username_lowercase: string;
   avatar: string | null;
-  avatarScale: string | null;
+  avatarScale: ScaleType | null;
   createdAt: Date;
   /* TODO: add stat */
   /* TODO: add settings */

@@ -1,43 +1,20 @@
-import React, { useEffect, useState } from "react";
+"use client";
+
+import React from "react";
 import { PageContentBlockStyled } from "../page-content-block/page-content-block.component.styled";
-import { collection, getDocs, limit, orderBy, query, where } from "firebase/firestore";
-import { firestore } from "@/firebase";
-import { ImageItem } from "@/types/image.types";
 import GalleryItemComponent from "../gallery-item/gallery-item.component";
 import { LinkStyled } from "../link/link.component.styled";
 import Image from "next/image";
+import { useGetImages } from "@/hooks/use-get-images";
 
-const LastCraftedBlockComponent = ({ uid }: { uid: string | null }) => {
-  const [lastCrafted, setLastCrafted] = useState<ImageItem | null>(null);
+const LastCraftedBlockComponent = () => {
+  const { images, loading } = useGetImages(true);
 
-
-  // TODO: create hook get images
-  useEffect(() => {
-    async function fetchImages() {
-      if (!uid) return;
-
-      try {
-        const ref = collection(firestore, "images");
-        const q = query(ref, where("ownerId", "==", uid));
-        const snapshot = await getDocs(q);
-        const list = snapshot.docs.map(
-          (doc) => ({ id: doc.id, ...doc.data() } as ImageItem)
-        );
-        const firstCraftedItem = list[0];
-        if (firstCraftedItem) {
-          setLastCrafted(firstCraftedItem);
-        }
-      } catch (err) {
-        console.error("Error loading last crafted:", err);
-      }
-    }
-    fetchImages();
-  }, [uid]);
   return (
     <PageContentBlockStyled>
       <h2>Last Crafted Penguin</h2>
-      {lastCrafted ? (
-        <GalleryItemComponent slim scalable={false} img={lastCrafted} />
+      {!loading && images && images.length ? (
+        <GalleryItemComponent slim scalable={false} img={images[0]} />
       ) : (
         <>
           <p>You don't have Penguins yet! </p>

@@ -10,6 +10,7 @@ import GalleryItemComponent from "@/components/gallery-item/gallery-item.compone
 import GalleryComponent from "@/components/gallery/gallery.component";
 import { LinkStyled } from "@/components/link/link.component.styled";
 import { firestore } from "@/firebase";
+import { useGetImages } from "@/hooks/use-get-images";
 import { ImageItem } from "@/types/image.types";
 import { getAuth, sendEmailVerification } from "firebase/auth";
 import {
@@ -30,13 +31,12 @@ const MyLibraryPage = () => {
   const { id: pageId } = useParams();
   const uid = useAtomValue(userIdAtom);
   const currentAvatar = useAtomValue(avatarAtom);
-
   const setAvatar = useSetAtom(avatarAtom);
   const setAvatarScale = useSetAtom(avatarScaleAtom);
-  const [images, setImages] = useState<ImageItem[]>([]);
-  const [loading, setLoading] = useState(true);
   const [isMyPage, setIsMyPage] = useState(false);
   const [detailsImage, setDetailsImage] = useState<ImageItem | null>(null);
+
+  const { images, loading } = useGetImages(true, pageId);
 
   const handleOnClick = (img: ImageItem) => {
     setDetailsImage(img);
@@ -57,7 +57,6 @@ const MyLibraryPage = () => {
     const auth = getAuth();
     const user = auth.currentUser;
     if (!uid || !user) return;
-    setLoading(true);
 
     if (!user.emailVerified) {
       await sendEmailVerification(user);
@@ -100,37 +99,12 @@ const MyLibraryPage = () => {
       console.error("Error during gift process:", err);
     } finally {
       setDetailsImage(null);
-      setLoading(false);
-      const imagesDraft = [...images];
-      setImages(imagesDraft.filter((img) => img.id !== imageId));
-    }
-  };
-
-  const fetchImages = async () => {
-    const idIsEqual = pageId === uid;
-    setIsMyPage(idIsEqual);
-    const id = idIsEqual ? uid : pageId;
-    if (!id) return;
-    setLoading(true);
-    try {
-      const ref = collection(firestore, "images");
-      /* TODO: sort by scale */
-      const q = query(ref, where("ownerId", "==", id));
-      const snapshot = await getDocs(q);
-
-      const list = snapshot.docs.map(
-        (doc) => ({ id: doc.id, ...doc.data() } as ImageItem)
-      );
-      setImages(list);
-    } catch (err) {
-      console.error("Error loading gallery:", err);
-    } finally {
-      setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchImages();
+    const idIsEqual = pageId === uid;
+    setIsMyPage(idIsEqual);
   }, [uid, pageId]);
 
   return (

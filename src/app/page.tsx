@@ -30,7 +30,7 @@ export default function Home() {
               Craft new!
             </LinkStyled>
           </PageContentBlockStyled>
-          <LastCraftedBlockComponent uid={uid} />
+          <LastCraftedBlockComponent />
           <TotalCountBlockComponent />
           <PageContentBlockStyled>
             <h2>Road map</h2>
