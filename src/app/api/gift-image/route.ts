@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
-import { firestore, adminAuth } from "@/fireBase-admin";
-import { FieldValue } from "firebase-admin/firestore";
+import { firestore, FieldValue, adminAuth } from "@/fireBase-admin";
 
 export async function POST(req: Request) {
   const authHeader = req.headers.get("Authorization") || "";
