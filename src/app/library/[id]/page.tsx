@@ -33,6 +33,7 @@ const MyLibraryPage = () => {
   const currentAvatar = useAtomValue(avatarAtom);
   const setAvatar = useSetAtom(avatarAtom);
   const setAvatarScale = useSetAtom(avatarScaleAtom);
+  const [imagesFiltered, setImagesFiltered] = useState<ImageItem[]>([]);
   const [isMyPage, setIsMyPage] = useState(false);
   const [detailsImage, setDetailsImage] = useState<ImageItem | null>(null);
 
@@ -88,19 +89,20 @@ const MyLibraryPage = () => {
 
       if (data.success) {
         alert("Gift has been sent");
+        setDetailsImage(null);
+        const imagesDraft = [...images];
+        setImagesFiltered(imagesDraft.filter((img) => img.id !== imageId));
       } else {
-        console.log(toUid, "toUid");
-        console.log(imageId, "imageId");
-        console.log(uid, "uid (form atom)");
-
         console.error("Gift process failed:", data);
       }
     } catch (err) {
       console.error("Error during gift process:", err);
-    } finally {
-      setDetailsImage(null);
     }
   };
+
+  useEffect(() => {
+    setImagesFiltered(images);
+  }, [images]);
 
   useEffect(() => {
     const idIsEqual = pageId === uid;
@@ -120,8 +122,8 @@ const MyLibraryPage = () => {
           img={detailsImage}
         />
       </Rodal>
-      {images.length ? (
-        images.map((img: ImageItem) => (
+      {imagesFiltered.length ? (
+        imagesFiltered.map((img: ImageItem) => (
           <GalleryItemComponent
             onClick={handleOnClick}
             key={img.id}
