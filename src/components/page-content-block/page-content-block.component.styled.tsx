@@ -9,7 +9,7 @@ export const PageContentBlockFlex = styled.div`
 `;
 
 export const PageContentBlockStyled = styled(PageContentBlockFlex)`
-  box-shadow: 0 0 10px #fff;
-  border: 2px solid white;
-  border-radius: 1em;
+  box-shadow: 0 0 10px #415948c3;
+  border: 1px solid #415948c3;
+  border-radius: .5em;
 `;

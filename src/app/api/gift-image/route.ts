@@ -1,9 +1,19 @@
-import { firestore } from "@/fireBase-admin";
 import { supabaseServer } from "@/supabase";
 import { NextResponse } from "next/server";
-import { adminAuth } from "@/fireBase-admin";
 import * as admin from "firebase-admin";
 
+if (!admin.apps.length) {
+  admin.initializeApp({
+    credential: admin.credential.cert({
+      projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+      clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+      privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, "\n"),
+    }),
+  });
+}
+
+const firestore = admin.firestore();
+const adminAuth = admin.auth();
 const BUCKET = "penguins";
 
 export async function POST(req: Request) {
@@ -18,14 +28,17 @@ export async function POST(req: Request) {
   try {
     const decoded = await adminAuth.verifyIdToken(token);
     fromUid = decoded.uid;
-  } catch {
+  } catch (err) {
     return NextResponse.json({ error: "Invalid token" }, { status: 401 });
   }
 
   const { toUid, imageId } = await req.json();
 
   if (!fromUid || !toUid || !imageId) {
-    return NextResponse.json({ error: "Missing fields" }, { status: 400 });
+    return NextResponse.json(
+      { error: "Missing required fields" },
+      { status: 400 }
+    );
   }
 
   if (fromUid === toUid) {
@@ -44,94 +57,108 @@ export async function POST(req: Request) {
     }
 
     const data = fromDocSnap.data();
-    if (!data?.imageUrl) {
+    if (!data) {
       return NextResponse.json(
         { error: "Invalid image data" },
         { status: 400 }
       );
     }
 
-    const oldPath = new URL(data.imageUrl).pathname.split(
-      "/storage/v1/object/public/penguins/"
-    )[1];
-    const filename = oldPath.split("/").pop();
-    const newPath = `users/${toUid}/images/${filename}`;
+    const giftedHistory: { from: string; to: string; date: number }[] =
+      Array.isArray(data.giftedHistory) ? [...data.giftedHistory] : [];
 
-    // 1. Copy image in Supabase
-    const copyRes = await supabaseServer.storage
-      .from(BUCKET)
-      .copy(oldPath, newPath);
-    if (copyRes.error) {
-      console.error("Supabase copy error:", copyRes.error.message);
-      return NextResponse.json(
-        { error: "Failed to copy image" },
-        { status: 500 }
-      );
-    }
-
-    // 2. Get new image URL
-    const { data: urlData } = supabaseServer.storage
-      .from(BUCKET)
-      .getPublicUrl(newPath);
-
-    const newImageUrl = urlData?.publicUrl;
-    if (!newImageUrl) {
-      return NextResponse.json(
-        { error: "Failed to get image URL" + newImageUrl },
-        { status: 500 }
-      );
-    }
-
-    // 3. Push gift history
-    const giftedHistory = Array.isArray(data.giftedHistory)
-      ? [...data.giftedHistory]
-      : [];
-    giftedHistory.push({ from: fromUid, to: toUid, date: Date.now() });
+    giftedHistory.push({
+      from: fromUid,
+      to: toUid,
+      date: Date.now(),
+    });
 
     const newDoc = {
       ...data,
-      imageUrl: newImageUrl,
       gift: true,
       giftedHistory,
     };
 
+    const imageUrl: string = data.imageUrl;
+    const oldPath = new URL(imageUrl).pathname.split(
+      "/storage/v1/object/public/penguins/"
+    )[1];
+
+    const filename = oldPath.split("/").pop();
+    const newPath = `users/${toUid}/images/${filename}`;
+
+    console.log("🔁 Copying image from", oldPath, "to", newPath);
+
+    const copyRes = await supabaseServer.storage
+      .from(BUCKET)
+      .copy(oldPath, newPath);
+
+    if (copyRes.error) {
+      console.error("❌ Supabase copy error:", copyRes.error.message);
+      return NextResponse.json(
+        { error: "Failed to copy image", details: copyRes.error.message },
+        { status: 500 }
+      );
+    }
+
+    await new Promise((res) => setTimeout(res, 300)); // Ждём CDN
+
+    const { data: publicUrlData } = supabaseServer.storage
+      .from(BUCKET)
+      .getPublicUrl(newPath);
+
+    const newImageUrl = publicUrlData?.publicUrl;
+
+    if (!newImageUrl) {
+      return NextResponse.json(
+        { error: "Failed to get public URL" },
+        { status: 500 }
+      );
+    }
+
+    const head = await fetch(newImageUrl, { method: "HEAD" });
+    if (!head.ok) {
+      return NextResponse.json(
+        { error: "Copied file not available via CDN", status: head.status },
+        { status: 502 }
+      );
+    }
+
     const toDocRef = await firestore
       .collection(`users/${toUid}/images`)
-      .add(newDoc);
+      .add({ ...newDoc, imageUrl: newImageUrl });
 
-    // 4. Delete old Firestore + old image
     await fromDocRef.delete();
     await supabaseServer.storage.from(BUCKET).remove([oldPath]);
 
-    // 5. Update statistics
     const fromUserRef = firestore.doc(`users/${fromUid}`);
     const toUserRef = firestore.doc(`users/${toUid}`);
 
-    await Promise.all([
-      fromUserRef.update({
-        "statistics.totalGiftsSent": admin.firestore.FieldValue.increment(1),
-        "statistics.lastGiftSentAt": new Date(),
-      }),
-      toUserRef.update({
-        "statistics.totalGiftsReceived":
-          admin.firestore.FieldValue.increment(1),
-      }),
-    ]);
+    await fromUserRef.update({
+      "statistics.totalGiftsSent": admin.firestore.FieldValue.increment(1),
+      "statistics.lastGiftSentAt": new Date(),
+    });
 
-    // 6. Update friend links (if exist)
+    await toUserRef.update({
+      "statistics.totalGiftsReceived": admin.firestore.FieldValue.increment(1),
+    });
+
+    const friendRef = firestore.doc(`users/${fromUid}/friends/${toUid}`);
+    const reverseFriendRef = firestore.doc(`users/${toUid}/friends/${fromUid}`);
+
     const [friendSnap, reverseSnap] = await Promise.all([
-      firestore.doc(`users/${fromUid}/friends/${toUid}`).get(),
-      firestore.doc(`users/${toUid}/friends/${fromUid}`).get(),
+      friendRef.get(),
+      reverseFriendRef.get(),
     ]);
 
     if (friendSnap.exists) {
-      await friendSnap.ref.update({
+      await friendRef.update({
         giftsSent: admin.firestore.FieldValue.increment(1),
       });
     }
 
     if (reverseSnap.exists) {
-      await reverseSnap.ref.update({
+      await reverseFriendRef.update({
         giftsReceived: admin.firestore.FieldValue.increment(1),
       });
     }
@@ -142,7 +169,7 @@ export async function POST(req: Request) {
       newImageUrl,
     });
   } catch (err) {
-    console.error("Gift error:", err);
+    console.error("❌ Gift error:", err);
     return NextResponse.json(
       { error: "Server error", details: String(err) },
       { status: 500 }
