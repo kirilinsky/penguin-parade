@@ -2,6 +2,7 @@ import React, { useMemo, useState } from "react";
 import Tilt from "react-parallax-tilt";
 import {
   GalleryItemContent,
+  GalleryItemGiftBadge,
   GalleryItemImage,
   GalleryItemSkeleton,
 } from "./gallery-item.component.styled";
@@ -9,6 +10,7 @@ import { ImageItem } from "@/types/image.types";
 import { getBaseColorByScale } from "@/helpers/get-base-color-by-rarity/get-base-color-by-rarity";
 import GalleryItemScaleComponent from "../gallery-item-scale/gallery-item-scale.component";
 import { Orbitron } from "next/font/google";
+import Image from "next/image";
 
 const orbitron = Orbitron({
   subsets: ["latin"],
@@ -43,6 +45,7 @@ const GalleryItemComponent = ({
       glareBorderRadius="20px"
     >
       <GalleryItemContent onClick={() => onClick(img)}>
+        {img.gift && <GalleryItemGiftBadge width={25} height={25} alt="gift" src="/gift_badge.webp" />}
         <GalleryItemScaleComponent
           baseColor={baseColor}
           scale={img.settings.rarity}

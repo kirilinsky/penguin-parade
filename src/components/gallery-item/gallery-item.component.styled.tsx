@@ -1,3 +1,4 @@
+import Image from "next/image";
 import styled from "styled-components";
 
 export const GalleryItemImage = styled.img.withConfig({
@@ -44,4 +45,12 @@ export const GalleryItemContent = styled.div`
   &:hover {
     cursor: pointer;
   }
+`;
+
+export const GalleryItemGiftBadge = styled(Image)`
+  position: absolute;
+  transform: rotate(15deg);
+  opacity: 0.9;
+  top: 3%;
+  right: 4%;
 `;
