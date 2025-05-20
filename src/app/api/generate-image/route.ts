@@ -77,20 +77,14 @@ export async function POST(req: Request) {
   }
 
   try {
-    /* if evolution */
-    const headers: Record<string, string> = {};
-    let body: string | undefined = undefined;
-    if (evolutionMode) {
-      headers["Content-Type"] = "application/json";
-      body = JSON.stringify({ scale });
-    }
-
     const settingsRes = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL}/api/generate-settings`,
       {
         method: "POST",
-        headers,
-        ...(body ? { body } : {}),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(evolutionMode ? { scale } : {}),
       }
     );
     if (!settingsRes.ok) {
@@ -106,7 +100,7 @@ export async function POST(req: Request) {
     const descriptionParts = [
       settings.theme && `The color mood is ${settings.theme.toLowerCase()}`,
       `A penguin titled \"${settings.t}\"`,
-      `stands in a setting with ${settings.bg.toLowerCase()}`,
+      `background is ${settings.bg.toLowerCase()}`,
       `wearing ${settings.acc}`,
       `with a ${settings.beak.toLowerCase()} color of penguin beak`,
       `a ${settings.breast.toLowerCase()} color chest`,
@@ -192,7 +186,7 @@ export async function POST(req: Request) {
       });
     } else {
       await updateDoc(doc(firestore, `users/${uid}`), {
-        'statistics.lastEvolutionAt': new Date(),
+        "statistics.lastEvolutionAt": new Date(),
         "statistics.evolutions": increment(1),
         imageIds: arrayUnion(imageDoc.id),
       });
