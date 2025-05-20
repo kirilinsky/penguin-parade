@@ -37,13 +37,17 @@ export default function Home() {
           <PageContentBlockStyled>
             <h2>Road map</h2>
             <ul>
-              <li>Improve generation rules</li>
               <li>Funds system</li>
-              <li>Auction</li>
+              <li>Anonyous home page</li>
+              <li>Gift functionality design update</li>
+              <li>Evolution functionality design update</li>
+              <li>Pay to skip function</li>
               <li>Expeditions (TBA)</li>
               <li>NFT Mint preparation</li>
-              <li>Images avatar optimization</li>
-              <li>Friends updates</li>
+              <li>Images avatar optimization</li>{" "}
+              <li>Friends page design update</li>
+              <li>Friends Updtes(news)</li>
+              <li>Announcements</li>
               <li>Tutorial page</li>
               <li>SignUp/Login via gmail</li>
               <li>I18n</li>
@@ -53,18 +57,15 @@ export default function Home() {
             <h2>News</h2>
           </PageContentBlockStyled>
           <PageContentBlockStyled>
-            <h2>Auction</h2>
-            <span>coming soon</span>
-          </PageContentBlockStyled>
-          <PageContentBlockStyled>
             <h2>Info</h2>
             <Image width="220" height="320" src="/scale-top.jpg" alt="scales" />
           </PageContentBlockStyled>
         </>
       ) : (
         <PageContentBlockStyled>
+          <h2>Hello anon!</h2>
           <p>
-            please <a href="/login">login</a>
+            <LinkStyled href="/login">Please login</LinkStyled>
           </p>
         </PageContentBlockStyled>
       )}
