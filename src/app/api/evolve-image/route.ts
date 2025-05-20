@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { adminAuth } from "@/fireBase-admin";
 import { firestore } from "@/firebase";
 import {
-    arrayRemove,
+  arrayRemove,
   collection,
   doc,
   getDocs,
@@ -31,10 +31,6 @@ export async function POST(req: Request) {
     uid = decoded.uid;
   } catch {
     return NextResponse.json({ error: "Invalid token" }, { status: 401 });
-  }
-
-  if (uid !== "MA1UKPOCUvUEYH4l4iqHDrJeJC22") {
-    return NextResponse.json({ error: "DEBUG EXIT" }, { status: 400 });
   }
 
   const { imageIds } = await req.json();
