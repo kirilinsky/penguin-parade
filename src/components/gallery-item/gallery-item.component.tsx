@@ -47,8 +47,8 @@ const GalleryItemComponent = ({
       <GalleryItemContent onClick={() => onClick(img)}>
         {img.gift && (
           <GalleryItemGiftBadge
-            width={25}
-            height={25}
+            width={31}
+            height={31}
             alt="gift"
             src="/gift_badge.webp"
           />
@@ -56,7 +56,6 @@ const GalleryItemComponent = ({
         <GalleryItemScaleComponent
           baseColor={baseColor}
           scale={img.settings.rarity}
-          className={orbitron.className}
         />
         <GalleryItemSkeleton loaded={loaded} />
         <GalleryItemImage

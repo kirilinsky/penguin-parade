@@ -15,10 +15,8 @@ import {
 import { Orbitron } from "next/font/google";
 import GalleryItemScaleComponent from "../gallery-item-scale/gallery-item-scale.component";
 import { getBaseColorByScale } from "@/helpers/get-base-color-by-rarity/get-base-color-by-rarity";
-
 import NeonButtonComponent from "../neon-button/neon-button.component";
-import { format } from "date-fns";
-import { useGetFriends } from "@/hooks/use-get-friends";
+import { format } from "date-fns"; 
 import { getPriceByScale } from "@/helpers/get-price-by-scale/get-price-by-scale";
 import { FriendWithUser, User } from "@/types/friends.types";
 import { ScaleType } from "@/types/scale.types";
@@ -77,7 +75,6 @@ const GalleryItemModalComponent = ({
         <GalleryItemModalScale>
           <GalleryItemScaleComponent
             baseColor={baseColor}
-            className={orbitron.className}
             scale={img.settings.rarity}
           />
         </GalleryItemModalScale>

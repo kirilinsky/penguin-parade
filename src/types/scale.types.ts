@@ -25,11 +25,39 @@ export const scaleConfig: Record<
     buy: number | null;
   }
 > = {
-  common: { color: "gray", sell: 1, buy: 4 },
-  rare: { color: "blue", sell: 2, buy: 8 },
-  epic: { color: "purple", sell: 4, buy: 16 },
-  legendary: { color: "red", sell: 8, buy: 32 },
-  divine: { color: "gold", sell: 16, buy: 64 },
-  ghost: { color: "white", sell: null, buy: null },
-  mystic: { color: "green", sell: null, buy: null },
+  common: {
+    color: "#808080",
+    sell: 1,
+    buy: 4,
+  },
+  rare: {
+    color: "#00b7ff",
+    sell: 2,
+    buy: 10,
+  },
+  epic: {
+    color: "#a020f0",
+    sell: 4,
+    buy: 20,
+  },
+  legendary: {
+    color: "#ff3131",
+    sell: 8,
+    buy: 35,
+  },
+  divine: {
+    color: "#fdd835",
+    sell: 16,
+    buy: 80,
+  },
+  ghost: {
+    color: "#f0f0f0",
+    sell: null,
+    buy: null,
+  },
+  mystic: {
+    color: "#39ff14",
+    sell: null,
+    buy: null,
+  },
 };

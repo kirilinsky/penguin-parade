@@ -57,21 +57,40 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "User not found" }, { status: 404 });
   }
 
-  const allowCraftAt = userData.allowCraftAt;
+  let evolutionMode = false;
+  const { scale } = await req.json();
 
-  if (
-    allowCraftAt &&
-    typeof allowCraftAt.toDate === "function" &&
-    !isBefore(allowCraftAt.toDate(), new Date())
-  ) {
-    return NextResponse.json({ error: "Not able to craft!" }, { status: 403 });
+  if (!scale) {
+    const allowCraftAt = userData.allowCraftAt;
+    if (
+      allowCraftAt &&
+      typeof allowCraftAt.toDate === "function" &&
+      !isBefore(allowCraftAt.toDate(), new Date())
+    ) {
+      return NextResponse.json(
+        { error: "Not able to craft!" },
+        { status: 403 }
+      );
+    }
+  } else {
+    evolutionMode = true;
   }
 
   try {
+    /* if evolution */
+    const headers: Record<string, string> = {};
+    let body: string | undefined = undefined;
+    if (evolutionMode) {
+      headers["Content-Type"] = "application/json";
+      body = JSON.stringify({ scale });
+    }
+
     const settingsRes = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL}/api/generate-settings`,
       {
         method: "POST",
+        headers,
+        ...(body ? { body } : {}),
       }
     );
     if (!settingsRes.ok) {
@@ -147,7 +166,7 @@ export async function POST(req: Request) {
         { status: 500 }
       );
     }
-
+    const origin = evolutionMode ? "evolution" : "craft";
     const imageDoc = await addDoc(
       collection(firestore, GLOBAL_IMAGES_COLLECTION),
       {
@@ -155,22 +174,29 @@ export async function POST(req: Request) {
         title: settings.t || "Untitled",
         creatorUid: uid,
         ownerId: uid,
-        origin: "craft",
+        origin,
         gift: false,
         settings,
         createdAt: serverTimestamp(),
       }
     );
+    if (!evolutionMode) {
+      const DAY_MS = 24 * 60 * 60 * 1000;
+      const allowCraftAt = new Date(Date.now() + DAY_MS);
 
-    const DAY_MS = 24 * 60 * 60 * 1000;
-    const allowCraftAt = new Date(Date.now() + DAY_MS);
-
-    await updateDoc(doc(firestore, `users/${uid}`), {
-      allowCraftAt,
-      lastGeneratedAt: new Date(),
-      "statistics.totalCrafted": increment(1),
-      imageIds: arrayUnion(imageDoc.id),
-    });
+      await updateDoc(doc(firestore, `users/${uid}`), {
+        allowCraftAt,
+        lastGeneratedAt: new Date(),
+        "statistics.totalCrafted": increment(1),
+        imageIds: arrayUnion(imageDoc.id),
+      });
+    } else {
+      await updateDoc(doc(firestore, `users/${uid}`), {
+        'statistics.lastEvolutionAt': new Date(),
+        "statistics.evolutions": increment(1),
+        imageIds: arrayUnion(imageDoc.id),
+      });
+    }
 
     return NextResponse.json({
       success: true,

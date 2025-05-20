@@ -51,6 +51,6 @@ export const GalleryItemGiftBadge = styled(Image)`
   position: absolute;
   transform: rotate(15deg);
   opacity: 0.9;
-  top: 3%;
-  right: 4%;
+  top: 2%;
+  right: 3%;
 `;

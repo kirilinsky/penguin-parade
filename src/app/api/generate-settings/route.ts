@@ -1,12 +1,13 @@
 import { themes } from "@/data/themes";
+import { ScaleType } from "@/types/scale.types";
 import { NextResponse } from "next/server";
 
-export async function POST() {
+export async function POST(req: Request) {
   const randomNumber = Math.floor(Math.random() * 1234);
   const randomSettings = Math.floor(Math.random() * themes.length);
   const randomlyUpdatedTheme = themes[randomSettings];
 
-  const rarity =
+  let rarity: ScaleType =
     randomNumber < 2
       ? "mystic"
       : randomNumber < 5
@@ -20,6 +21,11 @@ export async function POST() {
       : randomNumber < 300
       ? "rare"
       : "common";
+
+  const { scale } = await req.json();
+  if (scale) {
+    rarity = scale;
+  }
 
   const presetsObject = {
     common:

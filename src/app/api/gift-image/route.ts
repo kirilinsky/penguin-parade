@@ -6,7 +6,7 @@ import { firestore } from "@/firebase"; // client-side firestore instance
 import {
   doc,
   getDoc,
-  updateDoc,
+  updateDoc,  
   increment,
   serverTimestamp,
 } from "firebase/firestore";
