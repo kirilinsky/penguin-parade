@@ -2,15 +2,17 @@ export const runtime = "nodejs";
 
 import { NextResponse } from "next/server";
 import { adminAuth } from "@/fireBase-admin";
-import { firestore } from "@/firebase"; // client-side firestore instance
+import { firestore } from "@/firebase";
 import {
   doc,
   getDoc,
   updateDoc,
   increment,
   serverTimestamp,
+  arrayUnion,
 } from "firebase/firestore";
 import { getPriceByScale } from "@/helpers/get-price-by-scale/get-price-by-scale";
+import { ImageItemAuctionHistory } from "@/types/image.types";
 
 export async function POST(req: Request) {
   const authHeader = req.headers.get("Authorization") || "";
@@ -46,38 +48,70 @@ export async function POST(req: Request) {
     }
 
     const data = imageSnap.data();
-    if (!data || data.ownerId !== uid) {
+    if (!data || data.ownerId !== "auction") {
       return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
     }
 
-    if (data.auction) {
-      return NextResponse.json({ error: "Already sold" }, { status: 403 });
+    if (!data.auction) {
+      return NextResponse.json(
+        { error: "Image not on auction" },
+        { status: 403 }
+      );
     }
     /* coins */
-    const { sell, buy } = getPriceByScale(data.settings.rarity);
+    const { buy } = getPriceByScale(data.settings.rarity);
 
-    if (!sell) {
-      return NextResponse.json({ error: "Can't sell this" }, { status: 403 });
+    if (!buy) {
+      return NextResponse.json({ error: "Can't buy this" }, { status: 403 });
     }
 
-    await updateDoc(imageRef, {
-      ownerId: "auction",
-      gift: false,
-      auction: true,
+    if (!buy) {
+      return NextResponse.json({ error: "Can't buy this" }, { status: 403 });
+    }
+
+    const buyerUserRef = doc(firestore, "users", uid);
+
+    const userDoc = await getDoc(buyerUserRef);
+    const userData = userDoc.data();
+
+    if (!userData) {
+      return NextResponse.json({ error: "User not found" }, { status: 404 });
+    }
+
+    if (userData.coins < buy) {
+      return NextResponse.json(
+        { error: "User has not enough money" },
+        { status: 404 }
+      );
+    }
+    const auctionHistory: ImageItemAuctionHistory[] = Array.isArray(
+      data.auctionHistory
+    )
+      ? [...data.auctionHistory]
+      : [];
+
+    auctionHistory.push({
+      buyerId: uid,
       price: buy,
-      placedForAuctionAt: serverTimestamp(),
+      date: Date.now(),
     });
 
-    const sellerUserRef = doc(firestore, "users", uid);
-    /* TODO: check avatar of sold image */
-    await Promise.all([
-      updateDoc(sellerUserRef, {
-        coins: increment(sell),
-        "statistics.totalSold": increment(1),
-        "statistics.totalCoinsEarned": increment(sell),
-        "statistics.lastAuctionSellAt": serverTimestamp(),
-      }),
-    ]);
+    await updateDoc(imageRef, {
+      ownerId: uid,
+      gift: false,
+      auction: false,
+      price: 0,
+      placedForAuctionAt: null,
+      auctionHistory,
+    });
+
+    await updateDoc(buyerUserRef, {
+      coins: increment(-buy),
+      imageIds: arrayUnion(imageId),
+      "statistics.totalBought": increment(1),
+      "statistics.totalCoinsSpent": increment(-buy),
+      "statistics.lastAuctionPurchaseAt": serverTimestamp(),
+    });
 
     return NextResponse.json({ success: true });
   } catch (err) {

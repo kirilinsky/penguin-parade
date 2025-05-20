@@ -133,6 +133,8 @@ export async function POST(req: Request) {
     if (data.success) {
       const userRef = doc(firestore, "users", uid);
 
+      /* TODO: check avatar of donated images */
+
       const updateImagePromises = imageIds.map(async (imageId) => {
         const imageRef = doc(firestore, "images", imageId);
         await updateDoc(imageRef, {

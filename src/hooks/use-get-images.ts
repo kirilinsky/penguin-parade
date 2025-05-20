@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { firestore } from "@/firebase";
 import { ImageItem } from "@/types/image.types";
@@ -13,10 +13,16 @@ export const useGetImages = (
 ) => {
   const { user } = useUserDetails();
   const uid = id ?? user?.id;
+
   const [images, setImages] = useState<ImageItem[]>([]);
   const [rarityCount, setRarityCount] = useState<RarityCount>({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<unknown>(null);
+  const [refetchTrigger, setRefetchTrigger] = useState(0);
+
+  const refetch = useCallback(() => {
+    setRefetchTrigger((prev) => prev + 1);
+  }, []);
 
   useEffect(() => {
     const fetchImages = async () => {
@@ -28,7 +34,6 @@ export const useGetImages = (
       try {
         const ref = collection(firestore, "images");
         const q = query(ref, where("ownerId", "==", uid));
-
         const snapshot = await getDocs(q);
 
         let list = snapshot.docs.map(
@@ -58,7 +63,7 @@ export const useGetImages = (
     };
 
     fetchImages();
-  }, [uid, sortByDate]);
+  }, [uid, sortByDate, refetchTrigger]);
 
-  return { images, rarityCount, loading, error };
+  return { images, rarityCount, loading, error, refetch };
 };

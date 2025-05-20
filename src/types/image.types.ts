@@ -22,7 +22,7 @@ export interface ImageItem {
 export interface ImageItemAuctionHistory {
   date: number;
   buyerId: string;
-  price: string;
+  price: number;
 }
 export interface ImageItemGiftedHistory {
   date: number;
