@@ -45,6 +45,7 @@ const HeaderComponent = () => {
           avatarScale={user.avatarScale}
           avatar={user.avatar}
           username={user.username}
+          coins={user.coins}
         />
       )}
     </HeaderWrapper>

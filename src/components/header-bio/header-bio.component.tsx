@@ -11,8 +11,10 @@ const HeaderBioComponent = ({
   username,
   avatar,
   avatarScale,
+  coins,
 }: {
   username: string | null;
+  coins: number | null;
   avatar: string | null;
   avatarScale: ScaleType | null;
 }) => {
@@ -26,7 +28,7 @@ const HeaderBioComponent = ({
           avatarScale={avatarScale}
         />
         <b>{username}</b>
-        <span>0</span>
+        <span>{coins}</span>
         <HeaderBioCoinImage src="/coin.webp" alt="coin" />
       </HeaderBioWrapper>
     </Link>
