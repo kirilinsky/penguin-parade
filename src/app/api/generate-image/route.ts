@@ -5,7 +5,6 @@ import sharp from "sharp";
 import { isBefore } from "date-fns";
 import { supabase } from "@/supabase";
 import { adminAuth } from "@/fireBase-admin";
-import { getUserAllowCraftedAt } from "@/helpers/get-user-allow-crafted-at/get-user-allow-crafted-at";
 import { firestore } from "@/firebase";
 import {
   addDoc,
@@ -15,6 +14,7 @@ import {
   updateDoc,
   increment,
   arrayUnion,
+  getDoc,
 } from "firebase/firestore";
 
 const replicate = new Replicate({ auth: process.env.REPLICATE_API_TOKEN });
@@ -25,7 +25,7 @@ const BUCKET = "penguins";
 const GLOBAL_IMAGES_COLLECTION = "images";
 
 const basePrompt = `
-Generate a 2D digital cartoon-style portrait of a penguin character, centered in the image. Keep the penguin's pose, proportions, and expression exactly the same as in the reference image. Do not alter the penguin's structure. But you can experiment with clothes and stuff.`;
+Generate a 2D digital cartoon-style portrait of a penguin character, centered in the image. Keep the penguin's pose, proportions, and expression exactly the same as in the reference image. Do not alter the penguin's structure. But you can experiment with clothes effects, and stuff.`;
 
 export async function POST(req: Request) {
   const authHeader = req.headers.get("Authorization") || "";
@@ -49,10 +49,20 @@ export async function POST(req: Request) {
   const uid = decoded.uid;
   if (!uid) return NextResponse.json({ error: "Missing uid" }, { status: 400 });
 
-  const allowUserCraftedAt = await getUserAllowCraftedAt(uid);
+  const userRef = doc(firestore, "users", uid);
+  const userDoc = await getDoc(userRef);
+  const userData = userDoc.data();
+
+  if (!userData) {
+    return NextResponse.json({ error: "User not found" }, { status: 404 });
+  }
+
+  const allowCraftAt = userData.allowCraftAt;
+
   if (
-    allowUserCraftedAt &&
-    !isBefore(allowUserCraftedAt.toDate(), new Date())
+    allowCraftAt &&
+    typeof allowCraftAt.toDate === "function" &&
+    !isBefore(allowCraftAt.toDate(), new Date())
   ) {
     return NextResponse.json({ error: "Not able to craft!" }, { status: 403 });
   }
