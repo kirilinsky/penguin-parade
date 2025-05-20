@@ -38,12 +38,11 @@ export default function Home() {
             <h2>Road map</h2>
             <ul>
               <li>Improve generation rules</li>
-              <li>Evolution</li>
               <li>Funds system</li>
               <li>Auction</li>
-              <li>Centralized storage</li>
+              <li>Expeditions (TBA)</li>
               <li>NFT Mint preparation</li>
-              <li>Images optimization</li>
+              <li>Images avatar optimization</li>
               <li>Friends updates</li>
               <li>Tutorial page</li>
               <li>SignUp/Login via gmail</li>
