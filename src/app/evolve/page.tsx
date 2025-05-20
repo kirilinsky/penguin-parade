@@ -242,7 +242,6 @@ const EvolvePage = () => {
             />
           ))}
         <EvolutionGridItemCenterWrap>
-          {" "}
           {result && resultTitle && <span>Your new {resultTitle}!</span>}
           <EvolutionGridItemCenterStyled
             bordercolor={expectingScaleColor}

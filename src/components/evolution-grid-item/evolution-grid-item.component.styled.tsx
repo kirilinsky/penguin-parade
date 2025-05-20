@@ -21,10 +21,10 @@ const EvolutionGridItemDefault = styled.div`
 export const EvolutionGridItemCenterWrap = styled.div`
   display: flex;
   flex-direction: column;
-  height: 20vh;
+
   gap: 40px;
   justify-content: center;
-  text-align:center;
+  text-align: center;
 `;
 
 export const EvolutionGridItemCenterStyled = styled(
