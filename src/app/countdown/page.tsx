@@ -71,7 +71,6 @@ const CountDownPage = () => {
     try {
       const res = await fetch("/api/generate-image", {
         method: "POST",
-        body: JSON.stringify({ scale: "scale test" }),
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
