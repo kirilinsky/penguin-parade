@@ -1,21 +1,6 @@
+import { scaleConfig, ScaleType } from "@/types/scale.types";
+
 export function getBaseColorByScale(scale: string | null): string {
-  if (!scale) return "black";
-  switch (scale.toLowerCase()) {
-    case "common":
-      return "gray";
-    case "rare":
-      return "blue";
-    case "epic":
-      return "purple";
-    case "legendary":
-      return "red";
-    case "divine":
-      return "gold";
-    case "ghost":
-      return "white";
-    case "mystic":
-      return "green";
-    default:
-      return "black";
-  }
+  const s = scale?.toLowerCase() as ScaleType;
+  return scaleConfig[s]?.color || "black";
 }

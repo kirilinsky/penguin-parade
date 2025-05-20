@@ -2,8 +2,11 @@
 
 import EvolutionGridContainer from "@/components/evolution-grid-container/evolution-grid-container.component";
 import EvolutionGridItem from "@/components/evolution-grid-item/evolution-grid-item.component";
+import { getBaseColorByScale } from "@/helpers/get-base-color-by-rarity/get-base-color-by-rarity";
+import { getNextScale } from "@/helpers/get-next-scale/get-next-scale";
 import { useGetImages } from "@/hooks/use-get-images";
 import { ImageItem } from "@/types/image.types";
+import { ScaleType } from "@/types/scale.types";
 import React, { useEffect, useState } from "react";
 import Rodal from "rodal";
 
@@ -23,9 +26,10 @@ const EvolvePage = () => {
   const [evolutionList, setEvolutionList] =
     useState<Record<string, EvolutionSlot>>(evolutionListDefault);
   const [filteredImages, setFilteredIMages] = useState<ImageItem[]>([]);
-  const [currentRarityScale, setCurrentRarityScale] = useState<string | null>(
-    null
-  );
+  const [currentRarityScale, setCurrentRarityScale] =
+    useState<ScaleType | null>(null);
+  const [expectingRarityScale, setExpectingRarityScale] =
+    useState<ScaleType | null>(null);
   const [currentKey, setCurrentKey] = useState<string | null>(null);
   const [showLibraryModal, setShowLibraryModal] = useState<boolean>(false);
   const evolutionKeys = Object.keys(evolutionListDefault);
@@ -56,6 +60,8 @@ const EvolvePage = () => {
     const filteredImagesDraft = [...filteredImages].filter(
       (img) => img.settings.rarity === currentRarityScale
     );
+    const nextScale = getNextScale(currentRarityScale);
+    setExpectingRarityScale(nextScale);
     setFilteredIMages(filteredImagesDraft);
   }, [currentRarityScale]);
 
@@ -74,6 +80,8 @@ const EvolvePage = () => {
         <div>Choose Candidate</div>
         <span>for {currentKey} </span>
         <span>{currentRarityScale} - rarity</span>
+        <br />
+        <span>{expectingRarityScale} - expected rarity</span>
         <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
           {filteredImages.map((img: ImageItem) => (
             <div
@@ -97,13 +105,17 @@ const EvolvePage = () => {
         {!loading &&
           evolutionKeys.map((key) => (
             <EvolutionGridItem
+              bordercolor={getBaseColorByScale(currentRarityScale)}
               value={evolutionList[key] ? evolutionList[key].imageUrl : null}
               onClick={onItemClick}
               key={key}
               gridarea={key}
             />
           ))}
-        <EvolutionGridItem gridarea="c"></EvolutionGridItem>
+        <EvolutionGridItem
+          bordercolor={getBaseColorByScale(expectingRarityScale)}
+          gridarea="c"
+        ></EvolutionGridItem>
       </EvolutionGridContainer>
     </>
   );

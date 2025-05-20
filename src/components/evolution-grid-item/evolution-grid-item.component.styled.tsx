@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const EvolutionGridItemStyled = styled.div<{
   gridarea: string;
+  bordercolor: string;
   value: string | null;
 }>`
   background: ${({ value }) =>
@@ -11,7 +12,9 @@ export const EvolutionGridItemStyled = styled.div<{
   opacity: ${({ value }) => (value ? 1 : 0.95)};
   display: grid;
   place-items: center;
-  border: 1px solid #fff;
+  border: 1px solid ${({ bordercolor }) => bordercolor};
+  box-shadow: 0 0 10px ${({ bordercolor }) => bordercolor};
+
   grid-area: ${({ gridarea }) => gridarea};
   @media (max-width: 500px) {
     aspect-ratio: unset;
