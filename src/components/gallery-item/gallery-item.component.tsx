@@ -70,7 +70,12 @@ const GalleryItemComponent = ({
           loading="lazy"
         />
         <p className={orbitron.className}>{img.title}</p>
-        {img.auction && <p>price - P${img.price}</p>}
+        {img.auction && (
+          <p>
+            Price - {img.price}{" "}
+            <Image src="/coin.webp" width={18} height={18} alt="coin" />{" "}
+          </p>
+        )}
       </GalleryItemContent>
     </Tilt>
   );

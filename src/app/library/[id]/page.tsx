@@ -1,58 +1,48 @@
 "use client";
 
-import {
-  avatarAtom,
-  avatarScaleAtom,
-  userIdAtom,
-} from "@/atoms/user/user.atom";
 import GalleryItemModalComponent from "@/components/gallery-item-modal/gallery-item-modal.component";
 import GalleryItemComponent from "@/components/gallery-item/gallery-item.component";
 import GalleryComponent from "@/components/gallery/gallery.component";
 import { LinkStyled } from "@/components/link/link.component.styled";
 import { firestore } from "@/firebase";
+import { useGetFriends } from "@/hooks/use-get-friends";
 import { useGetImages } from "@/hooks/use-get-images";
+import { useUserDetails } from "@/hooks/use-user-details";
 import { ImageItem } from "@/types/image.types";
+import { ScaleType } from "@/types/scale.types";
 import { getAuth, sendEmailVerification } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
-import { useAtomValue, useSetAtom } from "jotai";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import Rodal from "rodal";
 
 const MyLibraryPage = () => {
   const { id: pageId } = useParams();
-  const uid = useAtomValue(userIdAtom);
-  const currentAvatar = useAtomValue(avatarAtom);
-  const setAvatar = useSetAtom(avatarAtom);
-  const setAvatarScale = useSetAtom(avatarScaleAtom);
+  const { user, updateUser } = useUserDetails();
+
   const [imagesFiltered, setImagesFiltered] = useState<ImageItem[]>([]);
   const [isMyPage, setIsMyPage] = useState(false);
   const [detailsImage, setDetailsImage] = useState<ImageItem | null>(null);
 
   const { images, loading } = useGetImages(true, pageId);
+  const { friends } = useGetFriends();
 
   const handleOnClick = (img: ImageItem) => {
     setDetailsImage(img);
   };
 
-  const setAvatarAction = async (avatar: string, avatarScale: string) => {
-    if (!uid) return;
-    await setDoc(
-      doc(firestore, "users", uid),
-      { avatar, avatarScale },
-      { merge: true }
-    );
-    setAvatar(avatar);
-    setAvatarScale(avatarScale);
+  const setAvatarAction = async (avatar: string, avatarScale: ScaleType) => {
+    if (!user) return;
+    await updateUser({ avatar, avatarScale });
   };
 
   const sendGift = async (toUid: string, imageId: string) => {
     const auth = getAuth();
-    const user = auth.currentUser;
-    if (!uid || !user) return;
+    const userCred = auth.currentUser;
+    if (!user || !userCred) return;
 
-    if (!user.emailVerified) {
-      await sendEmailVerification(user);
+    if (!userCred.emailVerified) {
+      await sendEmailVerification(userCred);
       alert(
         `Please verify your email (${user.email}) before gifting a penguin.`
       );
@@ -63,7 +53,7 @@ const MyLibraryPage = () => {
       return;
     }
 
-    const token = await user.getIdToken(true);
+    const token = await userCred.getIdToken(true);
     try {
       const res = await fetch("/api/gift-image", {
         method: "POST",
@@ -94,13 +84,13 @@ const MyLibraryPage = () => {
 
   const sellImage = async (imageId: string) => {
     const auth = getAuth();
-    const user = auth.currentUser;
-    if (!uid || !user) return;
+    const userCred = auth.currentUser;
+    if (!user || !userCred) return;
 
-    if (!user.emailVerified) {
-      await sendEmailVerification(user);
+    if (!userCred.emailVerified) {
+      await sendEmailVerification(userCred);
       alert(
-        `Please verify your email (${user.email}) before selling a penguin.`
+        `Please verify your email (${userCred.email}) before selling a penguin.`
       );
       return;
     }
@@ -110,8 +100,9 @@ const MyLibraryPage = () => {
       return;
     }
 
-    const token = await user.getIdToken(true);
+    const token = await userCred.getIdToken(true);
     try {
+      /* TODO: add loading state for call (block button) */
       const res = await fetch("/api/sold-image", {
         method: "POST",
         body: JSON.stringify({
@@ -143,20 +134,20 @@ const MyLibraryPage = () => {
   }, [images]);
 
   useEffect(() => {
-    const idIsEqual = pageId === uid;
+    const idIsEqual = pageId === user?.id;
     setIsMyPage(idIsEqual);
-  }, [uid, pageId]);
+  }, [user, pageId]);
 
   return (
     <GalleryComponent>
       <Rodal visible={!!detailsImage} onClose={() => setDetailsImage(null)}>
         <GalleryItemModalComponent
-          uid={uid}
+          user={user}
+          friends={friends}
           isMyPage={isMyPage}
           onSendGift={sendGift}
           onSellImage={sellImage}
           loading={loading}
-          currentAvatar={currentAvatar}
           setAvatar={setAvatarAction}
           img={detailsImage}
         />

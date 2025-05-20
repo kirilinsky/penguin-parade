@@ -4,38 +4,28 @@ import React from "react";
 import { HeaderLinks, HeaderWrapper } from "./header.component.styled";
 import Link from "next/link";
 import { useAtomValue, useSetAtom } from "jotai";
-import {
-  avatarAtom,
-  avatarScaleAtom,
-  loggedInAtom,
-  userIdAtom,
-  userNameAtom,
-} from "@/atoms/user/user.atom";
+import { loggedInAtom } from "@/atoms/user/user.atom";
 import HeaderBioComponent from "../header-bio/header-bio.component";
+import { useUserDetails } from "@/hooks/use-user-details";
 
 const HeaderComponent = () => {
-  const username = useAtomValue(userNameAtom);
-  const avatar = useAtomValue(avatarAtom);
-  const avatarScale = useAtomValue(avatarScaleAtom);
+  const { user, logOut } = useUserDetails();
   const loggedIn = useAtomValue(loggedInAtom);
-  const uid = useAtomValue(userIdAtom);
-  const setUserName = useSetAtom(userNameAtom);
+
   const setLoggedIn = useSetAtom(loggedInAtom);
-  const setUserId = useSetAtom(userIdAtom);
 
   const logOutHandler = () => {
-    setUserId(null);
     setLoggedIn(false);
-    setUserName(null);
+    logOut();
   };
   // TODO: add dynamic routes
   return (
     <HeaderWrapper>
       <HeaderLinks>
-        {loggedIn ? (
+        {user && loggedIn ? (
           <>
             <Link href="/countdown">Craft!</Link>
-            <Link href={`/library/${uid}`}>My Penguins</Link>
+            <Link href={`/library/${user.id}`}>My Penguins</Link>
             <Link href="/friends">Friends</Link>
             <Link href="/evolve">Evolve</Link>
             <Link href="/auction">Auction</Link>
@@ -50,11 +40,11 @@ const HeaderComponent = () => {
           </>
         )}
       </HeaderLinks>
-      {loggedIn && (
+      {loggedIn && user && (
         <HeaderBioComponent
-          avatarScale={avatarScale}
-          avatar={avatar}
-          username={username}
+          avatarScale={user.avatarScale}
+          avatar={user.avatar}
+          username={user.username}
         />
       )}
     </HeaderWrapper>

@@ -10,6 +10,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { firestore } from "@/firebase";
 import { useRouter } from "next/navigation";
 import AvatarComponent from "../avatar-component/avatar-component";
+import { ScaleType } from "@/types/scale.types";
 
 const FriendListItemComponent = ({
   friend,
@@ -20,7 +21,7 @@ const FriendListItemComponent = ({
 }) => {
   const router = useRouter();
   const [friendAvatar, setFriendAvatar] = useState<null | string>(null);
-  const [friendAvatarScale, setFriendAvatarScale] = useState<null | string>(
+  const [friendAvatarScale, setFriendAvatarScale] = useState<null | ScaleType>(
     null
   );
   const [friendUserName, setFriendUserName] = useState<null | string>(null);

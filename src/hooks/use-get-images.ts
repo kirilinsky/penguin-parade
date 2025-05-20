@@ -2,9 +2,8 @@ import { useEffect, useState } from "react";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { firestore } from "@/firebase";
 import { ImageItem } from "@/types/image.types";
-import { useAtomValue } from "jotai";
-import { userIdAtom } from "@/atoms/user/user.atom";
 import { ParamValue } from "next/dist/server/request/params";
+import { useUserDetails } from "./use-user-details";
 
 type RarityCount = Record<string, number>;
 
@@ -12,7 +11,8 @@ export const useGetImages = (
   sortByDate: boolean = false,
   id?: string | ParamValue
 ) => {
-  const uid = id ?? useAtomValue(userIdAtom);
+  const { user } = useUserDetails();
+  const uid = id ?? user?.id;
   const [images, setImages] = useState<ImageItem[]>([]);
   const [rarityCount, setRarityCount] = useState<RarityCount>({});
   const [loading, setLoading] = useState(false);

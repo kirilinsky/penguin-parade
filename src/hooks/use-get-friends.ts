@@ -16,6 +16,8 @@ import {
   RequestRecord,
   User,
 } from "@/types/friends.types";
+import { useAtomValue } from "jotai";
+import { userDetailsAtom } from "@/atoms/user/user.atom";
 
 function extractUniqueUserIds(
   incoming: { id: string }[],
@@ -50,24 +52,25 @@ async function fetchUsersByIds(uids: string[]): Promise<Record<string, User>> {
   return users;
 }
 
-export function useGetFriends(uid: string | null): {
+export function useGetFriends(): {
   friends: FriendWithUser[];
   sentRequests: FriendData[];
   incomingRequests: FriendData[];
   loading: boolean;
   refetch: () => Promise<void>;
 } {
+  const userDetails = useAtomValue(userDetailsAtom);
   const [friends, setFriends] = useState<FriendWithUser[]>([]);
   const [sentRequests, setSentRequests] = useState<FriendData[]>([]);
   const [incomingRequests, setIncomingRequests] = useState<FriendData[]>([]);
   const [loading, setLoading] = useState(false);
 
   const fetchAllFriends = async () => {
-    if (!uid) return;
+    if (!userDetails) return;
     setLoading(true);
 
     const friendsSnap = await getDocs(
-      collection(firestore, `users/${uid}/friends`)
+      collection(firestore, `users/${userDetails.id}/friends`)
     );
     const friendRecords: Friend[] = friendsSnap.docs.map((d) => ({
       id: d.id,
@@ -76,7 +79,7 @@ export function useGetFriends(uid: string | null): {
       addedAt: d.data().addedAt.toDate(),
     }));
 
-    const userDoc = await getDoc(doc(firestore, "users", uid));
+    const userDoc = await getDoc(doc(firestore, "users", userDetails.id));
     const userData = userDoc.data();
 
     const incoming = userData?.friendRequests ?? [];
@@ -97,8 +100,8 @@ export function useGetFriends(uid: string | null): {
   };
 
   useEffect(() => {
-    if (uid) fetchAllFriends();
-  }, [uid]);
+    if (userDetails) fetchAllFriends();
+  }, [userDetails]);
 
   return {
     friends,

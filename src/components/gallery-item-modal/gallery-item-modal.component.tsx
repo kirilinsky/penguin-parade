@@ -20,6 +20,8 @@ import NeonButtonComponent from "../neon-button/neon-button.component";
 import { format } from "date-fns";
 import { useGetFriends } from "@/hooks/use-get-friends";
 import { getPriceByScale } from "@/helpers/get-price-by-scale/get-price-by-scale";
+import { FriendWithUser, User } from "@/types/friends.types";
+import { ScaleType } from "@/types/scale.types";
 
 const orbitron = Orbitron({
   subsets: ["latin"],
@@ -29,28 +31,26 @@ const orbitron = Orbitron({
 
 const GalleryItemModalComponent = ({
   img,
-  uid,
   isMyPage,
+  friends,
   loading,
   onSendGift,
   onSellImage,
-  currentAvatar,
+  user,
   setAvatar,
 }: {
   img: ImageItem | null;
-  uid: string | null;
   isMyPage: boolean;
+  friends: FriendWithUser[];
   loading: boolean;
-  currentAvatar: string | null;
+  user: User | null;
   onSendGift: (recipientId: string, imgId: string) => void;
   onSellImage: (imgId: string) => void;
-  setAvatar: (a: string, aR: string) => void;
+  setAvatar: (a: string, aR: ScaleType) => void;
 }) => {
   if (!img) return null;
   const [giftMode, setGiftMode] = useState(false);
   const [friendRecipient, setFriendRecipient] = useState<string>("");
-
-  const { friends, loading: friendsLoading } = useGetFriends(uid);
 
   const baseColor = useMemo(() => {
     return getBaseColorByScale(img.settings.rarity);
@@ -84,8 +84,6 @@ const GalleryItemModalComponent = ({
         <GalleryItemModalAccordion $expand={!giftMode}>
           <GalleryItemModalDes>{img.settings.des}</GalleryItemModalDes>
 
-          {/*  <span>Theme: {img.settings.theme}</span> */}
-
           <span>Ability: {img.settings.ability}</span>
 
           <span>Loot: {img.settings.acc}</span>
@@ -100,9 +98,9 @@ const GalleryItemModalComponent = ({
 
           <span>Created: {format(img.createdAt.toDate(), "dd.MM.yy")}</span>
 
-          {isMyPage && (
+          {user && isMyPage && (
             <GalleryItemModalButtonsContainer>
-              {currentAvatar !== img.imageUrl && (
+              {user.avatar !== img.imageUrl && (
                 <NeonButtonComponent
                   title="Set as avatar"
                   onClick={() => setAvatar(img.imageUrl, img.settings.rarity)}
@@ -122,14 +120,14 @@ const GalleryItemModalComponent = ({
           )}
         </GalleryItemModalAccordion>
 
-        {giftMode && (
+        {user && giftMode && (
           <div>
             <span>
               <i>beta feature</i>
             </span>
             <h3>Choose recipient</h3>
             <br />
-            {!friendsLoading && (
+            {friends && (
               <select
                 onChange={(e) => setFriendRecipient(e.target.value)}
                 name="friend-recipient"

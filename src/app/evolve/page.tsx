@@ -1,11 +1,9 @@
 "use client";
 
-import { userIdAtom } from "@/atoms/user/user.atom";
 import EvolutionGridContainer from "@/components/evolution-grid-container/evolution-grid-container.component";
 import EvolutionGridItem from "@/components/evolution-grid-item/evolution-grid-item.component";
 import { useGetImages } from "@/hooks/use-get-images";
 import { ImageItem } from "@/types/image.types";
-import { useAtomValue } from "jotai";
 import React, { useEffect, useState } from "react";
 import Rodal from "rodal";
 
@@ -22,7 +20,6 @@ const evolutionListDefault: Record<string, EvolutionSlot> = {
   bra: null,
 };
 const EvolvePage = () => {
-  const uid = useAtomValue(userIdAtom);
   const [evolutionList, setEvolutionList] =
     useState<Record<string, EvolutionSlot>>(evolutionListDefault);
   const [filteredImages, setFilteredIMages] = useState<ImageItem[]>([]);

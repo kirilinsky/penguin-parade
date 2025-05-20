@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
 import { AvatarComponentStyled } from "./avatar-component.styled";
 import { getBaseColorByScale } from "@/helpers/get-base-color-by-rarity/get-base-color-by-rarity";
+import { ScaleType } from "@/types/scale.types";
 
 const AvatarComponent = ({
   avatarUrl,
@@ -10,7 +11,7 @@ const AvatarComponent = ({
 }: {
   avatarUrl: string | null;
   id: string;
-  avatarScale: string | null;
+  avatarScale: ScaleType | null;
   mini?: boolean;
 }) => {
   const borderColor = useMemo(() => {

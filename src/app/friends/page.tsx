@@ -1,20 +1,19 @@
 "use client";
 
-import { userIdAtom } from "@/atoms/user/user.atom";
 import FriendsListBlockComponent from "@/components/friends-list-block/friends-list-block.component";
 import { PageContentBlockStyled } from "@/components/page-content-block/page-content-block.component.styled";
 import { PageContentWrapperComponent } from "@/components/page-content-wrapper/page-content-wrapper.component";
 import UserListItemComponent from "@/components/user-list-item/user-list-item.component";
 import { firestore } from "@/firebase";
 import { useGetFriends } from "@/hooks/use-get-friends";
-import { Friend, FriendData, RequestRecord, User } from "@/types/friends.types";
+import { useUserDetails } from "@/hooks/use-user-details";
+import { FriendData, User } from "@/types/friends.types";
 import {
   arrayRemove,
   arrayUnion,
   collection,
   deleteDoc,
   doc,
-  documentId,
   getDoc,
   getDocs,
   query,
@@ -22,12 +21,11 @@ import {
   updateDoc,
   where,
 } from "firebase/firestore";
-import { useAtomValue } from "jotai";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 const FriendsPage = () => {
-  const uid = useAtomValue(userIdAtom);
+  const { user: currentUser } = useUserDetails();
 
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState<User[]>([]);
@@ -38,10 +36,10 @@ const FriendsPage = () => {
     incomingRequests,
     loading: friendsLoading,
     refetch: friendsRefetch,
-  } = useGetFriends(uid);
+  } = useGetFriends();
 
   const handleSearch = async () => {
-    if (!search.trim() || !uid) return;
+    if (!search.trim() || !currentUser) return;
     const lowercase_search = search.toLowerCase();
 
     const usersRef = collection(firestore, "users");
@@ -59,9 +57,9 @@ const FriendsPage = () => {
   };
 
   const handleCancelRequest = async (user: User) => {
-    if (!uid || !user) return;
+    if (!currentUser) return;
 
-    const currentUserRef = doc(firestore, "users", uid);
+    const currentUserRef = doc(firestore, "users", currentUser.id);
     const targetUserRef = doc(firestore, "users", user.id);
 
     await updateDoc(currentUserRef, {
@@ -72,7 +70,7 @@ const FriendsPage = () => {
     const targetUserData = targetUserSnap.data();
 
     const cleanedIncoming = (targetUserData?.friendRequests || []).filter(
-      (req: any) => req.id !== uid
+      (req: any) => req.id !== currentUser.id
     );
 
     await updateDoc(targetUserRef, {
@@ -83,9 +81,9 @@ const FriendsPage = () => {
   };
 
   const handleDeclineRequest = async (user: User) => {
-    if (!uid || !user) return;
+    if (!currentUser || !user) return;
 
-    const currentUserRef = doc(firestore, "users", uid);
+    const currentUserRef = doc(firestore, "users", currentUser.id);
     await updateDoc(currentUserRef, {
       friendRequests: sentRequests.filter(
         (req: FriendData) => req.id !== user.id
@@ -94,18 +92,18 @@ const FriendsPage = () => {
 
     const friendRef = doc(firestore, "users", user.id);
     await updateDoc(friendRef, {
-      sentRequests: arrayRemove({ id: uid }),
+      sentRequests: arrayRemove({ id: currentUser.id }),
     });
 
     friendsRefetch();
   };
 
   const handleAcceptRequest = async (user: User) => {
-    if (!uid || !user?.id) return;
+    if (!currentUser || !user?.id) return;
 
     const now = new Date();
 
-    const currentUserRef = doc(firestore, "users", uid);
+    const currentUserRef = doc(firestore, "users", currentUser.id);
     const targetUserRef = doc(firestore, "users", user.id);
 
     const currentUserSnap = await getDoc(currentUserRef);
@@ -123,15 +121,21 @@ const FriendsPage = () => {
     const targetData = targetUserSnap.data();
 
     const cleanedSent = (targetData?.sentRequests || []).filter(
-      (req: any) => req.id !== uid
+      (req: any) => req.id !== currentUser.id
     );
 
     await updateDoc(targetUserRef, {
       sentRequests: cleanedSent,
     });
 
-    const myFriendDoc = doc(firestore, `users/${uid}/friends/${user.id}`);
-    const theirFriendDoc = doc(firestore, `users/${user.id}/friends/${uid}`);
+    const myFriendDoc = doc(
+      firestore,
+      `users/${currentUser.id}/friends/${user.id}`
+    );
+    const theirFriendDoc = doc(
+      firestore,
+      `users/${user.id}/friends/${currentUser.id}`
+    );
 
     const friendData = {
       giftsReceived: 0,
@@ -152,16 +156,16 @@ const FriendsPage = () => {
   };
 
   const handleAddFriend = async (user: User) => {
-    if (!uid) return;
+    if (!currentUser) return;
 
     const timestamp = new Date();
 
     const targetUserRef = doc(firestore, "users", user.id);
     await updateDoc(targetUserRef, {
-      friendRequests: arrayUnion({ id: uid, sentAt: timestamp }),
+      friendRequests: arrayUnion({ id: currentUser.id, sentAt: timestamp }),
     });
 
-    const currentUserRef = doc(firestore, "users", uid);
+    const currentUserRef = doc(firestore, "users", currentUser.id);
     await updateDoc(currentUserRef, {
       sentRequests: arrayUnion({ id: user.id, sentAt: timestamp }),
     });
@@ -170,10 +174,16 @@ const FriendsPage = () => {
   };
 
   const handleRemoveFriend = async (targetId: string) => {
-    if (!uid || !targetId) return;
+    if (!currentUser || !targetId) return;
 
-    const myFriendRef = doc(firestore, `users/${uid}/friends/${targetId}`);
-    const theirFriendRef = doc(firestore, `users/${targetId}/friends/${uid}`);
+    const myFriendRef = doc(
+      firestore,
+      `users/${currentUser.id}/friends/${targetId}`
+    );
+    const theirFriendRef = doc(
+      firestore,
+      `users/${targetId}/friends/${currentUser.id}`
+    );
 
     await Promise.all([deleteDoc(myFriendRef), deleteDoc(theirFriendRef)]);
 

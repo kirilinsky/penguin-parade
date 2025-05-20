@@ -1,16 +1,22 @@
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, Timestamp } from "firebase/firestore";
 import { firestore } from "@/firebase";
-import { Timestamp } from "firebase-admin/firestore";
+import { User } from "@/types/friends.types";
 
 export async function getUserAllowCraftedAt(
-  uid: string
+  user: User | null
 ): Promise<Timestamp | undefined> {
-  const userDoc = await getDoc(doc(firestore, "users", uid));
+  if (!user) return;
+
+  const userDoc = await getDoc(doc(firestore, "users", user.id));
 
   const data = userDoc.data();
-  if (!data) {
-    return;
-  }
+  if (!data) return;
+
   const last = data.allowCraftAt;
-  return last;
+
+  return last instanceof Timestamp
+    ? last
+    : Timestamp.fromMillis(
+        last.seconds * 1000 + Math.floor(last.nanoseconds / 1_000_000)
+      );
 }

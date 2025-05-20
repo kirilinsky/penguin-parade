@@ -1,8 +1,6 @@
 "use client";
 
-import { userIdAtom } from "@/atoms/user/user.atom";
 import { GenerateImageReposne } from "@/types/api.types";
-import { useAtomValue } from "jotai";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { LinkStyled } from "@/components/link/link.component.styled";
@@ -17,6 +15,7 @@ import { ArcadeButtonStyled } from "@/components/arcade-button/arcade-button.com
 import NeonButtonComponent from "@/components/neon-button/neon-button.component";
 import { getAuth, sendEmailVerification } from "firebase/auth";
 import { formatDuration, intervalToDuration, isBefore } from "date-fns";
+import { useUserDetails } from "@/hooks/use-user-details";
 
 type GenerationResult = {
   downloadURL: string;
@@ -25,7 +24,7 @@ type GenerationResult = {
 };
 
 const CountDownPage = () => {
-  const uid = useAtomValue(userIdAtom);
+  const { user } = useUserDetails();
   const [canCraft, setCanCraft] = useState<boolean>(false);
   const [loading, setLoading] = useState(false);
   const [leftTime, setLeftTime] = useState<string>("");
@@ -33,8 +32,9 @@ const CountDownPage = () => {
   const [shareLink, setShareLink] = useState<string | null>(null);
 
   const checkUserStatus = async () => {
-    if (!uid) return;
-    const allowUserCraftedAt = await getUserAllowCraftedAt(uid);
+    /* TODO: think about useUserDetails refresh */
+    if (!user) return;
+    const allowUserCraftedAt = await getUserAllowCraftedAt(user);
     if (allowUserCraftedAt) {
       const allowedDate = allowUserCraftedAt.toDate();
       const allowed = isBefore(allowedDate, new Date());
@@ -53,19 +53,19 @@ const CountDownPage = () => {
 
   const craft = async () => {
     const auth = getAuth();
-    const user = auth.currentUser;
-    if (!uid || !user) return;
+    const userCred = auth.currentUser;
+    if (!userCred || !user) return;
 
-    await user.reload();
-    if (!user.emailVerified) {
-      await sendEmailVerification(user);
+    await userCred.reload();
+    if (!userCred.emailVerified) {
+      await sendEmailVerification(userCred);
       alert(
-        `Please verify your email (${user.email}) before crafting a penguin.`
+        `Please verify your email (${userCred.email}) before crafting a penguin.`
       );
       return;
     }
 
-    const token = await user.getIdToken(true);
+    const token = await userCred.getIdToken(true);
 
     setLoading(true);
     try {
@@ -88,7 +88,7 @@ const CountDownPage = () => {
         });
         setShareLink(
           encodeURIComponent(
-            `${location.origin}/share/${uid}/${data.downloadURL}`
+            `${location.origin}/share/${user.id}/${data.downloadURL}`
           )
         );
         setCanCraft(false);
@@ -104,8 +104,8 @@ const CountDownPage = () => {
   };
 
   useEffect(() => {
-    checkUserStatus();
-  }, [uid]);
+    user && checkUserStatus();
+  }, [user]);
 
   return (
     <PageContentWrapperComponent>
@@ -155,7 +155,11 @@ const CountDownPage = () => {
             <br />
             <span>{result.rarity}</span>
             <br />
-            <LinkStyled href={`/library/${uid}`}>Go to my Library</LinkStyled>
+            {user && (
+              <LinkStyled href={`/library/${user.id}`}>
+                Go to my Library
+              </LinkStyled>
+            )}
             {/* TODO: add share functionality  */}
             <NeonButtonComponent title="Share this (TBA)" />
             {/*   <a
