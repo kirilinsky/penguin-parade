@@ -32,7 +32,7 @@ const evolutionListDefault: Record<string, EvolutionSlot> = {
   bra: null,
 };
 const EvolvePage = () => {
-  const { user } = useUserDetails();
+  const { user, refreshUser } = useUserDetails();
   const [evolutionList, setEvolutionList] =
     useState<Record<string, EvolutionSlot>>(evolutionListDefault);
   const [filteredImages, setFilteredIMages] = useState<ImageItem[]>([]);
@@ -128,9 +128,7 @@ const EvolvePage = () => {
         setResultImage(downloadURL);
         setResultTitle(title);
         setPayout(payout);
-        console.log(payout, "payout");
-        console.log(downloadURL, "downloadURL res");
-        console.log(title, "title res");
+        refreshUser();
       }
     } catch (err) {
       console.error("Evolution check failed:", err);
