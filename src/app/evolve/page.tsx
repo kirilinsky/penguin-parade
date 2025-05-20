@@ -260,7 +260,7 @@ const EvolvePage = () => {
             {evolutionInProgress && <EvolutionEffect />}
           </EvolutionGridItemCenterStyled>
           {result && payout && <span>You earned {payout} P$</span>}
-          {user && (
+          {result && user && (
             <LinkStyled href={`/library/${user.id}`}>
               Go to My Penguins
             </LinkStyled>
