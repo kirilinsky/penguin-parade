@@ -137,7 +137,13 @@ const MyLibraryPage = () => {
     const idIsEqual = pageId === user?.id;
     setIsMyPage(idIsEqual);
   }, [user, pageId]);
-
+  if (loading) {
+    return (
+      <div>
+        <span>loading...</span>
+      </div>
+    );
+  }
   return (
     <GalleryComponent>
       <Rodal visible={!!detailsImage} onClose={() => setDetailsImage(null)}>
