@@ -242,7 +242,8 @@ const EvolvePage = () => {
             />
           ))}
         <EvolutionGridItemCenterWrap>
-          {result && resultTitle && <span>Your new {resultTitle}!</span>}
+          {result && payout && <span>You earned {payout} P$</span>}
+
           <EvolutionGridItemCenterStyled
             bordercolor={expectingScaleColor}
             gridarea="c"
@@ -258,11 +259,16 @@ const EvolvePage = () => {
               ))}
             {evolutionInProgress && <EvolutionEffect />}
           </EvolutionGridItemCenterStyled>
-          {result && payout && <span>You earned {payout} P$</span>}
-          {result && user && (
-            <LinkStyled href={`/library/${user.id}`}>
-              Go to My Penguins
-            </LinkStyled>
+          {result && resultTitle && (
+            <p>
+              Your new {resultTitle}!
+              <br />
+              {result && user && (
+                <LinkStyled href={`/library/${user.id}`}>
+                  Go to My Penguins
+                </LinkStyled>
+              )}
+            </p>
           )}
         </EvolutionGridItemCenterWrap>
       </EvolutionGridContainer>

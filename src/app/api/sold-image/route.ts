@@ -65,6 +65,7 @@ export async function POST(req: Request) {
       gift: false,
       auction: true,
       price: buy,
+      placedForAuctionAt: serverTimestamp(),
     });
 
     const sellerUserRef = doc(firestore, "users", uid);

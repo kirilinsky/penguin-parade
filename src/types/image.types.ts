@@ -13,6 +13,7 @@ export interface ImageItem {
   price: number;
   soldAt: Timestamp;
   createdAt: Timestamp;
+  placedForAuctionAt: Timestamp;
   settings: ImageItemSettings;
   auctionHistory: ImageItemAuctionHistory[];
   giftedHistory: ImageItemGiftedHistory[];

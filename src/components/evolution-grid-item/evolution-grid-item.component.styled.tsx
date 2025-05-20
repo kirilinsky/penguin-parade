@@ -21,8 +21,8 @@ const EvolutionGridItemDefault = styled.div`
 export const EvolutionGridItemCenterWrap = styled.div`
   display: flex;
   flex-direction: column;
-
-  gap: 40px;
+  height: 20vh;
+  gap: 38px;
   justify-content: center;
   text-align: center;
 `;
@@ -51,7 +51,7 @@ export const EvolutionGridItemCenterStyled = styled(
       level + (level ? 10 : 0)
     }%); `};
   ${({ result }) =>
-    result && `transition: background 1s ease-in;transform: scale(1.3);`}
+    result && `transition: background 1s ease-in;transform: scale(1.2);`}
   ${({ bg }) => bg && `background-image: url(${bg})`};
   background-size: cover;
   background-repeat: no-repeat;
@@ -85,7 +85,9 @@ export const EvolutionGridItemStyled = styled(
   border: ${({ bordercolor }) => `1px solid ${bordercolor}`};
   grid-area: ${({ gridarea }) => gridarea};
 
-  ${({ result }) => result && `opacity: 0; transition: opacity 3s ease-out;`}
+  ${({ result }) =>
+    result &&
+    `opacity: 0; pointer-events: none; transition: opacity 3s ease-out;`}
 
   ${({ gridarea }) => {
     let transform = "none";

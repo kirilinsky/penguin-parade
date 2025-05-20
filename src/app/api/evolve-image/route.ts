@@ -2,11 +2,13 @@ import { NextResponse } from "next/server";
 import { adminAuth } from "@/fireBase-admin";
 import { firestore } from "@/firebase";
 import {
+    arrayRemove,
   collection,
   doc,
   getDocs,
   increment,
   query,
+  serverTimestamp,
   updateDoc,
   where,
 } from "firebase/firestore";
@@ -133,11 +135,26 @@ export async function POST(req: Request) {
     const data: GenerateImageReposne = await craftRes.json();
 
     if (data.success) {
-      const sellerUserRef = doc(firestore, "users", uid);
+      const userRef = doc(firestore, "users", uid);
 
-      await updateDoc(sellerUserRef, {
+      const updateImagePromises = imageIds.map(async (imageId) => {
+        const imageRef = doc(firestore, "images", imageId);
+        await updateDoc(imageRef, {
+          ownerId: "auction",
+          gift: false,
+          auction: true,
+          price: price.buy,
+          placedForAuctionAt: serverTimestamp(),
+        });
+      });
+
+      await Promise.all(updateImagePromises);
+
+      await updateDoc(userRef, {
         coins: increment(payout),
         "statistics.totalCoinsEarned": increment(payout),
+        "statistics.totalImagesDonated": increment(imageIds.length),
+        imageIds: arrayRemove(...imageIds),
       });
       return NextResponse.json({
         success: true,
