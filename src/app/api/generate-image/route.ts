@@ -24,8 +24,11 @@ const templateImageUrl = "https://i.ibb.co/B55bD3mh/template.png";
 const BUCKET = "penguins";
 const GLOBAL_IMAGES_COLLECTION = "images";
 
-const basePrompt = `
-Generate a 2D digital cartoon-style portrait of a penguin character, centered in the image. Keep the penguin's pose, proportions, and expression exactly the same as in the reference image. Do not alter the penguin's structure. But you can experiment with clothes effects, and stuff.`;
+const basePrompt = `A 2D digital cartoon-style portrait of a penguin character. 
+Centered in the image, full upper body, same pose and proportions as the reference image. 
+Do not change anatomy or expression. 
+You must modify clothing, effects, background, lighting, and artistic style.
+Highly detailed, cinematic lighting, vibrant colors.`;
 
 export async function POST(req: Request) {
   const authHeader = req.headers.get("Authorization") || "";
@@ -95,16 +98,16 @@ export async function POST(req: Request) {
     }
     const { settings } = await settingsRes.json();
 
-    const fxDescription = `with a visible effect of ${settings.fx} at picture`;
+    const fxDescription = `with visible effect of ${settings.fx} at picture`;
 
     const descriptionParts = [
-      settings.theme && `mood of picture is ${settings.theme.toLowerCase()}`,
-      `on background of picture is ${settings.bg.toLowerCase()}`,
-      `A penguin titled \"${settings.t}\"`, 
-      `wearing ${settings.acc}`,
-      `with a ${settings.beak.toLowerCase()} color of penguin beak`,
-      `a ${settings.breast.toLowerCase()} color of its chest`,
-      `and ${settings.back.toLowerCase()} color on its penguin back`,
+      settings.theme &&
+        `the scene is styled as ${settings.theme.toLowerCase()}`,
+      `penguin wears ${settings.acc}`,
+      `has a ${settings.beak.toLowerCase()} beak`,
+      `a ${settings.breast.toLowerCase()} chest`,
+      `and a ${settings.back.toLowerCase()} back rear`,
+      `main picture background is ${settings.bg.toLowerCase()}`,
       fxDescription,
     ];
 
@@ -116,9 +119,10 @@ export async function POST(req: Request) {
         image: templateImageUrl,
         prompt,
         seed: Math.floor(Math.random() * 100000),
-        strength: 0.5,
-        guidance_scale: 10,
-        num_inference_steps: 50,
+        strength: 0.6,
+        negative_prompt: "low quality, bad quality, lack of details",
+        guidance_scale: 11,
+        num_inference_steps: 55,
       },
     });
 
