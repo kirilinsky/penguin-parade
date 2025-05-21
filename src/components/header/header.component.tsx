@@ -19,9 +19,9 @@ const HeaderComponent = () => {
     logOut();
   };
 
-  useEffect(()=>{
-    refreshUser()
-  },[user])
+  useEffect(() => {
+    refreshUser();
+  }, []);
   // TODO: add dynamic routes
   return (
     <HeaderWrapper>
