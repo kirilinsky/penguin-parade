@@ -74,13 +74,10 @@ export const EvolutionGridItemStyled = styled(
   mounted: boolean;
 }>`
   background: ${({ value }) =>
-    value ? `url(${value}) center/cover no-repeat` : "#081108"};
-
-  opacity: ${({ mounted }) => (mounted ? 1 : 0)};
+    value ? `url(${value}) center/cover no-repeat` : "#212821"};
+  opacity: ${({ mounted }) => (mounted ? 0.96 : 0)};
   transform: ${({ mounted }) => (mounted ? "scale(1)" : "scale(0.95)")};
-
-  transition: opacity 0.7s ease-in-out, transform 0.7s ease-in-out;
-
+  transition: opacity 0.7s ease-in-out;
   box-shadow: ${({ bordercolor }) => `0 0 10px ${bordercolor}`};
   border: ${({ bordercolor }) => `1px solid ${bordercolor}`};
   grid-area: ${({ gridarea }) => gridarea};

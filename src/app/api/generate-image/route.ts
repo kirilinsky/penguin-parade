@@ -24,7 +24,7 @@ const templateImageUrl = "https://i.ibb.co/B55bD3mh/template.png";
 const BUCKET = "penguins";
 const GLOBAL_IMAGES_COLLECTION = "images";
 
-const basePrompt = `A 2D digital cartoon-style portrait of a penguin character. 
+const basePrompt = `A 2D digital cartoon-style like-a-collection card portrait of a penguin character. 
 Centered in the image, full upper body, same pose and proportions as the reference image. 
 Do not change anatomy or expression. 
 You must modify clothing, effects, background, lighting, and artistic style.
@@ -102,7 +102,9 @@ export async function POST(req: Request) {
 
     const descriptionParts = [
       settings.theme &&
-        `the scene is styled as ${settings.theme.toLowerCase()}`,
+        `rarity of this picture is ${
+          settings.rarity
+        }, scene is styled as ${settings.theme.toLowerCase()}`,
       `penguin wears ${settings.acc}`,
       `has a ${settings.beak.toLowerCase()} beak`,
       `a ${settings.breast.toLowerCase()} chest`,
@@ -120,9 +122,9 @@ export async function POST(req: Request) {
         prompt,
         seed: Math.floor(Math.random() * 100000),
         strength: 0.6,
-        negative_prompt: "low quality, bad quality, lack of details",
-        guidance_scale: 11,
-        num_inference_steps: 55,
+        negative_prompt: "low quality, bad quality, lack of details, realism",
+        guidance_scale: 12,
+        num_inference_steps: 50,
       },
     });
 

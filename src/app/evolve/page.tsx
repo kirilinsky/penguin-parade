@@ -9,6 +9,7 @@ import {
 } from "@/components/evolution-grid-item/evolution-grid-item.component.styled";
 import GalleryItemScaleComponent from "@/components/gallery-item-scale/gallery-item-scale.component";
 import { LinkStyled } from "@/components/link/link.component.styled";
+import NeonButtonComponent from "@/components/neon-button/neon-button.component";
 import { getBaseColorByScale } from "@/helpers/get-base-color-by-rarity/get-base-color-by-rarity";
 import { getNextScale } from "@/helpers/get-next-scale/get-next-scale";
 import { useGetImages } from "@/hooks/use-get-images";
@@ -241,7 +242,6 @@ const EvolvePage = () => {
           ))}
         <EvolutionGridItemCenterWrap>
           {result && payout && <span>You earned {payout} P$</span>}
-
           <EvolutionGridItemCenterStyled
             bordercolor={expectingScaleColor}
             gridarea="c"
@@ -253,7 +253,7 @@ const EvolvePage = () => {
               (evolutionListProgress < 100 ? (
                 `${evolutionListProgress}%`
               ) : (
-                <button onClick={evolve}>Evolve</button>
+                <NeonButtonComponent onClick={evolve} title="Evolve" />
               ))}
             {evolutionInProgress && <EvolutionEffect />}
           </EvolutionGridItemCenterStyled>
