@@ -47,7 +47,7 @@ You are a penguin variation generator. Respond with a JSON object only. No intro
 There are few scales of rarity: common, rare, epic, legendary, divine (greek gods), ghost (casper-like), and mystic (scary and creepy).
 Return an object with:
 {
-  "bg": background behind penguin should be connected with theme and rarity scale,
+  "bg": background behind penguin should be connected with theme and rarity scale, don't leave it too much simple,
   "theme": random theme,
   "beak": color of penguin's beak,
   "breast": color of penguin's breast,

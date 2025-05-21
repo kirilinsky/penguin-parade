@@ -98,13 +98,13 @@ export async function POST(req: Request) {
     const fxDescription = `with a visible effect of ${settings.fx} at picture`;
 
     const descriptionParts = [
-      settings.theme && `The color mood is ${settings.theme.toLowerCase()}`,
-      `A penguin titled \"${settings.t}\"`,
-      `background is ${settings.bg.toLowerCase()}`,
+      settings.theme && `mood of picture is ${settings.theme.toLowerCase()}`,
+      `on background of picture is ${settings.bg.toLowerCase()}`,
+      `A penguin titled \"${settings.t}\"`, 
       `wearing ${settings.acc}`,
       `with a ${settings.beak.toLowerCase()} color of penguin beak`,
-      `a ${settings.breast.toLowerCase()} color chest`,
-      `and ${settings.back.toLowerCase()} color on its back`,
+      `a ${settings.breast.toLowerCase()} color of its chest`,
+      `and ${settings.back.toLowerCase()} color on its penguin back`,
       fxDescription,
     ];
 
