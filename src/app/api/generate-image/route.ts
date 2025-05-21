@@ -96,35 +96,40 @@ export async function POST(req: Request) {
         { status: 500 }
       );
     }
-    const { settings } = await settingsRes.json();
+    const { settings } = await settingsRes.json(); 
 
-    const fxDescription = `with visible effect of ${settings.fx} at picture`;
+    const promptParts: string[] = [];
 
-    const descriptionParts = [
-      settings.theme &&
-        `rarity of this picture is ${
-          settings.rarity
-        }, scene is styled as ${settings.theme.toLowerCase()}`,
-      `penguin wears ${settings.acc}`,
-      `has a ${settings.beak.toLowerCase()} beak`,
-      `a ${settings.breast.toLowerCase()} chest`,
-      `and a ${settings.back.toLowerCase()} back rear`,
-      `main picture background is ${settings.bg.toLowerCase()}`,
-      fxDescription,
-    ];
+    promptParts.push(
+      `A 2D digital cartoon-style portrait of a penguin character.`,
+      `The penguin is standing in ${settings.bg.toLowerCase()}, surrounded by ${settings.fx.toLowerCase()}.`,
+      `The scene is styled as ${settings.theme.toLowerCase()}, with cinematic lighting and rich background details.`
+    );
 
-    const description = descriptionParts.filter(Boolean).join(", ") + ".";
-    const prompt = `${basePrompt.trim()} ${description}`.trim();
+    promptParts.push(
+      `The penguin wears ${settings.acc.toLowerCase()},`,
+      `has a ${settings.beak.toLowerCase()} beak,`,
+      `a ${settings.breast.toLowerCase()} chest,`,
+      `and a ${settings.back.toLowerCase()} back.`
+    );
+    promptParts.push(
+      `Highly detailed, vibrant colors, fantasy illustration, glowing effects,`,
+      `rarity level: ${settings.rarity.toLowerCase()}.`
+    );
+
+    //const description = descriptionParts.filter(Boolean).join(", ") + ".";
+    //const prompt = `${basePrompt.trim()} ${description}`.trim();
 
     const output = await replicate.run(model, {
       input: {
         image: templateImageUrl,
-        prompt,
-        seed: Math.floor(Math.random() * 100000),
-        strength: 0.6,
-        negative_prompt: "low quality, bad quality, lack of details, realism",
+        prompt: promptParts.join(" "),
+        seed: Math.floor(Math.random() * 10000),
+        strength: 0.66,
+        negative_prompt:
+          "low quality, bad quality, lack of details, realism,plain background, washed out",
         guidance_scale: 12,
-        num_inference_steps: 50,
+        num_inference_steps: 52,
       },
     });
 
