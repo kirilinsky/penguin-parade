@@ -37,14 +37,14 @@ export default function Home() {
           <PageContentBlockStyled>
             <h2>Road map</h2>
             <ul>
+              <li>Gallery/Auction filtering </li>
               <li>Funds system</li>
-              <li>Anonyous home page</li>
+              <li>Anonymous home page</li>
               <li>Gift functionality design update</li>
-              <li>Evolution functionality design update</li>
               <li>Pay to skip function</li>
               <li>Expeditions (TBA)</li>
               <li>NFT Mint preparation</li>
-              <li>Images avatar optimization</li>{" "}
+              <li>Images avatar optimization</li>
               <li>Friends page design update</li>
               <li>Friends Updtes(news)</li>
               <li>Announcements</li>
