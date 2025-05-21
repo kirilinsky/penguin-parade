@@ -1,18 +1,28 @@
 "use client";
 
-import React, { useEffect } from "react";
-import { HeaderLinks, HeaderWrapper } from "./header.component.styled";
+import React, { useEffect, useState } from "react";
+import {
+  HeaderLinks,
+  HeaderOpenMobileMenuButton,
+  HeaderWrapper,
+} from "./header.component.styled";
 import Link from "next/link";
 import { useAtomValue, useSetAtom } from "jotai";
 import { loggedInAtom } from "@/atoms/user/user.atom";
 import HeaderBioComponent from "../header-bio/header-bio.component";
 import { useUserDetails } from "@/hooks/use-user-details";
+import MobileMenuComponent from "../mobile-menu/mobile-menu.component";
+import NavigationLinksComponent from "../navigation-links/navigation-links.component";
 
 const HeaderComponent = () => {
   const { user, refreshUser, logOut } = useUserDetails();
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
   const loggedIn = useAtomValue(loggedInAtom);
-
   const setLoggedIn = useSetAtom(loggedInAtom);
+
+  const closeMoblieMenu = () => {
+    setShowMobileMenu(false);
+  };
 
   const logOutHandler = () => {
     setLoggedIn(false);
@@ -20,29 +30,36 @@ const HeaderComponent = () => {
   };
 
   useEffect(() => {
+    if (showMobileMenu) {
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${window.scrollY}px`;
+    } else {
+      const scrollY = document.body.style.top;
+      document.body.style.position = "unset";
+      document.body.style.top = "";
+      window.scrollTo(0, parseInt(scrollY || "0") * -1);
+    }
+  }, [showMobileMenu]);
+
+  useEffect(() => {
     refreshUser();
   }, []);
-  // TODO: add dynamic routes
   return (
     <HeaderWrapper>
+      {showMobileMenu && (
+        <MobileMenuComponent
+          user={user}
+          closeMoblieMenu={closeMoblieMenu}
+          logOutHandler={logOutHandler}
+          loggedIn={loggedIn}
+        />
+      )}
       <HeaderLinks>
-        {user && loggedIn ? (
-          <>
-            <Link href="/countdown">Craft!</Link>
-            <Link href={`/library/${user.id}`}>My Penguins</Link>
-            <Link href="/friends">Friends</Link>
-            <Link href="/evolve">Evolve</Link>
-            <Link href="/auction">Auction</Link>
-            <Link onClick={logOutHandler} href="/">
-              Log out
-            </Link>
-          </>
-        ) : (
-          <>
-            <Link href="/signup">Sign up</Link>
-            <Link href="/login">Login</Link>
-          </>
-        )}
+        <NavigationLinksComponent
+          user={user}
+          logOutHandler={logOutHandler}
+          loggedIn={loggedIn}
+        />
       </HeaderLinks>
       {loggedIn && user && (
         <HeaderBioComponent
@@ -52,6 +69,9 @@ const HeaderComponent = () => {
           coins={user.coins}
         />
       )}
+      <HeaderOpenMobileMenuButton onClick={() => setShowMobileMenu(true)}>
+        menu
+      </HeaderOpenMobileMenuButton>
     </HeaderWrapper>
   );
 };

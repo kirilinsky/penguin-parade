@@ -7,6 +7,7 @@ import {
   EvolutionGridItemCenterStyled,
   EvolutionGridItemCenterWrap,
 } from "@/components/evolution-grid-item/evolution-grid-item.component.styled";
+import EvolutionModalComponent from "@/components/evolution-modal/evolution-modal.component";
 import GalleryItemScaleComponent from "@/components/gallery-item-scale/gallery-item-scale.component";
 import { LinkStyled } from "@/components/link/link.component.styled";
 import NeonButtonComponent from "@/components/neon-button/neon-button.component";
@@ -36,7 +37,7 @@ const EvolvePage = () => {
   const { user, refreshUser } = useUserDetails();
   const [evolutionList, setEvolutionList] =
     useState<Record<string, EvolutionSlot>>(evolutionListDefault);
-  const [filteredImages, setFilteredIMages] = useState<ImageItem[]>([]);
+  const [filteredImages, setFilteredImages] = useState<ImageItem[]>([]);
   const [currentRarityScale, setCurrentRarityScale] =
     useState<ScaleType | null>(null);
   const [expectingRarityScale, setExpectingRarityScale] =
@@ -54,7 +55,7 @@ const EvolvePage = () => {
   const { images, loading } = useGetImages();
 
   useEffect(() => {
-    setFilteredIMages(images);
+    setFilteredImages(images);
   }, [images]);
 
   const onImageClick = (img: ImageItem) => {
@@ -67,7 +68,7 @@ const EvolvePage = () => {
     );
     const evolutionListDraft = { ...evolutionList };
     evolutionListDraft[currentKey] = img;
-    setFilteredIMages(filteredImagesDraft);
+    setFilteredImages(filteredImagesDraft);
     setEvolutionList(evolutionListDraft);
     setShowLibraryModal(false);
   };
@@ -79,13 +80,16 @@ const EvolvePage = () => {
     );
     const nextScale = getNextScale(currentRarityScale);
     setExpectingRarityScale(nextScale);
-    setFilteredIMages(filteredImagesDraft);
+    setFilteredImages(filteredImagesDraft);
   }, [currentRarityScale]);
 
-  const onItemClick = (e: any) => {
+  const onItemClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
-    setShowLibraryModal(true);
-    setCurrentKey(e.target.id);
+    const { id: currentIdkey } = e.target as HTMLButtonElement;
+    if (currentIdkey) {
+      setShowLibraryModal(true);
+      setCurrentKey(currentIdkey);
+    }
   };
 
   const evolve = async () => {
@@ -139,6 +143,27 @@ const EvolvePage = () => {
     }
   };
 
+  const handleResetItem = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+    const { id: resetKey } = e.target as HTMLButtonElement;
+    if (!resetKey) return;
+    const resetImage = evolutionList[resetKey] as ImageItem;
+    const filteredImagesDraft = [...filteredImages, resetImage];
+    const evolutionListDraft = { ...evolutionList };
+    evolutionListDraft[resetKey] = null;
+
+    const filled = Object.values(evolutionListDraft).filter(
+      (v) => v !== null
+    ).length;
+    if (!filled) {
+      setCurrentRarityScale(null);
+      setExpectingRarityScale(null);
+    }
+
+    setFilteredImages(filteredImagesDraft);
+    setEvolutionList(evolutionListDraft);
+  };
+
   const evolutionListProgress = useMemo(() => {
     const total = Object.keys(evolutionList).length;
 
@@ -170,63 +195,14 @@ const EvolvePage = () => {
         visible={showLibraryModal}
         onClose={() => setShowLibraryModal(false)}
       >
-        <h2>Choose Candidate</h2>
-        {currentRarityScale && (
-          <>
-            {" "}
-            <span> Current rarity: </span>
-            <GalleryItemScaleComponent
-              baseColor={currentScaleColor}
-              scale={currentRarityScale}
-            />
-          </>
-        )}
-        {expectingRarityScale && (
-          <>
-            <span> Expecting rarity: </span>
-            <GalleryItemScaleComponent
-              baseColor={expectingScaleColor}
-              scale={expectingRarityScale}
-            />
-          </>
-        )}
-
-        <div
-          style={{
-            display: "flex",
-            height: "90%",
-            gap: "12px",
-            padding: "10px",
-            flexWrap: "wrap",
-            justifyContent: "flex-start",
-            overflowY: "auto",
-          }}
-        >
-          {filteredImages.map((img: ImageItem) => (
-            <div
-              onClick={() => onImageClick(img)}
-              key={img.id}
-              style={{
-                maxWidth: "25%",
-
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                flexDirection: "column",
-                border: "1px dashed green",
-                borderRadius: "1em",
-                cursor: "pointer",
-              }}
-            >
-              <img width={"100%"} height={"100%"} src={img.imageUrl} />
-              <h4>{img.title}</h4>
-              <GalleryItemScaleComponent
-                baseColor={getBaseColorByScale(img.settings.rarity)}
-                scale={img.settings.rarity}
-              />
-            </div>
-          ))}
-        </div>
+        <EvolutionModalComponent
+          expectingScaleColor={expectingScaleColor}
+          currentScaleColor={currentScaleColor}
+          currentRarityScale={currentRarityScale}
+          expectingRarityScale={expectingRarityScale}
+          filteredImages={filteredImages}
+          onImageClick={onImageClick}
+        />
       </Rodal>
       <EvolutionGridContainer hide={result} target={currentScaleColor}>
         {!loading &&
@@ -238,7 +214,13 @@ const EvolvePage = () => {
               result={evolutionInProgress || result}
               key={key}
               gridarea={key}
-            />
+            >
+              {evolutionList[key] && (
+                <button onClick={handleResetItem} id={key}>
+                  reset
+                </button>
+              )}
+            </EvolutionGridItem>
           ))}
         <EvolutionGridItemCenterWrap>
           {result && payout && <span>You earned {payout} P$</span>}

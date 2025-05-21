@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { EvolutionGridItemStyled } from "./evolution-grid-item.component.styled";
 
 const EvolutionGridItem = ({
+  children,
   gridarea,
   bordercolor,
   value = null,
@@ -14,6 +15,7 @@ const EvolutionGridItem = ({
   result: boolean;
   value?: string | null;
   onClick?: (e: any) => void;
+  children: React.ReactNode;
 }>) => {
   const [mounted, setMounted] = useState(false);
 
@@ -31,7 +33,9 @@ const EvolutionGridItem = ({
       result={result}
       mounted={mounted}
       {...rest}
-    />
+    >
+      {children}
+    </EvolutionGridItemStyled>
   );
 };
 export default EvolutionGridItem;

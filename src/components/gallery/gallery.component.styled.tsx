@@ -5,6 +5,4 @@ export const GalleryWrap = styled.div`
   grid-template-columns: repeat(auto-fill, minmax(215px, 1fr));
   gap: 2rem;
   width: 100%;
-
- 
 `;

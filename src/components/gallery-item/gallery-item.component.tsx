@@ -60,8 +60,8 @@ const GalleryItemComponent = ({
         <GalleryItemSkeleton loaded={loaded} />
         <GalleryItemImage
           src={img.imageUrl}
-          width={slim ? 165 : 205}
-          height={slim ? 165 : 205}
+          width={slim ? 170 : 210}
+          height={slim ? 170 : 210}
           alt={img.title}
           color={baseColor}
           loaded={loaded}

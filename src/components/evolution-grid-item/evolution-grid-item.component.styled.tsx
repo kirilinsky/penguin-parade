@@ -115,9 +115,16 @@ export const EvolutionGridItemStyled = styled(
         break;
     }
     return `transform: ${transform};`;
-  }}
+  }}& button {
+    display: none;
+  }
 
   &:hover {
     box-shadow: ${({ bordercolor }) => `0 0 20px ${bordercolor}`};
+    & button {
+      display: block;
+      position: absolute;
+      padding: 10px;
+    }
   }
 `;
