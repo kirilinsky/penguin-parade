@@ -36,6 +36,12 @@ const GalleryItemModalStatistics = ({ img }: { img: ImageItem }) => {
           <p>{format(img.placedForAuctionAt.toDate(), "dd.MM.yy")}</p>
         </GalleryItemModalStatisticsItem>
       )}
+      {img.auction && (
+        <GalleryItemModalStatisticsItem>
+          <h3>Price </h3>
+          <p>{img.price} P$</p>
+        </GalleryItemModalStatisticsItem>
+      )}
       <GalleryItemModalStatisticsTrait>
         <h3>Beak Color</h3>
         <p>{img.settings.beak}</p>

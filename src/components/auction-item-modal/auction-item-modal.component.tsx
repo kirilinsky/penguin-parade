@@ -13,11 +13,11 @@ import {
   GalleryItemModalButtonsContainer,
   GalleryItemModalContainer,
   GalleryItemModalContent,
-  GalleryItemModalDes,
   GalleryItemModalImage,
   GalleryItemModalScale,
   GalleryItemModalTitle,
 } from "../gallery-item-modal/gallery-item-modal.component.styled";
+import GalleryItemModalStatistics from "../gallery-item-modal-statistics/gallery-item-modal-statistics.component";
 
 const orbitron = Orbitron({
   subsets: ["latin"],
@@ -59,34 +59,14 @@ const AuctionItemModalComponent = ({
         <GalleryItemModalScale>
           <GalleryItemScaleComponent scale={img.settings.rarity} />
         </GalleryItemModalScale>
-
-        <GalleryItemModalDes>{img.settings.des}</GalleryItemModalDes>
-
-        <span>Ability: {img.settings.ability}</span>
-
-        <span>Loot: {img.settings.acc}</span>
-
-        <span>Origin: {img.origin}</span>
-
-        <span>Breast: {img.settings.breast}</span>
-
-        <span>Beak: {img.settings.beak}</span>
-
-        <span>Back: {img.settings.back}</span>
-
-        <span>Created: {format(img.createdAt.toDate(), "dd.MM.yy")}</span>
-
-        <span>
-          On Auction since:{" "}
-          {format(img.placedForAuctionAt.toDate(), "dd.MM.yy")}
-        </span>
+        <GalleryItemModalStatistics img={img} />
 
         {user && img.price && (
           <GalleryItemModalButtonsContainer>
             <NeonButtonComponent
               disabled={isLoading}
               onClick={() => onBuyImage(img.id)}
-              title={isLoading ? "loading..." : `Buy for ${img.price} P$`}
+              title={isLoading ? "loading..." : `Buy`}
             />
           </GalleryItemModalButtonsContainer>
         )}
