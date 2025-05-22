@@ -4,11 +4,11 @@ import styled from "styled-components";
 export const LinkStyled = styled(Link)`
   background: #365c2c;
   color: #fff;
-  padding: 3px 7px;
+  padding: 6px 12px;
   margin-block: 15px;
   display: block;
   width: max-content;
-  border-radius: 2px;
+  border-radius: 3px;
   &:hover {
     transition: linear 0.3s;
     background: #fff;

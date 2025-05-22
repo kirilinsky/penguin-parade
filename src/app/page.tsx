@@ -30,7 +30,7 @@ export default function Home() {
               height="120"
             />
             <LinkStyled title="Craft new" href={"/countdown"}>
-              Craft new!
+              Craft new Penguin!
             </LinkStyled>
           </PageContentBlockStyled>
           <LastCraftedBlockComponent />
