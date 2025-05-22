@@ -34,6 +34,14 @@
   border-radius: 1em;
   box-shadow: 0 0 5px rgba(237, 231, 231, 0.729);
 }
+@media screen and (max-width: 750px) {
+  .rodal-dialog {
+    position: absolute;
+    width: 98vw !important;
+    height: 95vh !important;
+    padding: 20px 5px 5px;
+  }
+}
 
 .rodal-dialog:focus {
   outline: none;

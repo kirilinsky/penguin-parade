@@ -4,10 +4,13 @@ export const FriendListItemContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
+  @media (max-width: 768px) {
+    justify-content:space-evenly;
+  }
 `;
 export const FriendListItemContent = styled.div`
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   gap: 7px;
 `;
 

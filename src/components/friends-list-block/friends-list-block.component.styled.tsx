@@ -10,6 +10,7 @@ export const FriendsListBlockGrid = styled.div`
   overflow-y: auto;
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
+    max-height:50vh;
     padding: 10px;
   }
 `;
