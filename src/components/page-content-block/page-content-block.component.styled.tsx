@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const PageContentBlockFlex = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content:space-evenly;
   align-items: center;
   padding: 10px 3px;
   gap: 10px;

@@ -37,7 +37,7 @@ const GalleryItemComponent = ({
   }, [img.settings.rarity]);
   return (
     <Tilt
-      scale={scalable ? 1.14 : 1}
+      scale={scalable ? 1.15 : 1}
       key={img.id}
       glareEnable={true}
       glareMaxOpacity={0.8}
@@ -66,8 +66,8 @@ const GalleryItemComponent = ({
         <GalleryItemSkeleton loaded={loaded} />
         <GalleryItemImage
           src={img.imageUrl}
-          width={slim ? 170 : 210}
-          height={slim ? 170 : 210}
+          width={slim ? '60%' : 220}
+          height={slim ? '60%' : 220}
           alt={img.title}
           color={baseColor}
           loaded={loaded}
