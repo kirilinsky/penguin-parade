@@ -7,6 +7,8 @@ import {
   GalleryItemModalButtonsContainer,
   GalleryItemModalContainer,
   GalleryItemModalContent,
+  GalleryItemModalFriendsItem,
+  GalleryItemModalFriendsList,
   GalleryItemModalImage,
   GalleryItemModalScale,
   GalleryItemModalTitle,
@@ -15,11 +17,11 @@ import { Orbitron } from "next/font/google";
 import GalleryItemScaleComponent from "../gallery-item-scale/gallery-item-scale.component";
 import { getBaseColorByScale } from "@/helpers/get-base-color-by-rarity/get-base-color-by-rarity";
 import NeonButtonComponent from "../neon-button/neon-button.component";
-import { format } from "date-fns";
 import { getPriceByScale } from "@/helpers/get-price-by-scale/get-price-by-scale";
 import { FriendWithUser, User } from "@/types/friends.types";
 import { ScaleType } from "@/types/scale.types";
 import GalleryItemModalStatistics from "../gallery-item-modal-statistics/gallery-item-modal-statistics.component";
+import AvatarComponent from "../avatar-component/avatar-component";
 
 const orbitron = Orbitron({
   subsets: ["latin"],
@@ -48,7 +50,8 @@ const GalleryItemModalComponent = ({
 }) => {
   if (!img) return null;
   const [giftMode, setGiftMode] = useState(false);
-  const [friendRecipient, setFriendRecipient] = useState<string>("");
+  const [friendRecipient, setFriendRecipient] =
+    useState<FriendWithUser | null>();
 
   const baseColor = useMemo(() => {
     return getBaseColorByScale(img.settings.rarity);
@@ -87,7 +90,7 @@ const GalleryItemModalComponent = ({
               )}
               <NeonButtonComponent
                 onClick={() => setGiftMode(true)}
-                title="Give a friend (BETA)"
+                title="Gift to friend"
               />
               {buy && sell && (
                 <NeonButtonComponent
@@ -102,38 +105,52 @@ const GalleryItemModalComponent = ({
         {user && giftMode && (
           <>
             <h3>Choose Friend</h3>
-            <br />
-            {friends && (
-              <select
-                onChange={(e) => setFriendRecipient(e.target.value)}
-                name="friend-recipient"
-                id="friends-list"
-                value={friendRecipient}
-              >
-                <option value={""} disabled>
-                  Choose friend
-                </option>
-                {friends.map((friend) => (
-                  <option value={friend.id} key={friend.id}>
-                    {friend.username}
-                  </option>
-                ))}
-              </select>
-            )}
-            <br />
-            <br />
+            <GalleryItemModalFriendsList>
+              {friends.map((friend) => (
+                <GalleryItemModalFriendsItem
+                  active={friend.id === friendRecipient?.id}
+                >
+                  <b>{friend.username}</b>
+                  <AvatarComponent
+                    avatarScale={friend.avatarScale}
+                    avatarUrl={friend.avatar}
+                    username={friend.username}
+                  />
+
+                  <NeonButtonComponent
+                    onClick={() =>
+                      setFriendRecipient(
+                        friend.id === friendRecipient?.id ? null : friend
+                      )
+                    }
+                    title={
+                      friend.id === friendRecipient?.id
+                        ? "Unset"
+                        : `Choose ${friend.username}`
+                    }
+                  />
+                </GalleryItemModalFriendsItem>
+              ))}
+            </GalleryItemModalFriendsList>
+
             <GalleryItemModalButtonsContainer>
               {loading && "please wait..."}
-              <NeonButtonComponent
-                title="Send Penguin"
-                onClick={() => onSendGift(friendRecipient, img.id)}
-                disabled={!friendRecipient || loading}
-              />
+              {friendRecipient && (
+                <NeonButtonComponent
+                  title={
+                    loading
+                      ? "loading..."
+                      : `Send Penguin to ${friendRecipient.username}`
+                  }
+                  onClick={() => onSendGift(friendRecipient.id, img.id)}
+                  disabled={loading}
+                />
+              )}
 
               <NeonButtonComponent
                 onClick={() => {
                   setGiftMode(false);
-                  setFriendRecipient("");
+                  setFriendRecipient(null);
                 }}
                 title="Cancel"
               ></NeonButtonComponent>

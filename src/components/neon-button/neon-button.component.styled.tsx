@@ -12,10 +12,11 @@ export const NeonButtonStyled = styled.button`
   text-decoration: none;
   transition: 250ms ease-in-out;
   transition-property: all;
-  & span {
+  &:not(:disabled) span {
     filter: drop-shadow(0 0 1px currentcolor);
   }
-  &:after {
+
+  &:after:not(:disabled) {
     content: "";
     position: absolute;
     z-index: -1;
@@ -26,15 +27,20 @@ export const NeonButtonStyled = styled.button`
     transition: 250ms ease-in-out;
     transition-property: opacity;
   }
-  &:hover,
-  &:focus {
-    color: #ae3da3;;
-    background-color: #290626;;
+  &:hover:not(:disabled),
+  &:focus:not(:disabled) {
+    color: #ae3da3;
+    background-color: #290626;
     transform: scale(1.01);
     cursor: pointer;
   }
   &:hover::after,
   &:focus:after {
     opacity: 0.6;
+  }
+  &:disabled {
+    color: #ac9d9d;
+    background: #050405;
+    border-color: #464646;
   }
 `;

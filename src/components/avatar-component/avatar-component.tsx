@@ -6,11 +6,11 @@ import { ScaleType } from "@/types/scale.types";
 const AvatarComponent = ({
   avatarUrl,
   avatarScale,
-  id,
+  username,
   mini = false,
 }: {
   avatarUrl: string | null;
-  id: string;
+  username: string;
   avatarScale: ScaleType | null;
   mini?: boolean;
 }) => {
@@ -20,7 +20,7 @@ const AvatarComponent = ({
   return (
     <AvatarComponentStyled
       src={avatarUrl ?? "/template.png"}
-      alt={id}
+      alt={username}
       $borderColor={borderColor}
       width={mini ? 35 : 105}
       height={mini ? 35 : 105}

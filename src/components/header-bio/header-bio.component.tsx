@@ -23,7 +23,7 @@ const HeaderBioComponent = ({
       <HeaderBioWrapper>
         <AvatarComponent
           mini
-          id={`${username}-avatar`}
+          username={`${username}-avatar`}
           avatarUrl={avatar}
           avatarScale={avatarScale}
         />

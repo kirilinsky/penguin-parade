@@ -1,6 +1,6 @@
 import React from "react";
 import { PageContentBlockStyled } from "../page-content-block/page-content-block.component.styled";
-import { Friend } from "@/types/friends.types";
+import { FriendWithUser } from "@/types/friends.types";
 import Image from "next/image";
 import FriendListItemComponent from "../friend-list-item/friend-list-item.component";
 import { FriendsListBlockGrid } from "./friends-list-block.component.styled";
@@ -11,7 +11,7 @@ const FriendsListBlockComponent = ({
   friendsLoading,
 }: {
   onRemove: (targetId: string) => Promise<void>;
-  friends: Friend[];
+  friends: FriendWithUser[];
   friendsLoading: boolean;
 }) => {
   return (
@@ -19,7 +19,7 @@ const FriendsListBlockComponent = ({
       <h2>Your Friends</h2>
       {/* TODO: add spinner */}
       {friendsLoading ? (
-        "ffriends loading"
+        "friends loading"
       ) : friends.length ? (
         <FriendsListBlockGrid>
           {friends.map((friend) => (

@@ -159,7 +159,6 @@ const FriendsPage = () => {
     if (!currentUser) return;
 
     const timestamp = new Date();
-
     const targetUserRef = doc(firestore, "users", user.id);
     await updateDoc(targetUserRef, {
       friendRequests: arrayUnion({ id: currentUser.id, sentAt: timestamp }),
@@ -189,6 +188,8 @@ const FriendsPage = () => {
 
     friendsRefetch();
   };
+
+  console.log(friends, "friends");
 
   return (
     <PageContentWrapperComponent>

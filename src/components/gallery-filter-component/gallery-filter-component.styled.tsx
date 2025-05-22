@@ -11,8 +11,10 @@ export const GalleryFilterComponentContainer = styled.div`
   border-radius: 3px;
   font-size: 18px;
   @media (max-width: 960px) {
-    flex-direction:column-reverse;
-    height:auto;
+    width: 100%;
+    padding: 10px;
+    flex-direction: column-reverse;
+    height: auto;
     gap: 1em;
     align-items: end;
     font-size: 20px;
@@ -22,6 +24,11 @@ export const GalleryFilterComponentContainer = styled.div`
 export const GalleryFilterComponentSide = styled.div`
   display: flex;
   gap: 10px;
+  @media (max-width: 960px) {
+     flex-wrap: wrap;
+     gap: 15px;
+     justify-content:end;
+  }
 `;
 
 export const GalleryFilterButton = styled.button.withConfig({

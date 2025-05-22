@@ -58,10 +58,8 @@ export const GalleryItemModalAccordion = styled.div<{ $expand: boolean }>`
   gap: 15px;
   transition: 0.45s linear;
   overflow: hidden;
-  max-height: ${({ $expand }) => ($expand ? "600px" : "0")};
+  max-height: ${({ $expand }) => ($expand ? "2000px" : "0")};
 `;
-
-
 
 export const GalleryItemModalScale = styled.h3`
   text-align: center;
@@ -74,7 +72,40 @@ export const GalleryItemModalButtonsContainer = styled.div`
   @media (max-width: 1008px) {
     flex-direction: column;
   }
-  button{
+  button {
     flex-grow: 1;
   }
+`;
+export const GalleryItemModalFriendsList = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1em;
+  height: 250px;
+  overflow-y: auto;
+  @media (max-width: 1008px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (max-width: 766px) {
+    height: 60%;
+  }
+`;
+
+export const GalleryItemModalFriendsItem = styled.div.withConfig({
+  shouldForwardProp: (prop) => prop !== "active",
+})<{
+  active: boolean;
+}>`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #fff;
+  gap: 10px;
+  padding: 1em;
+  border-radius: 1em;
+  ${({ active }) =>
+    active &&
+    `
+  background: #3c3333e4;
+    box-shadow: 0 0 12px #84f9ee;
+  `}
 `;
