@@ -20,10 +20,10 @@ export const GalleryItemSkeleton = styled.div.withConfig({
   inset: 0;
   border-radius: 1em;
   opacity: ${(props) => (props.loaded ? 0 : 0.8)};
-  background: linear-gradient(90deg, #e0e0e0 25%, #f5f5f5 50%, #e0e0e0 75%);
+  background: linear-gradient(90deg, #a09e9e 25%, #858080 50%, #3b3b3b 75%);
   background-size: 200% 100%;
   animation: ${(props) =>
-    props.loaded ? "none" : "skeleton-loading 1.4s ease-in-out infinite"};
+    props.loaded ? "none" : "skeleton-loading 1.2s ease-in-out infinite"};
 
   @keyframes skeleton-loading {
     0% {
