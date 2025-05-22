@@ -26,12 +26,12 @@ export const scaleConfig: Record<
   }
 > = {
   common: {
-    color: "#808080",
+    color: "#606060",
     sell: 1,
     buy: 4,
   },
   rare: {
-    color: "#00b7ff",
+    color: "#00b7df",
     sell: 2,
     buy: 10,
   },
@@ -48,7 +48,7 @@ export const scaleConfig: Record<
   divine: {
     color: "#fdd835",
     sell: 16,
-    buy: 80,
+    buy: 82,
   },
   ghost: {
     color: "#f0f0f0",
