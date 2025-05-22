@@ -96,14 +96,14 @@ export async function POST(req: Request) {
         { status: 500 }
       );
     }
-    const { settings } = await settingsRes.json(); 
+    const { settings } = await settingsRes.json();
 
     const promptParts: string[] = [];
 
     promptParts.push(
       `A 2D digital cartoon-style portrait of a penguin character.`,
       `The penguin is standing in ${settings.bg.toLowerCase()}, surrounded by ${settings.fx.toLowerCase()}.`,
-      `The scene is styled as ${settings.theme.toLowerCase()}, with cinematic lighting and rich background details.`
+      `The penguin detailed and scene is styled as ${settings.theme.toLowerCase()}, with cinematic lighting and rich background details.`
     );
 
     promptParts.push(
@@ -113,12 +113,9 @@ export async function POST(req: Request) {
       `and a ${settings.back.toLowerCase()} back.`
     );
     promptParts.push(
-      `Highly detailed, vibrant colors, fantasy illustration, glowing effects,`,
+      `Highly detailed, vibrant colors, fantasy illustration, glowing effects or ambient,`,
       `rarity level: ${settings.rarity.toLowerCase()}.`
-    );
-
-    //const description = descriptionParts.filter(Boolean).join(", ") + ".";
-    //const prompt = `${basePrompt.trim()} ${description}`.trim();
+    ); 
 
     const output = await replicate.run(model, {
       input: {
@@ -127,9 +124,9 @@ export async function POST(req: Request) {
         seed: Math.floor(Math.random() * 10000),
         strength: 0.66,
         negative_prompt:
-          "low quality, bad quality, lack of details, realism,plain background, washed out",
-        guidance_scale: 12,
-        num_inference_steps: 52,
+          "low quality,3d, bad quality, lack of details, realism, plain background, washed out",
+        guidance_scale: 13,
+        num_inference_steps: 53,
       },
     });
 
