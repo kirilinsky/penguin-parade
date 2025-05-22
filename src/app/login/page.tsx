@@ -48,14 +48,14 @@ export default function Login() {
       <form
         onSubmit={handleLogin}
         style={{
-          width:'260px',
+          width: "260px",
           border: "1px solid #8ebb93",
-          margin:'10px',
+          margin: "10px",
           padding: "10px",
           display: "flex",
           flexDirection: "column",
-          gap:'10px;',
-          alignItems:'center'
+          gap: "10px",
+          alignItems: "center",
         }}
       >
         <input
@@ -66,7 +66,7 @@ export default function Login() {
           onChange={(e) => setEmail(e.target.value)}
           required
         />
-        
+
         <input
           style={{ padding: "10px" }}
           type="password"
@@ -75,8 +75,7 @@ export default function Login() {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-       
-      
+
         {error && <p style={{ color: "red" }}>{error}</p>}
         <NeonButtonComponent title="Login" type="submit" />
       </form>

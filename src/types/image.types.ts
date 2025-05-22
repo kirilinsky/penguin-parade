@@ -43,3 +43,5 @@ export interface ImageItemSettings {
   rarity: ScaleType;
   theme: string;
 }
+
+export type ImagesSortType = "newest" | "oldest" | "rarity";

@@ -103,7 +103,7 @@ export async function POST(req: Request) {
     promptParts.push(
       `A 2D digital cartoon-style portrait of a penguin character.`,
       `The penguin is standing in ${settings.bg.toLowerCase()}, surrounded by ${settings.fx.toLowerCase()}.`,
-      `The penguin detailed and scene is styled as ${settings.theme.toLowerCase()}, with cinematic lighting and rich background details.`
+      `The penguin detailed and scene is styled as ${settings.theme.toLowerCase()}, with cinematic lighting and rich background and penguin accessories details.`
     );
 
     promptParts.push(
@@ -114,8 +114,10 @@ export async function POST(req: Request) {
     );
     promptParts.push(
       `Highly detailed, vibrant colors, fantasy illustration, glowing effects or ambient,`,
-      `rarity level: ${settings.rarity.toLowerCase()}.`
-    ); 
+      `rarity level: ${settings.rarity.toLowerCase()} and the picture title is ${
+        settings.t
+      }.`
+    );
 
     const output = await replicate.run(model, {
       input: {
@@ -124,9 +126,9 @@ export async function POST(req: Request) {
         seed: Math.floor(Math.random() * 10000),
         strength: 0.66,
         negative_prompt:
-          "low quality,3d, bad quality, lack of details, realism, plain background, washed out",
+          "low quality, 3d, bad quality, lack of details, realism, plain background, washed out",
         guidance_scale: 13,
-        num_inference_steps: 53,
+        num_inference_steps: 52,
       },
     });
 

@@ -1,17 +1,23 @@
 "use client";
 
+import {
+  GalleryFilterButton,
+  GalleryFilterComponentContainer,
+  GalleryFilterComponentSide,
+} from "@/components/gallery-filter-component/gallery-filter-component.styled";
 import GalleryItemModalComponent from "@/components/gallery-item-modal/gallery-item-modal.component";
+import GalleryItemScaleComponent from "@/components/gallery-item-scale/gallery-item-scale.component";
 import GalleryItemComponent from "@/components/gallery-item/gallery-item.component";
 import GalleryComponent from "@/components/gallery/gallery.component";
 import { LinkStyled } from "@/components/link/link.component.styled";
 import { firestore } from "@/firebase";
+import { getBaseColorByScale } from "@/helpers/get-base-color-by-rarity/get-base-color-by-rarity";
 import { useGetFriends } from "@/hooks/use-get-friends";
 import { useGetImages } from "@/hooks/use-get-images";
 import { useUserDetails } from "@/hooks/use-user-details";
-import { ImageItem } from "@/types/image.types";
-import { ScaleType } from "@/types/scale.types";
+import { ImageItem, ImagesSortType } from "@/types/image.types";
+import { scaleOrder, ScaleType } from "@/types/scale.types";
 import { getAuth, sendEmailVerification } from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import Rodal from "rodal";
@@ -23,8 +29,10 @@ const MyLibraryPage = () => {
   const [imagesFiltered, setImagesFiltered] = useState<ImageItem[]>([]);
   const [isMyPage, setIsMyPage] = useState(false);
   const [detailsImage, setDetailsImage] = useState<ImageItem | null>(null);
+  const [sortOption, setSortOption] = useState<ImagesSortType>("newest");
+  const [filterOption, setFilterOption] = useState<"all" | ScaleType>("all");
 
-  const { images, loading } = useGetImages(true, pageId);
+  const { images, loading, rarityCount } = useGetImages(true, pageId);
   const { friends } = useGetFriends();
 
   const handleOnClick = (img: ImageItem) => {
@@ -129,9 +137,37 @@ const MyLibraryPage = () => {
     }
   };
 
+  const onFilterOptionClick = (option: "all" | ScaleType) => {
+    if (option === filterOption) {
+      option = "all";
+    }
+    setFilterOption(option);
+  };
+
   useEffect(() => {
-    setImagesFiltered(images);
-  }, [images]);
+    let filtered = [...images];
+
+    if (filterOption !== "all") {
+      filtered = filtered.filter((img) => img.settings.rarity === filterOption);
+    }
+
+    switch (sortOption) {
+      case "newest":
+        filtered.sort((a, b) => b.createdAt.seconds - a.createdAt.seconds);
+        break;
+      case "oldest":
+        filtered.sort((a, b) => a.createdAt.seconds - b.createdAt.seconds);
+        break;
+      case "rarity":
+        filtered.sort(
+          (a, b) =>
+            scaleOrder.indexOf(b.settings.rarity) -
+            scaleOrder.indexOf(a.settings.rarity)
+        );
+        break;
+    }
+    setImagesFiltered(filtered);
+  }, [images, sortOption, filterOption]);
 
   useEffect(() => {
     const idIsEqual = pageId === user?.id;
@@ -140,12 +176,15 @@ const MyLibraryPage = () => {
   if (loading) {
     return (
       <div>
-        <span>loading...</span>
+        <span>loading gallery...</span>
       </div>
     );
   }
+
+  console.log(rarityCount, "rarityCount");
+
   return (
-    <GalleryComponent>
+    <>
       <Rodal visible={!!detailsImage} onClose={() => setDetailsImage(null)}>
         <GalleryItemModalComponent
           user={user}
@@ -158,22 +197,54 @@ const MyLibraryPage = () => {
           img={detailsImage}
         />
       </Rodal>
-      {imagesFiltered.length ? (
-        imagesFiltered.map((img: ImageItem) => (
-          <GalleryItemComponent
-            onClick={handleOnClick}
-            key={img.id}
-            img={img}
-          />
-        ))
-      ) : (
-        <div>
-          <p>Seems you don't have Penguins yet.</p>
-          <br />
-          <LinkStyled href={"/countdown"}>Go and Craft first!</LinkStyled>
-        </div>
+      {images.length && (
+        <GalleryFilterComponentContainer>
+          <GalleryFilterComponentSide>
+            Sort by:
+            <select
+              value={sortOption}
+              onChange={(e) => setSortOption(e.target.value as any)}
+            >
+              <option value="newest">Newest</option>
+              <option value="oldest">Oldest</option>
+              <option value="rarity">By Rarity</option>
+            </select>
+          </GalleryFilterComponentSide>
+          <GalleryFilterComponentSide>
+            Show only:
+            {Object.keys(rarityCount).map((rarity) => (
+              <GalleryFilterButton
+                key={rarity}
+                active={rarity === filterOption}
+                onClick={() => onFilterOptionClick(rarity as ScaleType)}
+              >
+                <GalleryItemScaleComponent
+                  baseColor={getBaseColorByScale(rarity)}
+                  scale={rarity}
+                />
+              </GalleryFilterButton>
+            ))}
+          </GalleryFilterComponentSide>
+        </GalleryFilterComponentContainer>
       )}
-    </GalleryComponent>
+      <GalleryComponent>
+        {imagesFiltered.length ? (
+          imagesFiltered.map((img: ImageItem) => (
+            <GalleryItemComponent
+              onClick={handleOnClick}
+              key={img.id}
+              img={img}
+            />
+          ))
+        ) : (
+          <div>
+            <p>Seems you don't have Penguins yet.</p>
+            <br />
+            <LinkStyled href={"/countdown"}>Go and Craft first!</LinkStyled>
+          </div>
+        )}
+      </GalleryComponent>
+    </>
   );
 };
 
