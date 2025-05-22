@@ -7,7 +7,6 @@ import {
   GalleryItemModalButtonsContainer,
   GalleryItemModalContainer,
   GalleryItemModalContent,
-  GalleryItemModalDes,
   GalleryItemModalImage,
   GalleryItemModalScale,
   GalleryItemModalTitle,
@@ -20,6 +19,7 @@ import { format } from "date-fns";
 import { getPriceByScale } from "@/helpers/get-price-by-scale/get-price-by-scale";
 import { FriendWithUser, User } from "@/types/friends.types";
 import { ScaleType } from "@/types/scale.types";
+import GalleryItemModalStatistics from "../gallery-item-modal-statistics/gallery-item-modal-statistics.component";
 
 const orbitron = Orbitron({
   subsets: ["latin"],
@@ -76,22 +76,7 @@ const GalleryItemModalComponent = ({
           <GalleryItemScaleComponent scale={img.settings.rarity} />
         </GalleryItemModalScale>
         <GalleryItemModalAccordion $expand={!giftMode}>
-          <GalleryItemModalDes>{img.settings.des}</GalleryItemModalDes>
-
-          <span>Ability: {img.settings.ability}</span>
-
-          <span>Loot: {img.settings.acc}</span>
-
-          <span>Origin: {img.origin}</span>
-
-          <span>Breast: {img.settings.breast}</span>
-
-          <span>Beak: {img.settings.beak}</span>
-
-          <span>Back: {img.settings.back}</span>
-
-          <span>Created: {format(img.createdAt.toDate(), "dd.MM.yy")}</span>
-
+          <GalleryItemModalStatistics img={img} />
           {user && isMyPage && (
             <GalleryItemModalButtonsContainer>
               {user.avatar !== img.imageUrl && (
@@ -115,11 +100,8 @@ const GalleryItemModalComponent = ({
         </GalleryItemModalAccordion>
 
         {user && giftMode && (
-          <div>
-            <span>
-              <i>beta feature</i>
-            </span>
-            <h3>Choose recipient</h3>
+          <>
+            <h3>Choose Friend</h3>
             <br />
             {friends && (
               <select
@@ -142,23 +124,21 @@ const GalleryItemModalComponent = ({
             <br />
             <GalleryItemModalButtonsContainer>
               {loading && "please wait..."}
-              <button
+              <NeonButtonComponent
+                title="Send Penguin"
                 onClick={() => onSendGift(friendRecipient, img.id)}
                 disabled={!friendRecipient || loading}
-              >
-                send
-              </button>
+              />
 
-              <button
+              <NeonButtonComponent
                 onClick={() => {
                   setGiftMode(false);
                   setFriendRecipient("");
                 }}
-              >
-                cancel
-              </button>
+                title="Cancel"
+              ></NeonButtonComponent>
             </GalleryItemModalButtonsContainer>
-          </div>
+          </>
         )}
       </GalleryItemModalContent>
     </GalleryItemModalContainer>

@@ -61,12 +61,7 @@ export const GalleryItemModalAccordion = styled.div<{ $expand: boolean }>`
   max-height: ${({ $expand }) => ($expand ? "600px" : "0")};
 `;
 
-export const GalleryItemModalDes = styled.p`
-  font-size: 21px;
-  @media (max-width: 768px) {
-    font-size: 15px;
-  }
-`;
+
 
 export const GalleryItemModalScale = styled.h3`
   text-align: center;
@@ -78,5 +73,8 @@ export const GalleryItemModalButtonsContainer = styled.div`
   gap: 10px;
   @media (max-width: 1008px) {
     flex-direction: column;
+  }
+  button{
+    flex-grow: 1;
   }
 `;
