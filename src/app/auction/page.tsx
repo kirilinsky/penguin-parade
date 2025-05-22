@@ -27,7 +27,7 @@ const AuctionPage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const [imagesFiltered, setImagesFiltered] = useState<ImageItem[]>([]);
-  const [sortOption, setSortOption] = useState<ImagesSortType>("newest");
+  const [sortOption, setSortOption] = useState<ImagesSortType>("expensive");
   const [filterOption, setFilterOption] = useState<"all" | ScaleType>("all");
 
   const buyImage = async (imageId: string) => {
@@ -82,6 +82,12 @@ const AuctionPage = () => {
     }
 
     switch (sortOption) {
+      case "cheap":
+        filtered.sort((a, b) => a.price - b.price);
+        break;
+      case "expensive":
+        filtered.sort((a, b) => b.price - a.price);
+        break;
       case "newest":
         filtered.sort((a, b) => b.createdAt.seconds - a.createdAt.seconds);
         break;
@@ -118,6 +124,8 @@ const AuctionPage = () => {
               value={sortOption}
               onChange={(e) => setSortOption(e.target.value as any)}
             >
+              <option value="expensive">Expensive</option>
+              <option value="cheap">Cheap</option>
               <option value="newest">Newest</option>
               <option value="oldest">Oldest</option>
               <option value="rarity">By Rarity</option>

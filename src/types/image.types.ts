@@ -44,4 +44,9 @@ export interface ImageItemSettings {
   theme: string;
 }
 
-export type ImagesSortType = "newest" | "oldest" | "rarity";
+export type ImagesSortType =
+  | "newest"
+  | "oldest"
+  | "rarity"
+  | "expensive"
+  | "cheap";
