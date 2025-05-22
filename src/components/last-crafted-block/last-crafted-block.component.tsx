@@ -8,13 +8,23 @@ import Image from "next/image";
 import { useGetImages } from "@/hooks/use-get-images";
 
 const LastCraftedBlockComponent = () => {
-  const { images, loading } = useGetImages(true);
+  const { images, uid, loading } = useGetImages(true);
 
   return (
     <PageContentBlockStyled>
       <h2>Last Crafted Penguin</h2>
       {!loading && images && images.length ? (
-        <GalleryItemComponent slim scalable={false} img={images[0]} />
+        <>
+          <GalleryItemComponent
+            slim
+            glare={false}
+            scalable={false}
+            img={images[0]}
+          />
+          <LinkStyled title="Library page" href={`/library/${uid}`}>
+            Go to my library
+          </LinkStyled>
+        </>
       ) : (
         <>
           <p>You don't have Penguins yet! </p>

@@ -23,11 +23,13 @@ const GalleryItemComponent = ({
   img,
   onClick = () => {},
   slim = false,
+  glare = true,
   scalable = true,
 }: {
   img: ImageItem;
   onClick?: (img: ImageItem) => void;
   slim?: boolean;
+  glare?: boolean;
   scalable?: boolean;
 }) => {
   const [loaded, setLoaded] = useState(false);
@@ -39,7 +41,7 @@ const GalleryItemComponent = ({
     <Tilt
       scale={scalable ? 1.15 : 1}
       key={img.id}
-      glareEnable={true}
+      glareEnable={glare}
       glareMaxOpacity={0.8}
       glarePosition="all"
       glareColor={baseColor}
@@ -66,8 +68,8 @@ const GalleryItemComponent = ({
         <GalleryItemSkeleton loaded={loaded} />
         <GalleryItemImage
           src={img.imageUrl}
-          width={slim ? '60%' : '95%'}
-          height={slim ? '60%' : "95%"}
+          width={slim ? "60%" : "95%"}
+          height={slim ? "60%" : "95%"}
           alt={img.title}
           color={baseColor}
           loaded={loaded}

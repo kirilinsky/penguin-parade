@@ -121,8 +121,14 @@ const CountDownPage = () => {
               </>
             ) : (
               <>
-                <p>Sorry, you can craft only once in a day.</p>
-                come back in {leftTime}
+                <Image
+                  width={190}
+                  height={200}
+                  src="/come_later.webp"
+                  alt="come later"
+                />
+                <p>Sorry, you can craft only once a day.</p>
+                <span>Come back in <b>{leftTime}</b></span>
               </>
             )}
           </PageContentBlockFlex>

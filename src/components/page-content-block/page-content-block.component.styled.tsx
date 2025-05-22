@@ -6,7 +6,7 @@ export const PageContentBlockFlex = styled.div`
   justify-content:space-evenly;
   align-items: center;
   padding: 10px 3px;
-  gap: 10px;
+  gap: 8px;
 `;
 
 export const PageContentBlockStyled = styled(PageContentBlockFlex)`

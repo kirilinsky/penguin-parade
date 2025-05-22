@@ -66,5 +66,5 @@ export const useGetImages = (
     fetchImages();
   }, [uid, sortByDate, refetchTrigger]);
 
-  return { images, rarityCount, total, loading, error, refetch };
+  return { images, rarityCount, uid, total, loading, error, refetch };
 };

@@ -21,16 +21,21 @@ export default function Home() {
         <>
           <PageContentBlockStyled>
             <h1>Welcome, {user.username}!</h1>
-            <span>Here you can craft and collect unique Penguins.</span>
-            <span>Then you can share or exchange with friends.</span>
+            <p>Start crafting your own collection of unique Penguins</p>
+            <span>each with their own style and story.</span>
+            <span>
+              Show them off, trade with another users, or send as surprise gifts
+              to friends.
+            </span>
+
             <Image
               alt="nofriends"
               src="/infographics/welcome.png"
               width="120"
               height="120"
             />
-            <LinkStyled title="Craft new" href={"/countdown"}>
-              Craft new Penguin!
+            <LinkStyled title="Craft page" href={"/countdown"}>
+              Go to Craft page
             </LinkStyled>
           </PageContentBlockStyled>
           <LastCraftedBlockComponent />

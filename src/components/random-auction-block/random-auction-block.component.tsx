@@ -21,10 +21,11 @@ const RandomAuctionBlockComponent = () => {
         <>
           <GalleryItemComponent
             slim
+            glare={false}
             scalable={false}
             img={images[randomNumber]}
           />
-          
+
           <LinkStyled href="/auction">Go to Auction</LinkStyled>
         </>
       ) : (
