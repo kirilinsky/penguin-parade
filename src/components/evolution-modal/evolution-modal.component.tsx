@@ -30,32 +30,26 @@ const EvolutionModalComponent = ({
         {currentRarityScale && (
           <>
             <span> Current rarity: </span>
-            <GalleryItemScaleComponent
-              baseColor={currentScaleColor}
-              scale={currentRarityScale}
-            />
+            <GalleryItemScaleComponent scale={currentRarityScale} />
           </>
         )}
         {expectingRarityScale && (
           <>
             <span> Expecting rarity: </span>
-            <GalleryItemScaleComponent
-              baseColor={expectingScaleColor}
-              scale={expectingRarityScale}
-            />
+            <GalleryItemScaleComponent scale={expectingRarityScale} />
           </>
         )}
       </h4>
 
       <EvolutionModalGallery>
         {filteredImages.map((img: ImageItem) => (
-          <EvolutionModalGalleryItem onClick={() => onImageClick(img)} key={img.id}>
+          <EvolutionModalGalleryItem
+            onClick={() => onImageClick(img)}
+            key={img.id}
+          >
             <img width={"100%"} height={"100%"} src={img.imageUrl} />
             <h4>{img.title}</h4>
-            <GalleryItemScaleComponent
-              baseColor={getBaseColorByScale(img.settings.rarity)}
-              scale={img.settings.rarity}
-            />
+            <GalleryItemScaleComponent scale={img.settings.rarity} />
           </EvolutionModalGalleryItem>
         ))}
       </EvolutionModalGallery>

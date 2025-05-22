@@ -62,10 +62,7 @@ const GalleryItemComponent = ({
             src="/badbatch_badge.webp"
           />
         )}
-        <GalleryItemScaleComponent
-          baseColor={baseColor}
-          scale={img.settings.rarity}
-        />
+        <GalleryItemScaleComponent scale={img.settings.rarity} />
         <GalleryItemSkeleton loaded={loaded} />
         <GalleryItemImage
           src={img.imageUrl}

@@ -10,8 +10,6 @@ import GalleryItemScaleComponent from "@/components/gallery-item-scale/gallery-i
 import GalleryItemComponent from "@/components/gallery-item/gallery-item.component";
 import GalleryComponent from "@/components/gallery/gallery.component";
 import { LinkStyled } from "@/components/link/link.component.styled";
-import { firestore } from "@/firebase";
-import { getBaseColorByScale } from "@/helpers/get-base-color-by-rarity/get-base-color-by-rarity";
 import { useGetFriends } from "@/hooks/use-get-friends";
 import { useGetImages } from "@/hooks/use-get-images";
 import { useUserDetails } from "@/hooks/use-user-details";
@@ -218,10 +216,7 @@ const MyLibraryPage = () => {
                 active={rarity === filterOption}
                 onClick={() => onFilterOptionClick(rarity as ScaleType)}
               >
-                <GalleryItemScaleComponent
-                  baseColor={getBaseColorByScale(rarity)}
-                  scale={rarity}
-                />
+                <GalleryItemScaleComponent scale={rarity} />
               </GalleryFilterButton>
             ))}
           </GalleryFilterComponentSide>

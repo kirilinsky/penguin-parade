@@ -8,8 +8,7 @@ import {
   EvolutionGridItemCenterWrap,
 } from "@/components/evolution-grid-item/evolution-grid-item.component.styled";
 import EvolutionModalComponent from "@/components/evolution-modal/evolution-modal.component";
-import GalleryItemScaleComponent from "@/components/gallery-item-scale/gallery-item-scale.component";
-import { LinkStyled } from "@/components/link/link.component.styled";
+ import { LinkStyled } from "@/components/link/link.component.styled";
 import NeonButtonComponent from "@/components/neon-button/neon-button.component";
 import { getBaseColorByScale } from "@/helpers/get-base-color-by-rarity/get-base-color-by-rarity";
 import { getNextScale } from "@/helpers/get-next-scale/get-next-scale";

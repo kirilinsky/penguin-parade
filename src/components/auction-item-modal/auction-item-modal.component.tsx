@@ -57,10 +57,7 @@ const AuctionItemModalComponent = ({
           {img.title}
         </GalleryItemModalTitle>
         <GalleryItemModalScale>
-          <GalleryItemScaleComponent
-            baseColor={baseColor}
-            scale={img.settings.rarity}
-          />
+          <GalleryItemScaleComponent scale={img.settings.rarity} />
         </GalleryItemModalScale>
 
         <GalleryItemModalDes>{img.settings.des}</GalleryItemModalDes>
