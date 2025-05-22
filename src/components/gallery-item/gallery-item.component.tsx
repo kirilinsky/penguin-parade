@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from "react";
 import Tilt from "react-parallax-tilt";
 import {
+  GalleryItemBadBatchBadge,
   GalleryItemContent,
   GalleryItemGiftBadge,
   GalleryItemImage,
@@ -51,6 +52,14 @@ const GalleryItemComponent = ({
             height={31}
             alt="gift"
             src="/gift_badge.webp"
+          />
+        )}
+        {img.origin === "bad batch" && (
+          <GalleryItemBadBatchBadge
+            width={55}
+            height={40}
+            alt="bad batch"
+            src="/badbatch_badge.webp"
           />
         )}
         <GalleryItemScaleComponent

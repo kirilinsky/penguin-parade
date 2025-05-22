@@ -54,3 +54,11 @@ export const GalleryItemGiftBadge = styled(Image)`
   top: 2%;
   right: 3%;
 `;
+
+export const GalleryItemBadBatchBadge = styled(GalleryItemGiftBadge)`
+  right: unset;
+  top: 7%;
+  left: 3%;
+  transform: rotate(-10deg);
+  z-index: 16;
+`;
