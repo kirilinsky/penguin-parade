@@ -74,7 +74,7 @@ const SignUpPage = () => {
             style={{ padding: "10px" }}
             placeholder="Email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value.trim())}
             required
           />
           <br />
@@ -83,7 +83,7 @@ const SignUpPage = () => {
             style={{ padding: "10px" }}
             placeholder="User Name"
             value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            onChange={(e) => setUsername(e.target.value.trim())}
             required
           />
           <br />
