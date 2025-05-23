@@ -1,10 +1,27 @@
 import Image from "next/image";
 import styled from "styled-components";
 
+export const GalleryImageWrap = styled.div`
+  position: relative;
+  display: flex;
+ align-items: center;justify-content: center;
+`;
+
+export const GalleryImageFrameOverlay = styled.img`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  object-fit: contain;
+  border-radius: 4px;
+`;
+
 export const GalleryItemImage = styled.img.withConfig({
-  shouldForwardProp: (prop) => prop !== "loaded",
-})<{ color: string; loaded: boolean }>`
-  border-radius: 1em;
+  shouldForwardProp: (prop) => prop !== "loaded" && prop !== "emperor",
+})<{ emperor: boolean; color: string; loaded: boolean }>`
+  border-radius: ${({ emperor }) => (emperor ? '4px' : "1em")};
   z-index: 15;
   opacity: ${(props) => (props.loaded ? 1 : 0)};
   transition: opacity 0.4s ease-in-out;

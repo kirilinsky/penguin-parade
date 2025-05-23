@@ -1,25 +1,21 @@
 import React from "react";
 import GalleryItemScaleComponent from "../gallery-item-scale/gallery-item-scale.component";
 import { ImageItem } from "@/types/image.types";
-import { getBaseColorByScale } from "@/helpers/get-base-color-by-rarity/get-base-color-by-rarity";
 import {
   EvolutionModalContainer,
   EvolutionModalGallery,
   EvolutionModalGalleryItem,
 } from "./evolution-modal.component.styled";
+import { ScaleType } from "@/types/scale.types";
 
 const EvolutionModalComponent = ({
   currentRarityScale,
-  currentScaleColor,
   expectingRarityScale,
-  expectingScaleColor,
   filteredImages,
   onImageClick,
 }: {
-  currentRarityScale: string | null;
-  expectingRarityScale: string | null;
-  currentScaleColor: string;
-  expectingScaleColor: string;
+  currentRarityScale: ScaleType | null;
+  expectingRarityScale: ScaleType | null;
   filteredImages: ImageItem[];
   onImageClick: (img: ImageItem) => void;
 }) => {

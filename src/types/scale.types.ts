@@ -5,7 +5,8 @@ export type ScaleType =
   | "legendary"
   | "divine"
   | "ghost"
-  | "mystic";
+  | "mystic"
+  | "emperor";
 
 export const scaleOrder: ScaleType[] = [
   "common",
@@ -15,49 +16,48 @@ export const scaleOrder: ScaleType[] = [
   "divine",
   "ghost",
   "mystic",
+  "emperor",
 ];
 
-export const scaleConfig: Record<
-  ScaleType,
-  {
-    color: string;
-    sell: number | null;
-    buy: number | null;
-  }
-> = {
+export const scaleConfig = {
   common: {
-    color: "#606060",
+    color: "#6e6e6e",
     sell: 1,
     buy: 4,
   },
   rare: {
-    color: "#00b7df",
+    color: "#00c4ff",
     sell: 2,
     buy: 10,
   },
   epic: {
-    color: "#a020f0",
+    color: "#b030f0",
     sell: 4,
     buy: 20,
   },
   legendary: {
-    color: "#ff3131",
+    color: "#ff2a2a",
     sell: 8,
     buy: 35,
   },
   divine: {
-    color: "#fdd835",
+    color: "#ffe14d",
     sell: 16,
     buy: 82,
   },
   ghost: {
-    color: "#f0f0f0",
-    sell: null,
-    buy: null,
+    color: "#fafafa",
+    sell: 32,
+    buy: 100,
   },
   mystic: {
-    color: "#39ff14",
+    color: "#00ff7f",
     sell: null,
     buy: null,
   },
-};
+  emperor: {
+    color: "rgba(218, 165, 32, 1)",
+    sell: null,
+    buy: null,
+  },
+} as const;

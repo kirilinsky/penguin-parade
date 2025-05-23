@@ -1,6 +1,8 @@
 import React, { useMemo, useState } from "react";
 import Tilt from "react-parallax-tilt";
 import {
+  GalleryImageFrameOverlay,
+  GalleryImageWrap,
   GalleryItemBadBatchBadge,
   GalleryItemContent,
   GalleryItemGiftBadge,
@@ -34,18 +36,20 @@ const GalleryItemComponent = ({
 }) => {
   const [loaded, setLoaded] = useState(false);
 
+  const emperor = img.settings.rarity === "emperor";
+
   const baseColor = useMemo(() => {
     return getBaseColorByScale(img.settings.rarity);
   }, [img.settings.rarity]);
   return (
     <Tilt
-      scale={scalable ? 1.15 : 1}
+      scale={scalable ? 1.12 : 1}
       key={img.id}
       glareEnable={glare}
-      glareMaxOpacity={0.8}
+      glareMaxOpacity={0.7}
       glarePosition="all"
       glareColor={baseColor}
-      glareBorderRadius="20px"
+      glareBorderRadius="1em"
     >
       <GalleryItemContent onClick={() => onClick(img)}>
         {img.gift && (
@@ -66,20 +70,26 @@ const GalleryItemComponent = ({
         )}
         <GalleryItemScaleComponent scale={img.settings.rarity} />
         <GalleryItemSkeleton loaded={loaded} />
-        <GalleryItemImage
-          src={img.imageUrl}
-          width={slim ? "60%" : "95%"}
-          height={slim ? "60%" : "95%"}
-          alt={img.title}
-          color={baseColor}
-          loaded={loaded}
-          onLoad={() => setLoaded(true)}
-          loading="lazy"
-        />
+        <GalleryImageWrap>
+          {emperor && (
+            <GalleryImageFrameOverlay src="/emperor_frame.webp" alt="frame" />
+          )}
+          <GalleryItemImage
+            src={img.imageUrl}
+            width={slim ? "60%" : "100%"}
+            height={slim ? "60%" : "100%"}
+            alt={img.title}
+            color={baseColor}
+            emperor={emperor}
+            loaded={loaded}
+            onLoad={() => setLoaded(true)}
+            loading="lazy"
+          />
+        </GalleryImageWrap>
         <p className={orbitron.className}>{img.title}</p>
         {img.auction && (
           <p>
-            Price - {img.price}{" "}
+            Price - {img.price}
             <Image src="/coin.webp" width={18} height={18} alt="coin" />{" "}
           </p>
         )}

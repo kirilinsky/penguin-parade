@@ -196,8 +196,6 @@ const EvolvePage = () => {
         onClose={() => setShowLibraryModal(false)}
       >
         <EvolutionModalComponent
-          expectingScaleColor={expectingScaleColor}
-          currentScaleColor={currentScaleColor}
           currentRarityScale={currentRarityScale}
           expectingRarityScale={expectingRarityScale}
           filteredImages={filteredImages}

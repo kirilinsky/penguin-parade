@@ -139,7 +139,7 @@ const AuctionPage = () => {
                 active={rarity === filterOption}
                 onClick={() => onFilterOptionClick(rarity as ScaleType)}
               >
-                <GalleryItemScaleComponent scale={rarity} />
+                <GalleryItemScaleComponent scale={rarity as ScaleType} />
               </GalleryFilterButton>
             ))}
           </GalleryFilterComponentSide>

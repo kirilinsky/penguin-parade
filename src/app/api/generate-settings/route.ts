@@ -3,22 +3,23 @@ import { ScaleType } from "@/types/scale.types";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
-  const randomNumber = Math.floor(Math.random() * 1234);
+  const randomNumber = Math.floor(Math.random() * 1300);
   const randomSettings = Math.floor(Math.random() * themes.length);
-  const randomlyUpdatedTheme = themes[randomSettings];
 
   let rarity: ScaleType =
     randomNumber < 2
-      ? "mystic"
+      ? "emperor"
       : randomNumber < 5
+      ? "mystic"
+      : randomNumber < 10
       ? "ghost"
-      : randomNumber < 9
+      : randomNumber < 15
       ? "divine"
-      : randomNumber < 49
+      : randomNumber < 60
       ? "legendary"
-      : randomNumber < 111
+      : randomNumber < 150
       ? "epic"
-      : randomNumber < 300
+      : randomNumber < 400
       ? "rare"
       : "common";
 
@@ -26,7 +27,8 @@ export async function POST(req: Request) {
   if (scale) {
     rarity = scale;
   }
-
+  const randomlyUpdatedTheme =
+    rarity === "emperor" ? "Ancient rome emperor" : themes[randomSettings];
   const presetsObject = {
     common:
       "Keep it grounded or lightly stylized. Title should be related to theme. Backgrounds may include cozy cottages, campfires, village squares, wooden bridges, blue skies with clouds, or garden paths. Title should feel soft, playful, or nostalgic. Effects minimal — perhaps some falling leaves or laundry in the breeze, warm light. Accessories simple. No grandiose titles (avoid'whispering', 'king', 'emperor', etc). Abilities should be subtle and clever.",
@@ -40,6 +42,8 @@ export async function POST(req: Request) {
       "Eerie and decayed. Include haunted mansions, shadowy forests, broken mirrors, huge emeralds, clouds, fogged forest, or carnival ruins wrapped in fog. Details like flickering lanterns, floating chains, whispering gravestones, or black flame torches. Glows come from within or unseen sources in white-moon or light yellow colors. Ability must feel cursed or spectral. Title should sound mysterious, not heroic.",
     mystic:
       "Surreal, ancient, and dreamlike, scarry. Backgrounds may include floating pyramids, huge diamonds, spiders, graveyards, inverted temples, moving sky-forests, or libraries with sentient books. Colors can shift or glow strangely but in green neon like color. Environments should feel secretive and impossible — arcane symbols in the sky, living shadows, or fractured light. Title is cryptic. Ability must feel ancient and whispered. Effects are enormous and bright",
+    emperor:
+      "Colossal, divine, and authoritarian. Backgrounds depict shattered celestial thrones, planetary cores, molten time-forges, roman cities, or mythic towers spiraling into the void. Everything feels ancient and omnipotent — gravity-bending architecture, black suns, or monoliths with pulsating inscriptions.Accessories are royal and rich. Colors are regal and darkly radiant: obsidian, deep crimson, starlit gold. Title is imperial and absolute. Ability reads like a commandment, carved into fate itself. Effects are monumental, reality-distorting, and almost godlike in presence.",
   };
 
   const systemPrompt = `

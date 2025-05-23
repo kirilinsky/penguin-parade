@@ -7,6 +7,7 @@ import {
   TotalCountBlockItemNumber,
 } from "./total-count-block.component.styled";
 import GalleryItemScaleComponent from "../gallery-item-scale/gallery-item-scale.component";
+import { ScaleType } from "@/types/scale.types";
 
 const TotalCountBlockComponent = () => {
   const { rarityCount, loading } = useGetImages();
@@ -20,7 +21,7 @@ const TotalCountBlockComponent = () => {
           : Object.entries(rarityCount).map(([key, value]) => {
               return (
                 <TotalCountBlockItem key={key}>
-                  <GalleryItemScaleComponent scale={key} />
+                  <GalleryItemScaleComponent scale={key as ScaleType} />
 
                   <TotalCountBlockItemNumber>{value}</TotalCountBlockItemNumber>
                 </TotalCountBlockItem>

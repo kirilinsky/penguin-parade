@@ -171,7 +171,7 @@ const MyLibraryPage = () => {
     const idIsEqual = pageId === user?.id;
     setIsMyPage(idIsEqual);
   }, [user, pageId]);
-  
+
   if (loading) {
     return (
       <div>
@@ -179,9 +179,6 @@ const MyLibraryPage = () => {
       </div>
     );
   }
-
-  console.log(rarityCount, "rarityCount");
-
   return (
     <>
       <Rodal visible={!!detailsImage} onClose={() => setDetailsImage(null)}>
@@ -217,7 +214,7 @@ const MyLibraryPage = () => {
                 active={rarity === filterOption}
                 onClick={() => onFilterOptionClick(rarity as ScaleType)}
               >
-                <GalleryItemScaleComponent scale={rarity} />
+                <GalleryItemScaleComponent scale={rarity as ScaleType} />
               </GalleryFilterButton>
             ))}
           </GalleryFilterComponentSide>
