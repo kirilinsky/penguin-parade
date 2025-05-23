@@ -29,17 +29,17 @@ export async function POST(req: Request) {
 
   const presetsObject = {
     common:
-      "Keep it grounded or lightly stylized. Title should be related to theme. Backgrounds may include cozy cottages, campfires, village squares, wooden bridges, blue skies with clouds, or garden paths. Themes should feel soft, playful, or nostalgic. Effects minimal — perhaps some falling leaves or laundry in the breeze. Accessories simple. No grandiose titles (avoid'whispering', 'king', 'emperor', etc). Abilities should be subtle and clever.",
-    rare: "Introduce distinct fantasy elements: glowing mushrooms, crystal flowers, enchanted glades, or surreal sunsets. Backgrounds may include floating islands, rainbow-lit waterfalls, or celestial gardens. Accessories may glow or shimmer. Abilities become unique but not overpowered.",
-    epic: "Strong visual contrasts and striking scenes. Environments may feature elemental chaos — volcano temples, storm altars, overgrown mechs, or desert ruins powered by arcane energy. Include magical effects like lightning trails or glowing glyphs. Give the penguin an aura or light. Titles should feel iconic and epic.",
+      "Keep it grounded or lightly stylized. Title should be related to theme. Backgrounds may include cozy cottages, campfires, village squares, wooden bridges, blue skies with clouds, or garden paths. Title should feel soft, playful, or nostalgic. Effects minimal — perhaps some falling leaves or laundry in the breeze, warm light. Accessories simple. No grandiose titles (avoid'whispering', 'king', 'emperor', etc). Abilities should be subtle and clever.",
+    rare: "Introduce distinct fantasy elements: glowing mushrooms, crystal flowers, enchanted glades, or surreal sunsets. Backgrounds may include floating islands, rainbow-lit waterfalls, or celestial gardens. Accessories may glow or shimmer, carbon. Abilities become unique but not overpowered.",
+    epic: "Strong visual contrasts and striking scenes. Black shine stones. Environments may feature elemental chaos — volcano temples, storm altars, overgrown mechs, or desert ruins powered by arcane energy, some violet bright colors. Include magical effects like lightning trails or glowing glyphs, crystals. Give the penguin an aura or light. Titles should feel iconic and epic.",
     legendary:
-      "Grand and symbolic. Backgrounds may include shattered moons, celestial maps, giant statues, or forgotten kingdoms ablaze with runes. Effects like fire halos, stardust rain, or radiant wings. Themes evoke ancient greatness. Title may sound mythic or eternal. Ability is powerful and thematically rich.",
+      "Grand and symbolic. Backgrounds may include shattered moons, ruby stones, celestial maps, giant statues, or forgotten kingdoms ablaze with runes and castles. Effects like fire halos, stardust rain, or radiant wings, asteroids. Title evoke ancient greatness, may sound mythic or eternal. Ability is powerful and thematically rich.",
     divine:
-      "High fantasy meets celestial architecture. Temples above the clouds, golden marble roads, divine obelisks, or glowing altars surrounded by doves or spirits. Use light rays, halos, and sacred gems. The environment may reflect godlike serenity. Accessories may include olive wreaths or star-forged armor.",
+      "High fantasy meets celestial architecture. Temples above the clouds, golden marble roads, divine obelisks, or glowing altars surrounded by doves or spirits, gold elements, marble columns. Use light rays, halos, and sacred gems and lightning. The environment may reflect godlike serenity and Olympus. Accessories may include olive wreaths or star-forged armor, ancient greece helmets and weapon.",
     ghost:
-      "Eerie and decayed. Include haunted mansions, shadowy forests, broken mirrors, or carnival ruins wrapped in fog. Details like flickering lanterns, floating chains, whispering gravestones, or black flame torches. Glows come from within or unseen sources. Ability must feel cursed or spectral. Title should sound mysterious, not heroic.",
+      "Eerie and decayed. Include haunted mansions, shadowy forests, broken mirrors, huge emeralds, clouds, fogged forest, or carnival ruins wrapped in fog. Details like flickering lanterns, floating chains, whispering gravestones, or black flame torches. Glows come from within or unseen sources in white-moon or light yellow colors. Ability must feel cursed or spectral. Title should sound mysterious, not heroic.",
     mystic:
-      "Surreal, ancient, and dreamlike. Backgrounds may include floating pyramids, inverted temples, moving sky-forests, or libraries with sentient books. Colors can shift or glow strangely. Environments should feel secretive and impossible — arcane symbols in the sky, living shadows, or fractured light. Title is cryptic. Ability must feel ancient and whispered.",
+      "Surreal, ancient, and dreamlike, scarry. Backgrounds may include floating pyramids, huge diamonds, spiders, graveyards, inverted temples, moving sky-forests, or libraries with sentient books. Colors can shift or glow strangely but in green neon like color. Environments should feel secretive and impossible — arcane symbols in the sky, living shadows, or fractured light. Title is cryptic. Ability must feel ancient and whispered. Effects are enormous and bright",
   };
 
   const systemPrompt = `
@@ -47,15 +47,15 @@ You are a penguin variation generator. Respond with a JSON object only. No intro
 There are few scales of rarity: common, rare, epic, legendary, divine (greek gods), ghost (casper-like), and mystic (scary and creepy).
 Return an object with:
 {
-  "bg": background behind penguin should be connected with theme and rarity scale, don't leave it too much simple,
-  "theme": random theme,
+  "bg": background behind penguin should be connected with theme and rarity scale, don't leave it too much simple, 
+  "theme": given theme,
   "beak": color of penguin's beak,
   "breast": color of penguin's breast,
   "back": color of penguin's back,
   "fx": picture effects,
   "acc": (max 1-3 words, clothing/hat/accessory),
   "t": (max 3 words, title of the penguin),
-  "des": story about penguin in 20-25 words,
+  "des": story about penguin in 20-27 words,
   "ability": max 1-3 words, ability of the penguin
 }
 Use Capital first letter for values. Background always connected with title and theme. Same for colors. Be bold and original. Mix elements. Return only JSON.`;
