@@ -7,7 +7,6 @@ import { Orbitron } from "next/font/google";
 import GalleryItemScaleComponent from "../gallery-item-scale/gallery-item-scale.component";
 import { getBaseColorByScale } from "@/helpers/get-base-color-by-rarity/get-base-color-by-rarity";
 import NeonButtonComponent from "../neon-button/neon-button.component";
-import { format } from "date-fns";
 import { User } from "@/types/friends.types";
 import {
   GalleryItemModalButtonsContainer,

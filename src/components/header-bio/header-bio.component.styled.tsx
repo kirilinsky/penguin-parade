@@ -1,5 +1,4 @@
-import Image from "next/image";
-import styled from "styled-components";
+ import styled from "styled-components";
 
 export const HeaderBioWrapper = styled.div`
   display: flex;

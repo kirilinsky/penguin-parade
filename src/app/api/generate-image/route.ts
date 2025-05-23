@@ -23,12 +23,7 @@ const model =
 const templateImageUrl = "https://i.ibb.co/B55bD3mh/template.png";
 const BUCKET = "penguins";
 const GLOBAL_IMAGES_COLLECTION = "images";
-
-const basePrompt = `A 2D digital cartoon-style like-a-collection card portrait of a penguin character. 
-Centered in the image, full upper body, same pose and proportions as the reference image. 
-Do not change anatomy or expression. 
-You must modify clothing, effects, background, lighting, and artistic style.
-Highly detailed, cinematic lighting, vibrant colors.`;
+ 
 
 export async function POST(req: Request) {
   const authHeader = req.headers.get("Authorization") || "";

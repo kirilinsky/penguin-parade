@@ -6,14 +6,13 @@ import {
   HeaderOpenMobileMenuButton,
   HeaderWrapper,
 } from "./header.component.styled";
-import Link from "next/link";
-import { useAtomValue, useSetAtom } from "jotai";
+ import { useAtomValue, useSetAtom } from "jotai";
 import { loggedInAtom } from "@/atoms/user/user.atom";
 import HeaderBioComponent from "../header-bio/header-bio.component";
 import { useUserDetails } from "@/hooks/use-user-details";
 import MobileMenuComponent from "../mobile-menu/mobile-menu.component";
 import NavigationLinksComponent from "../navigation-links/navigation-links.component";
-
+ 
 const HeaderComponent = () => {
   const { user, refreshUser, logOut } = useUserDetails();
   const [showMobileMenu, setShowMobileMenu] = useState(false);
@@ -54,7 +53,7 @@ const HeaderComponent = () => {
           loggedIn={loggedIn}
         />
       )}
-      <HeaderLinks>
+       <HeaderLinks>
         <NavigationLinksComponent
           user={user}
           logOutHandler={logOutHandler}
