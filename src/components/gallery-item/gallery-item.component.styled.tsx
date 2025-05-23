@@ -58,7 +58,7 @@ export const GalleryItemContent = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  min-height: 210px;
+  min-height: 300px;
   padding: 10px 20px;
   position: relative;
   &:hover {
