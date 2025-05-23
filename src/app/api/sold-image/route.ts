@@ -9,6 +9,7 @@ import {
   updateDoc,
   increment,
   serverTimestamp,
+  arrayRemove,
 } from "firebase/firestore";
 import { getPriceByScale } from "@/helpers/get-price-by-scale/get-price-by-scale";
 
@@ -73,6 +74,7 @@ export async function POST(req: Request) {
     await Promise.all([
       updateDoc(sellerUserRef, {
         coins: increment(sell),
+        imageIds: arrayRemove(imageId),
         "statistics.totalSold": increment(1),
         "statistics.totalCoinsEarned": increment(sell),
         "statistics.lastAuctionSellAt": serverTimestamp(),

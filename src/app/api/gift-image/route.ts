@@ -6,9 +6,11 @@ import { firestore } from "@/firebase"; // client-side firestore instance
 import {
   doc,
   getDoc,
-  updateDoc,  
+  updateDoc,
   increment,
   serverTimestamp,
+  arrayUnion,
+  arrayRemove,
 } from "firebase/firestore";
 
 export async function POST(req: Request) {
@@ -30,11 +32,17 @@ export async function POST(req: Request) {
   const { toUid, imageId } = await req.json();
 
   if (!fromUid || !toUid || !imageId) {
-    return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
+    return NextResponse.json(
+      { error: "Missing required fields" },
+      { status: 400 }
+    );
   }
 
   if (fromUid === toUid) {
-    return NextResponse.json({ error: "Cannot gift to yourself" }, { status: 400 });
+    return NextResponse.json(
+      { error: "Cannot gift to yourself" },
+      { status: 400 }
+    );
   }
 
   try {
@@ -79,7 +87,10 @@ export async function POST(req: Request) {
     ]);
 
     const friendRef = doc(firestore, `users/${fromUid}/friends/${toUid}`);
-    const reverseFriendRef = doc(firestore, `users/${toUid}/friends/${fromUid}`);
+    const reverseFriendRef = doc(
+      firestore,
+      `users/${toUid}/friends/${fromUid}`
+    );
 
     const [friendSnap, reverseSnap] = await Promise.all([
       getDoc(friendRef),
@@ -89,12 +100,14 @@ export async function POST(req: Request) {
     if (friendSnap.exists()) {
       await updateDoc(friendRef, {
         giftsSent: increment(1),
+        imageIds: arrayUnion(imageId),
       });
     }
 
     if (reverseSnap.exists()) {
       await updateDoc(reverseFriendRef, {
         giftsReceived: increment(1),
+        imageIds: arrayRemove(imageId),
       });
     }
 

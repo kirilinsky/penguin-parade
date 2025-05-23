@@ -3,6 +3,7 @@ import { adminAuth } from "@/fireBase-admin";
 import { firestore } from "@/firebase";
 import {
   arrayRemove,
+  arrayUnion,
   collection,
   doc,
   getDocs,
@@ -149,10 +150,14 @@ export async function POST(req: Request) {
       await Promise.all(updateImagePromises);
 
       await updateDoc(userRef, {
+        imageIds: arrayRemove(...imageIds),
+      });
+
+      await updateDoc(userRef, {
         coins: increment(payout),
         "statistics.totalCoinsEarned": increment(payout),
         "statistics.totalImagesDonated": increment(imageIds.length),
-        imageIds: arrayRemove(...imageIds),
+        imageIds: arrayUnion(data.id),
       });
       return NextResponse.json({
         success: true,
