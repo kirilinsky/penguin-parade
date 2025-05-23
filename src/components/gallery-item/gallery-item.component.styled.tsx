@@ -4,7 +4,8 @@ import styled from "styled-components";
 export const GalleryImageWrap = styled.div`
   position: relative;
   display: flex;
- align-items: center;justify-content: center;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const GalleryImageFrameOverlay = styled.img`
@@ -16,12 +17,13 @@ export const GalleryImageFrameOverlay = styled.img`
   pointer-events: none;
   object-fit: contain;
   border-radius: 4px;
+  z-index: 16;
 `;
 
 export const GalleryItemImage = styled.img.withConfig({
   shouldForwardProp: (prop) => prop !== "loaded" && prop !== "emperor",
 })<{ emperor: boolean; color: string; loaded: boolean }>`
-  border-radius: ${({ emperor }) => (emperor ? '4px' : "1em")};
+  border-radius: ${({ emperor }) => (emperor ? "4px" : "1em")};
   z-index: 15;
   opacity: ${(props) => (props.loaded ? 1 : 0)};
   transition: opacity 0.4s ease-in-out;
