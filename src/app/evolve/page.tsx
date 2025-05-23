@@ -8,7 +8,7 @@ import {
   EvolutionGridItemCenterWrap,
 } from "@/components/evolution-grid-item/evolution-grid-item.component.styled";
 import EvolutionModalComponent from "@/components/evolution-modal/evolution-modal.component";
- import { LinkStyled } from "@/components/link/link.component.styled";
+import { LinkStyled } from "@/components/link/link.component.styled";
 import NeonButtonComponent from "@/components/neon-button/neon-button.component";
 import { getBaseColorByScale } from "@/helpers/get-base-color-by-rarity/get-base-color-by-rarity";
 import { getNextScale } from "@/helpers/get-next-scale/get-next-scale";
@@ -71,16 +71,6 @@ const EvolvePage = () => {
     setEvolutionList(evolutionListDraft);
     setShowLibraryModal(false);
   };
-
-  useEffect(() => {
-    if (!currentRarityScale) return;
-    const filteredImagesDraft = [...filteredImages].filter(
-      (img) => img.settings.rarity === currentRarityScale
-    );
-    const nextScale = getNextScale(currentRarityScale);
-    setExpectingRarityScale(nextScale);
-    setFilteredImages(filteredImagesDraft);
-  }, [currentRarityScale]);
 
   const onItemClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
@@ -151,10 +141,8 @@ const EvolvePage = () => {
     const evolutionListDraft = { ...evolutionList };
     evolutionListDraft[resetKey] = null;
 
-    const filled = Object.values(evolutionListDraft).filter(
-      (v) => v !== null
-    ).length;
-    if (!filled) {
+    const filled = Object.values(evolutionListDraft).filter((v) => v !== null);
+    if (!filled.length) {
       setCurrentRarityScale(null);
       setExpectingRarityScale(null);
     }
@@ -187,6 +175,19 @@ const EvolvePage = () => {
     }
     return getBaseColorByScale(expectingRarityScale);
   }, [expectingRarityScale]);
+
+  useEffect(() => {
+    if (!currentRarityScale) {
+      setFilteredImages([...images]);
+      return;
+    }
+    const filteredImagesDraft = [...filteredImages].filter(
+      (img) => img.settings.rarity === currentRarityScale
+    );
+    const nextScale = getNextScale(currentRarityScale);
+    setExpectingRarityScale(nextScale);
+    setFilteredImages(filteredImagesDraft);
+  }, [currentRarityScale]);
 
   return (
     <>
@@ -230,12 +231,13 @@ const EvolvePage = () => {
             result={result}
             bg={resultImage}
           >
-            {!result &&
-              (evolutionListProgress < 100 ? (
-                `${evolutionListProgress}%`
-              ) : (
-                <NeonButtonComponent onClick={evolve} title="Evolve" />
-              ))}
+            {!result ||
+              (!evolutionInProgress &&
+                (evolutionListProgress < 100 ? (
+                  `${evolutionListProgress}%`
+                ) : (
+                  <NeonButtonComponent onClick={evolve} title="Evolve" />
+                )))}
             {evolutionInProgress && <EvolutionEffect />}
           </EvolutionGridItemCenterStyled>
           {result && resultTitle && (
