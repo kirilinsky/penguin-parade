@@ -188,9 +188,6 @@ const FriendsPage = () => {
 
     friendsRefetch();
   };
-
-  console.log(friends, "friends");
-
   return (
     <PageContentWrapperComponent>
       <FriendsListBlockComponent
