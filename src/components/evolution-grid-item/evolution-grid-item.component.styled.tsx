@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const EvolutionGridItemDefault = styled.div`
   aspect-ratio: 1 / 1;
-  border-radius: 2em;
+  border-radius: 1.2em;
   display: grid;
   place-items: center;
   z-index: 1;
@@ -10,7 +10,7 @@ const EvolutionGridItemDefault = styled.div`
     aspect-ratio: unset;
     width: 25vw;
     height: 25vh;
-    border-radius: 1em;
+    border-radius: .7em;
   }
   &:hover {
     transition: linear 0.2s;
@@ -22,7 +22,7 @@ export const EvolutionGridItemCenterWrap = styled.div`
   display: flex;
   flex-direction: column;
   height: 20vh;
-  gap: 38px;
+  gap: 39px;
   justify-content: center;
   text-align: center;
 `;
