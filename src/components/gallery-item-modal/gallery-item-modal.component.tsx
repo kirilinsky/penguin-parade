@@ -108,6 +108,7 @@ const GalleryItemModalComponent = ({
             <GalleryItemModalFriendsList>
               {friends.map((friend) => (
                 <GalleryItemModalFriendsItem
+                  key={friend.id}
                   active={friend.id === friendRecipient?.id}
                 >
                   <b>{friend.username}</b>
