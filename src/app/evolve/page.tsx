@@ -229,13 +229,13 @@ const EvolvePage = () => {
             result={result}
             bg={resultImage}
           >
-            {!result ||
-              (!evolutionInProgress &&
-                (evolutionListProgress < 100 ? (
-                  `${evolutionListProgress}%`
-                ) : (
-                  <NeonButtonComponent onClick={evolve} title="Evolve" />
-                )))}
+            
+            {(!result || !evolutionInProgress) &&
+              (evolutionListProgress < 100 ? (
+                `${evolutionListProgress}%`
+              ) : (
+                <NeonButtonComponent onClick={evolve} title="Evolve" />
+              ))}
             {evolutionInProgress && <EvolutionEffect />}
           </EvolutionGridItemCenterStyled>
           {result && resultTitle && (
