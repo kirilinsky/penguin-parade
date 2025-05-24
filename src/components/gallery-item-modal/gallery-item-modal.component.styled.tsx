@@ -21,7 +21,7 @@ export const GalleryItemModalContent = styled.div<{ $frameColor?: string }>`
   position: relative;
   color: #fff;
   width: 50%;
-  overflow: hidden;
+  overflow: auto;
   height: 100%;
   gap: 10px;
   border-radius: 1em;
