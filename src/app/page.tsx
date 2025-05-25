@@ -44,6 +44,7 @@ export default function Home() {
           <PageContentBlockStyled>
             <h2>Road map</h2>
             <ul>
+              <li>I18n</li>
               <li>Pay to skip function</li>
               <li>Funds system</li>
               <li>Anonymous home page</li>
@@ -56,7 +57,6 @@ export default function Home() {
               <li>Announcements</li>
               <li>Tutorial page</li>
               <li>SignUp/Login via gmail</li>
-              <li>I18n</li>
             </ul>
           </PageContentBlockStyled>
           <PageContentBlockStyled>
