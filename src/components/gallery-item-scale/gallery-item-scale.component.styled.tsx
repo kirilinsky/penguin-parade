@@ -6,20 +6,19 @@ export const GalleryItemScaleStyled = styled.span<{ color: string }>`
   align-items: center;
   transition: 0.2s linear;
   color: ${({ color }) => color};
-  text-transform: capitalize;
+  text-transform: capitalize; 
   text-shadow: 0 0 5px ${({ color }) => color}, 0 0 10px ${({ color }) => color},
     0 0 20px ${({ color }) => color};
 
   &:hover {
-    color: #fff;
-    transform: scale(1.12);
+    color: #fff; 
     text-shadow: 0 0 10px #fff, 0 0 20px ${({ color }) => color},
       0 0 40px ${({ color }) => color}, 0 0 80px ${({ color }) => color};
   }
 `;
 
 export const GalleryItemScaleGold = styled.span`
-text-transform: capitalize;
+  text-transform: capitalize;
   color: rgb(218, 165, 32);
   background: -webkit-linear-gradient(transparent, transparent),
     -webkit-linear-gradient(top, rgba(218, 165, 32, 1) 0%, rgba(
