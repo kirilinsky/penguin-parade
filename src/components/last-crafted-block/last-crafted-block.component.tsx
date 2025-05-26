@@ -6,13 +6,15 @@ import GalleryItemComponent from "../gallery-item/gallery-item.component";
 import { LinkStyled } from "../link/link.component.styled";
 import Image from "next/image";
 import { useGetImages } from "@/hooks/use-get-images";
+import { useTranslations } from "next-intl";
 
 const LastCraftedBlockComponent = () => {
   const { images, uid, loading } = useGetImages(true);
+  const t = useTranslations("lastCraftedBlock");
 
   return (
     <PageContentBlockStyled>
-      <h2>Last Crafted Penguin</h2>
+      <h2>{t("title")}</h2>
       {!loading && images && images.length ? (
         <>
           <GalleryItemComponent
@@ -22,14 +24,13 @@ const LastCraftedBlockComponent = () => {
             img={images[0]}
           />
           <LinkStyled title="Library page" href={`/library/${uid}`}>
-            Go to my library
+            {t("myLibraryLink")}
           </LinkStyled>
         </>
       ) : (
         <>
-          <p>You don't have Penguins yet! </p>
-          <LinkStyled href={"/countdown"}>Craft new</LinkStyled>
-
+          <p>{t("noPenguinsTitle")}</p>
+          <LinkStyled href={"/countdown"}>{t("craftLink")}</LinkStyled>
           <Image
             alt="nofriends"
             src="/infographics/no-friends.png"

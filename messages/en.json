@@ -14,6 +14,27 @@
         "rarity": "By Rarity",
         "showOnly": "Show only:"
     },
+    "lastCraftedBlock": {
+        "title": "Last Crafted Penguin",
+        "myLibraryLink": "Go to my library",
+        "noPenguinsTitle": "You don't have Penguins yet!",
+        "craftLink": "Craft new"
+    },
+    "craftPage": {
+        "title": "Get new Penguin",
+        "laterTitle": "Sorry, you can craft only once a day.",
+        "comeBackIn": "Come back in",
+        "payToSkipTitile": "or you can pay to skip and craft now:",
+        "loading": "loading...",
+        "payToSkipButton": "Pay to skip",
+        "generatingTitle": "Generating penguin...",
+        "waitMessage": "please wait",
+        "newPenguinTitle": "Wow, it's New",
+        "welcomeNew": "Welcome aboard buddy!",
+        "myLibraryLink": "Go to my Library",
+        "verifyEmailAlert1": "Please verify your email",
+        "verifyEmailAlert2": "before crafting a penguin."
+    },
     "LocaleSwitcher": {
         "en": "English",
         "ru": "Russian",

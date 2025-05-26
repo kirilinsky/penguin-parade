@@ -16,6 +16,7 @@ import NeonButtonComponent from "@/components/neon-button/neon-button.component"
 import { getAuth, sendEmailVerification } from "firebase/auth";
 import { formatDuration, intervalToDuration, isBefore } from "date-fns";
 import { useUserDetails } from "@/hooks/use-user-details";
+import { useTranslations } from "next-intl";
 
 type GenerationResult = {
   downloadURL: string;
@@ -24,6 +25,8 @@ type GenerationResult = {
 };
 
 const CountDownPage = () => {
+  const t = useTranslations("craftPage");
+
   const { user, refreshUser } = useUserDetails();
   const [canCraft, setCanCraft] = useState<boolean>(false);
   const [loading, setLoading] = useState(false);
@@ -61,7 +64,9 @@ const CountDownPage = () => {
     if (!userCred.emailVerified) {
       await sendEmailVerification(userCred);
       alert(
-        `Please verify your email (${userCred.email}) before crafting a penguin.`
+        `${t("verifyEmailAlert1")} (${userCred.email}) ${t(
+          "verifyEmailAlert2"
+        )}`
       );
       return;
     }
@@ -149,9 +154,7 @@ const CountDownPage = () => {
       <PageContentBlockStyled>
         {!loading && !result && (
           <PageContentBlockFlex>
-            {" "}
-            <h1>Get new Penguin</h1>
-            {/* TODO: Update counter */}
+            <h1>{t("title")}</h1>
             {canCraft ? (
               <>
                 <ArcadeButtonStyled onClick={craft} />
@@ -164,17 +167,21 @@ const CountDownPage = () => {
                   src="/come_later.webp"
                   alt="come later"
                 />
-                <p>Sorry, you can craft only once a day.</p>
+                <p>{t("laterTitle")}</p>
                 <span>
-                  Come back in <b>{leftTime}</b>
+                  {t("comeBackIn")} <b>{leftTime}</b>
                 </span>
                 <br />
                 <br />
-                <p>or you can pay to skip and craft now:</p>
+                <p>{t("payToSkipTitile")}</p>
                 {user && (
                   <NeonButtonComponent
                     disabled={loadingPayToSkip || user.coins <= 8}
-                    title={loadingPayToSkip ? "loading..." : "Pay to skip 8P$"}
+                    title={
+                      loadingPayToSkip
+                        ? t("loading")
+                        : `${t("payToSkipButton")} 8$P`
+                    }
                     onClick={payToSkip}
                   />
                 )}
@@ -192,16 +199,16 @@ const CountDownPage = () => {
               style={{ borderRadius: "50%" }}
               priority
             />
-            <p>Generating penguin...</p>
-            <span>please wait</span>
+            <p>{t("generatingTitle")}</p>
+            <span>{t("waitMessage")}</span>
           </PageContentBlockFlex>
         )}
         {!loading && result && (
           <PageContentBlockFlex>
             <h2>
-              Wow, it's New <b>{result.title}!</b>
+              {t("newPenguinTitle")} <b>{result.title}!</b>
             </h2>
-            <p>Welcome aboard buddy!</p>
+            <p>{t("welcomeNew")}</p>
             <img
               src={result.downloadURL}
               alt={result.title}
@@ -212,7 +219,7 @@ const CountDownPage = () => {
             <br />
             {user && (
               <LinkStyled href={`/library/${user.id}`}>
-                Go to my Library
+                {t("myLibraryLink")}
               </LinkStyled>
             )}
             {/* TODO: add share functionality  */}

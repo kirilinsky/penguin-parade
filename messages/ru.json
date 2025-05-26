@@ -14,6 +14,25 @@
         "rarity": "Редкие",
         "showOnly": "Показать только:"
     },
+    "lastCraftedBlock": {
+        "title": "Последний Созданный Пингвин",
+        "myLibraryLink": "Перейти в Мою коллекцию",
+        "noPenguinsTitle": "У тебя пока что нет Пингвинов!",
+        "craftLink": "Скрафтить нового"
+    },
+    "craftPage": {
+        "title": "Получить нового пингвина",
+        "laterTitle": "Увы, крафтить можно только раз в день.",
+        "comeBackIn": "Возвращайся через",
+        "payToSkipTitile": "или заплати, чтобы пропустить ожидание:",
+        "loading": "загрузка...",
+        "payToSkipButton": "Пропустить за монеты",
+        "generatingTitle": "Создаём пингвина...",
+        "waitMessage": "немного терпения",
+        "newPenguinTitle": "Ух ты, новенький!",
+        "welcomeNew": "Добро пожаловать в стаю, дружище!",
+        "myLibraryLink": "Перейти в Мою коллекцию"
+    },
     "LocaleSwitcher": {
         "en": "Английский",
         "ru": "Русский",
