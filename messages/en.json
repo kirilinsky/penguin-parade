@@ -35,6 +35,30 @@
         "verifyEmailAlert1": "Please verify your email",
         "verifyEmailAlert2": "before crafting a penguin."
     },
+    "loginPage": {
+        "title": "Login Page",
+        "password": "Password",
+        "loginButton": "Login"
+    },
+    "signUpPage": {
+        "title": "Sign up and start collecting the Penguins!",
+        "loginPageLink": "Go to Login page",
+        "username": "User name",
+        "password": "Password",
+        "verifyEmailAlert": "Welcome, please follow log in page and don't forget to verify email ",
+        "signUpButton": "Sign Up"
+    },
+    "header": {
+        "craft": "Craft!",
+        "friends": "Friends",
+        "myPenguins": "My Penguins",
+        "expeditions": "Expeditions",
+        "evolve": "Evolve",
+        "auction": "Auction",
+        "logOut": "Log Out",
+        "signUp": "Sign up",
+        "login": "Log in"
+    },
     "LocaleSwitcher": {
         "en": "English",
         "ru": "Russian",

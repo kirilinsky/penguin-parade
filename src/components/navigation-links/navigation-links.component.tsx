@@ -1,4 +1,5 @@
 import { User } from "@/types/friends.types";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 import React from "react";
 
@@ -13,36 +14,37 @@ const NavigationLinksComponent = ({
   logOutHandler: () => void;
   onClick?: () => void;
 }) => {
+  const t = useTranslations("header");
   return (
     <>
       {user && loggedIn ? (
         <>
           <Link onClick={onClick} href="/countdown">
-            Craft!
+            {t("craft")}
           </Link>
           <Link onClick={onClick} href={`/library/${user.id}`}>
-            My Penguins
+            {t("myPenguins")}
           </Link>
           <Link onClick={onClick} href="/friends">
-            Friends
+            {t("friends")}
           </Link>
           <Link onClick={onClick} href="/evolve">
-            Evolve
+            {t("evolve")}
           </Link>
           <Link onClick={onClick} href="/auction">
-            Auction
+            {t("auction")}
           </Link>
           <Link onClick={logOutHandler} href="/">
-            Log out
+            {t("logOut")}
           </Link>
         </>
       ) : (
         <>
           <Link onClick={onClick} href="/signup">
-            Sign up
+            {t("signUp")}
           </Link>
           <Link onClick={onClick} href="/login">
-            Login
+            {t("login")}
           </Link>
         </>
       )}

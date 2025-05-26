@@ -10,8 +10,11 @@ import { auth, firestore } from "../../firebase";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 import { LinkStyled } from "@/components/link/link.component.styled";
 import NeonButtonComponent from "@/components/neon-button/neon-button.component";
+import { useTranslations } from "next-intl";
 
 const SignUpPage = () => {
+  const t = useTranslations("signUpPage");
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
@@ -49,10 +52,7 @@ const SignUpPage = () => {
         lastGeneratedAt: null,
       });
 
-      alert(
-        "Welcome, please follow log in page and don't forget to verify email " +
-          user.email
-      );
+      alert(t("verifyEmailAlert") + user.email);
       setSuccess(true);
 
       setEmail("");
@@ -64,11 +64,23 @@ const SignUpPage = () => {
   };
   return (
     <div>
-      <h1>Sign up and collect Penguins</h1>
+      <h1>{t("title")}</h1>
+      <br />
       {success ? (
-        <LinkStyled href={"/login"}>Go to Login page</LinkStyled>
+        <LinkStyled href={"/login"}>{t("loginPageLink")}</LinkStyled>
       ) : (
-        <form onSubmit={handleSignUp}>
+        <form
+          onSubmit={handleSignUp}
+          style={{
+            border: "1px solid #8ebb93",
+            margin: "10px",
+            padding: "12px",
+            display: "flex",
+            flexDirection: "column",
+            gap: "5px",
+            alignItems: "center",
+          }}
+        >
           <input
             type="email"
             style={{ padding: "10px" }}
@@ -81,7 +93,7 @@ const SignUpPage = () => {
           <input
             type="text"
             style={{ padding: "10px" }}
-            placeholder="User Name"
+            placeholder={t("username")}
             value={username}
             onChange={(e) => setUsername(e.target.value.trim())}
             required
@@ -89,7 +101,7 @@ const SignUpPage = () => {
           <br />
           <input
             type="password"
-            placeholder="Pass"
+            placeholder={t("password")}
             value={password}
             style={{ padding: "10px" }}
             onChange={(e) => setPassword(e.target.value)}
@@ -99,7 +111,7 @@ const SignUpPage = () => {
           <br />
           <br />
 
-          <NeonButtonComponent title="Sign up" type="submit" />
+          <NeonButtonComponent title={t("signUpButton")} type="submit" />
         </form>
       )}
     </div>

@@ -9,11 +9,13 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { User } from "@/types/friends.types";
 import NeonButtonComponent from "@/components/neon-button/neon-button.component";
+import { useTranslations } from "next-intl";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const t = useTranslations("loginPage");
 
   const setUserDetails = useSetAtom(userDetailsAtom);
   const setLoggedIn = useSetAtom(loggedInAtom);
@@ -44,11 +46,12 @@ export default function Login() {
 
   return (
     <div>
-      <h1>Login Page</h1>
+      <h1>{t("title")}</h1>
+
       <form
         onSubmit={handleLogin}
         style={{
-          width: "260px",
+          
           border: "1px solid #8ebb93",
           margin: "10px",
           padding: "10px",
@@ -70,14 +73,14 @@ export default function Login() {
         <input
           style={{ padding: "10px" }}
           type="password"
-          placeholder="Password"
+          placeholder={t("password")}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
         />
 
         {error && <p style={{ color: "red" }}>{error}</p>}
-        <NeonButtonComponent title="Login" type="submit" />
+        <NeonButtonComponent title={t("loginButton")} type="submit" />
       </form>
     </div>
   );
