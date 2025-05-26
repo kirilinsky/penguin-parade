@@ -24,9 +24,10 @@ type GenerationResult = {
 };
 
 const CountDownPage = () => {
-  const { user } = useUserDetails();
+  const { user, refreshUser } = useUserDetails();
   const [canCraft, setCanCraft] = useState<boolean>(false);
   const [loading, setLoading] = useState(false);
+  const [loadingPayToSkip, setLoadingPayToSkip] = useState(false);
   const [leftTime, setLeftTime] = useState<string>("");
   const [result, setResult] = useState<GenerationResult | null>(null);
   const [shareLink, setShareLink] = useState<string | null>(null);
@@ -104,6 +105,7 @@ const CountDownPage = () => {
   };
 
   const payToSkip = async () => {
+    setLoadingPayToSkip(true);
     if (canCraft) return;
     try {
       const auth = getAuth();
@@ -115,7 +117,7 @@ const CountDownPage = () => {
 
       const token = await currentUser.getIdToken(true);
 
-      const res = await fetch("/api/unlock-craft", {
+      const res = await fetch("/api/pay-to-skip", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -128,10 +130,13 @@ const CountDownPage = () => {
         return { success: false, error: data.error || "Unknown error" };
       }
       setCanCraft(true);
+      refreshUser();
       return { success: true };
     } catch (err: any) {
       console.error("unlockCrafting error:", err);
       return { success: false, error: err.message || "Unexpected error" };
+    } finally {
+      setLoadingPayToSkip(false);
     }
   };
 
@@ -163,12 +168,13 @@ const CountDownPage = () => {
                 <span>
                   Come back in <b>{leftTime}</b>
                 </span>
-                <br /><br />
+                <br />
+                <br />
                 <p>or you can pay to skip and craft now:</p>
                 {user && (
                   <NeonButtonComponent
-                    disabled={user.coins <= 8}
-                    title="Pay to skip 8P$"
+                    disabled={loadingPayToSkip || user.coins <= 8}
+                    title={loadingPayToSkip ? "loading..." : "Pay to skip 8P$"}
                     onClick={payToSkip}
                   />
                 )}

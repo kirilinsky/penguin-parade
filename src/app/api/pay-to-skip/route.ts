@@ -11,7 +11,7 @@ import {
 
 const CRAFT_COST = 8;
 
-export default async function POST(req: Request) {
+export async function POST(req: Request) {
   const authHeader = req.headers.get("Authorization") || "";
   const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
 
@@ -42,7 +42,7 @@ export default async function POST(req: Request) {
       allowCraftAt: nowDate,
       "statistics.totalSkipToPay":
         (userData.statistics?.totalSkipToPay || 0) + 1,
-      "statistics.totalCoinsSpent": increment(-CRAFT_COST),
+      "statistics.totalCoinsSpent": increment(CRAFT_COST),
       "statistics.lastSkipToPayAt": nowDate,
     });
 

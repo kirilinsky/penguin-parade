@@ -45,9 +45,10 @@ export default function Home() {
             <h2>Road map</h2>
             <ul>
               <li>I18n</li>
-              <li>Funds system</li>
-              <li>Anonymous home page</li>
-              <li>Gift functionality design update</li>
+              <li>Statistics page/block</li>
+              <li>Notification toasts</li>
+              <li>Anonymous home page, loggedIn limitations</li>
+              <li>Gift functionality design update (notification)</li>
               <li>Expeditions (TBA)</li>
               <li>NFT Mint preparation</li>
               <li>Images avatar optimization</li>
@@ -55,6 +56,7 @@ export default function Home() {
               <li>Friends Updtes(news)</li>
               <li>Announcements</li>
               <li>Tutorial page</li>
+              <li>Farms functionality</li>
               <li>SignUp/Login via gmail</li>
             </ul>
           </PageContentBlockStyled>
