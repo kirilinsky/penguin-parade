@@ -1,6 +1,7 @@
 "use client";
 
 import FriendsListBlockComponent from "@/components/friends-list-block/friends-list-block.component";
+import NeonButtonComponent from "@/components/neon-button/neon-button.component";
 import { PageContentBlockStyled } from "@/components/page-content-block/page-content-block.component.styled";
 import { PageContentWrapperComponent } from "@/components/page-content-wrapper/page-content-wrapper.component";
 import UserListItemComponent from "@/components/user-list-item/user-list-item.component";
@@ -49,11 +50,16 @@ const FriendsPage = () => {
       where("username_lowercase", "<=", lowercase_search + "\uf8ff")
     );
     const snap = await getDocs(q);
-    const results = snap.docs.map((doc) => ({
+    const allResults = snap.docs.map((doc) => ({
       id: doc.id,
       ...doc.data(),
     })) as User[];
-    setSearchResults(results);
+
+    const friendIds = friends.map(({ id }) => id);
+    const filtered = allResults.filter(
+      (user) => user.id !== currentUser.id && !friendIds.includes(user.id)
+    );
+    setSearchResults(filtered);
   };
 
   const handleCancelRequest = async (user: User) => {
@@ -204,7 +210,10 @@ const FriendsPage = () => {
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search users by name"
         />
-        <button onClick={handleSearch}>Search Friend</button>
+        <NeonButtonComponent
+          title="Search Friend by name"
+          onClick={handleSearch}
+        />
 
         {searchResults.length > 0 && (
           <div>

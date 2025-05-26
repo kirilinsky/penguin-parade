@@ -29,10 +29,13 @@ const FriendListItemComponent = ({
       <FriendListItemContent>
         <FriendListItemName>{friend.username}</FriendListItemName>
         <div>
-          {friend.giftsReceived && (
+          {friend.imageIds.length && (
+            <p>Penguins Count: {friend.imageIds.length}</p>
+          )}
+          {!!friend.giftsReceived && (
             <p>Gifts Received: {friend.giftsReceived}</p>
           )}
-          {friend.giftsSent && <p>Gifts Sent: {friend.giftsSent}</p>}
+          {!!friend.giftsSent && <p>Gifts Sent: {friend.giftsSent}</p>}
         </div>
         <FriendListItemButtons>
           <NeonButtonComponent
