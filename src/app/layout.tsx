@@ -4,26 +4,31 @@ import { Provider as JotaiProvider } from "jotai";
 import ClientHeaderWrapper from "@/components/client-header-wrapper/client-header-wrapper.component";
 import FooterComponent from "@/components/footer/footer.component";
 import { PageWrapperStyled } from "@/components/page-wrapper/page-wrapper.component.styled";
+import { getLocale } from "next-intl/server";
+import { NextIntlClientProvider } from "next-intl";
 
 export const metadata = {
   title: "Penguin Parade",
   description: "Collect and trade rare penguins",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locale = await getLocale();
   return (
     <JotaiProvider>
-      <html suppressHydrationWarning lang="en">
+      <html suppressHydrationWarning lang={locale}>
         {/* TODO: fix suppressHydrationWarning */}
-        <body suppressHydrationWarning>
-          <ClientHeaderWrapper />
-          <PageWrapperStyled>{children}</PageWrapperStyled>
-          <FooterComponent />
-        </body>
+        <NextIntlClientProvider>
+          <body suppressHydrationWarning>
+            <ClientHeaderWrapper />
+            <PageWrapperStyled>{children}</PageWrapperStyled>
+            <FooterComponent />
+          </body>
+        </NextIntlClientProvider>
       </html>
     </JotaiProvider>
   );

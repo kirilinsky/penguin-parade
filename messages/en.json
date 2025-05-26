@@ -1,0 +1,13 @@
+{
+    "homePage": {
+        "welcome": "Welcome",
+        "subtitle": "Start crafting your own collection of unique Penguins, each with their own style and story.",
+        "actionText": "Show them off, trade with another users, or send as surprise gifts to friends.",
+        "linkCraftPage": "Go to Craft page!"
+    },
+    "LocaleSwitcher": {
+        "en": "English",
+        "ru": "Russian",
+        "label": "Language"
+    }
+}

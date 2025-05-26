@@ -9,24 +9,25 @@ import RandomAuctionBlockComponent from "@/components/random-auction-block/rando
 import TotalCountBlockComponent from "@/components/total-count-block/total-count-block.component";
 import { useUserDetails } from "@/hooks/use-user-details";
 import { useAtomValue } from "jotai";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 
 export default function Home() {
   const { user } = useUserDetails();
   const loggedIn = useAtomValue(loggedInAtom);
+  const t = useTranslations("homePage");
 
   return (
     <PageContentWrapperComponent>
       {user && loggedIn ? (
         <>
           <PageContentBlockStyled>
-            <h1>Welcome, {user.username}!</h1>
-            <p>Start crafting your own collection of unique Penguins</p>
-            <span>each with their own style and story.</span>
-            <span>
-              Show them off, trade with another users, or send as surprise gifts
-              to friends.
-            </span>
+            <h1>
+              {t("welcome")}, {user.username}!
+            </h1>
+            <p style={{ width: "75%", textAlign: "center" }}>{t("subtitle")}</p>
+            <br />
+            <span>{t("actionText")}</span>
 
             <Image
               alt="nofriends"
@@ -35,7 +36,7 @@ export default function Home() {
               height="120"
             />
             <LinkStyled title="Craft page" href={"/countdown"}>
-              Go to Craft page
+              {t("linkCraftPage")}
             </LinkStyled>
           </PageContentBlockStyled>
           <LastCraftedBlockComponent />
