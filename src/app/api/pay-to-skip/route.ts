@@ -1,5 +1,5 @@
-import { NextApiRequest, NextApiResponse } from "next";
 import { adminAuth } from "@/fireBase-admin";
+import { NextResponse } from "next/server";
 import { firestore } from "@/firebase"; // client-side firestore instance
 import {
   doc,
@@ -11,21 +11,13 @@ import {
 
 const CRAFT_COST = 8;
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
-  if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method Not Allowed" });
+export default async function POST(req: Request) {
+  const authHeader = req.headers.get("Authorization") || "";
+  const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
+
+  if (!token) {
+    return NextResponse.json({ error: "Missing auth token" }, { status: 401 });
   }
-
-  const authHeader = req.headers.authorization;
-
-  if (!authHeader) {
-    return res.status(401).json({ error: "Missing auth header" });
-  }
-
-  const token = authHeader.split(" ")[1];
 
   try {
     const decoded = await adminAuth.verifyIdToken(token);
@@ -35,14 +27,14 @@ export default async function handler(
     const userSnap = await getDoc(userRef);
 
     if (!userSnap.exists()) {
-      return res.status(404).json({ error: "User not found" });
+      return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
     const userData = userSnap.data();
     const currentCoins = userData.coins || 0;
 
     if (currentCoins < CRAFT_COST) {
-      return res.status(400).json({ error: "Not enough coins" });
+      return NextResponse.json({ error: "Not enough coins" }, { status: 400 });
     }
     const nowDate = serverTimestamp();
     await updateDoc(userRef, {
@@ -54,11 +46,12 @@ export default async function handler(
       "statistics.lastSkipToPayAt": nowDate,
     });
 
-    return res.status(200).json({ success: true });
+    return NextResponse.json({ success: true });
   } catch (err) {
     console.error("Error in unlock-craft:", err);
-    return res
-      .status(500)
-      .json({ error: "Internal server error", detail: String(err) });
+    return NextResponse.json(
+      { error: "Pay to Skip: Server error", details: String(err) },
+      { status: 500 }
+    );
   }
 }
