@@ -1,12 +1,7 @@
 "use client";
 
-import {
-  GalleryFilterButton,
-  GalleryFilterComponentContainer,
-  GalleryFilterComponentSide,
-} from "@/components/gallery-filter-component/gallery-filter-component.styled";
+import GalleryFilterComponent from "@/components/gallery-filter-component/gallery-filter-component";
 import GalleryItemModalComponent from "@/components/gallery-item-modal/gallery-item-modal.component";
-import GalleryItemScaleComponent from "@/components/gallery-item-scale/gallery-item-scale.component";
 import GalleryItemComponent from "@/components/gallery-item/gallery-item.component";
 import GalleryComponent from "@/components/gallery/gallery.component";
 import { LinkStyled } from "@/components/link/link.component.styled";
@@ -196,31 +191,14 @@ const MyLibraryPage = () => {
         </Rodal>
       )}
       {!!images.length && (
-        <GalleryFilterComponentContainer>
-          <GalleryFilterComponentSide>
-            Sort by:
-            <select
-              value={sortOption}
-              onChange={(e) => setSortOption(e.target.value as any)}
-            >
-              <option value="newest">Newest</option>
-              <option value="oldest">Oldest</option>
-              <option value="rarity">By Rarity</option>
-            </select>
-          </GalleryFilterComponentSide>
-          <GalleryFilterComponentSide>
-            Show only:
-            {Object.keys(rarityCount).map((rarity) => (
-              <GalleryFilterButton
-                key={rarity}
-                active={rarity === filterOption}
-                onClick={() => onFilterOptionClick(rarity as ScaleType)}
-              >
-                <GalleryItemScaleComponent scale={rarity as ScaleType} />
-              </GalleryFilterButton>
-            ))}
-          </GalleryFilterComponentSide>
-        </GalleryFilterComponentContainer>
+        <GalleryFilterComponent
+          isAuction={false}
+          sortOption={sortOption}
+          rarityCount={rarityCount}
+          filterOption={filterOption}
+          setSortOption={setSortOption}
+          onFilterOptionClick={onFilterOptionClick}
+        />
       )}
       <GalleryComponent>
         {imagesFiltered.length ? (

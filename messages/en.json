@@ -5,6 +5,15 @@
         "actionText": "Show them off, trade with another users, or send as surprise gifts to friends.",
         "linkCraftPage": "Go to Craft page!"
     },
+    "filter": {
+        "sortBy": "Sort by:",
+        "newest": "Newest",
+        "oldest": "Oldest",
+        "expensive": "Expensive",
+        "cheap": "Cheap",
+        "rarity": "By Rarity",
+        "showOnly": "Show only:"
+    },
     "LocaleSwitcher": {
         "en": "English",
         "ru": "Russian",

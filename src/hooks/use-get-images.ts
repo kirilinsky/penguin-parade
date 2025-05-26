@@ -5,7 +5,7 @@ import { ImageItem } from "@/types/image.types";
 import { ParamValue } from "next/dist/server/request/params";
 import { useUserDetails } from "./use-user-details";
 
-type RarityCount = Record<string, number>;
+export type RarityCount = Record<string, number>;
 
 export const useGetImages = (
   sortByDate: boolean = false,
