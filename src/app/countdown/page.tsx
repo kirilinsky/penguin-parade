@@ -103,6 +103,38 @@ const CountDownPage = () => {
     }
   };
 
+  const payToSkip = async () => {
+    if (canCraft) return;
+    try {
+      const auth = getAuth();
+      const currentUser = auth.currentUser;
+
+      if (!currentUser) {
+        return { success: false, error: "User not authenticated" };
+      }
+
+      const token = await currentUser.getIdToken(true);
+
+      const res = await fetch("/api/unlock-craft", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!res.ok) {
+        const data = await res.json();
+        return { success: false, error: data.error || "Unknown error" };
+      }
+      setCanCraft(true);
+      return { success: true };
+    } catch (err: any) {
+      console.error("unlockCrafting error:", err);
+      return { success: false, error: err.message || "Unexpected error" };
+    }
+  };
+
   useEffect(() => {
     user && checkUserStatus();
   }, [user]);
@@ -128,7 +160,18 @@ const CountDownPage = () => {
                   alt="come later"
                 />
                 <p>Sorry, you can craft only once a day.</p>
-                <span>Come back in <b>{leftTime}</b></span>
+                <span>
+                  Come back in <b>{leftTime}</b>
+                </span>
+                <br /><br />
+                <p>or you can pay to skip and craft now:</p>
+                {user && (
+                  <NeonButtonComponent
+                    disabled={user.coins <= 8}
+                    title="Pay to skip 8P$"
+                    onClick={payToSkip}
+                  />
+                )}
               </>
             )}
           </PageContentBlockFlex>

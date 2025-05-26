@@ -45,7 +45,6 @@ export default function Home() {
             <h2>Road map</h2>
             <ul>
               <li>I18n</li>
-              <li>Pay to skip function</li>
               <li>Funds system</li>
               <li>Anonymous home page</li>
               <li>Gift functionality design update</li>
