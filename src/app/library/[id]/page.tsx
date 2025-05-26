@@ -181,19 +181,21 @@ const MyLibraryPage = () => {
   }
   return (
     <>
-      <Rodal visible={!!detailsImage} onClose={() => setDetailsImage(null)}>
-        <GalleryItemModalComponent
-          user={user}
-          friends={friends}
-          isMyPage={isMyPage}
-          onSendGift={sendGift}
-          onSellImage={sellImage}
-          loading={loading}
-          setAvatar={setAvatarAction}
-          img={detailsImage}
-        />
-      </Rodal>
-      {images.length && (
+      {!!images.length && (
+        <Rodal visible={!!detailsImage} onClose={() => setDetailsImage(null)}>
+          <GalleryItemModalComponent
+            user={user}
+            friends={friends}
+            isMyPage={isMyPage}
+            onSendGift={sendGift}
+            onSellImage={sellImage}
+            loading={loading}
+            setAvatar={setAvatarAction}
+            img={detailsImage}
+          />
+        </Rodal>
+      )}
+      {!!images.length && (
         <GalleryFilterComponentContainer>
           <GalleryFilterComponentSide>
             Sort by:
@@ -231,9 +233,11 @@ const MyLibraryPage = () => {
           ))
         ) : (
           <div>
-            <p>Seems you don't have Penguins yet.</p>
+            <p>Seems {isMyPage ? "you" : "user"} don't have Penguins yet.</p>
             <br />
-            <LinkStyled href={"/countdown"}>Go and Craft first!</LinkStyled>
+            {user && isMyPage && (
+              <LinkStyled href={"/countdown"}>Go and Craft first!</LinkStyled>
+            )}
           </div>
         )}
       </GalleryComponent>

@@ -7,6 +7,7 @@ import {
   UserListItemContent,
   UserListItemContentDivider,
 } from "./user-list-item.component.styled";
+import Link from "next/link";
 
 const UserListItemComponent = ({
   user,
@@ -43,6 +44,9 @@ const UserListItemComponent = ({
           ) : (
             <button onClick={onCancel}>Cancel</button>
           )}
+          <Link href={`/library/${user.id}`}>
+            <button>Visit</button>
+          </Link>
         </UserListItemButtons>
       </UserListItemContent>
     </UserListItemContainer>
