@@ -17,7 +17,7 @@ const TotalCountBlockComponent = () => {
       <h2>Total count</h2>
       <TotalCountBlockGrid>
         {loading
-          ? "loding..."
+          ? "loading..."
           : Object.entries(rarityCount).map(([key, value]) => {
               return (
                 <TotalCountBlockItem key={key}>

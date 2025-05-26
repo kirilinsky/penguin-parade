@@ -33,7 +33,7 @@ const RandomAuctionBlockComponent = () => {
       ) : (
         <>
           <p>{t("emptyTitle")}</p>
-          <span>{t("emptySubitle")}</span>
+          <span>{t("emptySubtitle")}</span>
           <Image
             alt="nofriends"
             src="/infographics/no-friends.png"
