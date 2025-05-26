@@ -24,6 +24,8 @@ export type UserStatistics = {
   lastLoginAt: Date;
   lastAuctionPurchaseAt: Date;
   lastAuctionSellAt: Date;
+  lastSkipToPayAt: Date;
+  totalSkipToPay: number;
 };
 /* TODO: add settings */
 export type UserSettings = {
@@ -39,7 +41,7 @@ export type User = {
   avatar: string | null;
   avatarScale: ScaleType | null;
   createdAt: Date;
-  /* TODO: add stat */ 
+  /* TODO: add stat */
   /* TODO: add coins */
   coins: number;
   email: string;
