@@ -3,7 +3,9 @@
         "welcome": "Welcome",
         "subtitle": "Start crafting your own collection of unique Penguins, each with their own style and story.",
         "actionText": "Show them off, trade with another users, or send as surprise gifts to friends.",
-        "linkCraftPage": "Go to Craft page!"
+        "linkCraftPage": "Go to Craft page!",
+        "anonTitle": "Hello anon!",
+        "loginButton": "Please login"
     },
     "filter": {
         "sortBy": "Sort by:",
@@ -13,6 +15,12 @@
         "cheap": "Cheap",
         "rarity": "By Rarity",
         "showOnly": "Show only:"
+    },
+    "randomAuctionBlock": {
+        "title": "Random Auction Deal",
+        "auctionButton": "Go to Auction",
+        "emptyTitle": "Sorry, nothing for sale this time!",
+        "emptySubtitle": "Come to check later"
     },
     "lastCraftedBlock": {
         "title": "Last Crafted Penguin",

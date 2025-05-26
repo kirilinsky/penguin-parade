@@ -6,9 +6,11 @@ import GalleryItemComponent from "../gallery-item/gallery-item.component";
 import { LinkStyled } from "../link/link.component.styled";
 import Image from "next/image";
 import { useGetImages } from "@/hooks/use-get-images";
+import { useTranslations } from "next-intl";
 
 const RandomAuctionBlockComponent = () => {
   const { images, loading } = useGetImages(true, "auction");
+  const t = useTranslations("randomAuctionBlock");
 
   const randomNumber = useMemo(() => {
     return Math.floor(Math.random() * images.length);
@@ -16,7 +18,7 @@ const RandomAuctionBlockComponent = () => {
 
   return (
     <PageContentBlockStyled>
-      <h2>Random Auction Deal</h2>
+      <h2>{t("title")}</h2>
       {!loading && images && images.length ? (
         <>
           <GalleryItemComponent
@@ -26,12 +28,12 @@ const RandomAuctionBlockComponent = () => {
             img={images[randomNumber]}
           />
 
-          <LinkStyled href="/auction">Go to Auction</LinkStyled>
+          <LinkStyled href="/auction">{t("auctionButton")}</LinkStyled>
         </>
       ) : (
         <>
-          <p>Sorry, nothing for sale this time! </p>
-          <span>Come to check later</span>
+          <p>{t("emptyTitle")}</p>
+          <span>{t("emptySubitle")}</span>
           <Image
             alt="nofriends"
             src="/infographics/no-friends.png"

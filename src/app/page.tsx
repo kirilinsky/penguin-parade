@@ -71,9 +71,9 @@ export default function Home() {
         </>
       ) : (
         <PageContentBlockStyled>
-          <h2>Hello anon!</h2>
+          <h2>{t("anonTitle")}</h2>
           <p>
-            <LinkStyled href="/login">Please login</LinkStyled>
+            <LinkStyled href="/login">{t("loginButton")}</LinkStyled>
           </p>
         </PageContentBlockStyled>
       )}
