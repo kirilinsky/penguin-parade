@@ -12,8 +12,12 @@ export const GalleryItemModalStatisticsGrid = styled.div`
 
 export const GalleryItemModalStatisticsDes = styled.p`
   font-size: 21px;
-  grid-column: span 4;
-
+  grid-column: 1 / -1;
+  white-space: normal;
+  word-wrap: break-word;
+  hyphens: auto;
+  text-align: justify;
+  line-height: 1.4;
   @media (max-width: 888px) {
     font-size: 15px;
     grid-column: span 2;
@@ -25,7 +29,7 @@ export const GalleryItemModalStatisticsItem = styled.div`
   border: 1px solid #fff;
   box-shadow: 0 0 4px #fff;
   border-radius: 1em;
-  padding: 10px; 
+  padding: 10px;
   h3 {
     border-bottom: 1px solid #fff;
   }

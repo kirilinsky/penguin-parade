@@ -58,6 +58,7 @@ export const GalleryItemModalAccordion = styled.div<{ $expand: boolean }>`
   gap: 15px;
   transition: 0.45s linear;
   overflow: hidden;
+  width: 100%;
   max-height: ${({ $expand }) => ($expand ? "2000px" : "0")};
 `;
 
