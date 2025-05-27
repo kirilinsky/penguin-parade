@@ -8,6 +8,7 @@ export interface ImageItem {
   ownerId: string;
   origin: "craft" | "evolution" | "bad batch" | "expedition";
   title: string;
+  inExpedition: boolean;
   gift: boolean;
   auction: boolean;
   price: number;

@@ -1,30 +1,38 @@
 import { ScaleType } from "./scale.types";
 
+export type ExpeditionState =
+  | "preparing"
+  | "active"
+  | "ended"
+  | "resultsReady"
+  | "archived";
+
 export type Expedition = {
   id: string;
   title: string;
   theme: string;
   goal: string;
-  level: string;
+  level: ScaleType;
   minParticipants: number;
   maxParticipants: number;
+  participantsCount: number;
   durationHours: number;
-  state: "preparing" | "active" | "ended" | "resultsReady" | "archived";
+  state: ExpeditionState;
   imageUrl: string;
   createdAt: Date;
   startedAt: Date;
+  resultReadyAt: Date;
   endedAt: Date;
   preset: ExpeditionPreset;
   participants: ExpeditionParticipant[];
 };
 
 export type ExpeditionParticipant = {
-  id: {
-    penguinIds: string[];
-    submittedAt: Date;
-    goldEarned: number;
-    crystalType?: string;
-  };
+  userId: string;
+  penguinIds: string[];
+  submittedAt: Date;
+  goldEarned?: number;
+  crystalType?: string;
 };
 
 export type ExpeditionPreset = {
