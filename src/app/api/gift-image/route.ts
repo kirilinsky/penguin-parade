@@ -80,9 +80,11 @@ export async function POST(req: Request) {
       updateDoc(fromUserRef, {
         "statistics.totalGiftsSent": increment(1),
         "statistics.lastGiftSentAt": serverTimestamp(),
+        imageIds: arrayRemove(imageId),
       }),
       updateDoc(toUserRef, {
         "statistics.totalGiftsReceived": increment(1),
+        imageIds: arrayUnion(imageId),
       }),
     ]);
 
@@ -100,14 +102,12 @@ export async function POST(req: Request) {
     if (friendSnap.exists()) {
       await updateDoc(friendRef, {
         giftsSent: increment(1),
-        imageIds: arrayUnion(imageId),
       });
     }
 
     if (reverseSnap.exists()) {
       await updateDoc(reverseFriendRef, {
         giftsReceived: increment(1),
-        imageIds: arrayRemove(imageId),
       });
     }
 
