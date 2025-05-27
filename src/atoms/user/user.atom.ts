@@ -1,4 +1,4 @@
-import { User } from "@/types/friends.types";
+import { User } from "@/types/user.types";
 import { atomWithStorage } from "jotai/utils";
 
 export const userDetailsAtom = atomWithStorage<User | null>(

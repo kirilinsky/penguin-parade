@@ -4,8 +4,8 @@ import {
   MobileMenuLinksContainer,
   MobileMenuWrap,
 } from "./mobile-menu.component.styled";
-import { User } from "@/types/friends.types";
 import NavigationLinksComponent from "../navigation-links/navigation-links.component";
+import { User } from "@/types/user.types";
 
 const MobileMenuComponent = ({
   user,

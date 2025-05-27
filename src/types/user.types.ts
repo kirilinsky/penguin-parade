@@ -1,3 +1,4 @@
+import { Timestamp } from "firebase/firestore";
 import { ExpeditionState } from "./expeditions.types";
 import { LocalizedField } from "./image.types";
 import { ScaleType } from "./scale.types";
@@ -72,7 +73,7 @@ export type UserExpeditionItem = {
 
 export type RequestRecord = {
   id: string;
-  sentAt: Date;
+  sentAt: Timestamp;
 };
 
 export type CrystalType = {

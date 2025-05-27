@@ -1,6 +1,6 @@
 import { doc, getDoc, Timestamp } from "firebase/firestore";
 import { firestore } from "@/firebase";
-import { User } from "@/types/friends.types";
+import { User } from "@/types/user.types";
 
 export async function getUserAllowCraftedAt(
   user: User | null

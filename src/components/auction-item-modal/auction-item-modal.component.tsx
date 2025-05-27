@@ -7,7 +7,7 @@ import { Tektur } from "next/font/google";
 import GalleryItemScaleComponent from "../gallery-item-scale/gallery-item-scale.component";
 import { getBaseColorByScale } from "@/helpers/get-base-color-by-rarity/get-base-color-by-rarity";
 import NeonButtonComponent from "../neon-button/neon-button.component";
-import { User } from "@/types/friends.types";
+
 import {
   GalleryItemModalButtonsContainer,
   GalleryItemModalContainer,
@@ -18,6 +18,7 @@ import {
 } from "../gallery-item-modal/gallery-item-modal.component.styled";
 import GalleryItemModalStatistics from "../gallery-item-modal-statistics/gallery-item-modal-statistics.component";
 import { useTranslations } from "next-intl";
+import { User } from "@/types/user.types";
 
 const tektur = Tektur({
   subsets: ["latin"],

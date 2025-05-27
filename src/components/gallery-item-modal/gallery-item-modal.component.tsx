@@ -18,12 +18,13 @@ import GalleryItemScaleComponent from "../gallery-item-scale/gallery-item-scale.
 import { getBaseColorByScale } from "@/helpers/get-base-color-by-rarity/get-base-color-by-rarity";
 import NeonButtonComponent from "../neon-button/neon-button.component";
 import { getPriceByScale } from "@/helpers/get-price-by-scale/get-price-by-scale";
-import { FriendWithUser, User } from "@/types/friends.types";
+import { FriendWithUser } from "@/types/friends.types";
 import { ScaleType } from "@/types/scale.types";
 import GalleryItemModalStatistics from "../gallery-item-modal-statistics/gallery-item-modal-statistics.component";
 import AvatarComponent from "../avatar-component/avatar-component";
 import { useLocale, useTranslations } from "next-intl";
 import { getLocalized } from "@/helpers/get-localized/get-localized";
+import { User } from "@/types/user.types";
 
 const tektur = Tektur({
   subsets: ["latin"],

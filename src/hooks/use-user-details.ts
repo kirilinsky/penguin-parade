@@ -2,7 +2,7 @@ import { useAtom } from "jotai";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { firestore } from "@/firebase";
 import { userDetailsAtom } from "@/atoms/user/user.atom";
-import { User } from "@/types/friends.types";
+import { User } from "@/types/user.types";
 
 export function useUserDetails(strict: true): {
   user: User;

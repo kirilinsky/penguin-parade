@@ -1,4 +1,3 @@
-import { FriendData } from "@/types/friends.types";
 import React from "react";
 import {
   UserListItemAvatar,
@@ -9,6 +8,7 @@ import {
 } from "./user-list-item.component.styled";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
+import { FriendData } from "@/types/user.types";
 
 const UserListItemComponent = ({
   user,
@@ -36,7 +36,10 @@ const UserListItemComponent = ({
       />
       <UserListItemContent>
         <strong>{user.username}</strong>
-        <p>{t("requestSentAt")} {user.sentAt?.toDate?.().toLocaleString?.() || "-"}</p>
+        <p>
+          {t("requestSentAt")}{" "}
+          {user.sentAt?.toDate?.().toLocaleString?.() || "-"}
+        </p>
         <UserListItemContentDivider />
         <UserListItemButtons>
           {incoming ? (

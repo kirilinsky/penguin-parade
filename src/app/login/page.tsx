@@ -6,10 +6,10 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { useSetAtom } from "jotai";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { User } from "@/types/friends.types";
+import { useState } from "react"; 
 import NeonButtonComponent from "@/components/neon-button/neon-button.component";
 import { useTranslations } from "next-intl";
+import { User } from "@/types/user.types";
 
 export default function Login() {
   const [email, setEmail] = useState("");

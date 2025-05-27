@@ -1,4 +1,4 @@
-import { User } from "@/types/friends.types";
+import { User } from "@/types/user.types";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import React from "react";
