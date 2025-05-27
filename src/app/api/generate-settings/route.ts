@@ -69,7 +69,7 @@ where:
   "breast": color of penguin's breast,
   "back": color of penguin's back,
   "fx": picture effects,
-  "acc": (max 1-3 words, clothing/hat/accessory),
+  "acc": (max 1-3 words, clothing/hat/accessory, neckless),
   "t": (max 3 words, title of the penguin),
   "des": story about penguin in 20-27 words,
   "ability": max 1-3 words, ability of the penguin
