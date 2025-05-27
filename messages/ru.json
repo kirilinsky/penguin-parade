@@ -16,6 +16,64 @@
         "rarity": "Редкие",
         "showOnly": "Показать только:"
     },
+    "friendsPage": {
+        "addFriendTitle": "Добавить нового друга",
+        "searchFriendPlaceholder": "Искать пользователей по имени",
+        "searchButton": "Найти друга по имени",
+        "searchResultsTitle": "Результаты поиска",
+        "spanRequested": "запрос отправлен",
+        "cancelRequrestButton": "Отменить запрос",
+        "addFriendButton": "Добавить в друзья",
+        "incomingRequestsTitle": "Входящие запросы",
+        "sentRequestsTitle": "Отправленные запросы"
+    },
+    "userListItem": {
+        "requestSentAt": "Отправлено:",
+        "acceptButton": "Принять",
+        "declineButton": "Отклонить",
+        "cancelButton": "Отменить",
+        "visitButton": "Навестить"
+    },
+    "auctionItemModal": {
+        "buying": "пингвин упаковывается...",
+        "buyButton": "Купить себе"
+    },
+    "galleryItemModalStatistics": {
+        "theme": "Тема",
+        "ability": "Способность",
+        "loot": "Экипировка",
+        "createdAt": "Дата создания",
+        "auctionSince": "На аукционе с",
+        "price": "Цена",
+        "beak": "Цвет клюва",
+        "back": "Цвет спины",
+        "breast": "Цвет груди",
+        "origin": "Происхождение"
+    },
+    "galleryItemModal": {
+        "avatarButton": "Поставить как аватар",
+        "giftButton": "Подарить другу",
+        "sellButton": "Продать на аукционе за",
+        "chooseFriendTitle": "Выбери друга для подарка",
+        "unsetButton": "Убрать",
+        "chooseButton": "Выбрать",
+        "pleaseWait": "подожди немного...",
+        "loadingGift": "отправляем подарок...",
+        "sendButton": "Отправить пингвина для",
+        "cancelButton": "Отмена"
+    },
+    "friendsBlock": {
+        "title": "Твои друзья",
+        "loading": "загружаем друзей...",
+        "noFriendsTitle": "У тебя пока нет друзей! Попробуй кого-нибудь найти."
+    },
+    "friendsListItem": {
+        "titleCount": "Пингвинов у друга:",
+        "giftsReceivedCount": "Получено подарков:",
+        "giftsSentCount": "Отправлено подарков:",
+        "visitButton": "Навестить друга",
+        "removeButton": "Удалить из друзей"
+    },
     "randomAuctionBlock": {
         "title": "Случайная сделка на аукционе",
         "auctionButton": "Перейти на аукцион",

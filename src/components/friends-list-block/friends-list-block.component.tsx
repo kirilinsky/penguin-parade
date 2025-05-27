@@ -4,6 +4,7 @@ import { FriendWithUser } from "@/types/friends.types";
 import Image from "next/image";
 import FriendListItemComponent from "../friend-list-item/friend-list-item.component";
 import { FriendsListBlockGrid } from "./friends-list-block.component.styled";
+import { useTranslations } from "next-intl";
 
 const FriendsListBlockComponent = ({
   friends,
@@ -14,12 +15,13 @@ const FriendsListBlockComponent = ({
   friends: FriendWithUser[];
   friendsLoading: boolean;
 }) => {
+  const t = useTranslations("friendsBlock");
   return (
     <PageContentBlockStyled>
-      <h2>Your Friends</h2>
+      <h2>{t("title")}</h2>
       {/* TODO: add spinner */}
       {friendsLoading ? (
-        "friends loading"
+        t("loading")
       ) : friends.length ? (
         <FriendsListBlockGrid>
           {friends.map((friend) => (
@@ -32,7 +34,7 @@ const FriendsListBlockComponent = ({
         </FriendsListBlockGrid>
       ) : (
         <>
-          <p>You don't have friends yet! Try to find someone.</p>
+          <p>{t("noFriendsTitle")}</p>
           <Image
             alt="nofriends"
             src="/infographics/no-friends.png"

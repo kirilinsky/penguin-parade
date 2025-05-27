@@ -8,6 +8,7 @@ import {
   UserListItemContentDivider,
 } from "./user-list-item.component.styled";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 const UserListItemComponent = ({
   user,
@@ -22,6 +23,8 @@ const UserListItemComponent = ({
   onDecline: any;
   onCancel: any;
 }) => {
+  const t = useTranslations("userListItem");
+
   return (
     <UserListItemContainer>
       <UserListItemAvatar
@@ -33,19 +36,19 @@ const UserListItemComponent = ({
       />
       <UserListItemContent>
         <strong>{user.username}</strong>
-        <p>Sent: {user.sentAt?.toDate?.().toLocaleString?.() || "-"}</p>
+        <p>{t("requestSentAt")} {user.sentAt?.toDate?.().toLocaleString?.() || "-"}</p>
         <UserListItemContentDivider />
         <UserListItemButtons>
           {incoming ? (
             <>
-              <button onClick={onAccept}>Accept</button>
-              <button onClick={onDecline}>Decline</button>
+              <button onClick={onAccept}>{t("acceptButton")}</button>
+              <button onClick={onDecline}>{t("declineButton")}</button>
             </>
           ) : (
-            <button onClick={onCancel}>Cancel</button>
+            <button onClick={onCancel}>{t("cancelButton")}</button>
           )}
           <Link href={`/library/${user.id}`}>
-            <button>Visit</button>
+            <button>{t("visitButton")}</button>
           </Link>
         </UserListItemButtons>
       </UserListItemContent>

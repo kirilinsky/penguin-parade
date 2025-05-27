@@ -9,6 +9,7 @@ import { FriendWithUser } from "@/types/friends.types";
 import { useRouter } from "next/navigation";
 import AvatarComponent from "../avatar-component/avatar-component";
 import NeonButtonComponent from "../neon-button/neon-button.component";
+import { useTranslations } from "next-intl";
 
 const FriendListItemComponent = ({
   friend,
@@ -18,6 +19,7 @@ const FriendListItemComponent = ({
   friend: FriendWithUser;
 }) => {
   const router = useRouter();
+  const t = useTranslations('friendsListItem')
 
   return (
     <FriendListItemContainer>
@@ -30,21 +32,21 @@ const FriendListItemComponent = ({
         <FriendListItemName>{friend.username}</FriendListItemName>
         <div>
           {friend.imageIds.length && (
-            <p>Penguins Count: {friend.imageIds.length}</p>
+            <p>{t("titleCount")} {friend.imageIds.length}</p>
           )}
           {!!friend.giftsReceived && (
-            <p>Gifts Received: {friend.giftsReceived}</p>
+            <p>{t("giftsReceivedCount")} {friend.giftsReceived}</p>
           )}
-          {!!friend.giftsSent && <p>Gifts Sent: {friend.giftsSent}</p>}
+          {!!friend.giftsSent && <p>{t("giftsSentCount")} {friend.giftsSent}</p>}
         </div>
         <FriendListItemButtons>
           <NeonButtonComponent
-            title="Visit Friend"
+            title={t("visitButton")}
             onClick={() => router.push(`/library/${friend.id}`)}
           />
           {onRemove && (
             <NeonButtonComponent
-              title="Remove"
+              title={t("removeButton")}
               onClick={() => onRemove(friend.id)}
             />
           )}

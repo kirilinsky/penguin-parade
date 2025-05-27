@@ -22,12 +22,13 @@ import {
   updateDoc,
   where,
 } from "firebase/firestore";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import React, { useState } from "react";
 
 const FriendsPage = () => {
   const { user: currentUser } = useUserDetails();
-
+  const t = useTranslations("friendsPage");
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState<User[]>([]);
 
@@ -202,22 +203,19 @@ const FriendsPage = () => {
         friendsLoading={friendsLoading}
       />
       <PageContentBlockStyled>
-        <h2>Add new Friend</h2>
+        <h2>{t("addFriendTitle")}</h2>
         <input
           type="text"
           style={{ padding: "10px", marginBlock: "10px" }}
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          placeholder="Search users by name"
+          placeholder={t("searchFriendPlaceholder")}
         />
-        <NeonButtonComponent
-          title="Search Friend by name"
-          onClick={handleSearch}
-        />
+        <NeonButtonComponent title={t("searchButton")} onClick={handleSearch} />
 
         {searchResults.length > 0 && (
           <div>
-            <h2>Search Results</h2>
+            <h2>{t("searchResultsTitle")}</h2>
             <ul>
               {searchResults.map((user) => (
                 <li
@@ -237,15 +235,15 @@ const FriendsPage = () => {
                     <br />
                     {hasSentRequest(user.id) ? (
                       <>
-                        <span>requested</span>
+                        <span>{t("spanRequested")}</span>
                         <br />
                         <button onClick={() => handleCancelRequest(user)}>
-                          Cancel Request
+                          {t("cancelRequrestButton")}
                         </button>
                       </>
                     ) : (
                       <button onClick={() => handleAddFriend(user)}>
-                        Add Friend
+                        {t("addFriendButton")}
                       </button>
                     )}
                   </div>
@@ -257,7 +255,9 @@ const FriendsPage = () => {
       </PageContentBlockStyled>
 
       <PageContentBlockStyled>
-        <h2>Incoming Requests ({incomingRequests.length})</h2>
+        <h2>
+          {t("incomingRequestsTitle")} ({incomingRequests.length})
+        </h2>
         <ul>
           {incomingRequests.map((req) => (
             <UserListItemComponent
@@ -273,7 +273,9 @@ const FriendsPage = () => {
       </PageContentBlockStyled>
 
       <PageContentBlockStyled>
-        <h2>Sent Friend Requests ({sentRequests.length})</h2>
+        <h2>
+          {t("sentRequestsTitle")} ({sentRequests.length})
+        </h2>
         <ul>
           {sentRequests.map((req) => (
             <UserListItemComponent

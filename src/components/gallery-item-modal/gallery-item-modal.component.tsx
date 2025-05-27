@@ -22,6 +22,7 @@ import { FriendWithUser, User } from "@/types/friends.types";
 import { ScaleType } from "@/types/scale.types";
 import GalleryItemModalStatistics from "../gallery-item-modal-statistics/gallery-item-modal-statistics.component";
 import AvatarComponent from "../avatar-component/avatar-component";
+import { useTranslations } from "next-intl";
 
 const orbitron = Orbitron({
   subsets: ["latin"],
@@ -49,6 +50,7 @@ const GalleryItemModalComponent = ({
   setAvatar: (a: string, aR: ScaleType) => void;
 }) => {
   if (!img) return null;
+  const t = useTranslations("galleryItemModal");
   const [giftMode, setGiftMode] = useState(false);
   const [friendRecipient, setFriendRecipient] =
     useState<FriendWithUser | null>();
@@ -84,18 +86,18 @@ const GalleryItemModalComponent = ({
             <GalleryItemModalButtonsContainer>
               {user.avatar !== img.imageUrl && (
                 <NeonButtonComponent
-                  title="Set as avatar"
+                  title={t("avatarButton")}
                   onClick={() => setAvatar(img.imageUrl, img.settings.rarity)}
                 />
               )}
               <NeonButtonComponent
                 onClick={() => setGiftMode(true)}
-                title="Gift to friend"
+                title={t("giftButton")}
               />
               {buy && sell && (
                 <NeonButtonComponent
                   onClick={() => onSellImage(img.id)}
-                  title={`Sell on auction for ${sell} P$`}
+                  title={`${t("sellButton")} ${sell} P$`}
                 />
               )}
             </GalleryItemModalButtonsContainer>
@@ -104,7 +106,7 @@ const GalleryItemModalComponent = ({
 
         {user && giftMode && (
           <>
-            <h3>Choose Friend</h3>
+            <h3>{t("chooseFriendTitle")}</h3>
             <GalleryItemModalFriendsList>
               {friends.map((friend) => (
                 <GalleryItemModalFriendsItem
@@ -126,8 +128,8 @@ const GalleryItemModalComponent = ({
                     }
                     title={
                       friend.id === friendRecipient?.id
-                        ? "Unset"
-                        : `Choose ${friend.username}`
+                        ? t("unsetButton")
+                        : `${t("chooseButton")} ${friend.username}`
                     }
                   />
                 </GalleryItemModalFriendsItem>
@@ -135,13 +137,13 @@ const GalleryItemModalComponent = ({
             </GalleryItemModalFriendsList>
 
             <GalleryItemModalButtonsContainer>
-              {loading && "please wait..."}
+              {loading && t("pleaseWait")}
               {friendRecipient && (
                 <NeonButtonComponent
                   title={
                     loading
-                      ? "loading..."
-                      : `Send Penguin to ${friendRecipient.username}`
+                      ? t("loadingGift")
+                      : `${t("sendButton")} ${friendRecipient.username}`
                   }
                   onClick={() => onSendGift(friendRecipient.id, img.id)}
                   disabled={loading}
@@ -153,7 +155,7 @@ const GalleryItemModalComponent = ({
                   setGiftMode(false);
                   setFriendRecipient(null);
                 }}
-                title="Cancel"
+                title={t("cancelButton")}
               ></NeonButtonComponent>
             </GalleryItemModalButtonsContainer>
           </>

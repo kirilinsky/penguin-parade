@@ -17,6 +17,7 @@ import {
   GalleryItemModalTitle,
 } from "../gallery-item-modal/gallery-item-modal.component.styled";
 import GalleryItemModalStatistics from "../gallery-item-modal-statistics/gallery-item-modal-statistics.component";
+import { useTranslations } from "next-intl";
 
 const orbitron = Orbitron({
   subsets: ["latin"],
@@ -36,7 +37,7 @@ const AuctionItemModalComponent = ({
   onBuyImage: (imgId: string) => void;
 }) => {
   if (!img) return null;
-
+  const t = useTranslations("auctionItemModal");
   const baseColor = useMemo(() => {
     return getBaseColorByScale(img.settings.rarity);
   }, [img.settings.rarity]);
@@ -65,7 +66,7 @@ const AuctionItemModalComponent = ({
             <NeonButtonComponent
               disabled={isLoading}
               onClick={() => onBuyImage(img.id)}
-              title={isLoading ? "loading..." : `Buy`}
+              title={isLoading ? t("buying") : t("buyButton")}
             />
           </GalleryItemModalButtonsContainer>
         )}

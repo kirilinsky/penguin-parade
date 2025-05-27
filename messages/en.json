@@ -22,6 +22,64 @@
         "emptyTitle": "Sorry, nothing for sale this time!",
         "emptySubtitle": "Come to check later"
     },
+    "userListItem": {
+        "requestSentAt": "Sent At:",
+        "acceptButton": "Accept",
+        "declineButton": "Decline",
+        "cancelButton": "Cancel",
+        "visitButton": "Visit"
+    },
+    "friendsPage": {
+        "addFriendTitle": "Add new Friend",
+        "searchFriendPlaceholder": "Search users by name",
+        "searchButton": "Search Friend by name",
+        "searchResultsTitle": "Search Results",
+        "spanRequested": "requested",
+        "cancelRequrestButton": "Cancel Request",
+        "addFriendButton": "Add friend",
+        "incomingRequestsTitle": "Incoming Requests",
+        "sentRequestsTitle": "Sent Friend Requests"
+    },
+    "galleryItemModalStatistics": {
+        "theme": "Theme",
+        "ability": "Ability",
+        "loot": "Loot",
+        "createdAt": "Creation Date",
+        "auctionSince": "On Auction since",
+        "price": "Price",
+        "beak": "Beak Color",
+        "back": "Back Color",
+        "breast": "Chest Color",
+        "origin": "Origin"
+    },
+    "auctionItemModal": {
+        "buying": "buying in progress...",
+        "buyButton": "Buy"
+    },
+    "galleryItemModal": {
+        "avatarButton": "Set as Avatar",
+        "giftButton": "Gift to friend",
+        "sellButton": "Sell on auction for",
+        "chooseFriendTitle": "Choose Friend to gift",
+        "unsetButton": "Unset",
+        "chooseButton": "Choose",
+        "pleaseWait": "please wait...",
+        "loadingGift": "sending gift...",
+        "sendButton": "Send Penguin to",
+        "cancelButton": "Cancel"
+    },
+    "friendsBlock": {
+        "title": "Your Friends",
+        "loading": "loading friends",
+        "noFriendsTitle": "You don't have friends yet! Try to find someone."
+    },
+    "friendsListItem": {
+        "titleCount": "Penguins Count:",
+        "giftsReceivedCount": "Gifts Received:",
+        "giftsSentCount": "Gifts Sent:",
+        "visitButton": "Visit friend",
+        "removeButton": "Remove friend"
+    },
     "lastCraftedBlock": {
         "title": "Last Crafted Penguin",
         "myLibraryLink": "Go to my library",
