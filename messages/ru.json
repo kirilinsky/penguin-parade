@@ -75,7 +75,7 @@
         "noFriendsTitle": "У тебя пока нет друзей! Попробуй кого-нибудь найти."
     },
     "friendsListItem": {
-        "titleCount": "Пингвинов у друга:",
+        "titleCount": "Пингвинов всего:",
         "giftsReceivedCount": "Получено подарков:",
         "giftsSentCount": "Отправлено подарков:",
         "visitButton": "Навестить",
