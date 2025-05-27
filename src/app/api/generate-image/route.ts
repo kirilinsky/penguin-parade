@@ -178,7 +178,7 @@ export async function POST(req: Request) {
       collection(firestore, GLOBAL_IMAGES_COLLECTION),
       {
         imageUrl: urlData.publicUrl,
-        title: settings.t.en || "Untitled",
+        title: settings.t || "Untitled",
         creatorUid: uid,
         ownerId: uid,
         origin,
