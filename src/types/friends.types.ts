@@ -18,22 +18,27 @@ export type TopUser = {
 
 export type UserStatistics = {
   evolutions: number;
+  expeditions: number;
   totalGiftsSent: number;
   totalGiftsReceived: number;
-  /* TODO: add totalAmount stat */
-  totalAmount: Record<string, number>;
   totalCoinsEarned: number;
+  totalCrystalsEarned: number;
+  totalExpeditionParticipants: number;
+  totalCrystalsSpent: number;
   totalCoinsSpent: number;
   totalCrafted: number;
   totalSold: number;
   totalBought: number;
   lastEvolutionAt: Date;
   lastGiftSentAt: Date;
+  lastExpeditionAt: Date;
   lastLoginAt: Date;
   lastAuctionPurchaseAt: Date;
   lastAuctionSellAt: Date;
   lastSkipToPayAt: Date;
   totalSkipToPay: number;
+  /* TODO: add totalAmount stat */
+  //totalAmount: Record<string, number>;
 };
 /* TODO: add settings */
 export type UserSettings = {
@@ -49,12 +54,13 @@ export type User = {
   avatar: string | null;
   avatarScale: ScaleType | null;
   createdAt: Date;
-  /* TODO: add stat */
-  /* TODO: add coins */
   coins: number;
   email: string;
+  friendRequests: RequestRecord[];
+  sentRequests: RequestRecord[];
+  statistics: UserStatistics;
   /* TODO: add xp system */
-  xp: number;
+  //xp: number;
   imageIds: string[];
   lastGeneratedAt: Date;
   allowCraftAt: Date;
