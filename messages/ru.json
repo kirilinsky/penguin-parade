@@ -78,7 +78,7 @@
         "titleCount": "Пингвинов у друга:",
         "giftsReceivedCount": "Получено подарков:",
         "giftsSentCount": "Отправлено подарков:",
-        "visitButton": "Навестить друга",
+        "visitButton": "Навестить",
         "removeButton": "Удалить из друзей"
     },
     "randomAuctionBlock": {
@@ -86,6 +86,10 @@
         "auctionButton": "Перейти на аукцион",
         "emptyTitle": "Увы, сейчас ничего не продаётся!",
         "emptySubtitle": "Загляни позже — вдруг повезёт"
+    },
+    "topUsersBlock": {
+        "title": "Топ пользователей (по количеству пингвинов):",
+        "loading": "загрузка пользователей..."
     },
     "lastCraftedBlock": {
         "title": "Последний Созданный Пингвин",

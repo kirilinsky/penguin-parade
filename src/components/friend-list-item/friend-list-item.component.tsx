@@ -5,7 +5,7 @@ import {
   FriendListItemContent,
   FriendListItemName,
 } from "./friend-list-item.component.styled";
-import { FriendWithUser } from "@/types/friends.types";
+import { FriendWithUser, TopUser } from "@/types/friends.types";
 import { useRouter } from "next/navigation";
 import AvatarComponent from "../avatar-component/avatar-component";
 import NeonButtonComponent from "../neon-button/neon-button.component";
@@ -16,10 +16,13 @@ const FriendListItemComponent = ({
   onRemove,
 }: {
   onRemove?: (id: string) => void;
-  friend: FriendWithUser;
+  friend: FriendWithUser | TopUser;
 }) => {
   const router = useRouter();
-  const t = useTranslations('friendsListItem')
+  const t = useTranslations("friendsListItem");
+
+  const imageCount =
+    "imageIds" in friend ? friend.imageIds.length : friend.imageCount;
 
   return (
     <FriendListItemContainer>
@@ -31,20 +34,26 @@ const FriendListItemComponent = ({
       <FriendListItemContent>
         <FriendListItemName>{friend.username}</FriendListItemName>
         <div>
-          {friend.imageIds.length && (
-            <p>{t("titleCount")} {friend.imageIds.length}</p>
+          <p>
+            {t("titleCount")} {imageCount}
+          </p>
+          {"giftsReceived" in friend && friend.giftsReceived > 0 && (
+            <p>
+              {t("giftsReceivedCount")} {friend.giftsReceived}
+            </p>
           )}
-          {!!friend.giftsReceived && (
-            <p>{t("giftsReceivedCount")} {friend.giftsReceived}</p>
+          {"giftsSent" in friend && friend.giftsSent > 0 && (
+            <p>
+              {t("giftsSentCount")} {friend.giftsSent}
+            </p>
           )}
-          {!!friend.giftsSent && <p>{t("giftsSentCount")} {friend.giftsSent}</p>}
         </div>
         <FriendListItemButtons>
           <NeonButtonComponent
             title={t("visitButton")}
             onClick={() => router.push(`/library/${friend.id}`)}
           />
-          {onRemove && (
+          {"addedAt" in friend && onRemove && (
             <NeonButtonComponent
               title={t("removeButton")}
               onClick={() => onRemove(friend.id)}

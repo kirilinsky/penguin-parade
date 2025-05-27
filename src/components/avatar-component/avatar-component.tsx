@@ -19,7 +19,7 @@ const AvatarComponent = ({
   }, [avatarScale]);
   return (
     <AvatarComponentStyled
-      src={avatarUrl ?? "/template.png"}
+      src={avatarUrl || "/template.png"}
       alt={username}
       $borderColor={borderColor}
       width={mini ? 35 : 105}

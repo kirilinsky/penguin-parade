@@ -8,6 +8,14 @@ export type Friend = {
   addedAt: Date;
 };
 
+export type TopUser = {
+  id: string;
+  username: string;
+  avatar: string;
+  imageCount: number;
+  avatarScale: ScaleType | null;
+};
+
 export type UserStatistics = {
   evolutions: number;
   totalGiftsSent: number;

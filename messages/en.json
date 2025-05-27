@@ -22,6 +22,10 @@
         "emptyTitle": "Sorry, nothing for sale this time!",
         "emptySubtitle": "Come to check later"
     },
+    "topUsersBlock": {
+        "title": "Top users (by owned penguins):",
+        "loading": "loading users..."
+    },
     "userListItem": {
         "requestSentAt": "Sent At:",
         "acceptButton": "Accept",
@@ -84,7 +88,7 @@
         "titleCount": "Penguins Count:",
         "giftsReceivedCount": "Gifts Received:",
         "giftsSentCount": "Gifts Sent:",
-        "visitButton": "Visit friend",
+        "visitButton": "Visit",
         "removeButton": "Remove friend"
     },
     "lastCraftedBlock": {
