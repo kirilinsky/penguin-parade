@@ -34,6 +34,9 @@ const NavigationLinksComponent = ({
           <Link onClick={onClick} href="/auction">
             {t("auction")}
           </Link>
+          <Link onClick={onClick} href="/expeditions">
+            {t("expeditions")}
+          </Link>
           <Link onClick={logOutHandler} href="/">
             {t("logOut")}
           </Link>

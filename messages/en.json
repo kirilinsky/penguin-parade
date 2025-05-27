@@ -53,6 +53,7 @@
         "origin": "Origin",
         "craft": "Craft",
         "evolution": "Evolution",
+        "expedition": "Expedition",
         "bad batch": "Bad Batch"
     },
     "auctionItemModal": {

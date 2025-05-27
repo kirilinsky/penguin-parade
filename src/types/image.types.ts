@@ -6,7 +6,7 @@ export interface ImageItem {
   imageUrl: string;
   creatorUid: string;
   ownerId: string;
-  origin: "craft" | "evolution" | "bad batch";
+  origin: "craft" | "evolution" | "bad batch" | "expedition";
   title: string;
   gift: boolean;
   auction: boolean;
