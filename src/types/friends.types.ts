@@ -1,5 +1,5 @@
 import { ScaleType } from "./scale.types";
-import { RequestRecord, User } from "./user.types";
+import { User } from "./user.types";
 
 export type Friend = {
   id: string;
@@ -15,7 +15,5 @@ export type TopUser = {
   imageCount: number;
   avatarScale: ScaleType | null;
 };
-
-export type FriendData = RequestRecord & User;
 
 export type FriendWithUser = Friend & User;

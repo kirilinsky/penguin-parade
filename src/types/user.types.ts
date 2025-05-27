@@ -2,6 +2,8 @@ import { ExpeditionState } from "./expeditions.types";
 import { LocalizedField } from "./image.types";
 import { ScaleType } from "./scale.types";
 
+export type FriendData = RequestRecord & User;
+
 export type UserStatistics = {
   evolutions: number;
   expeditions: number;

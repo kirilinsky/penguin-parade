@@ -8,8 +8,7 @@ import UserListItemComponent from "@/components/user-list-item/user-list-item.co
 import { firestore } from "@/firebase";
 import { useGetFriends } from "@/hooks/use-get-friends";
 import { useUserDetails } from "@/hooks/use-user-details";
-import { FriendData } from "@/types/friends.types";
-import { User } from "@/types/user.types";
+import { FriendData, User } from "@/types/user.types";
 import {
   arrayRemove,
   arrayUnion,
