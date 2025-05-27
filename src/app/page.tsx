@@ -45,7 +45,6 @@ export default function Home() {
           <PageContentBlockStyled>
             <h2>Road map</h2>
             <ul>
-              <li>I18n</li>
               <li>Statistics page/block</li>
               <li>Notification toasts</li>
               <li>Anonymous home page, loggedIn limitations</li>
