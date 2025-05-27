@@ -154,7 +154,7 @@ export async function POST(req: Request) {
       .from(BUCKET)
       .upload(filename, webpBuffer, {
         contentType: "image/webp",
-        cacheControl: "31536000",
+        cacheControl: "31576000",
       });
 
     if (uploadRes.error) {
@@ -178,7 +178,7 @@ export async function POST(req: Request) {
       collection(firestore, GLOBAL_IMAGES_COLLECTION),
       {
         imageUrl: urlData.publicUrl,
-        title: settings.en.t || "Untitled",
+        title: settings.t.en || "Untitled",
         creatorUid: uid,
         ownerId: uid,
         origin,
