@@ -15,6 +15,7 @@ import GalleryItemScaleComponent from "../gallery-item-scale/gallery-item-scale.
 import { Tektur } from "next/font/google";
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
+import { getLocalized } from "@/helpers/get-localized/get-localized";
 
 const tektur = Tektur({
   subsets: ["latin"],
@@ -38,11 +39,6 @@ const GalleryItemComponent = ({
   const [loaded, setLoaded] = useState(false);
   const t = useTranslations("galleryItem");
   const locale = useLocale();
-
-  const getLocalized = (field: { en: string; ru: string } | undefined) => {
-    if (!field) return "-";
-    return field[locale as "en" | "ru"] ?? field.en;
-  };
 
   const emperor = img.settings.rarity === "emperor";
 
@@ -95,7 +91,7 @@ const GalleryItemComponent = ({
           />
         </GalleryImageWrap>
         <p style={{ textAlign: "center" }} className={tektur.className}>
-          {getLocalized(img.settings.t)}
+          {getLocalized(img.settings.t, locale)}
         </p>
         {img.auction && (
           <p>

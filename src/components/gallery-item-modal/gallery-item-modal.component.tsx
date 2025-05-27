@@ -22,7 +22,8 @@ import { FriendWithUser, User } from "@/types/friends.types";
 import { ScaleType } from "@/types/scale.types";
 import GalleryItemModalStatistics from "../gallery-item-modal-statistics/gallery-item-modal-statistics.component";
 import AvatarComponent from "../avatar-component/avatar-component";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import { getLocalized } from "@/helpers/get-localized/get-localized";
 
 const tektur = Tektur({
   subsets: ["latin"],
@@ -51,6 +52,7 @@ const GalleryItemModalComponent = ({
 }) => {
   if (!img) return null;
   const t = useTranslations("galleryItemModal");
+  const locale = useLocale();
   const [giftMode, setGiftMode] = useState(false);
   const [friendRecipient, setFriendRecipient] =
     useState<FriendWithUser | null>();
@@ -75,7 +77,7 @@ const GalleryItemModalComponent = ({
       </GalleryItemModalContent>
       <GalleryItemModalContent>
         <GalleryItemModalTitle className={tektur.className}>
-          {img.title}
+          {getLocalized(img.settings.t, locale)}
         </GalleryItemModalTitle>
         <GalleryItemModalScale>
           <GalleryItemScaleComponent scale={img.settings.rarity} />
