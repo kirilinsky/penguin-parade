@@ -1,3 +1,4 @@
+import { LocalizedField } from "./image.types";
 import { ScaleType } from "./scale.types";
 
 export type ExpeditionState =
@@ -9,9 +10,7 @@ export type ExpeditionState =
 
 export type Expedition = {
   id: string;
-  title: string;
-  theme: string;
-  goal: string;
+  settings: ExpeditionSettings;
   level: ScaleType;
   minParticipants: number;
   maxParticipants: number;
@@ -25,6 +24,13 @@ export type Expedition = {
   endedAt: Date;
   preset: ExpeditionPreset;
   participants: ExpeditionParticipant[];
+};
+
+export type ExpeditionSettings = {
+  title: LocalizedField;
+  theme: LocalizedField;
+  goal: LocalizedField;
+  description: LocalizedField;
 };
 
 export type ExpeditionParticipant = {

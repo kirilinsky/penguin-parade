@@ -69,12 +69,12 @@ where:
   "breast": color of penguin's breast,
   "back": color of penguin's back,
   "fx": picture effects,
-  "acc": (max 1-3 words, clothing/hat/accessory, neckless),
+  "acc": (max 1-3 words, clothing/hat/accessory, necklace, shirt etc),
   "t": (max 3 words, title of the penguin),
   "des": story about penguin in 20-27 words,
   "ability": max 1-3 words, ability of the penguin
 
-Use Capital first letter for values. Background always connected with title and theme. Same for colors. Be bold and original. Mix elements. Return only JSON.`;
+Use Capital first letter for values and spaces between words. Background always connected with title and theme. Same for colors. Be bold and original. Mix elements. Return only JSON.`;
 
   const userPrompt = `
 Generate a completely new penguin variation. Avoid repeating previous themes like moss, leaf, whisperer, explorer or sovereign. Surprise me. Title and background should come from theme its important.

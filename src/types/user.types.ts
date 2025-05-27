@@ -1,4 +1,5 @@
 import { ExpeditionState } from "./expeditions.types";
+import { LocalizedField } from "./image.types";
 import { ScaleType } from "./scale.types";
 
 export type UserStatistics = {
@@ -56,7 +57,7 @@ export type User = {
 export type UserExpeditionItem = {
   expeditionId: string;
   expeditionScale: ScaleType;
-  expeditionTitle: string;
+  expeditionTitle: LocalizedField;
   expeditionState: ExpeditionState;
   penguinIds: string[];
   joinedAt: Date;
