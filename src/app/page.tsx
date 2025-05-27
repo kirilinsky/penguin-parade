@@ -57,7 +57,7 @@ export default function Home() {
               <li>Friends Updtes(news)</li>
               <li>Announcements</li>
               <li>Tutorial page</li>
-              <li>Farms functionality</li>
+              <li>Farms functionality</li> <li>Mystery eggs</li>
               <li>SignUp/Login via gmail</li>
             </ul>
           </PageContentBlockStyled>

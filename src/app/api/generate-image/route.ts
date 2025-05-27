@@ -23,7 +23,6 @@ const model =
 const templateImageUrl = "https://i.ibb.co/B55bD3mh/template.png";
 const BUCKET = "penguins";
 const GLOBAL_IMAGES_COLLECTION = "images";
- 
 
 export async function POST(req: Request) {
   const authHeader = req.headers.get("Authorization") || "";
@@ -93,25 +92,34 @@ export async function POST(req: Request) {
     }
     const { settings } = await settingsRes.json();
 
+    const en = (key: keyof typeof settings) =>
+      typeof settings[key] === "object" && settings[key]?.en
+        ? settings[key].en
+        : settings[key];
+
     const promptParts: string[] = [];
 
     promptParts.push(
       `A 2D digital cartoon-style portrait of a penguin character.`,
-      `The penguin is standing in ${settings.bg.toLowerCase()}, surrounded by ${settings.fx.toLowerCase()}.`,
-      `The penguin detailed and scene is styled as ${settings.theme.toLowerCase()}, with cinematic lighting and rich background and penguin accessories details.`
+      `The penguin is standing in ${en("bg").toLowerCase()}, surrounded by ${en(
+        "fx"
+      ).toLowerCase()}.`,
+      `The penguin detailed and scene is styled as ${en(
+        "theme"
+      ).toLowerCase()}, with cinematic lighting and rich background and great penguin accessories details.`
     );
 
     promptParts.push(
-      `The penguin wears ${settings.acc.toLowerCase()},`,
-      `has a ${settings.beak.toLowerCase()} beak,`,
-      `a ${settings.breast.toLowerCase()} chest,`,
-      `and a ${settings.back.toLowerCase()} back.`
+      `The penguin wears ${en("acc").toLowerCase()},`,
+      `has a ${en("beak").toLowerCase()} beak,`,
+      `a ${en("breast").toLowerCase()} chest,`,
+      `and a ${en("back").toLowerCase()} back.`
     );
     promptParts.push(
-      `Highly detailed, vibrant colors, fantasy illustration, glowing effects or ambient,`,
-      `rarity level: ${settings.rarity.toLowerCase()} and the picture title is ${
-        settings.t
-      }.`
+      `Highly detailed, vibrant colors, fantasy illustration, attractive and detailed effects,`,
+      `rarity level: ${settings.rarity.toLowerCase()} and picture title is ${en(
+        "t"
+      )}.`
     );
 
     const output = await replicate.run(model, {
@@ -200,7 +208,7 @@ export async function POST(req: Request) {
     return NextResponse.json({
       success: true,
       downloadURL: urlData.publicUrl,
-      title: settings.t,
+      title: settings.t.en,
       settings,
       id: imageDoc.id,
     });

@@ -30,18 +30,23 @@ export interface ImageItemGiftedHistory {
   to: string;
 }
 
+export interface LocalizedField {
+  en: string;
+  ru: string;
+}
+
 export interface ImageItemSettings {
-  acc: string;
-  back: string;
-  beak: string;
-  bg: string;
-  breast: string;
-  des: string;
-  ability: string;
-  eyes: string;
-  fx: string;
+  acc: LocalizedField;
+  back: LocalizedField;
+  beak: LocalizedField;
+  bg: LocalizedField;
+  breast: LocalizedField;
+  des: LocalizedField;
+  ability: LocalizedField;
+  fx: LocalizedField;
   rarity: ScaleType;
-  theme: string;
+  theme: LocalizedField;
+  t: LocalizedField;
 }
 
 export type ImagesSortType =

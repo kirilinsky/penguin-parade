@@ -14,7 +14,7 @@ import { getBaseColorByScale } from "@/helpers/get-base-color-by-rarity/get-base
 import GalleryItemScaleComponent from "../gallery-item-scale/gallery-item-scale.component";
 import { Tektur } from "next/font/google";
 import Image from "next/image";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 const tektur = Tektur({
   subsets: ["latin"],
@@ -37,6 +37,12 @@ const GalleryItemComponent = ({
 }) => {
   const [loaded, setLoaded] = useState(false);
   const t = useTranslations("galleryItem");
+  const locale = useLocale();
+
+  const getLocalized = (field: { en: string; ru: string } | undefined) => {
+    if (!field) return "-";
+    return field[locale as "en" | "ru"] ?? field.en;
+  };
 
   const emperor = img.settings.rarity === "emperor";
 
@@ -88,7 +94,9 @@ const GalleryItemComponent = ({
             loading="lazy"
           />
         </GalleryImageWrap>
-        <p className={tektur.className}>{img.title}</p>
+        <p style={{ textAlign: "center" }} className={tektur.className}>
+          {getLocalized(img.settings.t)}
+        </p>
         {img.auction && (
           <p>
             {t("price")} - {img.price}

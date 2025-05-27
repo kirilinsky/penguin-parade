@@ -1,0 +1,26 @@
+{
+  "success": true,
+  "images": [ 
+     
+    {
+      "id": "oQAuyVxp23gFQldqe8mS",
+      "settings": {
+        "fx": "sparkling bubbles",
+        "des": "Coral Joy dances through reefs, seaweed crown bouncing as sparkling bubbles rise around her warm coral hues.",
+        "ability": "Bubble boost",
+        "rarity": "common",
+        "shadow": "#3366ff",
+        "theme": "coral",
+        "bg": "underwater coral reef",
+        "eyes": "#33cccc",
+        "breast": "#ffcc99",
+        "back": "#ff9966",
+        "acc": "seaweed crown",
+        "t": "Coral Joy",
+        "beak": "#ff9900"
+      }
+    } 
+     
+     
+  ]
+}

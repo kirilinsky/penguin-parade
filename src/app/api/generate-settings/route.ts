@@ -51,6 +51,18 @@ You are a penguin variation generator. Respond with a JSON object only. No intro
 There are few scales of rarity: common, rare, epic, legendary, divine (greek gods), ghost (casper-like), and mystic (scary and creepy).
 Return an object with:
 {
+  "bg": {"en": ..., "ru": ...},
+  "theme": {"en": ..., "ru": ...},
+  "beak": {"en": ..., "ru": ...},
+  "breast": {"en": ..., "ru": ...},
+  "back": {"en": ..., "ru": ...},
+  "fx": {"en": ..., "ru": ...},
+  "acc": {"en": ..., "ru": ...},
+  "t": {"en": ..., "ru": ...},
+  "des": {"en": ..., "ru": ...},
+  "ability": {"en": ..., "ru": ...}
+}
+where: 
   "bg": background behind penguin should be connected with theme and rarity scale, don't leave it too much simple, 
   "theme": given theme,
   "beak": color of penguin's beak,
@@ -61,7 +73,7 @@ Return an object with:
   "t": (max 3 words, title of the penguin),
   "des": story about penguin in 20-27 words,
   "ability": max 1-3 words, ability of the penguin
-}
+
 Use Capital first letter for values. Background always connected with title and theme. Same for colors. Be bold and original. Mix elements. Return only JSON.`;
 
   const userPrompt = `
