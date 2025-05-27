@@ -9,15 +9,11 @@ import {
   where,
 } from "firebase/firestore";
 import { firestore } from "@/firebase";
-import {
-  Friend,
-  FriendData,
-  FriendWithUser,
-  RequestRecord,
-  User,
-} from "@/types/friends.types";
+
 import { useAtomValue } from "jotai";
 import { userDetailsAtom } from "@/atoms/user/user.atom";
+import { FriendData, RequestRecord, User } from "@/types/user.types";
+import { Friend, FriendWithUser } from "@/types/friends.types";
 
 function extractUniqueUserIds(
   incoming: { id: string }[],
