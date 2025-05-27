@@ -13,7 +13,7 @@ import {
   GalleryItemModalScale,
   GalleryItemModalTitle,
 } from "./gallery-item-modal.component.styled";
-import { Orbitron } from "next/font/google";
+import { Tektur } from "next/font/google";
 import GalleryItemScaleComponent from "../gallery-item-scale/gallery-item-scale.component";
 import { getBaseColorByScale } from "@/helpers/get-base-color-by-rarity/get-base-color-by-rarity";
 import NeonButtonComponent from "../neon-button/neon-button.component";
@@ -24,7 +24,7 @@ import GalleryItemModalStatistics from "../gallery-item-modal-statistics/gallery
 import AvatarComponent from "../avatar-component/avatar-component";
 import { useTranslations } from "next-intl";
 
-const orbitron = Orbitron({
+const tektur = Tektur({
   subsets: ["latin"],
   weight: ["700"],
   display: "swap",
@@ -74,7 +74,7 @@ const GalleryItemModalComponent = ({
         />
       </GalleryItemModalContent>
       <GalleryItemModalContent>
-        <GalleryItemModalTitle className={orbitron.className}>
+        <GalleryItemModalTitle className={tektur.className}>
           {img.title}
         </GalleryItemModalTitle>
         <GalleryItemModalScale>

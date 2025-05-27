@@ -3,7 +3,7 @@
 import { ImageItem } from "@/types/image.types";
 import React, { useMemo } from "react";
 
-import { Orbitron } from "next/font/google";
+import { Tektur } from "next/font/google";
 import GalleryItemScaleComponent from "../gallery-item-scale/gallery-item-scale.component";
 import { getBaseColorByScale } from "@/helpers/get-base-color-by-rarity/get-base-color-by-rarity";
 import NeonButtonComponent from "../neon-button/neon-button.component";
@@ -19,7 +19,7 @@ import {
 import GalleryItemModalStatistics from "../gallery-item-modal-statistics/gallery-item-modal-statistics.component";
 import { useTranslations } from "next-intl";
 
-const orbitron = Orbitron({
+const tektur = Tektur({
   subsets: ["latin"],
   weight: ["700"],
   display: "swap",
@@ -53,7 +53,7 @@ const AuctionItemModalComponent = ({
         />
       </GalleryItemModalContent>
       <GalleryItemModalContent>
-        <GalleryItemModalTitle className={orbitron.className}>
+        <GalleryItemModalTitle className={tektur.className}>
           {img.title}
         </GalleryItemModalTitle>
         <GalleryItemModalScale>

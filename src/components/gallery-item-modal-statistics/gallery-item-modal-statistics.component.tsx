@@ -10,7 +10,7 @@ import { format } from "date-fns";
 import { useTranslations } from "next-intl";
 
 const GalleryItemModalStatistics = ({ img }: { img: ImageItem }) => {
-  const t= useTranslations("galleryItemModalStatistics")
+  const t = useTranslations("galleryItemModalStatistics");
   return (
     <GalleryItemModalStatisticsGrid>
       <GalleryItemModalStatisticsDes>
@@ -58,7 +58,7 @@ const GalleryItemModalStatistics = ({ img }: { img: ImageItem }) => {
       </GalleryItemModalStatisticsTrait>
       <GalleryItemModalStatisticsTrait>
         <h3>{t("origin")}</h3>
-        <p>{img.origin}</p>
+        <p>{t(img.origin)}</p>
       </GalleryItemModalStatisticsTrait>
     </GalleryItemModalStatisticsGrid>
   );

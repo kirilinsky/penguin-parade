@@ -9,8 +9,7 @@ export default Page;
 /* import { doc, getDoc } from "firebase/firestore";
 import { firestore } from "@/firebase";
 import Link from "next/link";
-import { Orbitron } from "next/font/google";
-import { ImageItem } from "@/types/image.types";
+ import { ImageItem } from "@/types/image.types";
 import { getBaseColorByScale } from "@/helpers/get-base-color-by-rarity/get-base-color-by-rarity";
 
 import { Metadata } from "next";
@@ -57,10 +56,7 @@ export async function generateMetadata(context: {
     },
   };
 }
-const orbitron = Orbitron({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-});
+ 
 
 export default async function SharePage({ params }: any) {
   const { userId, picture } = params;

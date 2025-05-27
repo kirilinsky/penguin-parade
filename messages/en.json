@@ -50,11 +50,17 @@
         "beak": "Beak Color",
         "back": "Back Color",
         "breast": "Chest Color",
-        "origin": "Origin"
+        "origin": "Origin",
+        "craft": "Craft",
+        "evolution": "Evolution",
+        "bad batch": "Bad Batch"
     },
     "auctionItemModal": {
         "buying": "buying in progress...",
         "buyButton": "Buy"
+    },
+    "galleryItem": {
+        "price": "Price"
     },
     "galleryItemModal": {
         "avatarButton": "Set as Avatar",

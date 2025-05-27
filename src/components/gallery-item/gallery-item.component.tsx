@@ -12,10 +12,11 @@ import {
 import { ImageItem } from "@/types/image.types";
 import { getBaseColorByScale } from "@/helpers/get-base-color-by-rarity/get-base-color-by-rarity";
 import GalleryItemScaleComponent from "../gallery-item-scale/gallery-item-scale.component";
-import { Orbitron } from "next/font/google";
+import { Tektur } from "next/font/google";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
-const orbitron = Orbitron({
+const tektur = Tektur({
   subsets: ["latin"],
   weight: ["400"],
   display: "swap",
@@ -35,6 +36,7 @@ const GalleryItemComponent = ({
   scalable?: boolean;
 }) => {
   const [loaded, setLoaded] = useState(false);
+  const t = useTranslations("galleryItem");
 
   const emperor = img.settings.rarity === "emperor";
 
@@ -86,10 +88,10 @@ const GalleryItemComponent = ({
             loading="lazy"
           />
         </GalleryImageWrap>
-        <p className={orbitron.className}>{img.title}</p>
+        <p className={tektur.className}>{img.title}</p>
         {img.auction && (
           <p>
-            Price - {img.price}
+            {t("price")} - {img.price}
             <Image src="/coin.webp" width={18} height={18} alt="coin" />{" "}
           </p>
         )}

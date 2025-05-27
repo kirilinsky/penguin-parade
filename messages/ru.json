@@ -16,6 +16,9 @@
         "rarity": "Редкие",
         "showOnly": "Показать только:"
     },
+    "galleryItem": {
+        "price": "Цена"
+    },
     "friendsPage": {
         "addFriendTitle": "Добавить нового друга",
         "searchFriendPlaceholder": "Искать пользователей по имени",
@@ -48,7 +51,10 @@
         "beak": "Цвет клюва",
         "back": "Цвет спины",
         "breast": "Цвет груди",
-        "origin": "Происхождение"
+        "origin": "Происхождение",
+        "craft": "Крафт",
+        "evolution": "Эволюция",
+        "bad batch": "Бракованная Партия"
     },
     "galleryItemModal": {
         "avatarButton": "Поставить как аватар",
