@@ -21,7 +21,7 @@ export const GalleryItemModalContent = styled.div<{ $frameColor?: string }>`
   position: relative;
   color: #fff;
   width: 50%;
-  overflow: auto;
+  overflow: ${({ $frameColor }) => ($frameColor ? "hidden" : "auto")};
   height: 100%;
   gap: 10px;
   border-radius: 1em;
@@ -32,8 +32,8 @@ export const GalleryItemModalContent = styled.div<{ $frameColor?: string }>`
     width: 99%;
     min-height: 55vh;
     &:nth-child(2) {
-      min-height: 100vh;
-      margin-bottom: 12px;
+      min-height: fit-content;
+      margin-bottom: 15px;
     }
   }
 `;
