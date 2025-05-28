@@ -90,9 +90,17 @@ export async function POST(req: Request) {
   const maxParticipants = Math.floor(Math.random() * 4) + 12; // до 16
 
   const now = new Date();
-  const startedAt = new Date(now.getTime() + 24 * 60 * 60 * 1000);
-  const endedAt = new Date(
-    startedAt.getTime() + durationHours * 60 * 60 * 1000
+
+  const preparationStartedAt = now;
+  const preparationEndedAt = new Date(
+    preparationStartedAt.getTime() + 24 * 60 * 60 * 1000
+  );
+
+  const activePhaseStartedAt = new Date(
+    preparationEndedAt.getTime() + 60 * 1000
+  );
+  const activePhaseEndedAt = new Date(
+    activePhaseStartedAt.getTime() + durationHours * 60 * 60 * 1000
   );
 
   const newDoc = await addDoc(collection(firestore, COLLECTION), {
@@ -105,9 +113,10 @@ export async function POST(req: Request) {
     state: "preparing",
     imageUrl: publicUrl,
     createdAt: now,
-    startedAt,
-    resultReadyAt: endedAt,
-    endedAt,
+    preparationStartedAt,
+    preparationEndedAt,
+    activePhaseStartedAt,
+    activePhaseEndedAt,
     preset: expeditionPresets[level as keyof typeof expeditionPresets],
     participants: [],
   });

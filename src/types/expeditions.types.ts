@@ -1,3 +1,4 @@
+import { Timestamp } from "firebase-admin/firestore";
 import { LocalizedField } from "./image.types";
 import { ScaleType } from "./scale.types";
 
@@ -16,12 +17,13 @@ export type Expedition = {
   maxParticipants: number;
   participantsCount: number;
   durationHours: number;
-  state: ExpeditionState;
   imageUrl: string;
-  createdAt: Date;
-  startedAt: Date;
-  resultReadyAt: Date;
-  endedAt: Date;
+  state: ExpeditionState;
+  createdAt: Timestamp;
+  preparationStartedAt: Timestamp;
+  preparationEndedAt: Timestamp;
+  activePhaseStartedAt: Timestamp;
+  activePhaseEndedAt: Timestamp;
   preset: ExpeditionPreset;
   participants: ExpeditionParticipant[];
 };
