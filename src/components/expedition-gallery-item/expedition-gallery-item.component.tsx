@@ -11,6 +11,7 @@ import { getLocalized } from "@/helpers/get-localized/get-localized";
 import Image from "next/image";
 import { format } from "date-fns";
 import { getBaseColorByScale } from "@/helpers/get-base-color-by-rarity/get-base-color-by-rarity";
+import { LinkStyled } from "../link/link.component.styled";
 
 const ExpeditionGalleryItem = ({ expedition }: { expedition: Expedition }) => {
   const locale = useLocale();
@@ -41,6 +42,7 @@ const ExpeditionGalleryItem = ({ expedition }: { expedition: Expedition }) => {
           <span>min Participants: {expedition.minParticipants}</span>
           <span>max Participants: {expedition.maxParticipants}</span>
           <span>participants Count: {expedition.participantsCount}</span>
+          <LinkStyled href={`/expeditions/${expedition.id}`}>go</LinkStyled>
         </ExpeditionGalleryItemSide>
       </ExpeditionGalleryItemSideContainer>{" "}
       <span>goal: {getLocalized(expedition.settings.goal, locale)}</span>
