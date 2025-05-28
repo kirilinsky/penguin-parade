@@ -9,6 +9,32 @@ export type ExpeditionState =
   | "resultsReady"
   | "archived";
 
+export const expeditionStatusColors: Record<
+  ExpeditionState,
+  { background: string; color: string }
+> = {
+  preparing: {
+    background: "#ffe066",
+    color: "#4a3900",
+  },
+  active: {
+    background: "#4dabf7",
+    color: "#003566",
+  },
+  ended: {
+    background: "#adb5bd",
+    color: "#212529",
+  },
+  resultsReady: {
+    background: "#69db7c",
+    color: "#0b3d0b",
+  },
+  archived: {
+    background: "#dee2e6",
+    color: "#495057",
+  },
+};
+
 export type Expedition = {
   id: string;
   settings: ExpeditionSettings;

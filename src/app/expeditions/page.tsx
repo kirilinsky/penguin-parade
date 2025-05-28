@@ -12,7 +12,6 @@ const PageExpeditions = () => {
 
   return (
     <div>
-      <h1> Expeditions</h1>
       {loading ? (
         "loading expeditions..."
       ) : !expeditions.length ? (
@@ -20,7 +19,10 @@ const PageExpeditions = () => {
       ) : (
         <ExpeditionGallery>
           {expeditions.map((expedition) => (
-            <ExpeditionGalleryItem expedition={expedition} key={expedition.id} />
+            <ExpeditionGalleryItem
+              expedition={expedition}
+              key={expedition.id}
+            />
           ))}
         </ExpeditionGallery>
       )}

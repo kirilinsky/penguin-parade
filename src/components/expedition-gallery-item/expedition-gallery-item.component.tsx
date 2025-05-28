@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
 import {
   ExpeditionGalleryItemContainer,
+  ExpeditionGalleryItemDes,
   ExpeditionGalleryItemImage,
   ExpeditionGalleryItemSide,
   ExpeditionGalleryItemSideContainer,
@@ -12,6 +13,7 @@ import Image from "next/image";
 import { format } from "date-fns";
 import { getBaseColorByScale } from "@/helpers/get-base-color-by-rarity/get-base-color-by-rarity";
 import { LinkStyled } from "../link/link.component.styled";
+import ExpeditionStatusBadge from "../expedition-status-badge/expedition-status-badge.component";
 
 const ExpeditionGalleryItem = ({ expedition }: { expedition: Expedition }) => {
   const locale = useLocale();
@@ -20,7 +22,7 @@ const ExpeditionGalleryItem = ({ expedition }: { expedition: Expedition }) => {
   }, [expedition.level]);
   return (
     <ExpeditionGalleryItemContainer $borderColor={borderColor}>
-      <h1>{getLocalized(expedition.settings.title, locale)}</h1>
+      <h1>{getLocalized(expedition.settings.title, locale)}</h1>{" "}
       <ExpeditionGalleryItemSideContainer>
         <ExpeditionGalleryItemSide>
           <ExpeditionGalleryItemImage
@@ -29,11 +31,11 @@ const ExpeditionGalleryItem = ({ expedition }: { expedition: Expedition }) => {
           />
         </ExpeditionGalleryItemSide>
         <ExpeditionGalleryItemSide>
-          <p>
-            description: {getLocalized(expedition.settings.description, locale)}
-          </p>
+          <ExpeditionStatusBadge status={expedition.state} />
+          <ExpeditionGalleryItemDes>
+            {getLocalized(expedition.settings.description, locale)}
+          </ExpeditionGalleryItemDes>
           <span>theme: {getLocalized(expedition.settings.theme, locale)}</span>
-          <span>current status: {expedition.state}</span>
           <span>
             preparation started at:
             {format(expedition.preparationStartedAt.toDate(), "dd.MM.yy")}

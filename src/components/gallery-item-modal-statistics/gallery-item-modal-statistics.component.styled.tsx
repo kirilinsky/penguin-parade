@@ -6,7 +6,7 @@ export const GalleryItemModalStatisticsGrid = styled.div`
   grid-template-columns: repeat(4, 1fr);
   width: 100%;
   @media (max-width: 888px) {
-    grid-template-columns: repeat(2, 1fr); /* адаптив */
+    grid-template-columns: repeat(2, 1fr);
   }
 `;
 

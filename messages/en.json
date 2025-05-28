@@ -140,5 +140,12 @@
         "en": "English",
         "ru": "Russian",
         "label": "Language"
+    },
+    "expeditionStatusBadge": {
+        "preparing": "Preparing",
+        "active": "Active",
+        "ended": "Ended",
+        "resultsReady": "Results Ready",
+        "archived": "Archived"
     }
 }
