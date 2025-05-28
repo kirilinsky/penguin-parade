@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useMemo } from "react";
 import {
   ExpeditionGalleryItemContainer,
+  ExpeditionGalleryItemImage,
   ExpeditionGalleryItemSide,
   ExpeditionGalleryItemSideContainer,
 } from "./expedition-gallery-item.component.styled";
@@ -9,26 +10,27 @@ import { useLocale } from "next-intl";
 import { getLocalized } from "@/helpers/get-localized/get-localized";
 import Image from "next/image";
 import { format } from "date-fns";
+import { getBaseColorByScale } from "@/helpers/get-base-color-by-rarity/get-base-color-by-rarity";
 
 const ExpeditionGalleryItem = ({ expedition }: { expedition: Expedition }) => {
   const locale = useLocale();
+  const borderColor = useMemo(() => {
+    return getBaseColorByScale(expedition.level);
+  }, [expedition.level]);
   return (
-    <ExpeditionGalleryItemContainer>
+    <ExpeditionGalleryItemContainer $borderColor={borderColor}>
       <h1>{getLocalized(expedition.settings.title, locale)}</h1>
-      <p>
-        description: {getLocalized(expedition.settings.description, locale)}
-      </p>
       <ExpeditionGalleryItemSideContainer>
         <ExpeditionGalleryItemSide>
-          <Image
-            width={300}
-            height={400}
+          <ExpeditionGalleryItemImage
             alt={getLocalized(expedition.settings.title, locale)}
             src={expedition.imageUrl}
           />
         </ExpeditionGalleryItemSide>
         <ExpeditionGalleryItemSide>
-          <span>goal: {getLocalized(expedition.settings.goal, locale)}</span>
+          <p>
+            description: {getLocalized(expedition.settings.description, locale)}
+          </p>
           <span>theme: {getLocalized(expedition.settings.theme, locale)}</span>
           <span>current status: {expedition.state}</span>
           <span>
@@ -40,7 +42,8 @@ const ExpeditionGalleryItem = ({ expedition }: { expedition: Expedition }) => {
           <span>max Participants: {expedition.maxParticipants}</span>
           <span>participants Count: {expedition.participantsCount}</span>
         </ExpeditionGalleryItemSide>
-      </ExpeditionGalleryItemSideContainer>
+      </ExpeditionGalleryItemSideContainer>{" "}
+      <span>goal: {getLocalized(expedition.settings.goal, locale)}</span>
     </ExpeditionGalleryItemContainer>
   );
 };

@@ -194,8 +194,8 @@ const CountDownPage = () => {
             <Image
               src="/loader.gif"
               alt="Loading..."
-              width={167}
-              height={167}
+              width={169}
+              height={169}
               style={{ borderRadius: "50%" }}
               priority
             />
