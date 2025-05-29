@@ -13,11 +13,16 @@ import { useUserDetails } from "@/hooks/use-user-details";
 import { useAtomValue } from "jotai";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
+import { useEffect } from "react";
 
 export default function Home() {
-  const { user } = useUserDetails();
+  const { user, refreshUser } = useUserDetails();
   const loggedIn = useAtomValue(loggedInAtom);
   const t = useTranslations("homePage");
+
+  useEffect(() => {
+    refreshUser();
+  }, []);
 
   return (
     <PageContentWrapperComponent>
