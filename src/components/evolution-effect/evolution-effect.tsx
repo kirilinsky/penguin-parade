@@ -21,12 +21,12 @@ const Orb = styled.span.withConfig({
   shouldForwardProp: (prop) => prop !== "duration",
 })<EnergyProps>`
   position: absolute;
-  width: ${({ radius }) => `calc(250% + ${radius})`};
-  height: ${({ radius }) => `calc(300% + ${radius})`};
+  width: ${({ radius }) => `calc(270% + ${radius})`};
+  height: ${({ radius }) => `calc(180% + ${radius})`};
   background: ${({ color }) => color};
-  border-radius: 50%;
-  top: -150%;
-  left: -75%;
+  border-radius: 40%;
+  top: -45%;
+  left: -90%;
 
   animation: ${rotate} ${({ duration }) => duration} linear infinite;
   mix-blend-mode: plus-lighter;

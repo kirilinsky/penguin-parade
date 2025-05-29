@@ -202,7 +202,10 @@ const EvolvePage = () => {
           onImageClick={onImageClick}
         />
       </Rodal>
-      <EvolutionGridContainer hide={result} target={currentScaleColor}>
+      <EvolutionGridContainer
+        hide={evolutionInProgress || result || evolutionListProgress === 0}
+        target={currentScaleColor}
+      >
         {!loading &&
           evolutionKeys.map((key) => (
             <EvolutionGridItem
@@ -221,7 +224,7 @@ const EvolvePage = () => {
             </EvolutionGridItem>
           ))}
         <EvolutionGridItemCenterWrap>
-          {result && payout && <span>You earned {payout} P$</span>}
+          {result && payout && <span>Wow, you've just earned {payout} P$</span>}
           <EvolutionGridItemCenterStyled
             bordercolor={expectingScaleColor}
             gridarea="c"
@@ -229,25 +232,33 @@ const EvolvePage = () => {
             result={result}
             bg={resultImage}
           >
-            
-            {(!result || !evolutionInProgress) &&
+            {!result &&
               (evolutionListProgress < 100 ? (
-                `${evolutionListProgress}%`
+                <span> {evolutionListProgress}%</span>
               ) : (
-                <NeonButtonComponent onClick={evolve} title="Evolve" />
+                !evolutionInProgress && (
+                  <NeonButtonComponent onClick={evolve} title="Evolve" />
+                )
               ))}
             {evolutionInProgress && <EvolutionEffect />}
           </EvolutionGridItemCenterStyled>
           {result && resultTitle && (
-            <p>
-              Your new {resultTitle}!
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              And here is your new {resultTitle}!<b>Welcome buddy</b>
               <br />
               {result && user && (
                 <LinkStyled href={`/library/${user.id}`}>
                   Go to My Penguins
                 </LinkStyled>
               )}
-            </p>
+            </div>
           )}
         </EvolutionGridItemCenterWrap>
       </EvolutionGridContainer>

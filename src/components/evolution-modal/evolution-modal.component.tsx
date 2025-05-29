@@ -5,6 +5,7 @@ import {
   EvolutionModalContainer,
   EvolutionModalGallery,
   EvolutionModalGalleryItem,
+  EvolutionModalGalleryScaleWrap,
 } from "./evolution-modal.component.styled";
 import { ScaleType } from "@/types/scale.types";
 
@@ -22,7 +23,7 @@ const EvolutionModalComponent = ({
   return (
     <EvolutionModalContainer>
       <h2>Choose Candidate for evolution. </h2>
-      <h4>
+      <EvolutionModalGalleryScaleWrap>
         {currentRarityScale && (
           <>
             <span> Current rarity: </span>
@@ -35,7 +36,7 @@ const EvolutionModalComponent = ({
             <GalleryItemScaleComponent scale={expectingRarityScale} />
           </>
         )}
-      </h4>
+      </EvolutionModalGalleryScaleWrap>
 
       <EvolutionModalGallery>
         {filteredImages.map((img: ImageItem) => (

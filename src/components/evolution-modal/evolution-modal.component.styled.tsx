@@ -8,6 +8,12 @@ export const EvolutionModalContainer = styled.div`
   overflow-y: auto;
 `;
 
+export const EvolutionModalGalleryScaleWrap = styled.div`
+ display: flex;
+ justify-content: center;
+ gap:.5rem;
+`;
+
 export const EvolutionModalGallery = styled.div`
   margin-top: 10px;
   display: grid;
