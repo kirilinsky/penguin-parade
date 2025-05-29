@@ -77,7 +77,7 @@ where:
 Use Capital first letter for values and spaces between words. Background always connected with title and theme. Same for colors. Be bold and original. Mix elements. Return only JSON.`;
 
   const userPrompt = `
-Generate a completely new penguin variation. Avoid repeating previous themes like moss, leaf, whisperer, explorer or sovereign. Surprise me. Title and background should come from theme its important, create rich equipment.
+Generate a completely new penguin variation. Avoid repeating previous themes like moss, leaf, whisperer, explorer or sovereign. Surprise me. Title and background should come from theme its important.
 Rarity: ${rarity}
 Theme reference: ${randomlyUpdatedTheme}, Title(t) and bg should be related to theme!
 Guidance:
