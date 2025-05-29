@@ -6,6 +6,7 @@ export const GalleryImageWrap = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  transform: translateZ(25px);
 `;
 
 export const GalleryImageFrameOverlay = styled.img`
@@ -26,10 +27,14 @@ export const GalleryItemImage = styled.img.withConfig({
   border-radius: ${({ emperor }) => (emperor ? "4px" : "1em")};
   z-index: 15;
   opacity: ${(props) => (props.loaded ? 1 : 0)};
-  transition: opacity 0.4s ease-in-out;
+  transition: 0.4s ease-in-out;
   margin-block: 5px;
   border: 1px solid ${({ color }) => color};
   box-shadow: 0 0 5px ${({ color }) => color};
+  &:hover {
+    transition: 0.4s ease-in-out;
+    box-shadow: 0 0 5px ${({ color }) => color}, 0 0 15px #000;
+  }
 `;
 
 export const GalleryItemSkeleton = styled.div.withConfig({
@@ -61,6 +66,7 @@ export const GalleryItemContent = styled.div`
   min-height: 300px;
   padding: 10px 20px;
   position: relative;
+  transform-style: preserve-3d;
   &:hover {
     cursor: pointer;
   }

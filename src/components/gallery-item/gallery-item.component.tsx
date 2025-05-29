@@ -47,13 +47,14 @@ const GalleryItemComponent = ({
   }, [img.settings.rarity]);
   return (
     <Tilt
-      scale={scalable ? 1.12 : 1}
+      scale={scalable ? 1.15 : 1}
       key={img.id}
       glareEnable={glare}
-      glareMaxOpacity={0.7}
+      glareMaxOpacity={0.65}
       glarePosition="all"
       glareColor={baseColor}
-      glareBorderRadius="1em"
+      glareBorderRadius={"16px"}
+      style={{ transformStyle: "preserve-3d" }}
     >
       <GalleryItemContent onClick={() => onClick(img)}>
         {img.gift && (
