@@ -14,9 +14,10 @@ import { getUserAllowCraftedAt } from "@/helpers/get-user-allow-crafted-at/get-u
 import { ArcadeButtonStyled } from "@/components/arcade-button/arcade-button.component.styled";
 import NeonButtonComponent from "@/components/neon-button/neon-button.component";
 import { getAuth, sendEmailVerification } from "firebase/auth";
-import { formatDuration, intervalToDuration, isBefore } from "date-fns";
+import { formatDuration, intervalToDuration, isBefore, Locale } from "date-fns";
 import { useUserDetails } from "@/hooks/use-user-details";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import { enUS, ru } from "date-fns/locale";
 
 type GenerationResult = {
   downloadURL: string;
@@ -26,7 +27,7 @@ type GenerationResult = {
 
 const CountDownPage = () => {
   const t = useTranslations("craftPage");
-
+  const localeCode = useLocale();
   const { user, refreshUser } = useUserDetails();
   const [canCraft, setCanCraft] = useState<boolean>(false);
   const [loading, setLoading] = useState(false);
@@ -34,6 +35,12 @@ const CountDownPage = () => {
   const [leftTime, setLeftTime] = useState<string>("");
   const [result, setResult] = useState<GenerationResult | null>(null);
   const [shareLink, setShareLink] = useState<string | null>(null);
+
+  const localeMap: Record<string, Locale> = {
+    en: enUS,
+    ru: ru,
+  };
+  const locale = localeMap[localeCode] ?? enUS;
 
   const checkUserStatus = async () => {
     /* TODO: think about useUserDetails refresh */
@@ -50,6 +57,7 @@ const CountDownPage = () => {
 
       const formattedDate = formatDuration(duration, {
         format: ["days", "hours", "minutes"],
+        locale,
       });
       setLeftTime(formattedDate);
     }
@@ -120,8 +128,8 @@ const CountDownPage = () => {
         return { success: false, error: "User not authenticated" };
       }
 
+      /* TODO: add api layer to get token */
       const token = await currentUser.getIdToken(true);
-
       const res = await fetch("/api/pay-to-skip", {
         method: "POST",
         headers: {
