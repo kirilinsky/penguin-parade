@@ -75,15 +75,15 @@ export const GalleryItemContent = styled.div`
 export const GalleryItemGiftBadge = styled(Image)`
   position: absolute;
   transform: rotate(15deg);
-  opacity: 0.9;
+ 
   top: 2%;
-  right: 3%;
+  right: 1%;
 `;
 
 export const GalleryItemBadBatchBadge = styled(GalleryItemGiftBadge)`
   right: unset;
-  top: 7%;
-  left: 15%;
+  top: 1%;
+  left: 1%;
   transform: rotate(-10deg);
   z-index: 16;
 `;

@@ -59,16 +59,16 @@ const GalleryItemComponent = ({
       <GalleryItemContent onClick={() => onClick(img)}>
         {img.gift && (
           <GalleryItemGiftBadge
-            width={31}
-            height={31}
+            width={33}
+            height={33}
             alt="gift"
             src="/gift_badge.webp"
           />
         )}
         {img.origin === "bad batch" && (
           <GalleryItemBadBatchBadge
-            width={55}
-            height={40}
+            width={57}
+            height={42}
             alt="bad batch"
             src="/badbatch_badge.webp"
           />
