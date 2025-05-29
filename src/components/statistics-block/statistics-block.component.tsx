@@ -28,7 +28,7 @@ const StatisticsBlockComponent = ({ user }: { user: User }) => {
 
     return value;
   };
-  if (!user) return null;
+  if (!user || !user.statistics) return null;
   const t = useTranslations("statisticsBlock");
   const statisticsArray = Object.entries(user.statistics);
   return (
