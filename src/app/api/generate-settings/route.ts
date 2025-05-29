@@ -71,13 +71,13 @@ where:
   "fx": picture effects,
   "acc": (max 1-3 words, clothing/hat/accessory, necklace, shirt etc),
   "t": (max 3 words, title of the penguin),
-  "des": story about penguin in 20-27 words,
+  "des": story about penguin,its origin, surrounding and fun fact, in 25-32 words,
   "ability": max 1-3 words, ability of the penguin
 
 Use Capital first letter for values and spaces between words. Background always connected with title and theme. Same for colors. Be bold and original. Mix elements. Return only JSON.`;
 
   const userPrompt = `
-Generate a completely new penguin variation. Avoid repeating previous themes like moss, leaf, whisperer, explorer or sovereign. Surprise me. Title and background should come from theme its important.
+Generate a completely new penguin variation. Avoid repeating previous themes like moss, leaf, whisperer, explorer or sovereign. Surprise me. Title and background should come from theme its important, create rich equipment.
 Rarity: ${rarity}
 Theme reference: ${randomlyUpdatedTheme}, Title(t) and bg should be related to theme!
 Guidance:
@@ -93,12 +93,12 @@ Title(t) and bg should be related to theme!
         Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
       },
       body: JSON.stringify({
-        model: "gpt-3.5-turbo",
+        model: "gpt-4",
         messages: [
           { role: "system", content: systemPrompt },
           { role: "user", content: userPrompt },
         ],
-        temperature: 1.3,
+        temperature: 1.4,
         top_p: 0.9,
       }),
     });
