@@ -22,8 +22,8 @@ const AvatarComponent = ({
       src={avatarUrl || "/template.png"}
       alt={username}
       $borderColor={borderColor}
-      width={mini ? 35 : 105}
-      height={mini ? 35 : 105}
+      width={mini ? 37 : 105}
+      height={mini ? 37 : 105}
       style={{ borderRadius: "50%" }}
     />
   );
