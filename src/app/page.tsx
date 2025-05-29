@@ -6,6 +6,7 @@ import { LinkStyled } from "@/components/link/link.component.styled";
 import { PageContentBlockStyled } from "@/components/page-content-block/page-content-block.component.styled";
 import { PageContentWrapperComponent } from "@/components/page-content-wrapper/page-content-wrapper.component";
 import RandomAuctionBlockComponent from "@/components/random-auction-block/random-auction-block.component";
+import StatisticsBlockComponent from "@/components/statistics-block/statistics-block.component";
 import TopUsersBlock from "@/components/top-users-block/top-users-block.component";
 import TotalCountBlockComponent from "@/components/total-count-block/total-count-block.component";
 import { useUserDetails } from "@/hooks/use-user-details";
@@ -43,11 +44,11 @@ export default function Home() {
           <LastCraftedBlockComponent />
           <TotalCountBlockComponent />
           <RandomAuctionBlockComponent />
-          <TopUsersBlock/>
+          <TopUsersBlock />
+          <StatisticsBlockComponent user={user} />
           <PageContentBlockStyled>
             <h2>Road map</h2>
             <ul>
-              <li>Statistics page/block</li>
               <li>Notification toasts</li>
               <li>Anonymous home page, loggedIn limitations</li>
               <li>Gift functionality design update (notification)</li>

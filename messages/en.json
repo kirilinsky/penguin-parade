@@ -147,5 +147,31 @@
         "ended": "Ended",
         "resultsReady": "Results Ready",
         "archived": "Archived"
+    },
+    "statisticsBlock": {
+        "title": "Statistics",
+        "evolutions": "Evolutions",
+        "expeditions": "Expeditions",
+        "totalGiftsSent": "Gifts Sent",
+        "totalGiftsReceived": "Gifts Received",
+        "totalImagesDonated": "Penguins donated (evolution)",
+        "totalCoinsEarned": "Coins Earned",
+        "totalCrystalsEarned": "Crystals Earned",
+        "totalExpeditionParticipants": "Expedition Participants",
+        "totalCrystalsSpent": "Crystals Spent",
+        "totalCoinsSpent": "Coins Spent",
+        "totalCrafted": "Penguins Crafted",
+        "totalSold": "Sold",
+        "totalBought": "Bought",
+        "lastCrystalAppliedAt": "Last Crystal Used",
+        "lastEvolutionAt": "Last Evolution",
+        "lastGiftSentAt": "Last Gift Sent",
+        "lastExpeditionAt": "Last Expedition",
+        "lastLoginAt": "Last Login",
+        "lastGeneratedAt": "Last Crafted",
+        "lastAuctionPurchaseAt": "Last Auction Buy",
+        "lastAuctionSellAt": "Last Auction Sell",
+        "lastSkipToPayAt": "Last Skip Used",
+        "totalSkipToPay": "Skips Used"
     }
 }

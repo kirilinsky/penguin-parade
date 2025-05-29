@@ -145,5 +145,31 @@
         "ended": "Завершена",
         "resultsReady": "Результаты готовы",
         "archived": "Архив"
+    },
+    "statisticsBlock": {
+        "title": "Статистика",
+        "evolutions": "Эволюции",
+        "expeditions": "Экспедиции",
+        "totalGiftsSent": "Подарков отправлено",
+        "totalGiftsReceived": "Подарков получено",
+        "totalImagesDonated": "Пожертвовано пингвинов (эволюция)",
+        "totalCoinsEarned": "Заработано монет",
+        "totalCrystalsEarned": "Заработано кристаллов",
+        "totalExpeditionParticipants": "Пингвинов в экспедициях",
+        "totalCrystalsSpent": "Потрачено кристаллов",
+        "totalCoinsSpent": "Потрачено монет",
+        "totalCrafted": "Создано пингвинов",
+        "totalSold": "Продано",
+        "totalBought": "Куплено",
+        "lastCrystalAppliedAt": "Последнее применение кристалла",
+        "lastEvolutionAt": "Последняя эволюция",
+        "lastGiftSentAt": "Последний отправленный подарок",
+        "lastExpeditionAt": "Последняя экспедиция",
+        "lastLoginAt": "Последний вход",
+        "lastGeneratedAt": "Последнее создание",
+        "lastAuctionPurchaseAt": "Последняя покупка на аукционе",
+        "lastAuctionSellAt": "Последняя продажа на аукционе",
+        "lastSkipToPayAt": "Последний пропуск за монеты",
+        "totalSkipToPay": "Пропусков использовано"
     }
 }
