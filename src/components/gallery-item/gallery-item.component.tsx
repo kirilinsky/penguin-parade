@@ -36,7 +36,7 @@ const GalleryItemComponent = ({
   glare?: boolean;
   scalable?: boolean;
 }) => {
-  //const [loaded, setLoaded] = useState(false);
+  const [loaded, setLoaded] = useState(false);
   const t = useTranslations("galleryItem");
   const locale = useLocale();
 
@@ -74,20 +74,19 @@ const GalleryItemComponent = ({
           />
         )}
         <GalleryItemScaleComponent scale={img.settings.rarity} />
-        {/* <GalleryItemSkeleton loaded={loaded} /> */}
+        <GalleryItemSkeleton loaded={loaded} />
         <GalleryImageWrap>
           {emperor && (
             <GalleryImageFrameOverlay src="/emperor_frame.webp" alt="frame" />
           )}
           <GalleryItemImage
             src={img.imageUrl}
-            width={slim ? "60%" : "100%"}
-            height={slim ? "60%" : "100%"}
+            height={slim ? "62%" : "auto"}
             alt={img.title}
             color={baseColor}
             emperor={emperor}
-            /*      loaded={loaded}
-            onLoad={() => setLoaded(true)} */
+            loaded={loaded}
+            onLoad={() => setLoaded(true)}
             loading="lazy"
           />
         </GalleryImageWrap>

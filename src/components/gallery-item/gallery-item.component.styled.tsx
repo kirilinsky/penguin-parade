@@ -22,11 +22,12 @@ export const GalleryImageFrameOverlay = styled.img`
 `;
 
 export const GalleryItemImage = styled.img.withConfig({
-  shouldForwardProp: (prop) => prop !== "emperor",
-})<{ emperor: boolean; color: string; loaded?: boolean }>`
+  shouldForwardProp: (prop) => prop !== "loaded" && prop !== "emperor",
+})<{ emperor: boolean; color: string; loaded: boolean }>`
   border-radius: ${({ emperor }) => (emperor ? "4px" : "1em")};
   z-index: 15;
-  //opacity: ${(props) => (props.loaded ? 1 : 0)};
+  height: 27vh;
+  opacity: ${(props) => (props.loaded ? 1 : 0)};
   transition: 0.4s ease-in-out;
   margin-block: 5px;
   border: 1px solid ${({ color }) => color};
@@ -34,6 +35,12 @@ export const GalleryItemImage = styled.img.withConfig({
   &:hover {
     transition: 0.4s ease-in-out;
     box-shadow: 0 0 5px ${({ color }) => color}, 0 0 15px #000;
+  }
+  @media (max-width: 768px) {
+    height: 30vh;
+  }
+  @media (max-width: 526px) {
+    height: 81vw;
   }
 `;
 

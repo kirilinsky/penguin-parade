@@ -177,7 +177,11 @@ const MyLibraryPage = () => {
   return (
     <>
       {!!images.length && (
-        <Rodal visible={!!detailsImage} onClose={() => setDetailsImage(null)}>
+        <Rodal
+          showMask
+          visible={!!detailsImage}
+          onClose={() => setDetailsImage(null)}
+        >
           <GalleryItemModalComponent
             user={user}
             friends={friends}
