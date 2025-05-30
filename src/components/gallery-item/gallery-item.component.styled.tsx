@@ -26,7 +26,7 @@ export const GalleryItemImage = styled.img.withConfig({
 })<{ emperor: boolean; color: string; loaded: boolean }>`
   border-radius: ${({ emperor }) => (emperor ? "4px" : "1em")};
   z-index: 15;
-  height: 27vh;
+  height: 30vh;
   opacity: ${(props) => (props.loaded ? 1 : 0)};
   transition: 0.4s ease-in-out;
   margin-block: 5px;
@@ -37,7 +37,7 @@ export const GalleryItemImage = styled.img.withConfig({
     box-shadow: 0 0 5px ${({ color }) => color}, 0 0 15px #000;
   }
   @media (max-width: 768px) {
-    height: 30vh;
+    height: 28vh;
   }
   @media (max-width: 526px) {
     height: 81vw;
