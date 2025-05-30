@@ -54,10 +54,11 @@ export default function Home() {
           <PageContentBlockStyled>
             <h2>Road map</h2>
             <ul>
+              <li>Gift cooldown</li>
+              <li>Expeditions (TBA)</li>
               <li>Notification toasts</li>
               <li>Anonymous home page, loggedIn limitations</li>
               <li>Gift functionality design update (notification)</li>
-              <li>Expeditions (TBA)</li>
               <li>NFT Mint preparation</li>
               <li>Images avatar optimization</li>
               <li>Friends page design update</li>
