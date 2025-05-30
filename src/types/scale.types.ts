@@ -22,23 +22,23 @@ export const scaleOrder: ScaleType[] = [
 export const scaleConfig = {
   common: {
     color: "#6e6e6e",
-    sell: 1,
-    buy: 4,
+    sell: 2,
+    buy: 3,
   },
   rare: {
-    color: "#00c4ff",
-    sell: 2,
+    color: "#00c3ff",
+    sell: 4,
     buy: 10,
   },
   epic: {
     color: "#b030f0",
-    sell: 4,
+    sell: 6,
     buy: 20,
   },
   legendary: {
     color: "#ff2a2a",
-    sell: 8,
-    buy: 35,
+    sell: 10,
+    buy: 36,
   },
   divine: {
     color: "#ffe14d",
