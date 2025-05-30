@@ -22,11 +22,11 @@ export const GalleryImageFrameOverlay = styled.img`
 `;
 
 export const GalleryItemImage = styled.img.withConfig({
-  shouldForwardProp: (prop) => prop !== "loaded" && prop !== "emperor",
-})<{ emperor: boolean; color: string; loaded: boolean }>`
+  shouldForwardProp: (prop) => prop !== "emperor",
+})<{ emperor: boolean; color: string; loaded?: boolean }>`
   border-radius: ${({ emperor }) => (emperor ? "4px" : "1em")};
   z-index: 15;
-  opacity: ${(props) => (props.loaded ? 1 : 0)};
+  //opacity: ${(props) => (props.loaded ? 1 : 0)};
   transition: 0.4s ease-in-out;
   margin-block: 5px;
   border: 1px solid ${({ color }) => color};
@@ -75,9 +75,9 @@ export const GalleryItemContent = styled.div`
 export const GalleryItemGiftBadge = styled(Image)`
   position: absolute;
   transform: rotate(15deg);
- 
+  opacity: 0.9;
   top: 2%;
-  right: 1%;
+  right: 2%;
 `;
 
 export const GalleryItemBadBatchBadge = styled(GalleryItemGiftBadge)`
