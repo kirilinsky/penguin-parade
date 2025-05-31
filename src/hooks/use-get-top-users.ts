@@ -3,7 +3,7 @@ import { collection, getDocs } from "firebase/firestore";
 import { firestore } from "@/firebase";
 import { TopUser } from "@/types/friends.types";
 
-export function useGetTopUsers(limitCount = 6) {
+export function useGetTopUsers(limitCount = 8) {
   const [users, setUsers] = useState<TopUser[]>([]);
   const [loading, setLoading] = useState(false);
 
