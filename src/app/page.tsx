@@ -54,7 +54,7 @@ export default function Home() {
           <PageContentBlockStyled>
             <h2>Road map</h2>
             <ul>
-              <li>Gift cooldown</li>
+              <li>Crystals system</li>
               <li>Expeditions (TBA)</li>
               <li>Notification toasts</li>
               <li>Anonymous home page, loggedIn limitations</li>
@@ -65,7 +65,8 @@ export default function Home() {
               <li>Friends Updtes(news)</li>
               <li>Announcements</li>
               <li>Tutorial page</li>
-              <li>Farms functionality</li> <li>Mystery eggs</li>
+              <li>Farms functionality</li>
+              <li>Mystery eggs</li>
               <li>SignUp/Login via gmail</li>
             </ul>
           </PageContentBlockStyled>

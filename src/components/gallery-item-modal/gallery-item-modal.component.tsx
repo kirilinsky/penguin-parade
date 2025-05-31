@@ -97,7 +97,7 @@ const GalleryItemModalComponent = ({
                 onClick={() => setGiftMode(true)}
                 title={t("giftButton")}
               />
-              {buy && sell && (
+              {buy && sell && !img.gift && (
                 <NeonButtonComponent
                   onClick={() => onSellImage(img.id)}
                   title={`${t("sellButton")} ${sell} P$`}

@@ -15,6 +15,7 @@ export const useGetImages = (
   const uid = id ?? user?.id;
 
   const [images, setImages] = useState<ImageItem[]>([]);
+  const [auctionImages, setAuctionImages] = useState<ImageItem[]>([]);
   const [rarityCount, setRarityCount] = useState<RarityCount>({});
   const [total, setTotal] = useState<number>(0);
   const [loading, setLoading] = useState(false);
@@ -49,7 +50,11 @@ export const useGetImages = (
 
         setImages(list);
         setTotal(list.length);
-        const computed = list.reduce((acc, { settings: { rarity } }) => {
+
+        const filtered = list.filter((img) => !img.gift);
+        setAuctionImages(filtered);
+
+        const computed = filtered.reduce((acc, { settings: { rarity } }) => {
           acc[rarity] = (acc[rarity] || 0) + 1;
           return acc;
         }, {} as RarityCount);
@@ -66,5 +71,14 @@ export const useGetImages = (
     fetchImages();
   }, [uid, sortByDate, refetchTrigger]);
 
-  return { images, rarityCount, uid, total, loading, error, refetch };
+  return {
+    images,
+    auctionImages,
+    rarityCount,
+    uid,
+    total,
+    loading,
+    error,
+    refetch,
+  };
 };

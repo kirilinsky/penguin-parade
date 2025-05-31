@@ -51,11 +51,11 @@ const EvolvePage = () => {
   const [resultTitle, setResultTitle] = useState<string | null>(null);
   const [payout, setPayout] = useState<number>(0);
 
-  const { images, loading } = useGetImages();
+  const { auctionImages, loading } = useGetImages();
 
   useEffect(() => {
-    setFilteredImages(images);
-  }, [images]);
+    setFilteredImages(auctionImages);
+  }, [auctionImages]);
 
   const onImageClick = (img: ImageItem) => {
     if (!currentRarityScale) {
@@ -178,7 +178,7 @@ const EvolvePage = () => {
 
   useEffect(() => {
     if (!currentRarityScale) {
-      setFilteredImages([...images]);
+      setFilteredImages([...auctionImages]);
       return;
     }
     const filteredImagesDraft = [...filteredImages].filter(
