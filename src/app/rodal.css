@@ -37,9 +37,9 @@
 @media screen and (max-width: 750px) {
   .rodal-dialog {
     position: absolute;
-    width: 100vw !important;
-    height: 100vh !important;
-    padding: 20px 4px 0 4px;
+    width: 96vw !important;
+    height: 96vh !important;
+    padding: 19px 4px 0 4px;
   }
 }
 
