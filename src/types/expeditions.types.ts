@@ -2,12 +2,7 @@ import { Timestamp } from "firebase-admin/firestore";
 import { LocalizedField } from "./image.types";
 import { ScaleType } from "./scale.types";
 
-export type ExpeditionState =
-  | "preparing"
-  | "active"
-  | "ended"
-  | "resultsReady"
-  | "archived";
+export type ExpeditionState = "preparing" | "active" | "ended" | "resultsReady";
 
 export const expeditionStatusColors: Record<
   ExpeditionState,
@@ -28,10 +23,6 @@ export const expeditionStatusColors: Record<
   resultsReady: {
     background: "#69db7c",
     color: "#0b3d0b",
-  },
-  archived: {
-    background: "#dee2e6",
-    color: "#495057",
   },
 };
 

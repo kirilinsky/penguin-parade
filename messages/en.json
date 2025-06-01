@@ -145,8 +145,7 @@
         "preparing": "Preparing",
         "active": "Active",
         "ended": "Ended",
-        "resultsReady": "Results Ready",
-        "archived": "Archived"
+        "resultsReady": "Results Ready"
     },
     "statisticsBlock": {
         "title": "Statistics",
