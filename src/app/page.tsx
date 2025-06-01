@@ -28,7 +28,7 @@ export default function Home() {
     <PageContentWrapperComponent>
       <PageContentBlockStyled>
         <h1>attention</h1>
-        <p>Application had new address</p>
+        <p>Application moved to new address: </p>
         <a href="https://www.getpenguin.top">getpenguin.top</a>
       </PageContentBlockStyled>
     </PageContentWrapperComponent>
