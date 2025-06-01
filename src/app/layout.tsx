@@ -24,7 +24,6 @@ export default async function RootLayout({
         {/* TODO: fix suppressHydrationWarning */}
         <NextIntlClientProvider>
           <body suppressHydrationWarning>
-            <ClientHeaderWrapper />
             <PageWrapperStyled>{children}</PageWrapperStyled>
             <FooterComponent />
           </body>
