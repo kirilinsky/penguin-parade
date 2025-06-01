@@ -21,7 +21,7 @@
     "react-parallax-tilt": "^1.7.295",
     "replicate": "^1.0.1",
     "rodal": "^2.1.0",
-    "sharp": "^0.34.1",
+    "sharp": "^0.34.2",
     "styled-components": "^6.1.18",
     "uuid": "^11.1.0"
   },
