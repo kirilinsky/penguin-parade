@@ -5,7 +5,7 @@ import Replicate from "replicate";
 import { firestore } from "@/firebase";
 import { collection, addDoc } from "firebase/firestore";
 import { expeditionPresets } from "@/types/expeditions.types";
-import { supabaseServer } from "@/supabase";
+import { supabase } from "@/supabase";
 
 const replicate = new Replicate({ auth: process.env.REPLICATE_API_TOKEN });
 const BUCKET = "penguins";
@@ -64,7 +64,7 @@ export async function POST(req: Request) {
   const buffer = await imageRes.arrayBuffer();
   const filename = `expeditions/${uuidv4()}.webp`;
 
-  const { data, error } = await supabaseServer.storage
+  const { data, error } = await supabase.storage
     .from(BUCKET)
     .upload(filename, Buffer.from(buffer), {
       contentType: "image/webp",
@@ -80,7 +80,7 @@ export async function POST(req: Request) {
 
   const {
     data: { publicUrl },
-  } = supabaseServer.storage.from(BUCKET).getPublicUrl(filename);
+  } = supabase.storage.from(BUCKET).getPublicUrl(filename);
 
   const [minDuration, maxDuration] =
     DURATION_RANGES[level as keyof typeof DURATION_RANGES];

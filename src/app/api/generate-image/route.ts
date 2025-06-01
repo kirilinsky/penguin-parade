@@ -5,7 +5,6 @@ import { v4 as uuidv4 } from "uuid";
 import Replicate from "replicate";
 import sharp from "sharp";
 import { isBefore } from "date-fns";
-import { supabaseServer } from "@/supabase";
 import { adminAuth } from "@/fireBase-admin";
 import { firestore } from "@/firebase";
 import {
@@ -18,6 +17,7 @@ import {
   arrayUnion,
   getDoc,
 } from "firebase/firestore";
+import { supabase } from "@/supabase";
 
 const replicate = new Replicate({ auth: process.env.REPLICATE_API_TOKEN });
 const model =
@@ -152,7 +152,7 @@ export async function POST(req: Request) {
       .toBuffer();
 
     const filename = `images/${Date.now()}_${uuidv4()}.webp`;
-    const uploadRes = await supabaseServer.storage
+    const uploadRes = await supabase.storage
       .from(BUCKET)
       .upload(filename, webpBuffer, {
         contentType: "image/webp",
@@ -166,7 +166,7 @@ export async function POST(req: Request) {
       );
     }
 
-    const { data: urlData } = supabaseServer.storage
+    const { data: urlData } = supabase.storage
       .from(BUCKET)
       .getPublicUrl(filename);
     if (!urlData?.publicUrl) {
