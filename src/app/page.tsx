@@ -26,11 +26,6 @@ export default function Home() {
 
   return (
     <PageContentWrapperComponent>
-      <PageContentBlockStyled>
-        <h1>attention</h1>
-        <p>Application had new address</p>
-        <a href="https://www.getpenguin.top">getpenguin.top</a>
-      </PageContentBlockStyled>
       {user && loggedIn ? (
         <>
           <PageContentBlockStyled>
