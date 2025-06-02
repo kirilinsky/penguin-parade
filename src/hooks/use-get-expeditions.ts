@@ -12,6 +12,7 @@ import { Expedition } from "@/types/expeditions.types";
 
 export const useGetExpeditions = (expeditionId?: string) => {
   const [expeditions, setExpeditions] = useState<Expedition[]>([]);
+  const [expedition, setExpedition] = useState<Expedition | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [hasActive, setHasActive] = useState(false);
@@ -34,7 +35,7 @@ export const useGetExpeditions = (expeditionId?: string) => {
             ...snapshot.data(),
           } as Expedition;
 
-          setExpeditions([data]);
+          setExpedition(data);
           setHasActive(data.state === "preparing" || data.state === "active");
         } else {
           const ref = collection(firestore, "expeditions");
@@ -64,5 +65,5 @@ export const useGetExpeditions = (expeditionId?: string) => {
     fetchExpeditions();
   }, [expeditionId]);
 
-  return { expeditions, hasActive, loading, error };
+  return { expeditions,expedition, hasActive, loading, error };
 };

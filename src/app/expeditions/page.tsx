@@ -8,8 +8,6 @@ import React from "react";
 const PageExpeditions = () => {
   const { loading, expeditions, hasActive } = useGetExpeditions();
 
-  console.log(expeditions, "expeditions");
-
   return (
     <div>
       {loading ? (
