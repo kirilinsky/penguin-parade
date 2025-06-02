@@ -61,7 +61,7 @@ export const GalleryItemModalAccordion = styled.div<{ $expand: boolean }>`
   transition: 0.45s linear;
   overflow: hidden;
   width: 100%;
-  ${({ $expand }) => $expand && "height: 0"};
+  ${({ $expand }) => !$expand && "height: 0"};
 `;
 
 export const GalleryItemModalScale = styled.h3`
