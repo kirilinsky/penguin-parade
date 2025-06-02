@@ -5,7 +5,7 @@ export const ExpeditionPageGrid = styled.div`
   grid-template-areas: "img title" "img desc" "img status" "img buttons" "part part";
   grid-template-columns: 1fr 2fr;
   gap: 1rem;
- color: #ffffff;
+  color: #ffffff;
   @media (max-width: 1068px) {
     row-gap: 0.75rem;
   }
@@ -47,9 +47,13 @@ export const ExpeditionPageTitle = styled.div`
   grid-area: title;
   font-weight: bold;
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
   gap: 0.5em;
-
+  @media (max-width: 768px) {
+    flex-direction: column;
+    font-size: 19px;
+  }
   h1 {
     text-align: center;
   }
@@ -58,7 +62,7 @@ export const ExpeditionPageTitle = styled.div`
 export const ExpeditionPageDescription = styled.div`
   grid-area: desc;
   outline: 1px dashed red;
- 
+
   font-size: 20px;
   flex-grow: 2;
   line-height: 2;
@@ -69,19 +73,19 @@ export const ExpeditionParticipants = styled.div`
   grid-area: part;
   font-size: 0.9rem;
   outline: 1px dotted blue;
- 
+
   padding: 1em;
 `;
 
 export const ExpeditionStatus = styled.div`
   grid-area: status;
-  gap:1em;
-  display:flex; 
-  align-items:center;
-  justify-content:center; 
+  gap: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 0.9rem;
   outline: 1px dotted turquoise;
- 
+  flex-wrap: wrap;
   padding: 1em;
 `;
 
