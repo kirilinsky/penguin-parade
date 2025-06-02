@@ -22,7 +22,7 @@ export const GalleryItemModalContent = styled.div<{ $frameColor?: string }>`
   position: relative;
   color: #fff;
   width: 50%;
-  overflow: ${({ $frameColor }) => ($frameColor ? "hidden" : "auto")};
+  overflow: ${({ $frameColor }) => ($frameColor ? "hidden" : "unset")};
   height: 100%;
   gap: 10px;
   border-radius: 1em;
@@ -61,7 +61,7 @@ export const GalleryItemModalAccordion = styled.div<{ $expand: boolean }>`
   transition: 0.45s linear;
   overflow: hidden;
   width: 100%;
-  max-height: ${({ $expand }) => ($expand ? "2000px" : "0")};
+  ${({ $expand }) => $expand && "height: 0"};
 `;
 
 export const GalleryItemModalScale = styled.h3`
