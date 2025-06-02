@@ -73,8 +73,24 @@ export const ExpeditionParticipants = styled.div`
   grid-area: part;
   font-size: 0.9rem;
   outline: 1px dotted blue;
-
+  display: flex;
+  gap: 0.5em;
+  flex-wrap: wrap;
   padding: 1em;
+`;
+export const ExpeditionParticipantsItem = styled.img.withConfig({
+  shouldForwardProp: (prop) => prop !== "borderColor",
+})<{ borderColor: string }>`
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  transition: transform 0.3s ease-in;
+  border: 1px solid ${({ borderColor }) => borderColor};
+  &:hover {
+    transform: scale(1.21);
+    transition: transform 0.3s ease-out;
+    cursor: pointer;
+  }
 `;
 
 export const ExpeditionStatus = styled.div`
