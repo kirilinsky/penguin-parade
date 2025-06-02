@@ -8,6 +8,7 @@ export const GalleryItemModalContainer = styled.div`
   height: calc(100% - 40px);
   @media (max-width: 768px) {
     flex-direction: column;
+    -webkit-overflow-scrolling: touch;
     gap: 0.5em;
     align-items: center;
     overflow-y: auto;
@@ -31,9 +32,9 @@ export const GalleryItemModalContent = styled.div<{ $frameColor?: string }>`
   @media (max-width: 768px) {
     width: 99%;
     min-height: 55vh;
-    height: auto; 
+    height: auto;
     &:nth-child(2) {
-      min-height: fit-content;
+      min-height: auto;
       margin-bottom: 1em;
     }
   }
