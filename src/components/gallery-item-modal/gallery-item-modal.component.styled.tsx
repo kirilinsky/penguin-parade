@@ -4,14 +4,14 @@ import styled from "styled-components";
 export const GalleryItemModalContainer = styled.div`
   margin-block: 25px;
   display: flex;
-  gap: 15px;
+  gap: 1em;
   height: calc(100% - 40px);
   @media (max-width: 768px) {
     flex-direction: column;
-    gap: 3px;
+    gap: 0.5em;
     align-items: center;
     overflow-y: auto;
-    margin-block: 20px;
+    margin-block: 25px;
   }
 `;
 
@@ -31,9 +31,10 @@ export const GalleryItemModalContent = styled.div<{ $frameColor?: string }>`
   @media (max-width: 768px) {
     width: 99%;
     min-height: 55vh;
+    height: auto; 
     &:nth-child(2) {
       min-height: fit-content;
-      margin-bottom: 15px;
+      margin-bottom: 1em;
     }
   }
 `;
