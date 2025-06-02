@@ -103,7 +103,11 @@ const AuctionPage = () => {
 
   return (
     <div>
-      <Rodal visible={!!detailsImage} onClose={() => setDetailsImage(null)}>
+      <Rodal
+        showMask
+        visible={!!detailsImage}
+        onClose={() => setDetailsImage(null)}
+      >
         <AuctionItemModalComponent
           onBuyImage={buyImage}
           user={user}

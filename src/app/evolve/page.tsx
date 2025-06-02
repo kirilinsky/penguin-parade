@@ -192,6 +192,7 @@ const EvolvePage = () => {
   return (
     <>
       <Rodal
+        showMask
         visible={showLibraryModal}
         onClose={() => setShowLibraryModal(false)}
       >
