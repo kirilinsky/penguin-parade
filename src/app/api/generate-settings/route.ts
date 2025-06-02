@@ -17,9 +17,9 @@ export async function POST(req: Request) {
       ? "divine"
       : randomNumber < 60
       ? "legendary"
-      : randomNumber < 150
+      : randomNumber < 160
       ? "epic"
-      : randomNumber < 400
+      : randomNumber < 420
       ? "rare"
       : "common";
 
@@ -71,7 +71,7 @@ where:
   "fx": picture effects,
   "acc": (max 1-3 words, clothing/hat/accessory, necklace, shirt etc),
   "t": (max 3 words, title of the penguin),
-  "des": story about penguin,its origin, surrounding and fun fact, in 25-32 words,
+  "des": story about penguin,its origin, surrounding, legacy, fun facts, in 30-35 words,
   "ability": max 1-3 words, ability of the penguin
 
 Use Capital first letter for values and spaces between words. Background always connected with title and theme. Same for colors. Be bold and original. Mix elements. Return only JSON.`;
