@@ -8,6 +8,7 @@ import {
   ExpeditionParticipants,
   ExpeditionStatus,
   ExpeditionParticipantsItem,
+  ExpeditionParticipantsItemImage,
 } from "./expedition-page-grid.component.styled";
 import { Expedition } from "@/types/expeditions.types";
 import { getLocalized } from "@/helpers/get-localized/get-localized";
@@ -54,6 +55,18 @@ const ExpeditionPageGridComponent = ({
     );
     setFilteredImages(filtredImagesDraft);
     setShowLibraryModal(false);
+  };
+
+  const removeParticipant = (img: ImageItem) => {
+    const participantsDraft = [...participants].filter(
+      (current) => current.id !== img.id
+    );
+    setParticipants(participantsDraft);
+    setFilteredImages(
+      [...filteredImages, img].sort(
+        (a, b) => b.createdAt.seconds - a.createdAt.seconds
+      )
+    );
   };
 
   const resetParticipants = () => {
@@ -126,9 +139,14 @@ const ExpeditionPageGridComponent = ({
         </ExpeditionStatus>
         <ExpeditionButtons>
           <NeonButtonComponent
-            title="join"
+            title="add participant"
             onClick={() => setShowLibraryModal(true)}
-            disabled={!filteredImages.length || loading}
+            disabled={
+              !filteredImages.length ||
+              loading ||
+              expedition.maxParticipants === participants.length ||
+              expedition.minParticipants > images.length
+            }
           />
           <NeonButtonComponent
             onClick={resetParticipants}
@@ -141,9 +159,13 @@ const ExpeditionPageGridComponent = ({
             <ExpeditionParticipantsItem
               key={participant.id}
               borderColor={participantScaleBorderColor}
-              src={participant.imageUrl}
-              alt={participant.title}
-            />
+              onClick={() => removeParticipant(participant)}
+            >
+              <ExpeditionParticipantsItemImage
+                src={participant.imageUrl}
+                alt={participant.title}
+              />
+            </ExpeditionParticipantsItem>
           ))}
         </ExpeditionParticipants>
       </ExpeditionPageGrid>

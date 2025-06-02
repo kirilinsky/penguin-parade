@@ -78,19 +78,40 @@ export const ExpeditionParticipants = styled.div`
   flex-wrap: wrap;
   padding: 1em;
 `;
-export const ExpeditionParticipantsItem = styled.img.withConfig({
+
+export const ExpeditionParticipantsItem = styled.div.withConfig({
   shouldForwardProp: (prop) => prop !== "borderColor",
 })<{ borderColor: string }>`
+  position: relative;
   width: 70px;
   height: 70px;
   border-radius: 50%;
+  overflow: hidden;
   transition: transform 0.3s ease-in;
   border: 1px solid ${({ borderColor }) => borderColor};
+  &:hover::after {
+    content: "×";
+    position: absolute;
+    display:flex; 
+    align-items:center;
+    justify-content:center; 
+    font-size: 25px;
+    width: 100%;
+    height: 100%;
+    background: #ccc;
+    top: 0;
+    left: 0;
+    z-index: 11;
+  }
   &:hover {
-    transform: scale(1.21);
+    transform: scale(1.11);
     transition: transform 0.3s ease-out;
     cursor: pointer;
   }
+`;
+export const ExpeditionParticipantsItemImage = styled.img`
+  width: 100%;
+  height: 100%;
 `;
 
 export const ExpeditionStatus = styled.div`
