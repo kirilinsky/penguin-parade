@@ -30,11 +30,11 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Invalid token" }, { status: 401 });
   }
 
-  const { expeditionId, imageId } = await req.json();
+  const { expeditionId, imageIds } = await req.json();
 
-  if (!expeditionId || !imageId) {
+  if (!expeditionId || !Array.isArray(imageIds) || imageIds.length === 0) {
     return NextResponse.json(
-      { error: "Missing expeditionId or imageId" },
+      { error: "Missing expeditionId or imageIds" },
       { status: 400 }
     );
   }
@@ -58,63 +58,41 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const penguinRef = doc(firestore, "images", imageId);
-  const penguinSnap = await getDoc(penguinRef);
-
-  if (!penguinSnap.exists()) {
-    return NextResponse.json({ error: "Penguin not found" }, { status: 404 });
-  }
-
-  const penguin = penguinSnap.data();
-  if (penguin.ownerId !== uid) {
-    return NextResponse.json({ error: "Not your penguin" }, { status: 403 });
-  }
-
-  const penguinScale = penguin.settings?.rarity;
-  const allowedTypes = expedition.preset.allowedTypes || [];
-
-  if (!allowedTypes.includes(penguinScale)) {
-    return NextResponse.json(
-      {
-        error: `Penguin of type ${penguinScale} not allowed in this expedition`,
-      },
-      { status: 400 }
-    );
-  }
-
-  const existingParticipant = expedition.participants.find(
-    (p) => p.userId === uid
-  );
-  const existingPenguins = existingParticipant?.penguinIds || [];
-  const userPenguinCount = existingPenguins.length;
-
-  if (existingPenguins.includes(imageId)) {
-    return NextResponse.json(
-      { error: "Penguin already added" },
-      { status: 409 }
-    );
-  }
-
-  if (userPenguinCount + 1 > expedition.maxParticipants) {
-    return NextResponse.json(
-      { error: "User penguin limit exceeded" },
-      { status: 400 }
-    );
-  }
-
   const updatedParticipants: ExpeditionParticipantUser[] = [
     ...expedition.participants,
   ];
   const userIndex = updatedParticipants.findIndex((p) => p.userId === uid);
+  const existingPenguins =
+    userIndex >= 0 ? updatedParticipants[userIndex].penguinIds : [];
 
-  if (userIndex >= 0) {
-    updatedParticipants[userIndex].penguinIds.push(imageId);
-  } else {
-    updatedParticipants.push({
-      userId: uid,
-      penguinIds: [imageId],
-      submittedAt: new Date(),
-    });
+  const validPenguins: UserExpeditionItemPenguin[] = [];
+
+  for (const imageId of imageIds) {
+    const penguinRef = doc(firestore, "images", imageId);
+    const penguinSnap = await getDoc(penguinRef);
+
+    if (!penguinSnap.exists()) continue;
+
+    const penguin = penguinSnap.data();
+    if (penguin.ownerId !== uid) continue;
+
+    const penguinScale = penguin.settings?.rarity;
+    const allowedTypes = expedition.preset.allowedTypes || [];
+
+    if (!allowedTypes.includes(penguinScale)) continue;
+    if (existingPenguins.includes(imageId)) continue;
+
+    validPenguins.push({ id: imageId, imageUrl: penguin.imageUrl || "" });
+
+    if (userIndex >= 0) {
+      updatedParticipants[userIndex].penguinIds.push(imageId);
+    } else {
+      updatedParticipants.push({
+        userId: uid,
+        penguinIds: [imageId],
+        submittedAt: new Date(),
+      });
+    }
   }
 
   const totalPenguinsCount = updatedParticipants.reduce(
@@ -135,24 +113,16 @@ export async function POST(req: NextRequest) {
     expeditionId
   );
 
-  const newPenguinItem: UserExpeditionItemPenguin = {
-    id: imageId,
-    imageUrl: penguin.imageUrl || "",
-  };
-
   const expeditionDoc = await getDoc(userExpeditionRef);
-  let updatedPenguins = [newPenguinItem];
+  let updatedPenguins = [...validPenguins];
 
   if (expeditionDoc.exists()) {
     const existingData = expeditionDoc.data();
-    const existingPenguins = existingData.penguins || [];
-    const alreadyExists = existingPenguins.some((p: any) => p.id === imageId);
+    const existing = existingData.penguins || [];
+    const existingIds = new Set(existing.map((p: any) => p.id));
 
-    if (!alreadyExists) {
-      updatedPenguins = [...existingPenguins, newPenguinItem];
-    } else {
-      updatedPenguins = existingPenguins;
-    }
+    const newOnes = validPenguins.filter((p) => !existingIds.has(p.id));
+    updatedPenguins = [...existing, ...newOnes];
   }
 
   await setDoc(
@@ -160,7 +130,7 @@ export async function POST(req: NextRequest) {
     {
       expeditionId,
       expeditionScale: expedition.level,
-      participantsScale: penguinScale,
+      participantsScale: expedition.preset.allowedTypes[0],
       expeditionTitle: expedition.settings.title,
       expeditionState: expedition.state,
       penguins: updatedPenguins,

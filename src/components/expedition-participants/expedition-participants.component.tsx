@@ -5,8 +5,8 @@ import {
   ExpeditionParticipantsItemImage,
   ExpeditionParticipantsStyled,
 } from "./expedition-participants.component.styled";
-import { UserExpeditionItemPenguin } from "@/types/user.types";
 import { getBaseColorByScale } from "@/helpers/get-base-color-by-rarity/get-base-color-by-rarity";
+import { ImageItem } from "@/types/image.types";
 
 const ExpeditionParticipants = ({
   loading,
@@ -18,9 +18,9 @@ const ExpeditionParticipants = ({
 }: {
   loading: boolean;
   addingDisabled: boolean;
-  penguinsParticipants: UserExpeditionItemPenguin[];
+  penguinsParticipants: ImageItem[];
   participantScale: string;
-  onRemove: (id: string) => void;
+  onRemove: (img: ImageItem) => void;
   onAdd: () => void;
 }) => {
   const participantScaleBorderColor = getBaseColorByScale(participantScale);
@@ -32,7 +32,7 @@ const ExpeditionParticipants = ({
             <ExpeditionParticipantsItem
               key={participant.id}
               borderColor={participantScaleBorderColor}
-              onClick={() => onRemove(participant.id)}
+              onClick={() => onRemove(participant)}
             >
               <ExpeditionParticipantsItemImage
                 src={participant.imageUrl}
@@ -46,7 +46,7 @@ const ExpeditionParticipants = ({
           role="button"
           tabIndex={0}
         >
-          add penguin
+          Add penguin
         </ExpeditionParticipantsAddItem>
       )}
     </ExpeditionParticipantsStyled>

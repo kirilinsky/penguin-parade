@@ -22,7 +22,7 @@ import {
   EvolutionModalGalleryItem,
 } from "../evolution-modal/evolution-modal.component.styled";
 import { getBaseColorByScale } from "@/helpers/get-base-color-by-rarity/get-base-color-by-rarity";
-import { User } from "@/types/user.types";
+import { User, UserExpeditionItemPenguin } from "@/types/user.types";
 import { getAuth } from "firebase/auth";
 import { useExpeditionPenguins } from "@/hooks/use-get-expedition-penguins";
 import ExpeditionCountdown from "../expedition-countdown/expedition-countdown.component";
@@ -42,6 +42,7 @@ const ExpeditionPageGridComponent = ({
     expedition.id
   );
   const [filteredImages, setFilteredImages] = useState<ImageItem[]>([]);
+  const [participants, setParticipants] = useState<ImageItem[]>([]);
   const [showLibraryModal, setShowLibraryModal] = useState<boolean>(false);
   const [loading, setLoading] = useState(false);
 
@@ -59,92 +60,29 @@ const ExpeditionPageGridComponent = ({
     if (!user) {
       return;
     }
-
-    const auth = getAuth();
-    const userCred = auth.currentUser;
-    if (!userCred || !user) return;
-
-    await userCred.reload();
-    if (!userCred.emailVerified) {
-      return;
-    }
-
-    const token = await userCred.getIdToken(true);
-    try {
-      setLoading(true);
-
-      const res = await fetch("/api/expeditions/add-expedition-participant", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ imageId: img.id, expeditionId: expedition.id }),
-      });
-
-      if (!res.ok) {
-        const err = await res.json();
-        return { success: false, error: err.error || "Unknown error" };
-      }
-
-      await res.json();
-      refetch();
-      setShowLibraryModal(false);
-    } catch (e) {
-      return { success: false, error: "Network or server error" };
-    } finally {
-      setLoading(false);
-    }
+    setParticipants([...participants, img]);
+    const filteredImagesDraft = [...filteredImages].filter(
+      (image) => image.id !== img.id
+    );
+    setFilteredImages(filteredImagesDraft);
+    setShowLibraryModal(false);
+    return;
   };
 
-  const removeParticipant = async (penguinParticipantId: string) => {
-    if (!user) {
-      return;
-    }
-
-    const auth = getAuth();
-    const userCred = auth.currentUser;
-    if (!userCred || !user) return;
-
-    await userCred.reload();
-    if (!userCred.emailVerified) {
-      return;
-    }
-
-    const token = await userCred.getIdToken(true);
-    try {
-      setLoading(true);
-      const res = await fetch(
-        "/api/expeditions/remove-expedition-participant",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({
-            imageId: penguinParticipantId,
-            expeditionId: expedition.id,
-          }),
-        }
-      );
-
-      if (!res.ok) {
-        const err = await res.json();
-        return { success: false, error: err.error || "Unknown error" };
-      }
-
-      await res.json();
-      refetch();
-    } catch (e) {
-      return { success: false, error: "Network or server error" };
-    } finally {
-      setLoading(false);
-    }
+  const removeParticipant = (img: ImageItem) => {
+    const participantsDraft = [...participants].filter(
+      (current) => current.id !== img.id
+    );
+    setParticipants(participantsDraft);
+    setFilteredImages(
+      [...filteredImages, img].sort(
+        (a, b) => b.createdAt.seconds - a.createdAt.seconds
+      )
+    );
   };
 
   const resetParticipants = () => {
-    /* TODO  add reset */
+    setParticipants([]);
     setFilteredImages(images);
   };
 
@@ -184,20 +122,19 @@ const ExpeditionPageGridComponent = ({
           <img src={expedition.imageUrl} alt={expedition.settings.title.en} />
         </ExpeditionPageImage>
         <ExpeditionContentColumn>
-          {" "}
           <ExpeditionPageTitle>
-            <h1>{getLocalized(expedition.settings.title, locale)}</h1>{" "}
-          </ExpeditionPageTitle>{" "}
+            <h1>{getLocalized(expedition.settings.title, locale)}</h1>
+          </ExpeditionPageTitle>
           <ExpeditionStatusComponent
             expedition={expedition}
             participantScale={participantScale}
-          />{" "}
+          />
           <ExpeditionPageDescription>
             <p>{getLocalized(expedition.settings.description, locale)}</p>
-          </ExpeditionPageDescription>{" "}
+          </ExpeditionPageDescription>
           <ExpeditionParticipants
             loading={loading}
-            penguinsParticipants={penguinsParticipants}
+            penguinsParticipants={participants}
             onRemove={removeParticipant}
             onAdd={() => setShowLibraryModal(true)}
             participantScale={participantScale}
@@ -208,7 +145,7 @@ const ExpeditionPageGridComponent = ({
               expedition.maxParticipants === penguinsParticipants.length ||
               expedition.minParticipants > images.length
             }
-          />{" "}
+          />
           <ExpeditionButtons>
             <NeonButtonComponent
               onClick={resetParticipants}
