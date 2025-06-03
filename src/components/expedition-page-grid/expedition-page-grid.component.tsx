@@ -27,13 +27,25 @@ import {
   EvolutionModalGalleryItem,
 } from "../evolution-modal/evolution-modal.component.styled";
 import { getBaseColorByScale } from "@/helpers/get-base-color-by-rarity/get-base-color-by-rarity";
+import { User } from "@/types/user.types";
+import { getAuth } from "firebase/auth";
+import { useExpeditionPenguins } from "@/hooks/use-get-expedition-penguins";
 
 const ExpeditionPageGridComponent = ({
   expedition,
+  user,
 }: {
   expedition: Expedition;
+  user: User;
 }) => {
   const locale = useLocale();
+
+  const { penguins: penguinsParticipants, refetch } = useExpeditionPenguins(
+    expedition.id
+  );
+  const [filteredImages, setFilteredImages] = useState<ImageItem[]>([]);
+  const [showLibraryModal, setShowLibraryModal] = useState<boolean>(false);
+  const [loading, setLoading] = useState(false);
 
   const participantsScale = useMemo(() => {
     return getPrevScale(expedition.level) as ScaleType;
@@ -42,41 +54,115 @@ const ExpeditionPageGridComponent = ({
   const participantScaleBorderColor = useMemo(() => {
     return getBaseColorByScale(participantsScale);
   }, [participantsScale]);
-  const [filteredImages, setFilteredImages] = useState<ImageItem[]>([]);
-  const [participants, setParticipants] = useState<ImageItem[]>([]);
-  const [showLibraryModal, setShowLibraryModal] = useState<boolean>(false);
 
-  const { images, loading } = useGetImages(true, null, participantsScale);
+  const { images, loading: imagesLoading } = useGetImages(
+    true,
+    null,
+    participantsScale
+  );
 
-  const addParticipant = (img: ImageItem) => {
-    setParticipants([...participants, img]);
-    const filtredImagesDraft = [...filteredImages].filter(
-      (current) => current.id !== img.id
-    );
-    setFilteredImages(filtredImagesDraft);
-    setShowLibraryModal(false);
+  const addParticipant = async (img: ImageItem) => {
+    if (!user) {
+      return;
+    }
+
+    const auth = getAuth();
+    const userCred = auth.currentUser;
+    if (!userCred || !user) return;
+
+    await userCred.reload();
+    if (!userCred.emailVerified) {
+      return;
+    }
+
+    const token = await userCred.getIdToken(true);
+    try {
+      setLoading(true);
+
+      const res = await fetch("/api/expeditions/add-expedition-participant", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ imageId: img.id, expeditionId: expedition.id }),
+      });
+
+      if (!res.ok) {
+        const err = await res.json();
+        return { success: false, error: err.error || "Unknown error" };
+      }
+
+      await res.json();
+      refetch();
+      setShowLibraryModal(false);
+    } catch (e) {
+      return { success: false, error: "Network or server error" };
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const removeParticipant = (img: ImageItem) => {
-    const participantsDraft = [...participants].filter(
-      (current) => current.id !== img.id
-    );
-    setParticipants(participantsDraft);
-    setFilteredImages(
-      [...filteredImages, img].sort(
-        (a, b) => b.createdAt.seconds - a.createdAt.seconds
-      )
-    );
+  const removeParticipant = async (penguinParticipantId: string) => {
+    if (!user) {
+      return;
+    }
+
+    const auth = getAuth();
+    const userCred = auth.currentUser;
+    if (!userCred || !user) return;
+
+    await userCred.reload();
+    if (!userCred.emailVerified) {
+      return;
+    }
+
+    const token = await userCred.getIdToken(true);
+    try {
+      setLoading(true);
+      const res = await fetch(
+        "/api/expeditions/remove-expedition-participant",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            imageId: penguinParticipantId,
+            expeditionId: expedition.id,
+          }),
+        }
+      );
+
+      if (!res.ok) {
+        const err = await res.json();
+        return { success: false, error: err.error || "Unknown error" };
+      }
+
+      await res.json();
+      refetch();
+    } catch (e) {
+      return { success: false, error: "Network or server error" };
+    } finally {
+      setLoading(false);
+    }
   };
 
   const resetParticipants = () => {
-    setParticipants([]);
+    /* TODO  add reset */
     setFilteredImages(images);
   };
 
   useEffect(() => {
-    setFilteredImages(images);
-  }, [images]);
+    const participantsIds = penguinsParticipants.map(
+      (participant) => participant.id
+    );
+    const filteredDraft = [...images].filter(
+      (image) => !participantsIds.includes(image.id)
+    );
+    setFilteredImages(filteredDraft);
+  }, [penguinsParticipants]);
 
   return (
     <>
@@ -85,6 +171,7 @@ const ExpeditionPageGridComponent = ({
         visible={showLibraryModal}
         onClose={() => setShowLibraryModal(false)}
       >
+        {/* TODO add loader into modal */}
         <EvolutionModalGallery>
           {filteredImages.map((img: ImageItem) => (
             <EvolutionModalGalleryItem
@@ -143,8 +230,8 @@ const ExpeditionPageGridComponent = ({
             onClick={() => setShowLibraryModal(true)}
             disabled={
               !filteredImages.length ||
-              loading ||
-              expedition.maxParticipants === participants.length ||
+              imagesLoading ||
+              expedition.maxParticipants === penguinsParticipants.length ||
               expedition.minParticipants > images.length
             }
           />
@@ -155,15 +242,15 @@ const ExpeditionPageGridComponent = ({
         </ExpeditionButtons>
 
         <ExpeditionParticipants>
-          {participants.map((participant) => (
+          {penguinsParticipants.map((participant) => (
             <ExpeditionParticipantsItem
               key={participant.id}
               borderColor={participantScaleBorderColor}
-              onClick={() => removeParticipant(participant)}
+              onClick={() => removeParticipant(participant.id)}
             >
               <ExpeditionParticipantsItemImage
                 src={participant.imageUrl}
-                alt={participant.title}
+                alt={participant.id}
               />
             </ExpeditionParticipantsItem>
           ))}

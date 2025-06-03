@@ -1,3 +1,4 @@
+import { expeditionPresets } from "@/types/expeditions.types";
 import { Timestamp } from "firebase/firestore";
 import { ExpeditionState } from "./expeditions.types";
 import { LocalizedField } from "./image.types";
@@ -55,20 +56,27 @@ export type User = {
   imageIds: string[];
   lastGeneratedAt: Date;
   allowCraftAt: Date;
+  expeditions: UserExpeditionItem[];
 };
 
 export type UserExpeditionItem = {
   expeditionId: string;
   expeditionScale: ScaleType;
+  participantsScale: ScaleType;
   expeditionTitle: LocalizedField;
   expeditionState: ExpeditionState;
-  penguinIds: string[];
+  penguins: UserExpeditionItemPenguin[];
   joinedAt: Date;
   claimedAt?: Date;
   finishedAt: Date;
   rewardGold: number;
   crystal?: string;
   durationHours: number;
+};
+
+export type UserExpeditionItemPenguin = {
+  id: string;
+  imageUrl: string;
 };
 
 export type RequestRecord = {

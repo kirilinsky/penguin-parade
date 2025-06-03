@@ -39,7 +39,7 @@ export async function POST(req: Request) {
   }
 
   const generateRes = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/api/generate-expedition`,
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/expeditions/generate-expedition`,
     {
       method: "POST",
       headers: { "Content-Type": "application/json" },

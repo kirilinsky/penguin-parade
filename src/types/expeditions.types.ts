@@ -42,7 +42,7 @@ export type Expedition = {
   activePhaseStartedAt: Timestamp;
   activePhaseEndedAt: Timestamp;
   preset: ExpeditionPreset;
-  participants: ExpeditionParticipant[];
+  participants: ExpeditionParticipantUser[];
 };
 
 export type ExpeditionSettings = {
@@ -52,7 +52,7 @@ export type ExpeditionSettings = {
   description: LocalizedField;
 };
 
-export type ExpeditionParticipant = {
+export type ExpeditionParticipantUser = {
   userId: string;
   penguinIds: string[];
   submittedAt: Date;
