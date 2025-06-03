@@ -71,8 +71,15 @@ export async function POST(req: NextRequest) {
     )
     .filter((p) => p.penguinIds.length > 0);
 
+  const totalPenguinsCount = updatedParticipants.reduce(
+    (sum, p) => sum + p.penguinIds.length,
+    0
+  );
+
   await updateDoc(expeditionRef, {
     participants: updatedParticipants,
+    participantsCount: updatedParticipants.length,
+    totalPenguinsCount,
     updatedAt: serverTimestamp(),
   });
 

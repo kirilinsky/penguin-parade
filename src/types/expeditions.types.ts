@@ -42,6 +42,7 @@ export type Expedition = {
   activePhaseStartedAt: Timestamp;
   activePhaseEndedAt: Timestamp;
   preset: ExpeditionPreset;
+  totalPenguinsCount: number;
   participants: ExpeditionParticipantUser[];
 };
 
