@@ -30,6 +30,7 @@ import { getBaseColorByScale } from "@/helpers/get-base-color-by-rarity/get-base
 import { User } from "@/types/user.types";
 import { getAuth } from "firebase/auth";
 import { useExpeditionPenguins } from "@/hooks/use-get-expedition-penguins";
+import ExpeditionCountdown from "../expedition-countdown/expedition-countdown.component";
 
 const ExpeditionPageGridComponent = ({
   expedition,
@@ -199,22 +200,7 @@ const ExpeditionPageGridComponent = ({
         </ExpeditionPageDescription>
 
         <ExpeditionStatus>
-          <span>
-            Preparation started:{" "}
-            {format(expedition.preparationStartedAt.toDate(), "dd.MM.yy HH:mm")}
-          </span>
-          <span>
-            Preparation ended:{" "}
-            {format(expedition.preparationEndedAt.toDate(), "dd.MM.yy HH:mm")}
-          </span>
-          <span>
-            Active phase started:{" "}
-            {format(expedition.activePhaseStartedAt.toDate(), "dd.MM.yy HH:mm")}
-          </span>
-          <span>
-            Active phase ended:{" "}
-            {format(expedition.activePhaseEndedAt.toDate(), "dd.MM.yy HH:mm")}
-          </span>
+          <ExpeditionCountdown expedition={expedition} />
           <span>Min participants: {expedition.minParticipants}</span>{" "}
           <span>Max participants: {expedition.maxParticipants}</span>
           {participantsScale && (
@@ -231,6 +217,7 @@ const ExpeditionPageGridComponent = ({
             disabled={
               !filteredImages.length ||
               imagesLoading ||
+              loading ||
               expedition.maxParticipants === penguinsParticipants.length ||
               expedition.minParticipants > images.length
             }
@@ -242,18 +229,20 @@ const ExpeditionPageGridComponent = ({
         </ExpeditionButtons>
 
         <ExpeditionParticipants>
-          {penguinsParticipants.map((participant) => (
-            <ExpeditionParticipantsItem
-              key={participant.id}
-              borderColor={participantScaleBorderColor}
-              onClick={() => removeParticipant(participant.id)}
-            >
-              <ExpeditionParticipantsItemImage
-                src={participant.imageUrl}
-                alt={participant.id}
-              />
-            </ExpeditionParticipantsItem>
-          ))}
+          {loading
+            ? "loading..."
+            : penguinsParticipants.map((participant) => (
+                <ExpeditionParticipantsItem
+                  key={participant.id}
+                  borderColor={participantScaleBorderColor}
+                  onClick={() => removeParticipant(participant.id)}
+                >
+                  <ExpeditionParticipantsItemImage
+                    src={participant.imageUrl}
+                    alt={participant.id}
+                  />
+                </ExpeditionParticipantsItem>
+              ))}
         </ExpeditionParticipants>
       </ExpeditionPageGrid>
     </>

@@ -92,9 +92,9 @@ export const ExpeditionParticipantsItem = styled.div.withConfig({
   &:hover::after {
     content: "×";
     position: absolute;
-    display:flex; 
-    align-items:center;
-    justify-content:center; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 25px;
     width: 100%;
     height: 100%;
@@ -138,3 +138,4 @@ export const ExpeditionButtons = styled.div`
     justify-content: center;
   }
 `;
+
