@@ -1,9 +1,9 @@
 import React, { useMemo } from "react";
-import { ExpeditionHighlight } from "./expedition-countdown.component.styled";
 import { Expedition } from "@/types/expeditions.types";
 import { formatDuration, intervalToDuration, Locale } from "date-fns";
 import { enUS, ru } from "date-fns/locale";
 import { useLocale } from "next-intl";
+import { ExpeditionStatusInfoWrap } from "../expedition-status-info/expedition-status-info.component.styled";
 
 const ExpeditionCountdown = ({ expedition }: { expedition: Expedition }) => {
   if (expedition.state === "ended" || expedition.state === "resultsReady")
@@ -36,9 +36,10 @@ const ExpeditionCountdown = ({ expedition }: { expedition: Expedition }) => {
   }, [expedition, isActive, locale]);
 
   return (
-    <ExpeditionHighlight>
-      ⏳ {isActive ? "Active" : "Preparation"} phase ends in {formattedDate}
-    </ExpeditionHighlight>
+    <ExpeditionStatusInfoWrap>
+      <span>⏳ {isActive ? "Active" : "Preparation"} phase ends in</span>
+      <p> {formattedDate}</p>
+    </ExpeditionStatusInfoWrap>
   );
 };
 

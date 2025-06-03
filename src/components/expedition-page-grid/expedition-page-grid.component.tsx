@@ -5,10 +5,7 @@ import {
   ExpeditionPageGrid,
   ExpeditionPageImage,
   ExpeditionPageTitle,
-  ExpeditionParticipants,
-  ExpeditionStatus,
-  ExpeditionParticipantsItem,
-  ExpeditionParticipantsItemImage,
+  ExpeditionContentColumn,
 } from "./expedition-page-grid.component.styled";
 import { Expedition } from "@/types/expeditions.types";
 import { getLocalized } from "@/helpers/get-localized/get-localized";
@@ -31,6 +28,8 @@ import { User } from "@/types/user.types";
 import { getAuth } from "firebase/auth";
 import { useExpeditionPenguins } from "@/hooks/use-get-expedition-penguins";
 import ExpeditionCountdown from "../expedition-countdown/expedition-countdown.component";
+import ExpeditionParticipants from "../expedition-participants/expedition-participants.component";
+import ExpeditionStatusComponent from "../expedition-status/expedition-status.component";
 
 const ExpeditionPageGridComponent = ({
   expedition,
@@ -187,63 +186,46 @@ const ExpeditionPageGridComponent = ({
         </EvolutionModalGallery>
       </Rodal>
       <ExpeditionPageGrid>
-        <ExpeditionPageTitle>
-          <h1>{getLocalized(expedition.settings.title, locale)}</h1>{" "}
-          <ExpeditionStatusBadge status={expedition.state} />
-        </ExpeditionPageTitle>
         <ExpeditionPageImage>
           <img src={expedition.imageUrl} alt={expedition.settings.title.en} />
         </ExpeditionPageImage>
-
-        <ExpeditionPageDescription>
-          <p>{getLocalized(expedition.settings.description, locale)}</p>
-        </ExpeditionPageDescription>
-
-        <ExpeditionStatus>
-          <ExpeditionCountdown expedition={expedition} />
-          <span>Min participants: {expedition.minParticipants}</span>{" "}
-          <span>Max participants: {expedition.maxParticipants}</span>
-          {participantsScale && (
-            <span>
-              Participants level:
-              <GalleryItemScaleComponent scale={participantsScale} />
-            </span>
-          )}
-        </ExpeditionStatus>
-        <ExpeditionButtons>
-          <NeonButtonComponent
-            title="add participant"
-            onClick={() => setShowLibraryModal(true)}
-            disabled={
+        <ExpeditionContentColumn>
+          {" "}
+          <ExpeditionPageTitle>
+            <h1>{getLocalized(expedition.settings.title, locale)}</h1>{" "}
+          </ExpeditionPageTitle>{" "}
+          <ExpeditionStatusComponent
+            expedition={expedition}
+            participantsScale={participantsScale}
+          />{" "}
+          <ExpeditionPageDescription>
+            <p>{getLocalized(expedition.settings.description, locale)}</p>
+          </ExpeditionPageDescription>{" "}
+          <ExpeditionParticipants
+            loading={loading}
+            penguinsParticipants={penguinsParticipants}
+            onRemove={removeParticipant}
+            onAdd={() => setShowLibraryModal(true)}
+            participantScaleBorderColor={participantScaleBorderColor}
+            addingDisabled={
               !filteredImages.length ||
               imagesLoading ||
               loading ||
               expedition.maxParticipants === penguinsParticipants.length ||
               expedition.minParticipants > images.length
             }
-          />
-          <NeonButtonComponent
-            onClick={resetParticipants}
-            title="reset my participants"
-          />
-        </ExpeditionButtons>
-
-        <ExpeditionParticipants>
-          {loading
-            ? "loading..."
-            : penguinsParticipants.map((participant) => (
-                <ExpeditionParticipantsItem
-                  key={participant.id}
-                  borderColor={participantScaleBorderColor}
-                  onClick={() => removeParticipant(participant.id)}
-                >
-                  <ExpeditionParticipantsItemImage
-                    src={participant.imageUrl}
-                    alt={participant.id}
-                  />
-                </ExpeditionParticipantsItem>
-              ))}
-        </ExpeditionParticipants>
+          />{" "}
+          <ExpeditionButtons>
+            <NeonButtonComponent
+              onClick={resetParticipants}
+              title="reset my participants"
+            />
+            <NeonButtonComponent
+              onClick={resetParticipants}
+              title="confirm participation"
+            />
+          </ExpeditionButtons>
+        </ExpeditionContentColumn>
       </ExpeditionPageGrid>
     </>
   );
