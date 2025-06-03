@@ -9,10 +9,10 @@ import ExpeditionStatusInfo from "../expedition-status-info/expedition-status-in
 
 const ExpeditionStatusComponent = ({
   expedition,
-  participantsScale,
+  participantScale,
 }: {
   expedition: Expedition;
-  participantsScale: ScaleType;
+  participantScale: ScaleType;
 }) => {
   return (
     <ExpeditionStatus>
@@ -26,10 +26,10 @@ const ExpeditionStatusComponent = ({
         title="Max participants"
         text={expedition.maxParticipants}
       />
-      {participantsScale && (
+      {participantScale && (
         <ExpeditionStatusInfo
           title="Participants level"
-          text={<GalleryItemScaleComponent scale={participantsScale} />}
+          text={<GalleryItemScaleComponent scale={participantScale} />}
         />
       )}{" "}
       <ExpeditionStatusInfo

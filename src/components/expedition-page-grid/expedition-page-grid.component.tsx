@@ -10,9 +10,7 @@ import {
 import { Expedition } from "@/types/expeditions.types";
 import { getLocalized } from "@/helpers/get-localized/get-localized";
 import { useLocale } from "next-intl";
-import ExpeditionStatusBadge from "../expedition-status-badge/expedition-status-badge.component";
 import NeonButtonComponent from "../neon-button/neon-button.component";
-import { format } from "date-fns";
 import GalleryItemScaleComponent from "../gallery-item-scale/gallery-item-scale.component";
 import { getPrevScale } from "@/helpers/get-prev-scale/get-prev-scale";
 import { useGetImages } from "@/hooks/use-get-images";
@@ -47,18 +45,14 @@ const ExpeditionPageGridComponent = ({
   const [showLibraryModal, setShowLibraryModal] = useState<boolean>(false);
   const [loading, setLoading] = useState(false);
 
-  const participantsScale = useMemo(() => {
+  const participantScale = useMemo(() => {
     return getPrevScale(expedition.level) as ScaleType;
   }, [expedition.level]);
-
-  const participantScaleBorderColor = useMemo(() => {
-    return getBaseColorByScale(participantsScale);
-  }, [participantsScale]);
 
   const { images, loading: imagesLoading } = useGetImages(
     true,
     null,
-    participantsScale
+    participantScale
   );
 
   const addParticipant = async (img: ImageItem) => {
@@ -196,7 +190,7 @@ const ExpeditionPageGridComponent = ({
           </ExpeditionPageTitle>{" "}
           <ExpeditionStatusComponent
             expedition={expedition}
-            participantsScale={participantsScale}
+            participantScale={participantScale}
           />{" "}
           <ExpeditionPageDescription>
             <p>{getLocalized(expedition.settings.description, locale)}</p>
@@ -206,7 +200,7 @@ const ExpeditionPageGridComponent = ({
             penguinsParticipants={penguinsParticipants}
             onRemove={removeParticipant}
             onAdd={() => setShowLibraryModal(true)}
-            participantScaleBorderColor={participantScaleBorderColor}
+            participantScale={participantScale}
             addingDisabled={
               !filteredImages.length ||
               imagesLoading ||

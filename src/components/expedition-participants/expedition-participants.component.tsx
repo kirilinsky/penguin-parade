@@ -6,11 +6,12 @@ import {
   ExpeditionParticipantsStyled,
 } from "./expedition-participants.component.styled";
 import { UserExpeditionItemPenguin } from "@/types/user.types";
+import { getBaseColorByScale } from "@/helpers/get-base-color-by-rarity/get-base-color-by-rarity";
 
 const ExpeditionParticipants = ({
   loading,
   penguinsParticipants,
-  participantScaleBorderColor,
+  participantScale,
   onRemove,
   onAdd,
   addingDisabled,
@@ -18,10 +19,11 @@ const ExpeditionParticipants = ({
   loading: boolean;
   addingDisabled: boolean;
   penguinsParticipants: UserExpeditionItemPenguin[];
-  participantScaleBorderColor: string;
+  participantScale: string;
   onRemove: (id: string) => void;
   onAdd: () => void;
 }) => {
+  const participantScaleBorderColor = getBaseColorByScale(participantScale);
   return (
     <ExpeditionParticipantsStyled>
       {loading
