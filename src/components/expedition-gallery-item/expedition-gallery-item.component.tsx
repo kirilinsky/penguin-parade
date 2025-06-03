@@ -43,7 +43,8 @@ const ExpeditionGalleryItem = ({ expedition }: { expedition: Expedition }) => {
           <span>level: {expedition.level}</span>
           <span>min Participants: {expedition.minParticipants}</span>
           <span>max Participants: {expedition.maxParticipants}</span>
-          <span>participants Count: {expedition.participantsCount}</span>
+          <span>Participants Count: {expedition.participantsCount}</span>
+          <span>Penguins Count: {expedition.totalPenguinsCount}</span>
           <LinkStyled href={`/expeditions/${expedition.id}`}>go</LinkStyled>
         </ExpeditionGalleryItemSide>
       </ExpeditionGalleryItemSideContainer>{" "}
