@@ -27,8 +27,8 @@ export const EvolutionModalGalleryItem = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 0 0 5px #fff;
-  border-radius: 2px;
+  box-shadow: 0 0 3px #fff;
+  border-radius: .5em;
   transition: transform linear 0.4s;
   &:hover {
     cursor: pointer;
