@@ -28,6 +28,7 @@ import { useExpeditionPenguins } from "@/hooks/use-get-expedition-penguins";
 import ExpeditionCountdown from "../expedition-countdown/expedition-countdown.component";
 import ExpeditionParticipants from "../expedition-participants/expedition-participants.component";
 import ExpeditionStatusComponent from "../expedition-status/expedition-status.component";
+import ExpeditionParticipantModal from "../modals/expedition-participant-modal/expedition-participant-modal.component";
 
 const ExpeditionPageGridComponent = ({
   expedition,
@@ -98,25 +99,12 @@ const ExpeditionPageGridComponent = ({
 
   return (
     <>
-      <Rodal
-        showMask
-        visible={showLibraryModal}
+      <ExpeditionParticipantModal
+        showModal={showLibraryModal}
+        images={filteredImages}
+        onItemClick={addParticipant}
         onClose={() => setShowLibraryModal(false)}
-      >
-        {/* TODO add loader into modal */}
-        <EvolutionModalGallery>
-          {filteredImages.map((img: ImageItem) => (
-            <EvolutionModalGalleryItem
-              onClick={() => addParticipant(img)}
-              key={img.id}
-            >
-              <img width={"100%"} height={"100%"} src={img.imageUrl} />
-              <h4>{img.title}</h4>
-              <GalleryItemScaleComponent scale={img.settings.rarity} />
-            </EvolutionModalGalleryItem>
-          ))}
-        </EvolutionModalGallery>
-      </Rodal>
+      />
       <ExpeditionPageGrid>
         <ExpeditionPageImage>
           <img src={expedition.imageUrl} alt={expedition.settings.title.en} />
