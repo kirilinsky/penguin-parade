@@ -89,16 +89,19 @@ const GalleryItemModalComponent = ({
             <GalleryItemModalButtonsContainer>
               {user.avatar !== img.imageUrl && (
                 <NeonButtonComponent
+                  disabled={loading}
                   title={t("avatarButton")}
                   onClick={() => setAvatar(img.imageUrl, img.settings.rarity)}
                 />
               )}
               <NeonButtonComponent
+                disabled={loading}
                 onClick={() => setGiftMode(true)}
                 title={t("giftButton")}
               />
               {buy && sell && !img.gift && (
                 <NeonButtonComponent
+                  disabled={loading}
                   onClick={() => onSellImage(img.id)}
                   title={`${t("sellButton")} ${sell} P$`}
                 />

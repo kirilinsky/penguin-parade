@@ -55,6 +55,9 @@ export async function POST(req: Request) {
   }
 
   if (userData.craftInProgress) {
+    await updateDoc(userRef, {
+      craftInProgress: true,
+    });
     return NextResponse.json(
       { error: "Generation already in progress" },
       { status: 429 }

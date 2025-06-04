@@ -128,7 +128,6 @@ const CountDownPage = () => {
         return { success: false, error: "User not authenticated" };
       }
 
-      /* TODO: add api layer to get token */
       const token = await currentUser.getIdToken(true);
       const res = await fetch("/api/pay-to-skip", {
         method: "POST",

@@ -21,6 +21,7 @@ const MyLibraryPage = () => {
 
   const [imagesFiltered, setImagesFiltered] = useState<ImageItem[]>([]);
   const [isMyPage, setIsMyPage] = useState(false);
+  const [loadingSell, setLoadingSell] = useState(false);
   const [detailsImage, setDetailsImage] = useState<ImageItem | null>(null);
   const [sortOption, setSortOption] = useState<ImagesSortType>("newest");
   const [filterOption, setFilterOption] = useState<"all" | ScaleType>("all");
@@ -102,8 +103,8 @@ const MyLibraryPage = () => {
     }
 
     const token = await userCred.getIdToken(true);
+    setLoadingSell(true);
     try {
-      /* TODO: add loading state for call (block button) */
       const res = await fetch("/api/sold-image", {
         method: "POST",
         body: JSON.stringify({
@@ -120,6 +121,7 @@ const MyLibraryPage = () => {
       if (data.success) {
         alert("Penguin has been sold");
         setDetailsImage(null);
+        setLoadingSell(false);
         const imagesDraft = [...images];
         setImagesFiltered(imagesDraft.filter((img) => img.id !== imageId));
       } else {
@@ -188,7 +190,7 @@ const MyLibraryPage = () => {
             isMyPage={isMyPage}
             onSendGift={sendGift}
             onSellImage={sellImage}
-            loading={loading}
+            loading={loading || loadingSell}
             setAvatar={setAvatarAction}
             img={detailsImage}
           />

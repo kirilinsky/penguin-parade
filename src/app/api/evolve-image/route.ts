@@ -35,7 +35,6 @@ export async function POST(req: Request) {
   }
 
   const { imageIds } = await req.json();
-  /* TODO: important, remove received imageIds from user imageIds */
 
   if (!Array.isArray(imageIds) || imageIds.length === 0) {
     return NextResponse.json(

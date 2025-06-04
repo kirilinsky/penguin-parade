@@ -17,6 +17,7 @@
         "showOnly": "Показать только:"
     },
     "galleryItem": {
+        "price": "Стоимость",
         "inExpedition": "Сейчас в экспедиции",
         "checkExpedition": "Проверить"
     },
