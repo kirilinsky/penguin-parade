@@ -57,7 +57,6 @@ export default function Home() {
           <PageContentBlockStyled>
             <h2>Road map</h2>
             <ul>
-              <li>Crystals system</li>
               <li>Expeditions (TBA)</li>
               <li>Notification toasts</li>
               <li>Anonymous home page, loggedIn limitations</li>
