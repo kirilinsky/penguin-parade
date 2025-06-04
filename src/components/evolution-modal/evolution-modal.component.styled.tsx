@@ -15,11 +15,11 @@ export const EvolutionModalGalleryScaleWrap = styled.div`
 `;
 
 export const EvolutionModalGallery = styled.div`
-  margin-top: 10px;
+  margin-block: 26px;
   display: grid;
   padding-inline: 5px;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 2.5em;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 2.3em;
   width: 100%;
 `;
 
