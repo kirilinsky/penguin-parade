@@ -180,6 +180,7 @@ const CountDownPage = () => {
                 <ArcadeButtonStyled
                   appliedColor={appliedColor}
                   onClick={craft}
+                  disabled={loading}
                 />
                 <CrystalsSelector
                   crystalApplied={crystalApplied}
