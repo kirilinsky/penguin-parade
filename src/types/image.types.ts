@@ -9,10 +9,11 @@ export interface ImageItem {
   origin: "craft" | "evolution" | "bad batch" | "expedition";
   title: string;
   inExpedition: boolean;
+  expeditionId: string | null;
+  expeditions: 0;
   gift: boolean;
   auction: boolean;
   price: number;
-  soldAt: Timestamp;
   createdAt: Timestamp;
   placedForAuctionAt: Timestamp;
   settings: ImageItemSettings;

@@ -11,24 +11,16 @@ import { Expedition } from "@/types/expeditions.types";
 import { getLocalized } from "@/helpers/get-localized/get-localized";
 import { useLocale } from "next-intl";
 import NeonButtonComponent from "../neon-button/neon-button.component";
-import GalleryItemScaleComponent from "../gallery-item-scale/gallery-item-scale.component";
 import { getPrevScale } from "@/helpers/get-prev-scale/get-prev-scale";
 import { useGetImages } from "@/hooks/use-get-images";
 import { ScaleType } from "@/types/scale.types";
 import { ImageItem } from "@/types/image.types";
-import Rodal from "rodal";
-import {
-  EvolutionModalGallery,
-  EvolutionModalGalleryItem,
-} from "../evolution-modal/evolution-modal.component.styled";
-import { getBaseColorByScale } from "@/helpers/get-base-color-by-rarity/get-base-color-by-rarity";
-import { User, UserExpeditionItemPenguin } from "@/types/user.types";
-import { getAuth } from "firebase/auth";
+import { User } from "@/types/user.types";
 import { useExpeditionPenguins } from "@/hooks/use-get-expedition-penguins";
-import ExpeditionCountdown from "../expedition-countdown/expedition-countdown.component";
 import ExpeditionParticipants from "../expedition-participants/expedition-participants.component";
 import ExpeditionStatusComponent from "../expedition-status/expedition-status.component";
 import ExpeditionParticipantModal from "../modals/expedition-participant-modal/expedition-participant-modal.component";
+import { getIdToken } from "@/helpers/get-token/get-token";
 
 const ExpeditionPageGridComponent = ({
   expedition,
@@ -80,6 +72,31 @@ const ExpeditionPageGridComponent = ({
         (a, b) => b.createdAt.seconds - a.createdAt.seconds
       )
     );
+  };
+
+  const confirmParticipant = async () => {
+    if (!participants.length) return;
+    /* TODO use get id token in other functions */
+    const imageIds = participants.map((img) => img.id);
+    const token = await getIdToken();
+
+    const res = await fetch("/api/expeditions/join-expedition", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        expeditionId: expedition.id,
+        imageIds,
+      }),
+    });
+
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || "Failed to join expedition");
+
+    alert("success!");
+    return data;
   };
 
   const resetParticipants = () => {
@@ -135,12 +152,18 @@ const ExpeditionPageGridComponent = ({
             }
           />
           <ExpeditionButtons>
+            {!!participants.length && (
+              <NeonButtonComponent
+                onClick={resetParticipants}
+                title="reset my participants"
+              />
+            )}
             <NeonButtonComponent
-              onClick={resetParticipants}
-              title="reset my participants"
-            />
-            <NeonButtonComponent
-              onClick={resetParticipants}
+              onClick={confirmParticipant}
+              disabled={
+                participants.length < expedition.minParticipants ||
+                participants.length > expedition.maxParticipants
+              }
               title="confirm participation"
             />
           </ExpeditionButtons>

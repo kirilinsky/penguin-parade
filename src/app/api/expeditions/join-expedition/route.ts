@@ -1,18 +1,15 @@
-import { NextRequest, NextResponse } from "next/server";
+import { firestore } from "@/firebase";
+import { adminAuth } from "@/fireBase-admin";
+import { Expedition } from "@/types/expeditions.types";
+import { UserExpeditionItemPenguin } from "@/types/user.types";
 import {
   doc,
   getDoc,
-  updateDoc,
-  setDoc,
   serverTimestamp,
+  setDoc,
+  updateDoc,
 } from "firebase/firestore";
-import { firestore } from "@/firebase";
-import { adminAuth } from "@/fireBase-admin";
-import {
-  Expedition,
-  ExpeditionParticipantUser,
-} from "@/types/expeditions.types";
-import { UserExpeditionItemPenguin } from "@/types/user.types";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
   const authHeader = req.headers.get("Authorization") || "";
@@ -58,14 +55,14 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const updatedParticipants: ExpeditionParticipantUser[] = [
-    ...expedition.participants,
-  ];
+  const updatedParticipants = [...expedition.participants];
   const userIndex = updatedParticipants.findIndex((p) => p.userId === uid);
   const existingPenguins =
     userIndex >= 0 ? updatedParticipants[userIndex].penguinIds : [];
 
   const validPenguins: UserExpeditionItemPenguin[] = [];
+  const newPenguinIds: string[] = [];
+  const penguinUpdatePromises: Promise<any>[] = [];
 
   for (const imageId of imageIds) {
     const penguinRef = doc(firestore, "images", imageId);
@@ -83,16 +80,32 @@ export async function POST(req: NextRequest) {
     if (existingPenguins.includes(imageId)) continue;
 
     validPenguins.push({ id: imageId, imageUrl: penguin.imageUrl || "" });
+    newPenguinIds.push(imageId);
 
-    if (userIndex >= 0) {
-      updatedParticipants[userIndex].penguinIds.push(imageId);
-    } else {
-      updatedParticipants.push({
-        userId: uid,
-        penguinIds: [imageId],
-        submittedAt: new Date(),
-      });
-    }
+    penguinUpdatePromises.push(
+      updateDoc(penguinRef, {
+        expedition: expeditionId,
+        inExpedition: true,
+        expeditions: (penguin.expeditions || 0) + 1,
+      })
+    );
+  }
+
+  if (newPenguinIds.length === 0) {
+    return NextResponse.json(
+      { error: "No valid penguins to add" },
+      { status: 400 }
+    );
+  }
+
+  if (userIndex >= 0) {
+    updatedParticipants[userIndex].penguinIds.push(...newPenguinIds);
+  } else {
+    updatedParticipants.push({
+      userId: uid,
+      penguinIds: newPenguinIds,
+      submittedAt: new Date(),
+    });
   }
 
   const totalPenguinsCount = updatedParticipants.reduce(
@@ -107,12 +120,13 @@ export async function POST(req: NextRequest) {
     updatedAt: serverTimestamp(),
   });
 
+  await Promise.all(penguinUpdatePromises);
+
   const userExpeditionRef = doc(
     firestore,
     `users/${uid}/expeditions`,
     expeditionId
   );
-
   const expeditionDoc = await getDoc(userExpeditionRef);
   let updatedPenguins = [...validPenguins];
 
@@ -120,7 +134,6 @@ export async function POST(req: NextRequest) {
     const existingData = expeditionDoc.data();
     const existing = existingData.penguins || [];
     const existingIds = new Set(existing.map((p: any) => p.id));
-
     const newOnes = validPenguins.filter((p) => !existingIds.has(p.id));
     updatedPenguins = [...existing, ...newOnes];
   }
@@ -132,7 +145,6 @@ export async function POST(req: NextRequest) {
       expeditionScale: expedition.level,
       participantsScale: expedition.preset.allowedTypes[0],
       expeditionTitle: expedition.settings.title,
-      expeditionState: expedition.state,
       penguins: updatedPenguins,
       joinedAt: new Date(),
       finishedAt: expedition.activePhaseEndedAt.toDate?.() || new Date(),
