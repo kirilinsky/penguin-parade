@@ -47,7 +47,7 @@ export const useGetExpeditions = (expeditionId?: string) => {
             ...doc.data(),
           })) as Expedition[];
 
-          setExpeditions(data);
+          setExpeditions(data.filter((expedition) => !expedition.hidden));
 
           const activeExists = data.some(
             (exp) => exp.state === "preparing" || exp.state === "active"
@@ -65,5 +65,5 @@ export const useGetExpeditions = (expeditionId?: string) => {
     fetchExpeditions();
   }, [expeditionId]);
 
-  return { expeditions,expedition, hasActive, loading, error };
+  return { expeditions, expedition, hasActive, loading, error };
 };

@@ -28,6 +28,7 @@ export const expeditionStatusColors: Record<
 
 export type Expedition = {
   id: string;
+  hidden: boolean;
   settings: ExpeditionSettings;
   level: ScaleType;
   minParticipants: number;

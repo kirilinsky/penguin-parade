@@ -47,12 +47,13 @@ export default function Home() {
               {t("linkCraftPage")}
             </LinkStyled>
           </PageContentBlockStyled>
+          <CrystalsBlock />
           <LastCraftedBlockComponent />
           <TotalCountBlockComponent />
           <RandomAuctionBlockComponent />
           <TopUsersBlock />
           <StatisticsBlockComponent user={user} />
-          <CrystalsBlock />
+
           <PageContentBlockStyled>
             <h2>Road map</h2>
             <ul>

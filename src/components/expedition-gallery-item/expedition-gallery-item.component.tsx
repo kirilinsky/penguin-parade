@@ -14,6 +14,7 @@ import { format } from "date-fns";
 import { getBaseColorByScale } from "@/helpers/get-base-color-by-rarity/get-base-color-by-rarity";
 import { LinkStyled } from "../link/link.component.styled";
 import ExpeditionStatusBadge from "../expedition-status-badge/expedition-status-badge.component";
+import GalleryItemScaleComponent from "../gallery-item-scale/gallery-item-scale.component";
 
 const ExpeditionGalleryItem = ({ expedition }: { expedition: Expedition }) => {
   const locale = useLocale();
@@ -35,20 +36,24 @@ const ExpeditionGalleryItem = ({ expedition }: { expedition: Expedition }) => {
           <ExpeditionGalleryItemDes>
             {getLocalized(expedition.settings.description, locale)}
           </ExpeditionGalleryItemDes>
-          <span>theme: {getLocalized(expedition.settings.theme, locale)}</span>
+          <span>{getLocalized(expedition.settings.theme, locale)}</span>
           <span>
             preparation started at:
             {format(expedition.preparationStartedAt.toDate(), "dd.MM.yy")}
           </span>
-          <span>level: {expedition.level}</span>
-          <span>min Participants: {expedition.minParticipants}</span>
-          <span>max Participants: {expedition.maxParticipants}</span>
+          <span>
+            level: <GalleryItemScaleComponent scale={expedition.level} />
+          </span>
+          <span>min penguins: {expedition.minParticipants}</span>
+          <span>max penguins: {expedition.maxParticipants}</span>
           <span>Participants Count: {expedition.participantsCount}</span>
           <span>Penguins Count: {expedition.totalPenguinsCount}</span>
-          <LinkStyled href={`/expeditions/${expedition.id}`}>go</LinkStyled>
+          <LinkStyled href={`/expeditions/${expedition.id}`}>Join</LinkStyled>
         </ExpeditionGalleryItemSide>
       </ExpeditionGalleryItemSideContainer>{" "}
-      <span>goal: {getLocalized(expedition.settings.goal, locale)}</span>
+      <h4 style={{ textAlign: "center" }}>
+        {getLocalized(expedition.settings.goal, locale)}
+      </h4>
     </ExpeditionGalleryItemContainer>
   );
 };

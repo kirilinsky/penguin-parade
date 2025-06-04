@@ -73,6 +73,12 @@
         "sendButton": "Отправить пингвина для",
         "cancelButton": "Отмена"
     },
+    "crystalsBlock": {
+        "title": "Кристаллы",
+        "noCrystalsTitle": "У тебя пока нет кристаллов...",
+        "noCrystalsSubtitle": "Участвуй в экспедициях и получи шанс заработать кристаллы",
+        "expeditionsLink": "Посмотреть экспедиции"
+    },
     "friendsBlock": {
         "title": "Твои друзья",
         "loading": "загружаем друзей...",

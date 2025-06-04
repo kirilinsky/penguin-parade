@@ -68,7 +68,7 @@
     },
     "galleryItem": {
         "price": "Price",
-        "inExpedition":"In expedition now",
+        "inExpedition": "In expedition now",
         "checkExpedition": "Check"
     },
     "galleryItemModal": {
@@ -82,6 +82,12 @@
         "loadingGift": "sending gift...",
         "sendButton": "Send Penguin to",
         "cancelButton": "Cancel"
+    },
+    "crystalsBlock": {
+        "title": "Crystals",
+        "noCrystalsTitle": "You don't have crystals yet...",
+        "noCrystalsSubtitle": "Join the expeditions and get the opportunity to get a crystals",
+        "expeditionsLink": "Go check expeditions"
     },
     "friendsBlock": {
         "title": "Your Friends",
