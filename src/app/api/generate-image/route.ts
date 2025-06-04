@@ -245,8 +245,9 @@ export async function POST(req: Request) {
       imageIds: arrayUnion(imageDoc.id),
       craftInProgress: false,
     };
-
+    const DAY_MS = 24 * 60 * 60 * 1000;
     if (crystalMode && crystal) {
+      updates.allowCraftAt = new Date(Date.now() + DAY_MS);
       updates[`statistics.crystalsUsed.${crystal}`] = increment(1);
       updates["statistics.totalCrystalsSpent"] = increment(1);
       await burnUserCrystal(uid, crystal);
@@ -254,7 +255,6 @@ export async function POST(req: Request) {
       updates["statistics.lastEvolutionAt"] = new Date();
       updates["statistics.evolutions"] = increment(1);
     } else {
-      const DAY_MS = 24 * 60 * 60 * 1000;
       updates.allowCraftAt = new Date(Date.now() + DAY_MS);
       updates.lastGeneratedAt = new Date();
       updates["statistics.totalCrafted"] = increment(1);
