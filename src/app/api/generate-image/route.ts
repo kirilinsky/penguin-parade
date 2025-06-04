@@ -54,6 +54,13 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "User not found" }, { status: 404 });
   }
 
+  if (userData.craftInProgress) {
+    return NextResponse.json(
+      { error: "Generation already in progress" },
+      { status: 429 }
+    );
+  }
+
   let evolutionMode = false;
   const { scale } = await req.json();
 
@@ -72,6 +79,10 @@ export async function POST(req: Request) {
   } else {
     evolutionMode = true;
   }
+
+  await updateDoc(userRef, {
+    craftInProgress: true,
+  });
 
   try {
     const settingsRes = await fetch(
@@ -199,12 +210,14 @@ export async function POST(req: Request) {
         lastGeneratedAt: new Date(),
         "statistics.totalCrafted": increment(1),
         imageIds: arrayUnion(imageDoc.id),
+        craftInProgress: false,
       });
     } else {
       await updateDoc(doc(firestore, `users/${uid}`), {
         "statistics.lastEvolutionAt": new Date(),
         "statistics.evolutions": increment(1),
         imageIds: arrayUnion(imageDoc.id),
+        craftInProgress: false,
       });
     }
 

@@ -46,7 +46,9 @@ export type User = {
   avatarScale: ScaleType | null;
   createdAt: Date;
   coins: number;
+  /* TODO move crystals to collection */
   crystals: CrystalType[];
+  craftInProgress: boolean;
   email: string;
   friendRequests: RequestRecord[];
   sentRequests: RequestRecord[];

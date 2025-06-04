@@ -5,11 +5,12 @@ import GalleryFilterComponent from "@/components/gallery-filter-component/galler
 
 import GalleryItemComponent from "@/components/gallery-item/gallery-item.component";
 import GalleryComponent from "@/components/gallery/gallery.component";
+import { getIdToken } from "@/helpers/get-token/get-token";
 import { useGetImages } from "@/hooks/use-get-images";
 import { useUserDetails } from "@/hooks/use-user-details";
 import { ImageItem, ImagesSortType } from "@/types/image.types";
 import { scaleOrder, ScaleType } from "@/types/scale.types";
-import { getAuth } from "firebase/auth";
+
 import React, { useEffect, useState } from "react";
 import Rodal from "rodal";
 
@@ -28,11 +29,9 @@ const AuctionPage = () => {
 
   const buyImage = async (imageId: string) => {
     setIsLoading(true);
-    const auth = getAuth();
-    const userCred = auth.currentUser;
-    if (!user || !userCred || !imageId) return;
+    if (!user || !imageId) return;
 
-    const token = await userCred.getIdToken(true);
+    const token = await getIdToken();
 
     try {
       const res = await fetch("/api/buy-image", {
