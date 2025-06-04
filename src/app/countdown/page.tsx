@@ -243,7 +243,13 @@ const CountDownPage = () => {
             <img
               src={result.downloadURL}
               alt={result.title}
-              style={{ width: 225, borderRadius: 10, padding: 4, margin: 10 }}
+              style={{
+                width: 255,
+                borderRadius: 10,
+                padding: 4,
+                margin: 10,
+                border: `1px solid ${getBaseColorByScale(result.rarity)}`,
+              }}
             />
 
             <GalleryItemScaleComponent scale={result.rarity as ScaleType} />
