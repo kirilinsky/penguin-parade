@@ -57,7 +57,8 @@
         "origin": "Origin",
         "craft": "Craft",
         "evolution": "Evolution",
-        "expedition": "Expedition",
+        "Expedition": "Expedition",
+        "crystal craft": "Craft with Crystal",
         "bad batch": "Bad Batch",
         "inExpedition": "This Penguin is on a Expedition!",
         "vistExpedition": "View Expedition Log"

@@ -70,7 +70,9 @@ const CrystalsSelector = ({
               </span>
             </CrystalsSelectorOption>
           ))}
-          <CrystalsSelectorOption>Cancel</CrystalsSelectorOption>
+          <CrystalsSelectorOption onClick={() => setIsOpen(false)}>
+            Cancel
+          </CrystalsSelectorOption>
         </div>
       </CrystalsSelectorContent>
     </CrystalsSelectorWrapper>
