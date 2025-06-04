@@ -26,6 +26,18 @@ const ExpeditionStatusComponent = ({
         title="Max participants"
         text={expedition.maxParticipants}
       />
+      {expedition.participantsCount && (
+        <ExpeditionStatusInfo
+          title="Total participants"
+          text={expedition.participantsCount}
+        />
+      )}
+      {expedition.totalPenguinsCount && (
+        <ExpeditionStatusInfo
+          title="Total penguins in expedition"
+          text={expedition.totalPenguinsCount}
+        />
+      )}
       {participantScale && (
         <ExpeditionStatusInfo
           title="Participants level"
