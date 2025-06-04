@@ -6,13 +6,14 @@ export interface ImageItem {
   imageUrl: string;
   creatorUid: string;
   ownerId: string;
-  origin: "craft" | "evolution" | "bad batch" | "expedition";
+  origin: "craft" | "crystal craft" | "evolution" | "bad batch" | "expedition";
   title: string;
   inExpedition: boolean;
   expedition: string | null;
   expeditions: 0;
   gift: boolean;
   auction: boolean;
+  crystalUsed: ScaleType | null;
   price: number;
   createdAt: Timestamp;
   placedForAuctionAt: Timestamp;

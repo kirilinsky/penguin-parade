@@ -1,6 +1,7 @@
 "use client";
 
 import { loggedInAtom } from "@/atoms/user/user.atom";
+import CrystalsBlock from "@/components/crystals-block/crystals-block.component";
 import LastCraftedBlockComponent from "@/components/last-crafted-block/last-crafted-block.component";
 import { LinkStyled } from "@/components/link/link.component.styled";
 import { PageContentBlockStyled } from "@/components/page-content-block/page-content-block.component.styled";
@@ -51,6 +52,7 @@ export default function Home() {
           <RandomAuctionBlockComponent />
           <TopUsersBlock />
           <StatisticsBlockComponent user={user} />
+          <CrystalsBlock />
           <PageContentBlockStyled>
             <h2>Road map</h2>
             <ul>

@@ -1,10 +1,15 @@
-import { expeditionPresets } from "@/types/expeditions.types";
 import { Timestamp } from "firebase/firestore";
 import { ExpeditionState } from "./expeditions.types";
 import { LocalizedField } from "./image.types";
 import { ScaleType } from "./scale.types";
 
 export type FriendData = RequestRecord & User;
+
+export type UserCrystal = {
+  type: ScaleType;
+  amount: number;
+  lastUpdated: Date;
+};
 
 export type UserStatistics = {
   evolutions: number;
@@ -15,7 +20,15 @@ export type UserStatistics = {
   totalCrystalsEarned: number;
   totalExpeditionParticipants: number;
   totalCrystalsSpent: number;
-  totalCoinsSpent: number;
+  totalCoinsUsed: number;
+  crystalsUsed: {
+    rare: number;
+    epic: number;
+    legendry: number;
+    divine: number;
+    ghost: number;
+    mystic: number;
+  };
   totalCrafted: number;
   totalSold: number;
   totalBought: number;
@@ -46,8 +59,6 @@ export type User = {
   avatarScale: ScaleType | null;
   createdAt: Date;
   coins: number;
-  /* TODO move crystals to collection */
-  crystals: CrystalType[];
   craftInProgress: boolean;
   email: string;
   friendRequests: RequestRecord[];
@@ -84,8 +95,4 @@ export type UserExpeditionItemPenguin = {
 export type RequestRecord = {
   id: string;
   sentAt: Timestamp;
-};
-
-export type CrystalType = {
-  crystalType: number;
 };
