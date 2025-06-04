@@ -15,7 +15,7 @@ import { getPrevScale } from "@/helpers/get-prev-scale/get-prev-scale";
 import { useGetImages } from "@/hooks/use-get-images";
 import { ScaleType } from "@/types/scale.types";
 import { ImageItem } from "@/types/image.types";
-import { User } from "@/types/user.types";
+import { User, UserExpeditionItemPenguin } from "@/types/user.types";
 import { useExpeditionPenguins } from "@/hooks/use-get-expedition-penguins";
 import ExpeditionParticipants from "../expedition-participants/expedition-participants.component";
 import ExpeditionStatusComponent from "../expedition-status/expedition-status.component";
@@ -34,9 +34,12 @@ const ExpeditionPageGridComponent = ({
   const { penguins: penguinsParticipants, refetch } = useExpeditionPenguins(
     expedition.id
   );
-  const [filteredImages, setFilteredImages] = useState<ImageItem[]>([]);
+  const [filteredImages, setFilteredImages] = useState<
+    ImageItem[] | UserExpeditionItemPenguin[]
+  >([]);
   const [participants, setParticipants] = useState<ImageItem[]>([]);
   const [showLibraryModal, setShowLibraryModal] = useState<boolean>(false);
+  const [hasJoined, setHasJoined] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const participantScale = useMemo(() => {
@@ -62,16 +65,15 @@ const ExpeditionPageGridComponent = ({
     return;
   };
 
-  const removeParticipant = (img: ImageItem) => {
+  const removeParticipant = (id: string) => {
     const participantsDraft = [...participants].filter(
-      (current) => current.id !== img.id
+      (current) => current.id !== id
     );
     setParticipants(participantsDraft);
-    setFilteredImages(
-      [...filteredImages, img].sort(
-        (a, b) => b.createdAt.seconds - a.createdAt.seconds
-      )
-    );
+    const removedCandidate = images.find((img) => img.id === id);
+    if (removedCandidate) {
+      setFilteredImages([...filteredImages, removedCandidate]);
+    }
   };
 
   const confirmParticipant = async () => {
@@ -94,34 +96,73 @@ const ExpeditionPageGridComponent = ({
 
     const data = await res.json();
     if (!res.ok) throw new Error(data.error || "Failed to join expedition");
-
+    refetch();
+    setHasJoined(true);
     alert("success!");
+
     return data;
   };
+
+  const unsetParticipation = async () => {
+    if (!penguinsParticipants.length) return;
+    /* TODO: add loader */
+    const token = await getIdToken();
+
+    const res = await fetch("/api/expeditions/exit-expedition", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        expeditionId: expedition.id,
+      }),
+    });
+
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || "Failed to exit expedition");
+
+    alert("you're unset!");
+    setHasJoined(false);
+    refetch();
+    return data;
+  };
+
+  const isImageItemArray = (arr: unknown[]): arr is ImageItem[] => {
+    return (
+      Array.isArray(arr) &&
+      arr.length > 0 &&
+      typeof arr[0] === "object" &&
+      arr[0] !== null &&
+      "settings" in arr[0]
+    );
+  };
+
+  useEffect(() => {
+    console.log(penguinsParticipants, "penguinsParticipants");
+    if (penguinsParticipants.length) {
+      setFilteredImages(penguinsParticipants);
+      setHasJoined(true);
+    } else {
+      resetParticipants();
+    }
+  }, [penguinsParticipants]);
 
   const resetParticipants = () => {
     setParticipants([]);
     setFilteredImages(images);
   };
 
-  useEffect(() => {
-    const participantsIds = penguinsParticipants.map(
-      (participant) => participant.id
-    );
-    const filteredDraft = [...images].filter(
-      (image) => !participantsIds.includes(image.id)
-    );
-    setFilteredImages(filteredDraft);
-  }, [penguinsParticipants]);
-
   return (
     <>
-      <ExpeditionParticipantModal
-        showModal={showLibraryModal}
-        images={filteredImages}
-        onItemClick={addParticipant}
-        onClose={() => setShowLibraryModal(false)}
-      />
+      {isImageItemArray(filteredImages) && (
+        <ExpeditionParticipantModal
+          showModal={showLibraryModal}
+          images={filteredImages}
+          onItemClick={addParticipant}
+          onClose={() => setShowLibraryModal(false)}
+        />
+      )}
       <ExpeditionPageGrid>
         <ExpeditionPageImage>
           <img src={expedition.imageUrl} alt={expedition.settings.title.en} />
@@ -139,11 +180,15 @@ const ExpeditionPageGridComponent = ({
           </ExpeditionPageDescription>
           <ExpeditionParticipants
             loading={loading}
-            penguinsParticipants={participants}
+            hasJoined={hasJoined}
+            penguinsParticipants={
+              hasJoined ? penguinsParticipants : participants
+            }
             onRemove={removeParticipant}
             onAdd={() => setShowLibraryModal(true)}
             participantScale={participantScale}
             addingDisabled={
+              hasJoined ||
               !filteredImages.length ||
               imagesLoading ||
               loading ||
@@ -158,14 +203,21 @@ const ExpeditionPageGridComponent = ({
                 title="reset my participants"
               />
             )}
-            <NeonButtonComponent
-              onClick={confirmParticipant}
-              disabled={
-                participants.length < expedition.minParticipants ||
-                participants.length > expedition.maxParticipants
-              }
-              title="confirm participation"
-            />
+            {hasJoined ? (
+              <NeonButtonComponent
+                onClick={unsetParticipation}
+                title="Unset participation"
+              />
+            ) : (
+              <NeonButtonComponent
+                onClick={confirmParticipant}
+                disabled={
+                  participants.length < expedition.minParticipants ||
+                  participants.length > expedition.maxParticipants
+                }
+                title="confirm participation"
+              />
+            )}
           </ExpeditionButtons>
         </ExpeditionContentColumn>
       </ExpeditionPageGrid>

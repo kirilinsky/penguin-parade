@@ -5,9 +5,9 @@ export const ExpeditionParticipantsStyled = styled.div`
   font-size: 0.9rem;
   align-self: stretch;
   outline: 1px solid turquoise;
-  border-radius:4px;
+  border-radius: 4px;
   display: flex;
-  
+
   gap: 1em;
   flex-wrap: wrap;
   padding: 0.5em;
@@ -34,15 +34,16 @@ export const ExpeditionParticipantsAddItem = styled.div`
 export const ExpeditionParticipantsItem = styled(
   ExpeditionParticipantsAddItem
 ).withConfig({
-  shouldForwardProp: (prop) => prop !== "borderColor",
-})<{ borderColor: string }>`
+  shouldForwardProp: (prop) =>
+    prop !== "borderColor" && prop !== "disableRemove",
+})<{ borderColor: string; disableRemove: boolean }>`
   position: relative;
 
   overflow: hidden;
   transition: transform 0.3s ease-in;
   border: 1px solid ${({ borderColor }) => borderColor};
   &:hover::after {
-    content: "×";
+    content: ${({ disableRemove }) => (disableRemove ? "" : "×")};
     position: absolute;
     display: flex;
     align-items: center;
