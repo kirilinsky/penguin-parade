@@ -11,7 +11,6 @@ const ExpeditionDetails = () => {
   const { user } = useUserDetails();
 
   const { expedition } = useGetExpeditions(expeditionId as string);
-  console.log(expedition, "expedition");
   if (!expedition || !user) return null;
   return <ExpeditionPageGridComponent user={user} expedition={expedition} />;
 };

@@ -17,7 +17,8 @@
         "showOnly": "Показать только:"
     },
     "galleryItem": {
-        "price": "Цена"
+        "inExpedition": "Сейчас в экспедиции",
+        "checkExpedition": "Проверить"
     },
     "friendsPage": {
         "addFriendTitle": "Добавить нового друга",
@@ -55,7 +56,9 @@
         "craft": "Крафт",
         "evolution": "Эволюция",
         "expedition": "Экспедиция",
-        "bad batch": "Бракованная Партия"
+        "bad batch": "Бракованная Партия",
+        "inExpedition": "Этот пингвин сейчас в экспедиции!",
+        "vistExpedition": "Открыть журнал экспедиции"
     },
     "galleryItemModal": {
         "avatarButton": "Поставить как аватар",

@@ -21,6 +21,37 @@ export const GalleryImageFrameOverlay = styled.img`
   z-index: 16;
 `;
 
+export const GalleryImageExpeditionOverlay = styled.div`
+  background: #b75d339f;
+  backdrop-filter: blur(2px);
+  flex-direction: column;
+  gap: 0.5em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  border-radius: 1em;
+  box-shadow: inset 0 0 15px #c06520;
+  height: 100%;
+  z-index: 16;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  a {
+    font-size: 18px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s linear;
+  }
+  &:hover {
+    a {
+      opacity: 1;
+      transition: opacity 0.4s linear;
+      pointer-events: unset;
+    }
+  }
+`;
+
 export const GalleryItemImage = styled.img.withConfig({
   shouldForwardProp: (prop) => prop !== "loaded" && prop !== "emperor",
 })<{ emperor: boolean; color: string; loaded: boolean }>`

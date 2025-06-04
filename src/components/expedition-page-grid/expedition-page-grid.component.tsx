@@ -139,7 +139,6 @@ const ExpeditionPageGridComponent = ({
   };
 
   useEffect(() => {
-    console.log(penguinsParticipants, "penguinsParticipants");
     if (penguinsParticipants.length) {
       setFilteredImages(penguinsParticipants);
       setHasJoined(true);
@@ -192,7 +191,7 @@ const ExpeditionPageGridComponent = ({
               !filteredImages.length ||
               imagesLoading ||
               loading ||
-              expedition.maxParticipants === penguinsParticipants.length ||
+              expedition.maxParticipants === participants.length ||
               expedition.minParticipants > images.length
             }
           />

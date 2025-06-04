@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from "react";
 import Tilt from "react-parallax-tilt";
 import {
+  GalleryImageExpeditionOverlay,
   GalleryImageFrameOverlay,
   GalleryImageWrap,
   GalleryItemBadBatchBadge,
@@ -16,6 +17,7 @@ import { Tektur } from "next/font/google";
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { getLocalized } from "@/helpers/get-localized/get-localized";
+import { LinkStyled } from "../link/link.component.styled";
 
 const tektur = Tektur({
   subsets: ["latin"],
@@ -47,7 +49,7 @@ const GalleryItemComponent = ({
   }, [img.settings.rarity]);
   return (
     <Tilt
-      scale={scalable ? 1.15 : 1}
+      scale={scalable ? 1.13 : 1}
       key={img.id}
       glareEnable={glare}
       glareMaxOpacity={0.65}
@@ -76,8 +78,19 @@ const GalleryItemComponent = ({
         <GalleryItemScaleComponent scale={img.settings.rarity} />
         <GalleryItemSkeleton loaded={loaded} />
         <GalleryImageWrap>
-          {emperor && (
+          {emperor && !img.inExpedition && (
             <GalleryImageFrameOverlay src="/emperor_frame.webp" alt="frame" />
+          )}
+          {img.inExpedition && (
+            <GalleryImageExpeditionOverlay>
+              <h3>{t("inExpedition")}</h3>
+              <LinkStyled
+                onClick={(e) => e.stopPropagation()}
+                href={`/expeditions/${img.expedition}`}
+              >
+                {t("checkExpedition")}
+              </LinkStyled>
+            </GalleryImageExpeditionOverlay>
           )}
           <GalleryItemImage
             src={img.imageUrl}

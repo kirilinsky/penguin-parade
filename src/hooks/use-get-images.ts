@@ -58,7 +58,8 @@ export const useGetImages = (
         setImages(list);
         setTotal(list.length);
 
-        const filtered = list.filter((img) => !img.gift);
+        const filtered = list.filter((img) => !img.inExpedition && !img.gift);
+
         setAuctionImages(filtered);
 
         const computed = filtered.reduce((acc, { settings: { rarity } }) => {

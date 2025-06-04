@@ -85,7 +85,7 @@ const GalleryItemModalComponent = ({
         </GalleryItemModalScale>
         <GalleryItemModalAccordion $expand={!giftMode}>
           <GalleryItemModalStatistics img={img} />
-          {user && isMyPage && (
+          {user && isMyPage && !img.inExpedition && (
             <GalleryItemModalButtonsContainer>
               {user.avatar !== img.imageUrl && (
                 <NeonButtonComponent

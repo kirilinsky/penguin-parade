@@ -58,14 +58,18 @@
         "craft": "Craft",
         "evolution": "Evolution",
         "expedition": "Expedition",
-        "bad batch": "Bad Batch"
+        "bad batch": "Bad Batch",
+        "inExpedition": "This Penguin is on a Expedition!",
+        "vistExpedition": "View Expedition Log"
     },
     "auctionItemModal": {
         "buying": "buying in progress...",
         "buyButton": "Buy"
     },
     "galleryItem": {
-        "price": "Price"
+        "price": "Price",
+        "inExpedition":"In expedition now",
+        "checkExpedition": "Check"
     },
     "galleryItemModal": {
         "avatarButton": "Set as Avatar",

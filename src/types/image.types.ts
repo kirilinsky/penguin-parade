@@ -9,7 +9,7 @@ export interface ImageItem {
   origin: "craft" | "evolution" | "bad batch" | "expedition";
   title: string;
   inExpedition: boolean;
-  expeditionId: string | null;
+  expedition: string | null;
   expeditions: 0;
   gift: boolean;
   auction: boolean;

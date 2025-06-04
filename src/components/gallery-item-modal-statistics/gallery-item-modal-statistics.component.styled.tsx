@@ -10,6 +10,16 @@ export const GalleryItemModalStatisticsGrid = styled.div`
   }
 `;
 
+export const GalleryItemModalStatisticsExpedition = styled.div`
+  border: 1px solid turquoise;
+  border-radius: 4px;
+  grid-column: 1 / -1;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
 export const GalleryItemModalStatisticsDes = styled.p`
   font-size: 21px;
   grid-column: 1 / -1;

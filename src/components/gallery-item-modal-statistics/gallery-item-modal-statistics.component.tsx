@@ -3,6 +3,7 @@
 import React from "react";
 import {
   GalleryItemModalStatisticsDes,
+  GalleryItemModalStatisticsExpedition,
   GalleryItemModalStatisticsGrid,
   GalleryItemModalStatisticsItem,
   GalleryItemModalStatisticsTrait,
@@ -11,6 +12,7 @@ import { ImageItem } from "@/types/image.types";
 import { format } from "date-fns";
 import { useTranslations, useLocale } from "next-intl";
 import { getLocalized } from "@/helpers/get-localized/get-localized";
+import { LinkStyled } from "../link/link.component.styled";
 
 const GalleryItemModalStatistics = ({ img }: { img: ImageItem }) => {
   const t = useTranslations("galleryItemModalStatistics");
@@ -21,6 +23,14 @@ const GalleryItemModalStatistics = ({ img }: { img: ImageItem }) => {
       <GalleryItemModalStatisticsDes>
         {getLocalized(img.settings.des, locale)}
       </GalleryItemModalStatisticsDes>
+      {img.inExpedition && (
+        <GalleryItemModalStatisticsExpedition>
+          <h2>{t("inExpedition")}</h2>
+          <LinkStyled href={`/expeditions/${img.expedition}`}>
+            {t("vistExpedition")}
+          </LinkStyled>
+        </GalleryItemModalStatisticsExpedition>
+      )}
 
       <GalleryItemModalStatisticsItem>
         <h3>{t("theme")}</h3>
