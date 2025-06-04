@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
-import { collection, getDocs, query, DocumentData } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import { firestore } from "@/firebase";
 import { useUserDetails } from "./use-user-details";
 import { ScaleType } from "@/types/scale.types";
-
-export type UserCrystals = Partial<Record<ScaleType, number>>;
+import { UserCrystal } from "@/types/user.types";
 
 export const useGetUserCrystals = () => {
   const { user } = useUserDetails();
-  const [crystals, setCrystals] = useState<UserCrystals>({});
+  const [crystals, setCrystals] = useState<UserCrystal[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<unknown>(null);
 
@@ -19,17 +18,20 @@ export const useGetUserCrystals = () => {
       setLoading(true);
       try {
         const crystalRef = collection(firestore, "users", user.id, "crystals");
-        const crystalSnap = await getDocs(query(crystalRef));
+        const crystalSnap = await getDocs(crystalRef);
 
-        const data: UserCrystals = {};
-        crystalSnap.forEach((doc) => {
-          const crystal = doc.data();
-          if (crystal?.amount > 0) {
-            data[doc.id as ScaleType] = crystal.amount;
-          }
-        });
+        const result: UserCrystal[] = crystalSnap.docs
+          .map((doc) => {
+            const data = doc.data();
+            return {
+              type: doc.id as ScaleType,
+              amount: data.amount ?? 0,
+              lastUpdated: data.lastUpdated?.toDate?.() ?? new Date(0),
+            } as UserCrystal;
+          })
+          .filter((c) => c.amount > 0);
 
-        setCrystals(data);
+        setCrystals(result);
       } catch (err) {
         setError(err);
       } finally {

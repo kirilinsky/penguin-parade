@@ -30,7 +30,9 @@ const StatisticsBlockComponent = ({ user }: { user: User }) => {
   };
   if (!user || !user.statistics) return null;
   const t = useTranslations("statisticsBlock");
-  const statisticsArray = Object.entries(user.statistics);
+  const statisticsArray = Object.entries(user.statistics).filter(
+    ([key]) => key !== "crystalsUsed"
+  );
   return (
     <PageContentBlockStyled>
       <h2>{t("title")}</h2>

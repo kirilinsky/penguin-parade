@@ -1,4 +1,5 @@
 import { ImageItemSettings } from "./image.types";
+import { ScaleType } from "./scale.types";
 
 export interface GenerateImageReposne {
   success: boolean;
@@ -6,4 +7,5 @@ export interface GenerateImageReposne {
   title: string;
   settings: ImageItemSettings;
   id: string;
+  crystal?: ScaleType;
 }

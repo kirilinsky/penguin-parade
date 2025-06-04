@@ -1,19 +1,25 @@
 import { Timestamp } from "firebase-admin/firestore";
 import { ScaleType } from "./scale.types";
 
+export type ImageOriginType =
+  | "craft"
+  | "crystal craft"
+  | "evolution"
+  | "bad batch"
+  | "expedition";
+
 export interface ImageItem {
   id: string;
   imageUrl: string;
   creatorUid: string;
   ownerId: string;
-  origin: "craft" | "crystal craft" | "evolution" | "bad batch" | "expedition";
+  origin: ImageOriginType;
   title: string;
   inExpedition: boolean;
   expedition: string | null;
   expeditions: 0;
   gift: boolean;
   auction: boolean;
-  crystalUsed: ScaleType | null;
   price: number;
   createdAt: Timestamp;
   placedForAuctionAt: Timestamp;

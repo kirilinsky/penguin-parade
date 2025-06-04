@@ -5,6 +5,8 @@ import { ScaleType } from "./scale.types";
 
 export type FriendData = RequestRecord & User;
 
+export type UserCrystals = Partial<Record<ScaleType, number>>;
+
 export type UserCrystal = {
   type: ScaleType;
   amount: number;

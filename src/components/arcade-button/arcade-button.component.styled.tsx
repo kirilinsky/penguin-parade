@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
-export const ArcadeButtonStyled = styled.button`
+export const ArcadeButtonStyled = styled.button.withConfig({
+  shouldForwardProp: (prop) => prop !== "appliedColor",
+})<{ appliedColor?: string }>`
   position: relative;
   display: inline-block;
   width: 200px;
@@ -10,11 +12,15 @@ export const ArcadeButtonStyled = styled.button`
   outline: none;
   background-color: #c2290a;
   border-radius: 50%;
+  opacity: 1;
   cursor: pointer;
   transition: box-shadow 200ms;
-  box-shadow: inset 0 6.25px 0 #da2e0b, inset 0 -6.25px 0 #aa2409,
-    inset 0 0 0 6.25px #b32609, inset 0 0 0 16.6666666667px #c2290a,
-    inset 0 0 0 20px #611405, inset 0 0 0 21.7391304348px black,
+  box-shadow: inset 0 6.25px 0
+      ${({ appliedColor }) => appliedColor || "#da2e0b"},
+    inset 0 -6.25px 0 ${({ appliedColor }) => appliedColor || "#aa2409 "},
+    inset 0 0 0 6.25px ${({ appliedColor }) => appliedColor || "#b32609 "},
+    inset 0 0 0 16.6666666667px #c2290a, inset 0 0 0 20px #611405,
+    inset 0 0 0 21.7391304348px black,
     inset 0 0 0 26.6666666667px rgba(247, 133, 110, 0.7),
     inset 0 0 0 36.3636363636px #c2290a, inset 0 80px 26.6666666667px #aa2409,
     inset 0 0 20px 33.3333333333px #911f08, 0 10px 0 rgba(0, 0, 0, 0.3);

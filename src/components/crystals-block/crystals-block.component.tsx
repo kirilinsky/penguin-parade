@@ -14,17 +14,17 @@ import { LinkStyled } from "../link/link.component.styled";
 const CrystalsBlock = () => {
   const t = useTranslations("crystalsBlock");
   const { crystals } = useGetUserCrystals();
-  const crystalsArray = Object.entries(crystals);
+
   return (
     <PageContentBlockStyled>
       <h2>{t("title")}</h2>
-      {crystalsArray.length ? (
+      {crystals.length ? (
         <CrystalBlockGrid>
-          {Object.entries(crystals).map(([scale, amount]) => (
+          {crystals.map((crystal) => (
             <CrystalItemComponent
-              key={scale + amount}
-              scale={scale as ScaleType}
-              amount={amount}
+              key={crystal.type}
+              scale={crystal.type as ScaleType}
+              amount={crystal.amount}
             />
           ))}
         </CrystalBlockGrid>

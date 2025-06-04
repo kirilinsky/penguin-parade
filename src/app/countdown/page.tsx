@@ -2,7 +2,7 @@
 
 import { GenerateImageReposne } from "@/types/api.types";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { LinkStyled } from "@/components/link/link.component.styled";
 import { PageContentWrapperComponent } from "@/components/page-content-wrapper/page-content-wrapper.component";
 import {
@@ -18,11 +18,17 @@ import { formatDuration, intervalToDuration, isBefore, Locale } from "date-fns";
 import { useUserDetails } from "@/hooks/use-user-details";
 import { useLocale, useTranslations } from "next-intl";
 import { enUS, ru } from "date-fns/locale";
+import { useGetUserCrystals } from "@/hooks/use-get-crystals";
+import CrystalsSelector from "@/components/crystals-selector/crystals-selector.component";
+import { ScaleType } from "@/types/scale.types";
+import { getBaseColorByScale } from "@/helpers/get-base-color-by-rarity/get-base-color-by-rarity";
+import GalleryItemScaleComponent from "@/components/gallery-item-scale/gallery-item-scale.component";
 
 type GenerationResult = {
   downloadURL: string;
   title: string;
   rarity: string;
+  crystal?: ScaleType;
 };
 
 const CountDownPage = () => {
@@ -34,6 +40,8 @@ const CountDownPage = () => {
   const [loadingPayToSkip, setLoadingPayToSkip] = useState(false);
   const [leftTime, setLeftTime] = useState<string>("");
   const [result, setResult] = useState<GenerationResult | null>(null);
+  const { crystals, loading: crystalsLoading } = useGetUserCrystals();
+  const [crystalApplied, setCrystalApplied] = useState<ScaleType | null>(null);
   const [shareLink, setShareLink] = useState<string | null>(null);
 
   const localeMap: Record<string, Locale> = {
@@ -85,7 +93,7 @@ const CountDownPage = () => {
     try {
       const res = await fetch("/api/generate-image", {
         method: "POST",
-        body: JSON.stringify({}),
+        body: JSON.stringify({ crystal: crystalApplied }),
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
@@ -95,17 +103,18 @@ const CountDownPage = () => {
       const data: GenerateImageReposne = await res.json();
 
       if (data.success) {
+        setCanCraft(false);
         setResult({
           downloadURL: data.downloadURL,
           title: data.title,
           rarity: data.settings.rarity,
+          crystal: data.crystal,
         });
-        setShareLink(
+        /*   setShareLink(
           encodeURIComponent(
             `${location.origin}/share/${user.id}/${data.downloadURL}`
           )
-        );
-        setCanCraft(false);
+        ); */
       } else {
         console.error("Generation failed:", data);
       }
@@ -156,15 +165,27 @@ const CountDownPage = () => {
     user && checkUserStatus();
   }, [user]);
 
+  const appliedColor = useMemo(() => {
+    if (crystalApplied) return getBaseColorByScale(crystalApplied);
+  }, [crystalApplied]);
+
   return (
     <PageContentWrapperComponent>
       <PageContentBlockStyled>
-        {!loading && !result && (
+        {!loading && !crystalsLoading && !result && (
           <PageContentBlockFlex>
             <h1>{t("title")}</h1>
             {canCraft ? (
               <>
-                <ArcadeButtonStyled onClick={craft} />
+                <ArcadeButtonStyled
+                  appliedColor={appliedColor}
+                  onClick={craft}
+                />
+                <CrystalsSelector
+                  crystalApplied={crystalApplied}
+                  setCrystalApplied={setCrystalApplied}
+                  crystals={crystals}
+                />
               </>
             ) : (
               <>
@@ -216,21 +237,24 @@ const CountDownPage = () => {
               {t("newPenguinTitle")} <b>{result.title}!</b>
             </h2>
             <p>{t("welcomeNew")}</p>
+            {result.crystal && (
+              <span>You spent 1 {result.crystal} crystal</span>
+            )}
             <img
               src={result.downloadURL}
               alt={result.title}
-              style={{ width: 225, borderRadius: 8, padding: 4, margin: 10 }}
+              style={{ width: 225, borderRadius: 10, padding: 4, margin: 10 }}
             />
-            <br />
-            <span>{result.rarity}</span>
-            <br />
+
+            <GalleryItemScaleComponent scale={result.rarity as ScaleType} />
+
             {user && (
               <LinkStyled href={`/library/${user.id}`}>
                 {t("myLibraryLink")}
               </LinkStyled>
             )}
             {/* TODO: add share functionality  */}
-            <NeonButtonComponent title="Share this (TBA)" />
+            {/*   <NeonButtonComponent title="Share this (TBA)" /> */}
             {/*   <a
               target="_blank"
               href={`https://t.me/share/url?url=${shareLink}&text=${encodeURIComponent(

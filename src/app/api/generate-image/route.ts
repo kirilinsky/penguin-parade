@@ -14,8 +14,11 @@ import {
   increment,
   arrayUnion,
   getDoc,
+  deleteDoc,
 } from "firebase/firestore";
 import { supabase } from "@/supabase";
+import { ScaleType } from "@/types/scale.types";
+import { ImageOriginType } from "@/types/image.types";
 
 const replicate = new Replicate({ auth: process.env.REPLICATE_API_TOKEN });
 const model =
@@ -23,6 +26,25 @@ const model =
 const templateImageUrl = "https://i.ibb.co/B55bD3mh/template.png";
 const BUCKET = "penguins";
 const GLOBAL_IMAGES_COLLECTION = "images";
+
+const burnUserCrystal = async (uid: string, type: ScaleType) => {
+  const crystalRef = doc(firestore, "users", uid, "crystals", type);
+  const crystalSnap = await getDoc(crystalRef);
+
+  if (!crystalSnap.exists()) return;
+
+  const data = crystalSnap.data();
+  const currentAmount = data.amount ?? 0;
+
+  if (currentAmount > 1) {
+    await updateDoc(crystalRef, {
+      amount: currentAmount - 1,
+      lastUpdated: new Date(),
+    });
+  } else {
+    await deleteDoc(crystalRef);
+  }
+};
 
 export async function POST(req: Request) {
   const authHeader = req.headers.get("Authorization") || "";
@@ -65,7 +87,9 @@ export async function POST(req: Request) {
   }
 
   let evolutionMode = false;
-  const { scale } = await req.json();
+  let crystalMode = false;
+
+  const { scale, crystal } = await req.json();
 
   if (!scale) {
     const allowCraftAt = userData.allowCraftAt;
@@ -78,6 +102,10 @@ export async function POST(req: Request) {
         { error: "Not able to craft!" },
         { status: 403 }
       );
+    }
+
+    if (crystal) {
+      crystalMode = true;
     }
   } else {
     evolutionMode = true;
@@ -95,7 +123,9 @@ export async function POST(req: Request) {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(evolutionMode ? { scale } : {}),
+        body: JSON.stringify(
+          evolutionMode ? { scale } : crystalMode ? { scale: crystal } : {}
+        ),
       }
     );
     if (!settingsRes.ok) {
@@ -187,7 +217,11 @@ export async function POST(req: Request) {
         { status: 500 }
       );
     }
-    const origin = evolutionMode ? "evolution" : "craft";
+    let origin: ImageOriginType = "craft";
+
+    if (evolutionMode) origin = "evolution";
+    if (crystalMode) origin = "crystal craft";
+
     const imageDoc = await addDoc(
       collection(firestore, GLOBAL_IMAGES_COLLECTION),
       {
@@ -204,33 +238,42 @@ export async function POST(req: Request) {
         createdAt: serverTimestamp(),
       }
     );
-    if (!evolutionMode) {
-      const DAY_MS = 24 * 60 * 60 * 1000;
-      const allowCraftAt = new Date(Date.now() + DAY_MS);
 
-      await updateDoc(doc(firestore, `users/${uid}`), {
-        allowCraftAt,
-        lastGeneratedAt: new Date(),
-        "statistics.totalCrafted": increment(1),
-        imageIds: arrayUnion(imageDoc.id),
-        craftInProgress: false,
-      });
+    //update user
+    const userRef = doc(firestore, `users/${uid}`);
+    const updates: Record<string, any> = {
+      imageIds: arrayUnion(imageDoc.id),
+      craftInProgress: false,
+    };
+
+    if (crystalMode && crystal) {
+      updates[`statistics.crystalsUsed.${crystal}`] = increment(1);
+      updates["statistics.totalCrystalsSpent"] = increment(1);
+      await burnUserCrystal(uid, crystal);
+    } else if (evolutionMode) {
+      updates["statistics.lastEvolutionAt"] = new Date();
+      updates["statistics.evolutions"] = increment(1);
     } else {
-      await updateDoc(doc(firestore, `users/${uid}`), {
-        "statistics.lastEvolutionAt": new Date(),
-        "statistics.evolutions": increment(1),
-        imageIds: arrayUnion(imageDoc.id),
-        craftInProgress: false,
-      });
+      const DAY_MS = 24 * 60 * 60 * 1000;
+      updates.allowCraftAt = new Date(Date.now() + DAY_MS);
+      updates.lastGeneratedAt = new Date();
+      updates["statistics.totalCrafted"] = increment(1);
     }
 
-    return NextResponse.json({
+    await updateDoc(userRef, updates);
+    const responsePayload: Record<string, any> = {
       success: true,
       downloadURL: urlData.publicUrl,
       title: settings.t.en,
       settings,
       id: imageDoc.id,
-    });
+    };
+
+    if (crystalMode) {
+      responsePayload.crystal = crystal;
+    }
+
+    return NextResponse.json(responsePayload);
   } catch (err) {
     console.error("Image generation failed:", err);
     return NextResponse.json(
