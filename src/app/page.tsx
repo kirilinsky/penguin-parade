@@ -39,9 +39,9 @@ export default function Home() {
 
             <Image
               alt="nofriends"
-              src="/infographics/welcome.png"
-              width="120"
-              height="120"
+              src="/infographics/welcome.webp"
+              width="130"
+              height="140"
             />
             <LinkStyled title="Craft page" href={"/countdown"}>
               {t("linkCraftPage")}
