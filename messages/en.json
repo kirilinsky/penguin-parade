@@ -17,8 +17,8 @@
         "showOnly": "Show only:"
     },
     "randomAuctionBlock": {
-        "title": "Random Auction Deal",
-        "auctionButton": "Go to Auction",
+        "title": "Random Market Deal",
+        "auctionButton": "Go to Market",
         "emptyTitle": "Sorry, nothing for sale this time!",
         "emptySubtitle": "Come to check later"
     },
@@ -49,7 +49,7 @@
         "ability": "Ability",
         "loot": "Loot",
         "createdAt": "Creation Date",
-        "auctionSince": "On Auction since",
+        "auctionSince": "On Market since",
         "price": "Price",
         "beak": "Beak Color",
         "back": "Back Color",
@@ -81,7 +81,7 @@
     "galleryItemModal": {
         "avatarButton": "Set as Avatar",
         "giftButton": "Gift to friend",
-        "sellButton": "Sell on auction for",
+        "sellButton": "Sell on Market for",
         "chooseFriendTitle": "Choose Friend to gift",
         "unsetButton": "Unset",
         "chooseButton": "Choose",
@@ -148,7 +148,7 @@
         "myPenguins": "My Penguins",
         "expeditions": "Expeditions",
         "evolve": "Evolve",
-        "auction": "Auction",
+        "auction": "Market",
         "logOut": "Log Out",
         "signUp": "Sign up",
         "login": "Log in"
@@ -185,8 +185,8 @@
         "lastExpeditionAt": "Last Expedition",
         "lastLoginAt": "Last Login",
         "lastGeneratedAt": "Last Crafted",
-        "lastAuctionPurchaseAt": "Last Auction Buy",
-        "lastAuctionSellAt": "Last Auction Sell",
+        "lastAuctionPurchaseAt": "Last Market Buy",
+        "lastAuctionSellAt": "Last Market Sell",
         "lastSkipToPayAt": "Last Skip Used",
         "totalSkipToPay": "Skips Used"
     },

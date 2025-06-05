@@ -48,6 +48,9 @@ export default function Home() {
             </LinkStyled>
           </PageContentBlockStyled>
           <CrystalsBlock />
+          <PageContentBlockStyled>
+            <h2>Notifications</h2>
+          </PageContentBlockStyled>
           <LastCraftedBlockComponent />
           <TotalCountBlockComponent />
           <RandomAuctionBlockComponent />
@@ -58,7 +61,6 @@ export default function Home() {
             <h2>Road map</h2>
             <ul>
               <li>System notifications</li>
-              <li>Expeditions </li>
               <li>Gift functionality design update (notification)</li>
               <li>Notification toasts</li>
               <li>Anonymous home page, loggedIn limitations</li>

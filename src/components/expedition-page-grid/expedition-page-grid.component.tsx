@@ -249,7 +249,6 @@ const ExpeditionPageGridComponent = ({
               coins
             </div>
           )}
-          {/* TODO add expected reward */}
           {expedition.state === "ended" && (
             <h2>
               Congratulations! The expedition is over and you can get your award

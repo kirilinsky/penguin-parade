@@ -31,7 +31,7 @@ const NavigationLinksComponent = ({
           <Link onClick={onClick} href="/evolve">
             {t("evolve")}
           </Link>
-          <Link onClick={onClick} href="/auction">
+          <Link onClick={onClick} href="/market">
             {t("auction")}
           </Link>
           <Link onClick={onClick} href="/expeditions">

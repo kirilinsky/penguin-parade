@@ -28,7 +28,7 @@ const RandomAuctionBlockComponent = () => {
             img={images[randomNumber]}
           />
 
-          <LinkStyled href="/auction">{t("auctionButton")}</LinkStyled>
+          <LinkStyled href="/market">{t("auctionButton")}</LinkStyled>
         </>
       ) : (
         <>

@@ -114,7 +114,7 @@ const AuctionPage = () => {
           isLoading={isLoading}
         />
       </Rodal>
-      <h2>Auction</h2>
+      <h2>Market</h2>
       {images.length && (
         <GalleryFilterComponent
           isAuction
@@ -131,7 +131,6 @@ const AuctionPage = () => {
         <GalleryComponent>
           {imagesFiltered.length ? (
             imagesFiltered.map((img: ImageItem) => (
-              /* add onclick modal for auction */
               <GalleryItemComponent
                 onClick={() => setDetailsImage(img)}
                 key={img.id}
