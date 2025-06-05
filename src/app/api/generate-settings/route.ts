@@ -71,7 +71,7 @@ where:
   "fx": picture effects,
   "acc": (max 1-3 words, clothing/hat/accessory, necklace, shirt etc),
   "t": (max 3 words, title of the penguin),
-  "des": story about penguin,its origin, surrounding, legacy, fun facts, in 30-35 words,
+  "des": story about penguin,its origin, surrounding, legacy, fun facts, in 32-35 words,
   "ability": max 1-3 words, ability of the penguin
 
 Use Capital first letter for values and spaces between words. Background always connected with title and theme. Same for colors. Be bold and original. Mix elements. Return only JSON.`;
@@ -93,7 +93,7 @@ Title(t) and bg should be related to theme!
         Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
       },
       body: JSON.stringify({
-        model: "gpt-4",
+       model: "gpt-3.5-turbo",
         messages: [
           { role: "system", content: systemPrompt },
           { role: "user", content: userPrompt },
