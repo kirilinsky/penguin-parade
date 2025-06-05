@@ -43,16 +43,20 @@ const EvolutionModalComponent = ({
       </EvolutionModalGalleryScaleWrap>
 
       <EvolutionModalGallery>
-        {filteredImages.map((img: ImageItem) => (
-          <EvolutionModalGalleryItem
-            onClick={() => onImageClick(img)}
-            key={img.id}
-          >
-            <img width={"100%"} height={"100%"} src={img.imageUrl} />
-            <h4>{getLocalized(img.settings.t, locale)}</h4>
-            <GalleryItemScaleComponent scale={img.settings.rarity} />
-          </EvolutionModalGalleryItem>
-        ))}
+        {filteredImages.length ? (
+          filteredImages.map((img: ImageItem) => (
+            <EvolutionModalGalleryItem
+              onClick={() => onImageClick(img)}
+              key={img.id}
+            >
+              <img width={"100%"} height={"100%"} src={img.imageUrl} />
+              <h4>{getLocalized(img.settings.t, locale)}</h4>
+              <GalleryItemScaleComponent scale={img.settings.rarity} />
+            </EvolutionModalGalleryItem>
+          ))
+        ) : (
+          <p>{t("notEnoughCandidates")}</p>
+        )}
       </EvolutionModalGallery>
     </EvolutionModalContainer>
   );

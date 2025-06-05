@@ -77,7 +77,8 @@
     "evolutionModal": {
         "title": "Выбери пингвинов для пожертвования ради эволюции.",
         "currentRarity": "Текущая редкость:",
-        "expectingRarity": "Ожидаемая редкость:"
+        "expectingRarity": "Ожидаемая редкость:",
+        "notEnoughCandidates": "Кажется у тебя больше нет Пингвинов этого уровня"
     },
     "crystalsBlock": {
         "title": "Кристаллы",

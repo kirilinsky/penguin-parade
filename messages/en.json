@@ -75,7 +75,8 @@
     "evolutionModal": {
         "title": "Choose Penguins to donate for evolution.",
         "currentRarity": "Current rarity:",
-        "expectingRarity": "Expecting rarity:"
+        "expectingRarity": "Expecting rarity:",
+        "notEnoughCandidates": "Seems you don't have more Penguins this scale"
     },
     "galleryItemModal": {
         "avatarButton": "Set as Avatar",
