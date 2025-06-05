@@ -13,6 +13,7 @@ import { firestore } from "@/firebase";
 import { Timestamp } from "firebase/firestore";
 
 export async function GET(req: NextRequest) {
+  /* TODO add secure header to cron operator */
   try {
     const expeditionsRef = collection(firestore, "expeditions");
     const now = new Date();
