@@ -45,6 +45,8 @@ export type Expedition = {
   endedAt?: Timestamp;
   preset: ExpeditionPreset;
   totalPenguinsCount: number;
+  totalGoldEarned: number;
+  totalCrystals: number;
   participants: ExpeditionParticipantUser[];
 };
 
@@ -59,8 +61,6 @@ export type ExpeditionParticipantUser = {
   userId: string;
   penguinIds: string[];
   submittedAt: Date;
-  goldEarned?: number;
-  crystalType?: string;
 };
 
 export type ExpeditionPreset = {
@@ -70,6 +70,11 @@ export type ExpeditionPreset = {
   baseCrystalChance: number;
   perPenguinBonus: number;
   maxCrystalChance: number;
+};
+
+export type ExpeditionRewardResponse = {
+  rewardGold: number;
+  crystal: string | null;
 };
 
 export const expeditionPresets = {

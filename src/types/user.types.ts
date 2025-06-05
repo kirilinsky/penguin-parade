@@ -71,7 +71,6 @@ export type User = {
   imageIds: string[];
   lastGeneratedAt: Date;
   allowCraftAt: Date;
-  expeditions: UserExpeditionItem[];
 };
 
 export type UserExpeditionItem = {
@@ -82,6 +81,7 @@ export type UserExpeditionItem = {
   expeditionState: ExpeditionState;
   penguins: UserExpeditionItemPenguin[];
   joinedAt: Date;
+  claimedReward: boolean;
   claimedAt?: Date;
   finishedAt: Date;
   rewardGold: number;

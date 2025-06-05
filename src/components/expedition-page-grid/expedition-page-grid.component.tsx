@@ -7,7 +7,10 @@ import {
   ExpeditionPageTitle,
   ExpeditionContentColumn,
 } from "./expedition-page-grid.component.styled";
-import { Expedition } from "@/types/expeditions.types";
+import {
+  Expedition,
+  ExpeditionRewardResponse,
+} from "@/types/expeditions.types";
 import { getLocalized } from "@/helpers/get-localized/get-localized";
 import { useLocale } from "next-intl";
 import NeonButtonComponent from "../neon-button/neon-button.component";
@@ -21,26 +24,35 @@ import ExpeditionParticipants from "../expedition-participants/expedition-partic
 import ExpeditionStatusComponent from "../expedition-status/expedition-status.component";
 import ExpeditionParticipantModal from "../modals/expedition-participant-modal/expedition-participant-modal.component";
 import { getIdToken } from "@/helpers/get-token/get-token";
+import ExpeditionRewardModal from "../modals/expedition-reward-modal/expedition-reward-modal.component";
+import { getRewardCall } from "@/helpers/api/get-reward.call";
 
 const ExpeditionPageGridComponent = ({
   expedition,
+  refreshUser,
   user,
 }: {
   expedition: Expedition;
+  refreshUser: () => Promise<void>;
   user: User;
 }) => {
   const locale = useLocale();
 
-  const { penguins: penguinsParticipants, refetch } = useExpeditionPenguins(
-    expedition.id
-  );
+  const {
+    penguins: penguinsParticipants,
+    hasJoined,
+    claimedReward,
+    refetch,
+  } = useExpeditionPenguins(expedition.id);
   const [filteredImages, setFilteredImages] = useState<
     ImageItem[] | UserExpeditionItemPenguin[]
   >([]);
   const [participants, setParticipants] = useState<ImageItem[]>([]);
   const [showLibraryModal, setShowLibraryModal] = useState<boolean>(false);
-  const [hasJoined, setHasJoined] = useState(false);
+  const [showRewardModal, setShowRewardModal] = useState<boolean>(false);
   const [loading, setLoading] = useState(false);
+  const [rewardLoading, setRewardLoading] = useState(false);
+  const [result, setResult] = useState<ExpeditionRewardResponse | null>(null);
 
   const participantScale = useMemo(() => {
     return getPrevScale(expedition.level) as ScaleType;
@@ -97,7 +109,6 @@ const ExpeditionPageGridComponent = ({
     const data = await res.json();
     if (!res.ok) throw new Error(data.error || "Failed to join expedition");
     refetch();
-    setHasJoined(true);
     alert("success!");
 
     return data;
@@ -123,7 +134,7 @@ const ExpeditionPageGridComponent = ({
     if (!res.ok) throw new Error(data.error || "Failed to exit expedition");
 
     alert("you're unset!");
-    setHasJoined(false);
+
     refetch();
     return data;
   };
@@ -138,10 +149,27 @@ const ExpeditionPageGridComponent = ({
     );
   };
 
+  const getReward = async () => {
+    setRewardLoading(true);
+
+    try {
+      const token = await getIdToken();
+      const res = await getRewardCall({
+        expeditionId: expedition.id,
+        token,
+      });
+      setResult(res);
+      setShowRewardModal(true);
+    } catch (err: any) {
+      console.error(err.message, "get reward error");
+    } finally {
+      setRewardLoading(false);
+    }
+  };
+
   useEffect(() => {
     if (penguinsParticipants.length) {
       setFilteredImages(penguinsParticipants);
-      setHasJoined(true);
     } else {
       resetParticipants();
     }
@@ -162,6 +190,18 @@ const ExpeditionPageGridComponent = ({
           onClose={() => setShowLibraryModal(false)}
         />
       )}
+      {result && (
+        <ExpeditionRewardModal
+          onClose={() => {
+            setShowRewardModal(false);
+            refetch();
+            refreshUser();
+          }}
+          showModal={showRewardModal}
+          result={result}
+        />
+      )}
+
       <ExpeditionPageGrid>
         <ExpeditionPageImage>
           <img src={expedition.imageUrl} alt={expedition.settings.title.en} />
@@ -196,10 +236,17 @@ const ExpeditionPageGridComponent = ({
             }
           />
           {/* TODO add expected reward */}
+          {expedition.state === "ended" && (
+            <h2>
+              Congratulations! The expedition is over and you can get your award
+              and return your penguins
+            </h2>
+          )}
           <ExpeditionButtons>
             {!!participants.length && (
               <NeonButtonComponent
                 onClick={resetParticipants}
+                disabled={loading}
                 title="reset my participants"
               />
             )}
@@ -208,17 +255,27 @@ const ExpeditionPageGridComponent = ({
                 <NeonButtonComponent
                   onClick={unsetParticipation}
                   title="Unset participation"
+                  disabled={loading}
                 />
               ) : (
                 <NeonButtonComponent
                   onClick={confirmParticipant}
                   disabled={
+                    loading ||
                     participants.length < expedition.minParticipants ||
                     participants.length > expedition.maxParticipants
                   }
                   title="confirm participation"
                 />
               ))}
+            {expedition.state === "ended" && hasJoined && !claimedReward && (
+              <NeonButtonComponent
+                disabled={rewardLoading || loading}
+                onClick={getReward}
+                title={rewardLoading ? "loading reward..." : "Take my reward!"}
+              />
+            )}
+            {claimedReward && <span>reward claimed!</span>}
           </ExpeditionButtons>
         </ExpeditionContentColumn>
       </ExpeditionPageGrid>

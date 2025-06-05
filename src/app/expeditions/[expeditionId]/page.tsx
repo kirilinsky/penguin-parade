@@ -8,11 +8,17 @@ import React from "react";
 
 const ExpeditionDetails = () => {
   const { expeditionId } = useParams();
-  const { user } = useUserDetails();
+  const { user, refreshUser } = useUserDetails();
 
   const { expedition } = useGetExpeditions(expeditionId as string);
   if (!expedition || !user) return null;
-  return <ExpeditionPageGridComponent user={user} expedition={expedition} />;
+  return (
+    <ExpeditionPageGridComponent
+      user={user}
+      refreshUser={refreshUser}
+      expedition={expedition}
+    />
+  );
 };
 
 export default ExpeditionDetails;

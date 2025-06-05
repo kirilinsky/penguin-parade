@@ -149,6 +149,7 @@ export async function POST(req: NextRequest) {
       joinedAt: new Date(),
       finishedAt: expedition.activePhaseEndedAt.toDate?.() || new Date(),
       rewardGold: 0,
+      claimedReward: false,
       durationHours: expedition.durationHours,
     },
     { merge: true }

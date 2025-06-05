@@ -11,6 +11,9 @@ export const useExpeditionPenguins = (expeditionId?: string) => {
   const [error, setError] = useState<unknown>(null);
   const [trigger, setTrigger] = useState(0);
 
+  const [hasJoined, setHasJoined] = useState<boolean>(false);
+  const [claimedReward, setClaimedReward] = useState<boolean>(false);
+
   const refetch = useCallback(() => {
     setTrigger((prev) => prev + 1);
   }, []);
@@ -29,8 +32,12 @@ export const useExpeditionPenguins = (expeditionId?: string) => {
         if (snap.exists()) {
           const data = snap.data();
           setPenguins(data.penguins || []);
+          setHasJoined(true);
+          setClaimedReward(Boolean(data.claimedReward));
         } else {
           setPenguins([]);
+          setHasJoined(false);
+          setClaimedReward(false);
         }
       } catch (err) {
         console.error("Failed to fetch expedition penguins", err);
@@ -43,5 +50,12 @@ export const useExpeditionPenguins = (expeditionId?: string) => {
     fetchPenguins();
   }, [user?.id, expeditionId, trigger]);
 
-  return { penguins, loading, error, refetch };
+  return {
+    penguins,
+    loading,
+    error,
+    hasJoined,
+    claimedReward,
+    refetch,
+  };
 };
