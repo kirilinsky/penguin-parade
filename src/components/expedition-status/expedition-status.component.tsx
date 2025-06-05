@@ -38,6 +38,18 @@ const ExpeditionStatusComponent = ({
           text={expedition.totalPenguinsCount}
         />
       )}
+      {expedition.state === "ended" && expedition.totalGoldEarned && (
+        <ExpeditionStatusInfo
+          title="Total coins earned "
+          text={expedition.totalGoldEarned}
+        />
+      )}
+      {expedition.state === "ended" && expedition.totalCrystals && (
+        <ExpeditionStatusInfo
+          title="Total crystals earned "
+          text={expedition.totalCrystals}
+        />
+      )}
       {participantScale && (
         <ExpeditionStatusInfo
           title="Participants level"

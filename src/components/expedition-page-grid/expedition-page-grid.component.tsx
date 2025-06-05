@@ -93,7 +93,7 @@ const ExpeditionPageGridComponent = ({
     /* TODO use get id token in other functions */
     const imageIds = participants.map((img) => img.id);
     const token = await getIdToken();
-
+    setLoading(true);
     const res = await fetch("/api/expeditions/join-expedition", {
       method: "POST",
       headers: {
@@ -110,6 +110,7 @@ const ExpeditionPageGridComponent = ({
     if (!res.ok) throw new Error(data.error || "Failed to join expedition");
     refetch();
     alert("success!");
+    setLoading(false);
 
     return data;
   };
@@ -118,6 +119,7 @@ const ExpeditionPageGridComponent = ({
     if (!penguinsParticipants.length) return;
     /* TODO: add loader */
     const token = await getIdToken();
+    setLoading(true);
 
     const res = await fetch("/api/expeditions/exit-expedition", {
       method: "POST",
@@ -134,7 +136,7 @@ const ExpeditionPageGridComponent = ({
     if (!res.ok) throw new Error(data.error || "Failed to exit expedition");
 
     alert("you're unset!");
-
+    setLoading(false);
     refetch();
     return data;
   };
@@ -235,6 +237,18 @@ const ExpeditionPageGridComponent = ({
               expedition.minParticipants > images.length
             }
           />
+          {(penguinsParticipants.length || penguinsParticipants.length) && (
+            <div>
+              {" "}
+              {claimedReward && <span>Reward claimed!</span>}
+              {claimedReward ? "Claimed" : "Expect rewards"}:{" "}
+              {expedition.preset.goldPerPenguin *
+                (hasJoined
+                  ? penguinsParticipants.length
+                  : participants.length)}{" "}
+              coins
+            </div>
+          )}
           {/* TODO add expected reward */}
           {expedition.state === "ended" && (
             <h2>
@@ -243,7 +257,7 @@ const ExpeditionPageGridComponent = ({
             </h2>
           )}
           <ExpeditionButtons>
-            {!!participants.length && (
+            {!!participants.length && !hasJoined && (
               <NeonButtonComponent
                 onClick={resetParticipants}
                 disabled={loading}
@@ -275,7 +289,6 @@ const ExpeditionPageGridComponent = ({
                 title={rewardLoading ? "loading reward..." : "Take my reward!"}
               />
             )}
-            {claimedReward && <span>reward claimed!</span>}
           </ExpeditionButtons>
         </ExpeditionContentColumn>
       </ExpeditionPageGrid>

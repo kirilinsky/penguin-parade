@@ -7,7 +7,7 @@ import {
   ExpeditionGalleryItemSideContainer,
 } from "./expedition-gallery-item.component.styled";
 import { Expedition } from "@/types/expeditions.types";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { getLocalized } from "@/helpers/get-localized/get-localized";
 import Image from "next/image";
 import { format } from "date-fns";
@@ -18,6 +18,7 @@ import GalleryItemScaleComponent from "../gallery-item-scale/gallery-item-scale.
 
 const ExpeditionGalleryItem = ({ expedition }: { expedition: Expedition }) => {
   const locale = useLocale();
+  const t = useTranslations("expeditionItem");
   const borderColor = useMemo(() => {
     return getBaseColorByScale(expedition.level);
   }, [expedition.level]);
@@ -38,21 +39,32 @@ const ExpeditionGalleryItem = ({ expedition }: { expedition: Expedition }) => {
           </ExpeditionGalleryItemDes>
           <span>{getLocalized(expedition.settings.theme, locale)}</span>
           <span>
-            preparation started at:
+            {t("started")}{" "}
             {format(expedition.preparationStartedAt.toDate(), "dd.MM.yy")}
           </span>
           <span>
-            level: <GalleryItemScaleComponent scale={expedition.level} />
+            {t("expLevel")}{" "}
+            <GalleryItemScaleComponent scale={expedition.level} />
           </span>
-          <span>min penguins: {expedition.minParticipants}</span>
-          <span>max penguins: {expedition.maxParticipants}</span>
-          <span>Participants Count: {expedition.participantsCount}</span>
-          <span>Penguins Count: {expedition.totalPenguinsCount}</span>
-          <LinkStyled href={`/expeditions/${expedition.id}`}>Join</LinkStyled>
+          <span>
+            {t("minPing")} {expedition.minParticipants}
+          </span>
+          <span>
+            {t("maxPing")} {expedition.maxParticipants}
+          </span>
+          <span>
+            {t("participantsCount")} {expedition.participantsCount}
+          </span>
+          <span>
+            {t("penguinsCount")} {expedition.totalPenguinsCount}
+          </span>
+          <LinkStyled href={`/expeditions/${expedition.id}`}>
+            {t("detailsLink")}
+          </LinkStyled>
         </ExpeditionGalleryItemSide>
-      </ExpeditionGalleryItemSideContainer>{" "}
+      </ExpeditionGalleryItemSideContainer>
       <h4 style={{ textAlign: "center" }}>
-        {getLocalized(expedition.settings.goal, locale)}
+        {t("target")}  {getLocalized(expedition.settings.goal, locale)}
       </h4>
     </ExpeditionGalleryItemContainer>
   );

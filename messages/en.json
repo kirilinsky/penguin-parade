@@ -189,5 +189,15 @@
         "lastAuctionSellAt": "Last Auction Sell",
         "lastSkipToPayAt": "Last Skip Used",
         "totalSkipToPay": "Skips Used"
+    },
+    "expeditionItem": {
+        "started": "Started at",
+        "expLevel": "Expedition level:",
+        "minPing": "Minimum penguins:",
+        "maxPing": "Maximum penguins:",
+        "participantsCount": "Participants Count:",
+        "penguinsCount": "Penguins Count:",
+        "detailsLink": "Details",
+        "target": "Target:"
     }
 }

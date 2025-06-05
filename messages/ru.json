@@ -187,5 +187,15 @@
         "lastAuctionSellAt": "Последняя продажа на аукционе",
         "lastSkipToPayAt": "Последний пропуск за монеты",
         "totalSkipToPay": "Пропусков использовано"
+    },
+    "expeditionItem": {
+        "started": "Началась:",
+        "expLevel": "Уровень экспедиции:",
+        "minPing": "Минимум пингвинов:",
+        "maxPing": "Максимум пингвинов:",
+        "participantsCount": "Участников:",
+        "target": "Цель:",
+        "penguinsCount": "Пингвинов участвует:",
+        "detailsLink": "Подробнее"
     }
 }
