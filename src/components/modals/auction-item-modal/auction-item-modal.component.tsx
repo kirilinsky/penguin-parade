@@ -4,10 +4,10 @@ import { ImageItem } from "@/types/image.types";
 import React, { useMemo } from "react";
 
 import { Tektur } from "next/font/google";
-import GalleryItemScaleComponent from "../gallery-item-scale/gallery-item-scale.component";
 import { getBaseColorByScale } from "@/helpers/get-base-color-by-rarity/get-base-color-by-rarity";
-import NeonButtonComponent from "../neon-button/neon-button.component";
 
+import { useTranslations } from "next-intl";
+import { User } from "@/types/user.types";
 import {
   GalleryItemModalButtonsContainer,
   GalleryItemModalContainer,
@@ -15,10 +15,10 @@ import {
   GalleryItemModalImage,
   GalleryItemModalScale,
   GalleryItemModalTitle,
-} from "../gallery-item-modal/gallery-item-modal.component.styled";
-import GalleryItemModalStatistics from "../gallery-item-modal-statistics/gallery-item-modal-statistics.component";
-import { useTranslations } from "next-intl";
-import { User } from "@/types/user.types";
+} from "@/components/gallery-item-modal/gallery-item-modal.component.styled";
+import GalleryItemScaleComponent from "@/components/gallery-item-scale/gallery-item-scale.component";
+import GalleryItemModalStatistics from "@/components/gallery-item-modal-statistics/gallery-item-modal-statistics.component";
+import NeonButtonComponent from "@/components/neon-button/neon-button.component";
 
 const tektur = Tektur({
   subsets: ["latin"],
@@ -61,7 +61,6 @@ const AuctionItemModalComponent = ({
           <GalleryItemScaleComponent scale={img.settings.rarity} />
         </GalleryItemModalScale>
         <GalleryItemModalStatistics img={img} />
-
         {user && img.price && (
           <GalleryItemModalButtonsContainer>
             <NeonButtonComponent
