@@ -78,7 +78,7 @@ export const expeditionPresets = {
     durationBoost: 0.05,
     baseCrystalChance: 0.1,
     perPenguinBonus: 0.01,
-    maxCrystalChance: 0.2,
+    maxCrystalChance: 0.25,
   },
   epic: {
     allowedTypes: ["rare"],
