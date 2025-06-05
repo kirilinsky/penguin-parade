@@ -29,7 +29,7 @@ export async function GET(req: NextRequest) {
 
     for (const docSnap of toActivate) {
       const id = docSnap.id;
-      console.log(`[CRON] Expedition${id} set as ACTIVE`);
+      console.log(`[CRON] Expedition ${id} set as ACTIVE`);
       await updateDoc(doc(firestore, "expeditions", id), {
         state: "active",
         activeStartedAt: serverTimestamp(),
