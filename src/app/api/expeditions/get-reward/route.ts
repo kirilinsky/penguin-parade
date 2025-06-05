@@ -111,6 +111,7 @@ export async function POST(req: NextRequest) {
     });
 
     const updates: Record<string, any> = {
+      coins: increment(rewardGold),
       "statistics.expeditions": increment(1),
       "statistics.totalCoinsEarned": increment(rewardGold),
       "statistics.totalExpeditionParticipants": increment(penguinCount),
