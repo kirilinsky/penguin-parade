@@ -57,12 +57,12 @@ export default function Home() {
           <PageContentBlockStyled>
             <h2>Road map</h2>
             <ul>
-              <li>Expeditions (TBA)</li>
+              <li>System notifications</li>
+              <li>Expeditions </li>
+              <li>Gift functionality design update (notification)</li>
               <li>Notification toasts</li>
               <li>Anonymous home page, loggedIn limitations</li>
-              <li>Gift functionality design update (notification)</li>
               <li>NFT Mint preparation</li>
-              <li>Images avatar optimization</li>
               <li>Friends page design update</li>
               <li>Friends Updtes(news)</li>
               <li>Announcements</li>
