@@ -17,7 +17,7 @@ export async function GET(req: NextRequest) {
   try {
     const expeditionsRef = collection(firestore, "expeditions");
     const now = new Date();
-
+    /* TODO end expeditions with 0 participants */
     const preparingSnap = await getDocs(
       query(expeditionsRef, where("state", "==", "preparing"))
     );
