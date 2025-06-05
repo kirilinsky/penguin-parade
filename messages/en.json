@@ -72,6 +72,11 @@
         "inExpedition": "In expedition now",
         "checkExpedition": "Check"
     },
+    "evolutionModal": {
+        "title": "Choose Penguins to donate for evolution.",
+        "currentRarity": "Current rarity:",
+        "expectingRarity": "Expecting rarity:"
+    },
     "galleryItemModal": {
         "avatarButton": "Set as Avatar",
         "giftButton": "Gift to friend",

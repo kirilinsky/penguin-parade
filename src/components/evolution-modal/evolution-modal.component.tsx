@@ -8,6 +8,8 @@ import {
   EvolutionModalGalleryScaleWrap,
 } from "./evolution-modal.component.styled";
 import { ScaleType } from "@/types/scale.types";
+import { useLocale, useTranslations } from "next-intl";
+import { getLocalized } from "@/helpers/get-localized/get-localized";
 
 const EvolutionModalComponent = ({
   currentRarityScale,
@@ -20,19 +22,21 @@ const EvolutionModalComponent = ({
   filteredImages: ImageItem[];
   onImageClick: (img: ImageItem) => void;
 }) => {
+  const locale = useLocale();
+  const t = useTranslations("evolutionModal");
   return (
     <EvolutionModalContainer>
-      <h2>Choose Candidate for evolution. </h2>
+      <h2>{t("title")}</h2>
       <EvolutionModalGalleryScaleWrap>
         {currentRarityScale && (
           <>
-            <span> Current rarity: </span>
+            <span>{t("currentRarity")}</span>
             <GalleryItemScaleComponent scale={currentRarityScale} />
           </>
         )}
         {expectingRarityScale && (
           <>
-            <span> Expecting rarity: </span>
+            <span>{t("expectingRarity")}</span>
             <GalleryItemScaleComponent scale={expectingRarityScale} />
           </>
         )}
@@ -45,7 +49,7 @@ const EvolutionModalComponent = ({
             key={img.id}
           >
             <img width={"100%"} height={"100%"} src={img.imageUrl} />
-            <h4>{img.title}</h4>
+            <h4>{getLocalized(img.settings.t, locale)}</h4>
             <GalleryItemScaleComponent scale={img.settings.rarity} />
           </EvolutionModalGalleryItem>
         ))}

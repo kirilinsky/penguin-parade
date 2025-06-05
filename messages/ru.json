@@ -74,6 +74,11 @@
         "sendButton": "Отправить пингвина для",
         "cancelButton": "Отмена"
     },
+    "evolutionModal": {
+        "title": "Выбери пингвинов для пожертвования ради эволюции.",
+        "currentRarity": "Текущая редкость:",
+        "expectingRarity": "Ожидаемая редкость:"
+    },
     "crystalsBlock": {
         "title": "Кристаллы",
         "noCrystalsTitle": "У тебя пока нет кристаллов...",
