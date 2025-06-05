@@ -38,10 +38,17 @@ const ExpeditionGalleryItem = ({ expedition }: { expedition: Expedition }) => {
             {getLocalized(expedition.settings.description, locale)}
           </ExpeditionGalleryItemDes>
           <span>{getLocalized(expedition.settings.theme, locale)}</span>
-          <span>
-            {t("started")}{" "}
-            {format(expedition.preparationStartedAt.toDate(), "dd.MM.yy")}
-          </span>
+          {expedition.state === "ended" ? (
+            <span>
+              {t("ended")}{" "}
+              {format(expedition.activePhaseEndedAt.toDate(), "dd.MM.yy")}
+            </span>
+          ) : (
+            <span>
+              {t("started")}{" "}
+              {format(expedition.preparationStartedAt.toDate(), "dd.MM.yy")}
+            </span>
+          )}
           <span>
             {t("expLevel")}{" "}
             <GalleryItemScaleComponent scale={expedition.level} />
@@ -64,7 +71,7 @@ const ExpeditionGalleryItem = ({ expedition }: { expedition: Expedition }) => {
         </ExpeditionGalleryItemSide>
       </ExpeditionGalleryItemSideContainer>
       <h4 style={{ textAlign: "center" }}>
-        {t("target")}  {getLocalized(expedition.settings.goal, locale)}
+        {t("target")} {getLocalized(expedition.settings.goal, locale)}
       </h4>
     </ExpeditionGalleryItemContainer>
   );

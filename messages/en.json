@@ -192,6 +192,7 @@
     },
     "expeditionItem": {
         "started": "Started at",
+        "ended": "Ended at",
         "expLevel": "Expedition level:",
         "minPing": "Minimum penguins:",
         "maxPing": "Maximum penguins:",

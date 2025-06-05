@@ -190,12 +190,13 @@
     },
     "expeditionItem": {
         "started": "Началась:",
+        "ended": "Закончилась:",
         "expLevel": "Уровень экспедиции:",
         "minPing": "Минимум пингвинов:",
         "maxPing": "Максимум пингвинов:",
         "participantsCount": "Участников:",
         "target": "Цель:",
-        "penguinsCount": "Пингвинов участвует:",
+        "penguinsCount": "Пингвинов участников:",
         "detailsLink": "Подробнее"
     }
 }
