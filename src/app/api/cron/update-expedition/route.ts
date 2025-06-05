@@ -32,7 +32,6 @@ export async function GET(req: NextRequest) {
       console.log(`[CRON] Expedition ${id} set as ACTIVE`);
       await updateDoc(doc(firestore, "expeditions", id), {
         state: "active",
-        activeStartedAt: serverTimestamp(),
       });
     }
 

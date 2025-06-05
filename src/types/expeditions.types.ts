@@ -42,6 +42,7 @@ export type Expedition = {
   preparationEndedAt: Timestamp;
   activePhaseStartedAt: Timestamp;
   activePhaseEndedAt: Timestamp;
+  endedAt?: Timestamp;
   preset: ExpeditionPreset;
   totalPenguinsCount: number;
   participants: ExpeditionParticipantUser[];
