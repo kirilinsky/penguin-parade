@@ -1,13 +1,18 @@
 import styled from "styled-components";
 
+export const ExpeditionParticipantsWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  outline: 1px solid turquoise;
+  border-radius: 4px;
+  padding: 0.5em;
+`;
 export const ExpeditionParticipantsStyled = styled.div`
   grid-area: part;
   font-size: 0.9rem;
   align-self: stretch;
-  outline: 1px solid turquoise;
-  border-radius: 4px;
-  display: flex;
 
+  display: flex; 
   gap: 1em;
   flex-wrap: wrap;
   padding: 0.5em;

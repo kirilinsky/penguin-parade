@@ -195,6 +195,7 @@ const ExpeditionPageGridComponent = ({
               expedition.minParticipants > images.length
             }
           />
+          {/* TODO add expected reward */}
           <ExpeditionButtons>
             {!!participants.length && (
               <NeonButtonComponent
@@ -202,21 +203,22 @@ const ExpeditionPageGridComponent = ({
                 title="reset my participants"
               />
             )}
-            {hasJoined ? (
-              <NeonButtonComponent
-                onClick={unsetParticipation}
-                title="Unset participation"
-              />
-            ) : (
-              <NeonButtonComponent
-                onClick={confirmParticipant}
-                disabled={
-                  participants.length < expedition.minParticipants ||
-                  participants.length > expedition.maxParticipants
-                }
-                title="confirm participation"
-              />
-            )}
+            {expedition.state === "preparing" &&
+              (hasJoined ? (
+                <NeonButtonComponent
+                  onClick={unsetParticipation}
+                  title="Unset participation"
+                />
+              ) : (
+                <NeonButtonComponent
+                  onClick={confirmParticipant}
+                  disabled={
+                    participants.length < expedition.minParticipants ||
+                    participants.length > expedition.maxParticipants
+                  }
+                  title="confirm participation"
+                />
+              ))}
           </ExpeditionButtons>
         </ExpeditionContentColumn>
       </ExpeditionPageGrid>
