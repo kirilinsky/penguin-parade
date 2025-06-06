@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const GalleryFilterComponentContainer = styled.div`
   height: 35px;
-  margin-bottom: 26px;
+  margin-block: 26px;
   padding: 20px;
   display: flex;
   align-items: center;

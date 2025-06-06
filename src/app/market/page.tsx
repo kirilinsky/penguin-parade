@@ -114,7 +114,7 @@ const AuctionPage = () => {
           isLoading={isLoading}
         />
       </Rodal>
-      <h2>Market</h2>
+      <h2>Market - {imagesFiltered.length} offers</h2>
       {images.length && (
         <GalleryFilterComponent
           isAuction

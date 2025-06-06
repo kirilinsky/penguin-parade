@@ -4,6 +4,7 @@ import { loggedInAtom } from "@/atoms/user/user.atom";
 import CrystalsBlock from "@/components/crystals-block/crystals-block.component";
 import LastCraftedBlockComponent from "@/components/last-crafted-block/last-crafted-block.component";
 import { LinkStyled } from "@/components/link/link.component.styled";
+import NotifictionsBlock from "@/components/notifications-block/notifictions-block.component";
 import { PageContentBlockStyled } from "@/components/page-content-block/page-content-block.component.styled";
 import { PageContentWrapperComponent } from "@/components/page-content-wrapper/page-content-wrapper.component";
 import RandomAuctionBlockComponent from "@/components/random-auction-block/random-auction-block.component";
@@ -48,9 +49,7 @@ export default function Home() {
             </LinkStyled>
           </PageContentBlockStyled>
           <CrystalsBlock />
-          <PageContentBlockStyled>
-            <h2>Notifications</h2>
-          </PageContentBlockStyled>
+          <NotifictionsBlock />
           <LastCraftedBlockComponent />
           <TotalCountBlockComponent />
           <RandomAuctionBlockComponent />
