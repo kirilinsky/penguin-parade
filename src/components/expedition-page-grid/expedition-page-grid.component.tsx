@@ -173,9 +173,10 @@ const ExpeditionPageGridComponent = ({
     if (penguinsParticipants.length) {
       setFilteredImages(penguinsParticipants);
     } else {
+      setFilteredImages(images);
       resetParticipants();
     }
-  }, [penguinsParticipants]);
+  }, [images, penguinsParticipants]);
 
   const resetParticipants = () => {
     setParticipants([]);
