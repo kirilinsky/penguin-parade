@@ -44,7 +44,6 @@ const CountDownPage = () => {
   const [result, setResult] = useState<GenerationResult | null>(null);
   const { crystals, loading: crystalsLoading } = useGetUserCrystals();
   const [crystalApplied, setCrystalApplied] = useState<ScaleType | null>(null);
-  const [shareLink, setShareLink] = useState<string | null>(null);
 
   const localeMap: Record<string, Locale> = {
     en: enUS,
