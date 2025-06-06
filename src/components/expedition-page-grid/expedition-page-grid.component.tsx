@@ -184,12 +184,6 @@ const ExpeditionPageGridComponent = ({
 
   const hasEnoughImages = images.length >= expedition.minParticipants;
   const hasSpaceLeft = participants.length < expedition.maxParticipants;
-  console.log(hasJoined, "hasJoined");
-  console.log(imagesLoading, "imagesLoading");
-  console.log(loading, "loading");
-  console.log(!filteredImages.length, " !filteredImages.length");
-  console.log(!hasEnoughImages, "!hasEnoughImages");
-  console.log(!hasSpaceLeft, "!hasSpaceLeft");
 
   return (
     <>
@@ -244,7 +238,6 @@ const ExpeditionPageGridComponent = ({
                 hasJoined ||
                 imagesLoading ||
                 loading ||
-                !filteredImages.length ||
                 !hasSpaceLeft ||
                 !hasEnoughImages
               }

@@ -61,8 +61,18 @@ export const ExpeditionPageTitle = styled.div`
 `;
 
 export const ExpeditionPageDescription = styled.div`
-  font-size: 19px;
-  line-height: 1.8;
+  font-size: 18px;
+  line-height: 1.7;
+  color: #d6f1ff;
+  background: rgba(0, 32, 45, 0.3);
+  padding: 1.2em;
+  border-radius: 8px;
+  box-shadow: inset 0 0 8px #0ff4ff55, 0 0 5px #00bcd4;
+  text-align: justify;
+  white-space: pre-line;
+  p {
+    margin: 0;
+  }
 `;
 
 export const ExpeditionButtons = styled.div`
