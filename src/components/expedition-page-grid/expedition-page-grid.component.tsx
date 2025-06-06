@@ -219,24 +219,28 @@ const ExpeditionPageGridComponent = ({
           <ExpeditionPageDescription>
             <p>{getLocalized(expedition.settings.description, locale)}</p>
           </ExpeditionPageDescription>
-          <ExpeditionParticipants
-            loading={loading}
-            hasJoined={hasJoined}
-            penguinsParticipants={
-              hasJoined ? penguinsParticipants : participants
-            }
-            onRemove={removeParticipant}
-            onAdd={() => setShowLibraryModal(true)}
-            participantScale={participantScale}
-            addingDisabled={
-              hasJoined ||
-              !filteredImages.length ||
-              imagesLoading ||
-              loading ||
-              expedition.maxParticipants === participants.length ||
-              expedition.minParticipants > images.length
-            }
-          />
+          {expedition.minParticipants > images.length ? (
+            "Sorry, you don't have enough Penguins to join"
+          ) : (
+            <ExpeditionParticipants
+              loading={loading}
+              hasJoined={hasJoined}
+              penguinsParticipants={
+                hasJoined ? penguinsParticipants : participants
+              }
+              onRemove={removeParticipant}
+              onAdd={() => setShowLibraryModal(true)}
+              participantScale={participantScale}
+              addingDisabled={
+                hasJoined ||
+                !filteredImages.length ||
+                imagesLoading ||
+                loading ||
+                expedition.maxParticipants === participants.length ||
+                expedition.minParticipants > images.length
+              }
+            />
+          )}
           {(!!penguinsParticipants.length || !!participants.length) && (
             <div>
               {claimedReward && <span>Reward claimed!</span>}
