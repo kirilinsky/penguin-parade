@@ -41,13 +41,7 @@ const CountDownPage = () => {
   const [loading, setLoading] = useState(false);
   const [loadingPayToSkip, setLoadingPayToSkip] = useState(false);
   const [leftTime, setLeftTime] = useState<string>("");
-  const [result, setResult] = useState<GenerationResult | null>({
-    downloadURL:
-      "https://animals.pibig.info/uploads/posts/2023-04/1680622087_animals-pibig-info-p-krisa-s-sigaretoi-zhivotnie-vkontakte-3.jpg",
-    title: "title",
-    rarity: "common",
-    id: "id22222",
-  });
+  const [result, setResult] = useState<GenerationResult | null>(null);
   const { crystals, loading: crystalsLoading } = useGetUserCrystals();
   const [crystalApplied, setCrystalApplied] = useState<ScaleType | null>(null);
   const [shareLink, setShareLink] = useState<string | null>(null);
