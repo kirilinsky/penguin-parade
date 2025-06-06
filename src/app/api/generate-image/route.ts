@@ -76,15 +76,14 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "User not found" }, { status: 404 });
   }
 
-  if (userData.craftInProgress) {
-    await updateDoc(userRef, {
-      craftInProgress: true,
-    });
+  if (userData.craftInProgress || userData.generationId) {
     return NextResponse.json(
       { error: "Generation already in progress" },
       { status: 429 }
     );
   }
+
+  const generationId = uuidv4();
 
   let evolutionMode = false;
   let crystalMode = false;
@@ -113,6 +112,7 @@ export async function POST(req: Request) {
 
   await updateDoc(userRef, {
     craftInProgress: true,
+    generationId,
   });
 
   try {
@@ -239,11 +239,10 @@ export async function POST(req: Request) {
       }
     );
 
-    //update user
-    const userRef = doc(firestore, `users/${uid}`);
     const updates: Record<string, any> = {
       imageIds: arrayUnion(imageDoc.id),
       craftInProgress: false,
+      generationId: null,
     };
     const DAY_MS = 24 * 60 * 60 * 1000;
     if (crystalMode && crystal) {
@@ -276,6 +275,10 @@ export async function POST(req: Request) {
     return NextResponse.json(responsePayload);
   } catch (err) {
     console.error("Image generation failed:", err);
+    await updateDoc(userRef, {
+      craftInProgress: false,
+      generationId: null,
+    });
     return NextResponse.json(
       { error: "Internal server error", details: String(err) },
       { status: 500 }

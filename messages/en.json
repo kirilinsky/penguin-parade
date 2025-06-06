@@ -127,7 +127,10 @@
         "welcomeNew": "Welcome aboard buddy!",
         "myLibraryLink": "Go to my Library",
         "verifyEmailAlert1": "Please verify your email",
-        "verifyEmailAlert2": "before crafting a penguin."
+        "verifyEmailAlert2": "before generating a penguin.",
+        "generationInProgress": "Generation is already in progress. Please wait for it to complete.",
+        "serverError": "The server took too long to respond. Please try again later.",
+        "unexpectedError": "An unexpected error occurred. Please try again."
     },
     "loginPage": {
         "title": "Login Page",
@@ -193,7 +196,7 @@
     "expeditionItem": {
         "started": "Started at",
         "ended": "Ended at",
-        "theme": "Theme:",
+        "theme": "Тема:",
         "expLevel": "Expedition level:",
         "minPing": "Minimum penguins:",
         "maxPing": "Maximum penguins:",

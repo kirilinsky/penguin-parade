@@ -87,10 +87,12 @@ const CountDownPage = () => {
       return;
     }
 
-    const token = await userCred.getIdToken(true);
+    if (loading) return;
 
     setLoading(true);
+
     try {
+      const token = await userCred.getIdToken(true);
       const res = await fetch("/api/generate-image", {
         method: "POST",
         body: JSON.stringify({ crystal: crystalApplied }),
@@ -102,6 +104,14 @@ const CountDownPage = () => {
 
       const data: GenerateImageReposne = await res.json();
 
+      if (res.status === 429) {
+        alert(t("generationInProgress"));
+      }
+
+      if (res.status === 500) {
+        alert(t("serverError"));
+      }
+
       if (data.success) {
         setCanCraft(false);
         setResult({
@@ -110,16 +120,12 @@ const CountDownPage = () => {
           rarity: data.settings.rarity,
           crystal: data.crystal,
         });
-        /*   setShareLink(
-          encodeURIComponent(
-            `${location.origin}/share/${user.id}/${data.downloadURL}`
-          )
-        ); */
       } else {
         console.error("Generation failed:", data);
       }
     } catch (err) {
       console.error("Error during generation:", err);
+      alert(t("unexpectedError"));
     } finally {
       setLoading(false);
       checkUserStatus();
