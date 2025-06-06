@@ -4,14 +4,11 @@ import { doc, getDoc } from "firebase/firestore";
 import Image from "next/image";
 import { Metadata } from "next";
 
-type Props = {
-  params: {
-    userId: string;
-    picture: string;
-  };
-};
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: { userId: string; picture: string };
+}): Promise<Metadata> {
   const { userId, picture } = params;
   const userSnap = await getDoc(doc(firestore, "users", userId));
   const penguinSnap = await getDoc(doc(firestore, "images", picture));
@@ -38,7 +35,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function SharePage({ params }: Props) {
+export default async function SharePage({
+  params,
+}: {
+  params: { userId: string; picture: string };
+}) {
   const { userId, picture } = params;
 
   const userSnap = await getDoc(doc(firestore, "users", userId));
