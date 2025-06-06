@@ -223,8 +223,7 @@ const ExpeditionPageGridComponent = ({
           <ExpeditionPageDescription>
             <p>{getLocalized(expedition.settings.description, locale)}</p>
           </ExpeditionPageDescription>
-          {expedition.minParticipants > images.length ||
-          expedition.minParticipants > filteredImages.length ? (
+          {!hasEnoughImages ? (
             "Sorry, you don't have enough Penguins to join"
           ) : (
             <ExpeditionParticipants
