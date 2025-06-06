@@ -4,16 +4,7 @@ import { doc, getDoc } from "firebase/firestore";
 import Image from "next/image";
 import type { Metadata } from "next";
 
-type SharePageParams = {
-  params: {
-    userId: string;
-    picture: string;
-  };
-};
-
-export async function generateMetadata({
-  params,
-}: SharePageParams): Promise<Metadata> {
+export async function generateMetadata({ params }: any): Promise<Metadata> {
   const { userId, picture } = params;
 
   const userSnap = await getDoc(doc(firestore, "users", userId));
@@ -49,7 +40,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function SharePage({ params }: SharePageParams) {
+export default async function SharePage({ params }: any) {
   const { userId, picture } = params;
 
   const userSnap = await getDoc(doc(firestore, "users", userId));
@@ -75,8 +66,8 @@ export default async function SharePage({ params }: SharePageParams) {
       <h3>{penguin.settings?.t?.en}</h3>
       <Image
         src={penguin.imageUrl}
-        width={512}
-        height={512}
+        width={511}
+        height={511}
         alt="Penguin"
         style={{ marginTop: "1em", borderRadius: "1em" }}
       />
