@@ -1,108 +1,74 @@
-import React from "react";
-
-const Page = () => {
-  return <div>soon</div>;
-};
-
-export default Page;
-
-/* import { doc, getDoc } from "firebase/firestore";
+import { notFound } from "next/navigation";
 import { firestore } from "@/firebase";
-import Link from "next/link";
- import { ImageItem } from "@/types/image.types";
-import { getBaseColorByScale } from "@/helpers/get-base-color-by-rarity/get-base-color-by-rarity";
-
+import { doc, getDoc } from "firebase/firestore";
+import Image from "next/image";
 import { Metadata } from "next";
 
-export async function generateMetadata(context: {
-  params: { userId: string; picture: string };
-}): Promise<Metadata> {
-  const { userId, picture } = context.params;
+type Props = {
+  params: {
+    userId: string;
+    picture: string;
+  };
+};
 
-  const ref = doc(firestore, `users/${userId}/images/${picture}`);
-  const snap = await getDoc(ref);
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { userId, picture } = params;
+  const userSnap = await getDoc(doc(firestore, "users", userId));
+  const penguinSnap = await getDoc(doc(firestore, "images", picture));
 
-  if (!snap.exists()) {
-    return {
-      title: "Penguin not found",
-      description: "Oops! Nothing to see here.",
-    };
+  if (!userSnap.exists() || !penguinSnap.exists()) {
+    return { title: "Not Found" };
   }
 
-  const data = snap.data() as ImageItem;
+  const user = userSnap.data();
+  const penguin = penguinSnap.data();
+
+  if (penguin.ownerId !== userId) {
+    return { title: "Not Found" };
+  }
 
   return {
-    title: `Look at my ${data.title}`,
-    description: `A ${data.settings.rarity} penguin from Penguin Parade!`,
+    title: `${user.username}'s Penguin`,
+    description: penguin.settings?.t?.en ?? "Check out this penguin!",
     openGraph: {
-      title: `Look at my ${data.title}`,
-      description: `A ${data.settings.rarity} penguin from Penguin Parade!`,
-      images: [
-        {
-          url: data.imageUrl,
-          width: 600,
-          height: 600,
-          alt: data.title,
-        },
-      ],
-      type: "website",
-      url: `https://yourdomain.com/share/${userId}/${picture}`,
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: `Look at my ${data.title}`,
-      description: `A ${data.settings.rarity} penguin from Penguin Parade!`,
-      images: [data.imageUrl],
+      title: `${user.username}'s Penguin`,
+      images: [penguin.imageUrl],
+      description: penguin.settings?.t?.en ?? "Penguin from Parade!",
     },
   };
 }
- 
 
-export default async function SharePage({ params }: any) {
+export default async function SharePage({ params }: Props) {
   const { userId, picture } = params;
-  console.log(picture,'params params',userId);
-  
 
-  const ref = doc(firestore, `users/${userId}/images/${picture}`);
-  const snap = await getDoc(ref);
+  const userSnap = await getDoc(doc(firestore, "users", userId));
+  const penguinSnap = await getDoc(doc(firestore, "images", picture));
 
-  if (!snap.exists()) {
-    return <div>Penguin not found 🐧</div>;
-  }
+  if (!userSnap.exists() || !penguinSnap.exists()) return notFound();
 
-  const data = snap.data() as ImageItem;
-  const color = getBaseColorByScale(data.settings.rarity);
+  const user = userSnap.data();
+  const penguin = penguinSnap.data();
+
+  if (penguin.ownerId !== userId) return notFound();
 
   return (
-    <div style={{ textAlign: "center", padding: "2rem" }}>
-      <h1 className={orbitron.className}>Look at my new {data.title}</h1>
-      <img
-        width={300}
-        height={300}
-        src={data.imageUrl}
-        alt={data.title}
-        style={{
-          margin: "15px",
-          maxWidth: "100%",
-          borderRadius: "15px",
-          border: `1px solid ${color}`,
-          boxShadow: `0 0 7px ${color}`,
-        }}
+    <main style={{ padding: "2em", textAlign: "center" }}>
+      <Image
+        src={user.avatar}
+        width={100}
+        height={100}
+        alt="User avatar"
+        style={{ borderRadius: "50%" }}
       />
-
-      <p>
-        Rarity:{" "}
-        <span className={orbitron.className} style={{ color: color }}>
-          {data.settings.rarity}
-        </span>
-      </p>
-      <p>
-        Generated in{" "}
-        <Link href={"/"}>
-          <button>Penguin Parade</button>{" "}
-        </Link>
-      </p>
-    </div>
+      <h2>{user.username}</h2>
+      <h3>{penguin.settings?.t?.en}</h3>
+      <Image
+        src={penguin.imageUrl}
+        width={512}
+        height={512}
+        alt="Penguin"
+        style={{ marginTop: "1em", borderRadius: "1em" }}
+      />
+    </main>
   );
 }
- */

@@ -25,6 +25,8 @@ import AvatarComponent from "../avatar-component/avatar-component";
 import { useLocale, useTranslations } from "next-intl";
 import { getLocalized } from "@/helpers/get-localized/get-localized";
 import { User } from "@/types/user.types";
+import Link from "next/link";
+import { TelegramShareButton } from "../tg-share-button/tg-share-button";
 
 const tektur = Tektur({
   subsets: ["latin"],
@@ -83,6 +85,7 @@ const GalleryItemModalComponent = ({
         <GalleryItemModalScale>
           <GalleryItemScaleComponent scale={img.settings.rarity} />
         </GalleryItemModalScale>
+
         <GalleryItemModalAccordion $expand={!giftMode}>
           <GalleryItemModalStatistics img={img} />
           {user && isMyPage && !img.inExpedition && (
@@ -104,6 +107,12 @@ const GalleryItemModalComponent = ({
                   disabled={loading}
                   onClick={() => onSellImage(img.id)}
                   title={`${t("sellButton")} ${sell} P$`}
+                />
+              )}
+              {user && (
+                <TelegramShareButton
+                  url={`${process.env.NEXT_PUBLIC_BASE_URL}/share/${user.id}/${img.id}`}
+                  text={`🐧 Check out this penguin by ${user.username}!`}
                 />
               )}
             </GalleryItemModalButtonsContainer>
@@ -155,14 +164,13 @@ const GalleryItemModalComponent = ({
                   disabled={loading}
                 />
               )}
-
               <NeonButtonComponent
                 onClick={() => {
                   setGiftMode(false);
                   setFriendRecipient(null);
                 }}
                 title={t("cancelButton")}
-              ></NeonButtonComponent>
+              ></NeonButtonComponent>{" "}
             </GalleryItemModalButtonsContainer>
           </>
         )}
