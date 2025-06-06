@@ -16,6 +16,8 @@ const NotifictionsBlock = () => {
   const { notifications, hasUnread, loading } = useGetNotifications();
   const [open, setOpen] = useState(false);
   const toggle = (notification: UserNotification) => {
+    console.log(notification, "notification");
+
     setOpen(!open);
   };
 

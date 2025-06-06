@@ -21,8 +21,8 @@ export const useGetNotifications = () => {
         const q = query(ref, orderBy("createdAt", "desc"));
         const snapshot = await getDocs(q);
         const notifs = snapshot.docs.map((doc) => ({
-          id: doc.id,
           ...(doc.data() as UserNotification),
+          id: doc.id,
         }));
         setNotifications(notifs);
         setHasUnread(notifs.some((notif) => !notif.read));
