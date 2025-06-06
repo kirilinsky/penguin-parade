@@ -182,6 +182,9 @@ const ExpeditionPageGridComponent = ({
     setFilteredImages(images);
   };
 
+  const hasEnoughImages = images.length >= expedition.minParticipants;
+  const hasSpaceLeft = participants.length < expedition.maxParticipants;
+
   return (
     <>
       {isImageItemArray(filteredImages) && (
@@ -233,11 +236,11 @@ const ExpeditionPageGridComponent = ({
               participantScale={participantScale}
               addingDisabled={
                 hasJoined ||
-                !filteredImages.length ||
                 imagesLoading ||
                 loading ||
-                expedition.maxParticipants === participants.length ||
-                expedition.minParticipants > images.length
+                !filteredImages.length ||
+                !hasSpaceLeft ||
+                !hasEnoughImages
               }
             />
           )}
