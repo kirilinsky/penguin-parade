@@ -23,9 +23,11 @@ import CrystalsSelector from "@/components/crystals-selector/crystals-selector.c
 import { ScaleType } from "@/types/scale.types";
 import { getBaseColorByScale } from "@/helpers/get-base-color-by-rarity/get-base-color-by-rarity";
 import GalleryItemScaleComponent from "@/components/gallery-item-scale/gallery-item-scale.component";
+import { TelegramShareButton } from "@/components/tg-share-button/tg-share-button";
 
 type GenerationResult = {
   downloadURL: string;
+  id: string;
   title: string;
   rarity: string;
   crystal?: ScaleType;
@@ -39,7 +41,13 @@ const CountDownPage = () => {
   const [loading, setLoading] = useState(false);
   const [loadingPayToSkip, setLoadingPayToSkip] = useState(false);
   const [leftTime, setLeftTime] = useState<string>("");
-  const [result, setResult] = useState<GenerationResult | null>(null);
+  const [result, setResult] = useState<GenerationResult | null>({
+    downloadURL:
+      "https://animals.pibig.info/uploads/posts/2023-04/1680622087_animals-pibig-info-p-krisa-s-sigaretoi-zhivotnie-vkontakte-3.jpg",
+    title: "title",
+    rarity: "common",
+    id: "id22222",
+  });
   const { crystals, loading: crystalsLoading } = useGetUserCrystals();
   const [crystalApplied, setCrystalApplied] = useState<ScaleType | null>(null);
   const [shareLink, setShareLink] = useState<string | null>(null);
@@ -115,6 +123,7 @@ const CountDownPage = () => {
       if (data.success) {
         setCanCraft(false);
         setResult({
+          id: data.id,
           downloadURL: data.downloadURL,
           title: data.title,
           rarity: data.settings.rarity,
@@ -251,8 +260,8 @@ const CountDownPage = () => {
               src={result.downloadURL}
               alt={result.title}
               style={{
-                width: 255,
-                borderRadius: 10,
+                width: 260,
+                borderRadius: "1em",
                 padding: 4,
                 margin: 10,
                 border: `1px solid ${getBaseColorByScale(result.rarity)}`,
@@ -266,16 +275,12 @@ const CountDownPage = () => {
                 {t("myLibraryLink")}
               </LinkStyled>
             )}
-            {/* TODO: add share functionality  */}
-            {/*   <NeonButtonComponent title="Share this (TBA)" /> */}
-            {/*   <a
-              target="_blank"
-              href={`https://t.me/share/url?url=${shareLink}&text=${encodeURIComponent(
-                `Look at my new penguin: ${result.title} 🐧\nCrafted on Penguin Parade!`
-              )}`}
-            >
-              
-            </a> */}
+            {user && (
+              <TelegramShareButton
+                url={`${process.env.NEXT_PUBLIC_BASE_URL}/share/${user.id}/${result.id}`}
+                text={`🐧 ${t("shareLink")} ${user.username}!`}
+              />
+            )}
           </PageContentBlockFlex>
         )}
       </PageContentBlockStyled>

@@ -3,44 +3,52 @@ import styled from "styled-components";
 export const NeonButtonStyled = styled.button`
   position: relative;
   z-index: 1;
-  background: #1c031a;
-  border: 2.4px solid;
-  border-color: #1fa52a;
-  border-radius: 0.75rem;
-  color: #1da426;
-  padding: 0.75rem 1rem;
-  text-decoration: none;
-  transition: 250ms ease-in-out;
-  transition-property: all;
+  background: #0a0a0a;
+  border: 1.8px solid #0ff;
+  border-radius: 0.5rem;
+  color: #0ff;
+  padding: 0.65rem 1.1rem;
+  font-family: "Tektur", sans-serif;
+  font-weight: 500;
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: all 0.2s ease-in-out;
+
   &:not(:disabled) span {
-    filter: drop-shadow(0 0 1px currentcolor);
+    text-shadow: 0 0 6px #0ff;
   }
 
-  &:after:not(:disabled) {
+  &::after {
     content: "";
     position: absolute;
-    z-index: -1;
     inset: 0;
-    opacity: 0.6;
     border-radius: inherit;
-    box-shadow: 0 0 1em 0.4em #20cd85;
-    transition: 250ms ease-in-out;
-    transition-property: opacity;
+    box-shadow: 0 0 0.75em #0ff;
+    opacity: 0.35;
+    z-index: -1;
+    transition: opacity 0.2s ease-in-out;
   }
+
   &:hover:not(:disabled),
-  &:focus:not(:disabled) {
-    color: #3dae6c;
-    background-color: #062918;
-    transform: scale(1.01);
-    cursor: pointer;
+  &:focus-visible:not(:disabled) {
+    color: #8ff;
+    border-color: #8ff;
+    background-color: #031c1c;
   }
+
   &:hover::after,
-  &:focus:after {
+  &:focus-visible::after {
     opacity: 0.6;
   }
+
   &:disabled {
-    color: #ac9d9d;
-    background: #050405;
-    border-color: #202722;
+    opacity: 0.5;
+    color: #555;
+    border-color: #333;
+    cursor: not-allowed;
+    &::after {
+      opacity: 0;
+    }
   }
 `;

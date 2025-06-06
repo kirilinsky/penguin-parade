@@ -126,6 +126,7 @@
         "newPenguinTitle": "Wow, it's New",
         "welcomeNew": "Welcome aboard buddy!",
         "myLibraryLink": "Go to my Library",
+        "shareLink": "Check out this Penguin by",
         "verifyEmailAlert1": "Please verify your email",
         "verifyEmailAlert2": "before generating a penguin.",
         "generationInProgress": "Generation is already in progress. Please wait for it to complete.",
@@ -204,5 +205,10 @@
         "penguinsCount": "Penguins Count:",
         "detailsLink": "Details",
         "target": "Target:"
+    },
+    "sharePage": {
+        "title": "Hey! Look who I just got!",
+        "subtitle": "Sign up now and get your own unique penguin too!",
+        "signUpButton": "Sign Up"
     }
 }
