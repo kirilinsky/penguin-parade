@@ -5,11 +5,20 @@ export const ExpeditionStatusInfoWrap = styled.div`
   flex-direction: column;
   align-items: center;
   border-radius: 8px;
-  box-shadow: inset 0 0 4px turquoise;
   padding: 8px 12px;
-  font-weight: 600; 
-  color: #b0b3bd;
+  font-weight: 600;
+  color: #b0e8d3;
+  background: linear-gradient(135deg, rgba(30, 60, 52, 0.6), rgba(20, 40, 38, 0.8));
+  box-shadow: inset 0 0 6px #00ffd5a8, 0 0 4px #00ffd522;
+  transition: box-shadow 0.3s ease;
+
+  &:hover {
+    box-shadow: inset 0 0 8px #00ffd5cc, 0 0 6px #00ffd555;
+  }
+
   p {
-    color: #fff9f9;
+    color: #ffffff;
+    margin: 0;
+    font-size: 0.85rem;
   }
 `;

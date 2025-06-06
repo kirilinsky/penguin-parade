@@ -28,7 +28,7 @@ const NotifictionsBlock = () => {
       {loading
         ? "loading"
         : notifications.map((notification) => (
-            <NotificationAccordionContainer>
+            <NotificationAccordionContainer key={notification.id}>
               <NotificationAccordionHeader
                 onClick={() => toggle(notification)}
                 $unread={!notification.read}

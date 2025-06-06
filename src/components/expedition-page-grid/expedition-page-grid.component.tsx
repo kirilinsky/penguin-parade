@@ -237,9 +237,8 @@ const ExpeditionPageGridComponent = ({
               expedition.minParticipants > images.length
             }
           />
-          {(penguinsParticipants.length || penguinsParticipants.length) && (
+          {(!!penguinsParticipants.length || !!participants.length) && (
             <div>
-              {" "}
               {claimedReward && <span>Reward claimed!</span>}
               {claimedReward ? "Claimed" : "Expect rewards"}:{" "}
               {expedition.preset.goldPerPenguin *

@@ -4,6 +4,7 @@ export type NotificationType =
   | "friend_request";
 
 export type UserNotification = {
+  id: string;
   type: NotificationType;
   createdAt: Date;
   read: boolean;

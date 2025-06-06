@@ -2,23 +2,56 @@ import styled from "styled-components";
 
 export const ExpeditionGalleryItemContainer = styled.div<{
   $borderColor: string;
+  $ended: boolean;
 }>`
   display: flex;
   border-radius: 1em;
   flex-direction: column;
-  gap: 1em;
+  gap: .6em;
   min-height: 50vh;
-  border: 1.5px solid ${({ $borderColor }) => $borderColor};
-  box-shadow: 0 8px 24px ${({ $borderColor }) => $borderColor},
+  padding: 1em;
+  border: 2px solid
+    ${({ $ended, $borderColor }) => ($ended ? "#000000d5" : $borderColor)};
+  box-shadow: 0 1px 24px
+      ${({ $ended, $borderColor }) => ($ended ? "#442929" : $borderColor)},
     0 0 8px rgba(255, 255, 255, 0.05);
-  border-radius: 1rem;
   background-color: rgba(10, 20, 18, 0.95);
   backdrop-filter: blur(6px);
   color: #e6fdf5;
-  padding: 1em;
+  border-radius: 1rem;
+
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeIn 0.6s ease forwards;
+
+  &:hover {
+    box-shadow: 0 0 12px ${({ $borderColor }) => $borderColor}aa,
+      0 0 20px ${({ $borderColor }) => $borderColor}55,
+      0 0 8px rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+  }
+  ${({ $ended }) =>
+    $ended &&
+    `
+    filter: grayscale(10);
+    transition: all 0.3s ease-in-out;
+    &:hover {
+      filter: grayscale(0);
+      border-color: rgba(88, 59, 59, 0.489);
+      box-shadow: 0 0 12px rgba(255, 100, 100, 0.4), 0 0 4px rgba(255, 255, 255, 0.05);
+    }
+  `}
+
   @media (max-width: 888px) {
     min-height: unset;
     margin-block: 30px;
+  }
+
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 `;
 
@@ -35,7 +68,7 @@ export const ExpeditionGalleryItemSide = styled.div`
   width: 50%;
   display: flex;
   flex-direction: column;
-  gap: 1em;
+  gap: .6em;
   @media (max-width: 888px) {
     width: 100%;
   }
