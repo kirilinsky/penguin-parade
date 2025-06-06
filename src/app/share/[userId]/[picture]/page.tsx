@@ -2,14 +2,20 @@ import { notFound } from "next/navigation";
 import { firestore } from "@/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import Image from "next/image";
-import { Metadata } from "next";
+import type { Metadata } from "next";
+
+type SharePageParams = {
+  params: {
+    userId: string;
+    picture: string;
+  };
+};
 
 export async function generateMetadata({
   params,
-}: {
-  params: { userId: string; picture: string };
-}): Promise<Metadata> {
+}: SharePageParams): Promise<Metadata> {
   const { userId, picture } = params;
+
   const userSnap = await getDoc(doc(firestore, "users", userId));
   const penguinSnap = await getDoc(doc(firestore, "images", picture));
 
@@ -24,22 +30,26 @@ export async function generateMetadata({
     return { title: "Not Found" };
   }
 
+  const penguinTitle = penguin.settings?.t?.en ?? "Check out this penguin!";
+
   return {
     title: `${user.username}'s Penguin`,
-    description: penguin.settings?.t?.en ?? "Check out this penguin!",
+    description: penguinTitle,
     openGraph: {
       title: `${user.username}'s Penguin`,
+      description: penguinTitle,
       images: [penguin.imageUrl],
-      description: penguin.settings?.t?.en ?? "Penguin from Parade!",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${user.username}'s Penguin`,
+      description: penguinTitle,
+      images: [penguin.imageUrl],
     },
   };
 }
 
-export default async function SharePage({
-  params,
-}: {
-  params: { userId: string; picture: string };
-}) {
+export default async function SharePage({ params }: SharePageParams) {
   const { userId, picture } = params;
 
   const userSnap = await getDoc(doc(firestore, "users", userId));
