@@ -236,6 +236,7 @@ const ExpeditionPageGridComponent = ({
               onAdd={() => setShowLibraryModal(true)}
               participantScale={participantScale}
               addingDisabled={
+                expedition.state !== "preparing" ||
                 hasJoined ||
                 imagesLoading ||
                 loading ||
@@ -255,12 +256,17 @@ const ExpeditionPageGridComponent = ({
               coins
             </div>
           )}
-          {expedition.state === "ended" && (
-            <h2>
-              Congratulations! The expedition is over and you can get your award
-              and return your penguins
-            </h2>
-          )}
+          {expedition.state === "ended" &&
+            (hasJoined ? (
+              <h2>
+                Congratulations! The expedition is over and you can get your
+                award and return your penguins
+              </h2>
+            ) : (
+              <h2>
+                The expedition is over, you can try to participate next one!
+              </h2>
+            ))}
           <ExpeditionButtons>
             {!!participants.length && !hasJoined && (
               <NeonButtonComponent
