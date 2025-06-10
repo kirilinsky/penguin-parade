@@ -190,11 +190,13 @@ const CountDownPage = () => {
                   onClick={craft}
                   disabled={loading}
                 />
-                <CrystalsSelector
-                  crystalApplied={crystalApplied}
-                  setCrystalApplied={setCrystalApplied}
-                  crystals={crystals}
-                />
+                {!!crystals.length && (
+                  <CrystalsSelector
+                    crystalApplied={crystalApplied}
+                    setCrystalApplied={setCrystalApplied}
+                    crystals={crystals}
+                  />
+                )}
               </>
             ) : (
               <>
