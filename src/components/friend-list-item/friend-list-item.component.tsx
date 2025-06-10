@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  FriendListBioWarpper,
   FriendListItemButtons,
   FriendListItemContainer,
   FriendListItemContent,
@@ -26,28 +27,20 @@ const FriendListItemComponent = ({
 
   return (
     <FriendListItemContainer>
-      <AvatarComponent
-        username={friend.username}
-        avatarUrl={friend.avatar}
-        avatarScale={friend.avatarScale}
-      />
-      <FriendListItemContent>
+      <FriendListBioWarpper>
+        <AvatarComponent
+          username={friend.username}
+          avatarUrl={friend.avatar}
+          avatarScale={friend.avatarScale}
+        />
         <FriendListItemName>{friend.username}</FriendListItemName>
-        <div>
+      </FriendListBioWarpper>
+      <FriendListItemContent>
+  
           <p>
             {t("titleCount")} {imageCount}
           </p>
-          {"giftsReceived" in friend && friend.giftsReceived > 0 && (
-            <p>
-              {t("giftsReceivedCount")} {friend.giftsReceived}
-            </p>
-          )}
-          {"giftsSent" in friend && friend.giftsSent > 0 && (
-            <p>
-              {t("giftsSentCount")} {friend.giftsSent}
-            </p>
-          )}
-        </div>
+     
         <FriendListItemButtons>
           <NeonButtonComponent
             title={t("visitButton")}

@@ -92,11 +92,11 @@
         "noFriendsTitle": "У тебя пока нет друзей! Попробуй кого-нибудь найти."
     },
     "friendsListItem": {
-        "titleCount": "Пингвинов всего:",
+        "titleCount": "Пингвинов:",
         "giftsReceivedCount": "Получено подарков:",
         "giftsSentCount": "Отправлено подарков:",
         "visitButton": "Навестить",
-        "removeButton": "Удалить из друзей"
+        "removeButton": "Удалить"
     },
     "randomAuctionBlock": {
         "title": "Случайная сделка на аукционе",

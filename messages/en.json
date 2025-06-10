@@ -102,11 +102,11 @@
         "noFriendsTitle": "You don't have friends yet! Try to find someone."
     },
     "friendsListItem": {
-        "titleCount": "Penguins Count:",
+        "titleCount": "Penguins:",
         "giftsReceivedCount": "Gifts Received:",
         "giftsSentCount": "Gifts Sent:",
         "visitButton": "Visit",
-        "removeButton": "Remove friend"
+        "removeButton": "Remove"
     },
     "lastCraftedBlock": {
         "title": "Last Crafted Penguin",
