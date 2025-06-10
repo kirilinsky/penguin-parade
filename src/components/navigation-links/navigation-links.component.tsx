@@ -25,6 +25,9 @@ const NavigationLinksComponent = ({
           <Link onClick={onClick} href={`/library/${user.id}`}>
             {t("myPenguins")}
           </Link>
+          <Link onClick={onClick} href="/updates">
+            {t("updates")}
+          </Link>
           <Link onClick={onClick} href="/friends">
             {t("friends")}
           </Link>
