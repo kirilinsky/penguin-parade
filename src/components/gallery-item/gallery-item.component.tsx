@@ -47,8 +47,7 @@ const GalleryItemComponent = ({
 
   const baseColor = useMemo(() => {
     return getBaseColorByScale(img.settings.rarity);
-  }, [img.settings.rarity]);
-  console.log(img, "img");
+  }, [img.settings.rarity]); 
 
   return (
     <Tilt
