@@ -1,6 +1,6 @@
 {
   "name": "penguin-parade",
-  "version": "0.7.2",
+  "version": "0.7.3",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -19,6 +19,7 @@
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-parallax-tilt": "^1.7.295",
+    "react-toastify": "^11.0.5",
     "replicate": "^1.0.1",
     "rodal": "^2.1.0",
     "sharp": "^0.34.2",
