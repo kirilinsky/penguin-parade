@@ -60,6 +60,7 @@ export default function Home() {
             <h2>Road map</h2>
             <ul>
               <li>System notifications</li>
+              <li>Suspicious gifts ban</li>
               <li>Allow to craft/expedition notifications</li>
               <li>Gift functionality design update (notification)</li>
               <li>Notification toasts</li>
