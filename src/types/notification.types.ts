@@ -1,5 +1,6 @@
 export type NotificationType =
   | "expedition_complete"
+  | "new_expedition"
   | "gift_received"
   | "friend_request";
 

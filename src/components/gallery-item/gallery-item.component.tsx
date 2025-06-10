@@ -8,6 +8,7 @@ import {
   GalleryItemContent,
   GalleryItemGiftBadge,
   GalleryItemImage,
+  GalleryItemNftBadge,
   GalleryItemSkeleton,
 } from "./gallery-item.component.styled";
 import { ImageItem } from "@/types/image.types";
@@ -47,6 +48,8 @@ const GalleryItemComponent = ({
   const baseColor = useMemo(() => {
     return getBaseColorByScale(img.settings.rarity);
   }, [img.settings.rarity]);
+  console.log(img, "img");
+
   return (
     <Tilt
       scale={scalable ? 1.13 : 1}
@@ -65,6 +68,14 @@ const GalleryItemComponent = ({
             height={33}
             alt="gift"
             src="/gift_badge.webp"
+          />
+        )}
+        {img.nft && (
+          <GalleryItemNftBadge
+            width={44}
+            height={44}
+            alt="nft"
+            src="/nft_badge.webp"
           />
         )}
         {img.origin === "bad batch" && (
@@ -105,6 +116,7 @@ const GalleryItemComponent = ({
         </GalleryImageWrap>
         <p style={{ textAlign: "center" }} className={tektur.className}>
           {getLocalized(img.settings.t, locale)}
+          {img.nft && "nft 1"}
         </p>
         {img.auction && (
           <p>

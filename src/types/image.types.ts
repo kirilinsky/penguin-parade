@@ -18,9 +18,12 @@ export interface ImageItem {
   inExpedition: boolean;
   expedition: string | null;
   expeditions: 0;
+  nft: boolean;
+  nftLink: string | null;
   gift: boolean;
   auction: boolean;
   price: number;
+  mintedAt: Timestamp;
   createdAt: Timestamp;
   placedForAuctionAt: Timestamp;
   settings: ImageItemSettings;
