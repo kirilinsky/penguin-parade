@@ -15,6 +15,7 @@ export const useGetImages = (
   const { user } = useUserDetails();
   const uid = id ?? user?.id;
 
+  const [lastCrafted, setLastCrafted] = useState<ImageItem | null>(null);
   const [images, setImages] = useState<ImageItem[]>([]);
   const [auctionImages, setAuctionImages] = useState<ImageItem[]>([]);
   const [rarityCount, setRarityCount] = useState<RarityCount>({});
@@ -54,7 +55,7 @@ export const useGetImages = (
             (a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0)
           );
         }
-
+        setLastCrafted(list[0]);
         setImages(list);
         setTotal(list.length);
 
@@ -82,6 +83,7 @@ export const useGetImages = (
   return {
     images,
     auctionImages,
+    lastCrafted,
     rarityCount,
     uid,
     total,

@@ -112,7 +112,8 @@
         "title": "Last Crafted Penguin",
         "myLibraryLink": "Go to my library",
         "noPenguinsTitle": "You don't have Penguins yet!",
-        "craftLink": "Craft new"
+        "craftLink": "Craft new",
+        "createdAt": "Created at"
     },
     "craftPage": {
         "title": "Get new Penguin",

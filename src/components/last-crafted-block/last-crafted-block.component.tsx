@@ -7,21 +7,27 @@ import { LinkStyled } from "../link/link.component.styled";
 import Image from "next/image";
 import { useGetImages } from "@/hooks/use-get-images";
 import { useTranslations } from "next-intl";
+import { format } from "date-fns";
 
 const LastCraftedBlockComponent = () => {
-  const { images, uid, loading } = useGetImages(true);
+  const { lastCrafted, uid, loading } = useGetImages(true);
   const t = useTranslations("lastCraftedBlock");
 
   return (
     <PageContentBlockStyled>
       <h2>{t("title")}</h2>
-      {!loading && images && images.length ? (
+      {loading ? (
+        "loading..."
+      ) : lastCrafted ? (
         <>
+          <span>
+            {t("createdAt")}: {format(lastCrafted.createdAt.toDate(), "dd.MM.yy")}
+          </span>
           <GalleryItemComponent
             slim
             glare={false}
             scalable={false}
-            img={images[0]}
+            img={lastCrafted}
           />
           <LinkStyled title="Library page" href={`/library/${uid}`}>
             {t("myLibraryLink")}

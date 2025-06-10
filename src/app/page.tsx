@@ -60,6 +60,7 @@ export default function Home() {
             <h2>Road map</h2>
             <ul>
               <li>System notifications</li>
+              <li>Allow to craft/expedition notifications</li>
               <li>Gift functionality design update (notification)</li>
               <li>Notification toasts</li>
               <li>Anonymous home page, loggedIn limitations</li>
