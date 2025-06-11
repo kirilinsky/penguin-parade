@@ -1,12 +1,15 @@
 "use client";
 
+import AvatarComponent from "@/components/avatar-component/avatar-component";
 import GalleryFilterComponent from "@/components/gallery-filter-component/gallery-filter-component";
 import GalleryItemModalComponent from "@/components/gallery-item-modal/gallery-item-modal.component";
 import GalleryItemComponent from "@/components/gallery-item/gallery-item.component";
 import GalleryComponent from "@/components/gallery/gallery.component";
+import LibraryTitleComponent from "@/components/library-title/library-title.component";
 import { LinkStyled } from "@/components/link/link.component.styled";
 import { useGetFriends } from "@/hooks/use-get-friends";
 import { useGetImages } from "@/hooks/use-get-images";
+import { useGetUserCredentials } from "@/hooks/use-get-user-credentials";
 import { useUserDetails } from "@/hooks/use-user-details";
 import { ImageItem, ImagesSortType } from "@/types/image.types";
 import { scaleOrder, ScaleType } from "@/types/scale.types";
@@ -25,6 +28,10 @@ const MyLibraryPage = () => {
   const [detailsImage, setDetailsImage] = useState<ImageItem | null>(null);
   const [sortOption, setSortOption] = useState<ImagesSortType>("newest");
   const [filterOption, setFilterOption] = useState<"all" | ScaleType>("all");
+
+  const { data: pageUser } = useGetUserCredentials(
+    isMyPage ? undefined : (pageId as string)
+  );
 
   const { images, loading, rarityCount } = useGetImages(true, pageId);
   const { friends } = useGetFriends();
@@ -196,6 +203,14 @@ const MyLibraryPage = () => {
           />
         </Rodal>
       )}
+      {(user || pageUser) && (
+        <LibraryTitleComponent
+          user={isMyPage ? user : pageUser}
+          imagesCount={images.length}
+          isMyPage={isMyPage}
+        />
+      )}
+
       {!!images.length && (
         <GalleryFilterComponent
           isAuction={false}

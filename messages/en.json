@@ -227,5 +227,9 @@
         "new_expedition": "New Expedition available!",
         "friend_request": "New Friend Request",
         "linkAction": "Go and Check"
+    },
+    "libraryTitle": {
+        "my": "My",
+        "penguins": "Penguins"
     }
 }

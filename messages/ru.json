@@ -227,5 +227,9 @@
         "new_expedition": "Доступна новая экспедиция!",
         "friend_request": "Новая заявка в друзья",
         "linkAction": "Перейти и проверить"
+    },
+    "libraryTitle": {
+        "my": "Мои",
+        "penguins": "Пингвины"
     }
 }
