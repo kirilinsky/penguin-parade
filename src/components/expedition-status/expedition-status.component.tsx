@@ -19,11 +19,11 @@ const ExpeditionStatusComponent = ({
       <ExpeditionStatusBadge status={expedition.state} />
       <ExpeditionCountdown expedition={expedition} />
       <ExpeditionStatusInfo
-        title="Min participants"
+        title="Min participants (p/person)"
         text={expedition.minParticipants}
       />
       <ExpeditionStatusInfo
-        title="Max participants"
+        title="Max participants (p/person)"
         text={expedition.maxParticipants}
       />
       {expedition.participantsCount && (
