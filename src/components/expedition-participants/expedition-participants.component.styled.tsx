@@ -1,3 +1,4 @@
+import Image from "next/image";
 import styled from "styled-components";
 
 export const ExpeditionParticipantsWrap = styled.div`
@@ -95,7 +96,7 @@ export const ExpeditionParticipantsItem = styled(
   }
 `;
 
-export const ExpeditionParticipantsItemImage = styled.img`
+export const ExpeditionParticipantsItemImage = styled(Image)`
   width: 100%;
   height: 100%;
   border-radius: 50%;

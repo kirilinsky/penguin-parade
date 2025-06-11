@@ -50,6 +50,8 @@ const ExpeditionParticipants = ({
                 <ExpeditionParticipantsItemImage
                   src={participant.imageUrl}
                   alt={participant.id}
+                  width={68}
+                  height={68}
                 />
               </ExpeditionParticipantsItem>
             ))}
@@ -70,7 +72,7 @@ const ExpeditionParticipants = ({
         />
       )}
       {showOther && !!otherPenguins.length && (
-        <div style={{marginBlock:'10px'}}>
+        <div style={{ marginBlock: "10px" }}>
           <h4>Other participants ({otherPenguins.length}):</h4>
           <ExpeditionParticipantsStyled>
             {otherPenguins.map((participant) => (
@@ -83,6 +85,8 @@ const ExpeditionParticipants = ({
                 <ExpeditionParticipantsItemImage
                   src={participant.imageUrl}
                   alt={participant.id}
+                  width={68}
+                  height={68}
                 />
               </ExpeditionParticipantsItem>
             ))}
