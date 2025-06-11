@@ -40,6 +40,7 @@ const ExpeditionPageGridComponent = ({
 
   const {
     penguins: penguinsParticipants,
+    otherPenguins,
     hasJoined,
     claimedReward,
     refetch,
@@ -229,6 +230,7 @@ const ExpeditionPageGridComponent = ({
             <ExpeditionParticipants
               loading={loading}
               hasJoined={hasJoined}
+              otherPenguins={otherPenguins}
               penguinsParticipants={
                 hasJoined ? penguinsParticipants : participants
               }

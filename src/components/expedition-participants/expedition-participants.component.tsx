@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   ExpeditionParticipantsAddItem,
   ExpeditionParticipantsItem,
@@ -9,6 +9,7 @@ import {
 import { getBaseColorByScale } from "@/helpers/get-base-color-by-rarity/get-base-color-by-rarity";
 import { ImageItem } from "@/types/image.types";
 import { UserExpeditionItemPenguin } from "@/types/user.types";
+import NeonButtonComponent from "../neon-button/neon-button.component";
 
 const ExpeditionParticipants = ({
   loading,
@@ -18,19 +19,22 @@ const ExpeditionParticipants = ({
   hasJoined,
   onAdd,
   addingDisabled,
+  otherPenguins,
 }: {
   loading: boolean;
   hasJoined: boolean;
   addingDisabled: boolean;
   penguinsParticipants: ImageItem[] | UserExpeditionItemPenguin[];
+  otherPenguins: UserExpeditionItemPenguin[];
   participantScale: string;
   onRemove: (id: string) => void;
   onAdd: () => void;
 }) => {
+  const [showOther, setShowOther] = useState(false);
   const participantScaleBorderColor = getBaseColorByScale(participantScale);
   return (
     <ExpeditionParticipantsWrap>
-      <h4>Your participants:</h4>
+      <h4>Your participants ({penguinsParticipants.length}):</h4>
       <ExpeditionParticipantsStyled>
         {loading
           ? "loading..."
@@ -59,6 +63,32 @@ const ExpeditionParticipants = ({
           </ExpeditionParticipantsAddItem>
         )}
       </ExpeditionParticipantsStyled>
+      {!!otherPenguins.length && (
+        <NeonButtonComponent
+          onClick={() => setShowOther(!showOther)}
+          title={showOther ? "hide other penguins" : "show other penguins"}
+        />
+      )}
+      {showOther && !!otherPenguins.length && (
+        <div style={{marginBlock:'10px'}}>
+          <h4>Other participants ({otherPenguins.length}):</h4>
+          <ExpeditionParticipantsStyled>
+            {otherPenguins.map((participant) => (
+              <ExpeditionParticipantsItem
+                key={participant.id}
+                disableRemove={true}
+                borderColor={participantScaleBorderColor}
+                onClick={undefined}
+              >
+                <ExpeditionParticipantsItemImage
+                  src={participant.imageUrl}
+                  alt={participant.id}
+                />
+              </ExpeditionParticipantsItem>
+            ))}
+          </ExpeditionParticipantsStyled>
+        </div>
+      )}
     </ExpeditionParticipantsWrap>
   );
 };
