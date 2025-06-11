@@ -68,7 +68,7 @@ export async function GET(req: NextRequest) {
           type: "expedition_complete",
           createdAt: new Date(),
           read: false,
-          payload: { expeditionId },
+          payload: { type: "expedition", expeditionId },
           message: {
             ru: "Экспедиция завершена! Забери свою награду.",
             en: "The expedition has ended! Claim your reward.",

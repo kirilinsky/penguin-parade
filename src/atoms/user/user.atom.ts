@@ -1,4 +1,5 @@
 import { User } from "@/types/user.types";
+import { atom } from "jotai";
 import { atomWithStorage } from "jotai/utils";
 
 export const userDetailsAtom = atomWithStorage<User | null>(
@@ -6,3 +7,4 @@ export const userDetailsAtom = atomWithStorage<User | null>(
   null
 );
 export const loggedInAtom = atomWithStorage<boolean | null>("loggedIn", false);
+export const hasUnreadNotificationsAtom = atom(false);

@@ -2,15 +2,22 @@ import { User } from "@/types/user.types";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import React from "react";
+import {
+  NavigationLinkBadge,
+  NavigationLinkWrapper,
+} from "./navigation-links.component.styled";
+import { navItems } from "@/data/navigation";
 
 const NavigationLinksComponent = ({
   user,
   loggedIn,
   logOutHandler,
+  hasUnread,
   onClick,
 }: {
   user: User | null;
   loggedIn: boolean | null;
+  hasUnread: boolean;
   logOutHandler: () => void;
   onClick?: () => void;
 }) => {
@@ -19,30 +26,25 @@ const NavigationLinksComponent = ({
     <>
       {user && loggedIn ? (
         <>
-          <Link onClick={onClick} href="/countdown">
-            {t("craft")}
-          </Link>
-          <Link onClick={onClick} href={`/library/${user.id}`}>
-            {t("myPenguins")}
-          </Link>
-          <Link onClick={onClick} href="/updates">
-            {t("updates")}
-          </Link>
-          <Link onClick={onClick} href="/friends">
-            {t("friends")}
-          </Link>
-          <Link onClick={onClick} href="/evolve">
-            {t("evolve")}
-          </Link>
-          <Link onClick={onClick} href="/market">
-            {t("auction")}
-          </Link>
-          <Link onClick={onClick} href="/expeditions">
-            {t("expeditions")}
-          </Link>
-          <Link onClick={logOutHandler} href="/">
-            {t("logOut")}
-          </Link>
+          {navItems.map((item, idx) => {
+            const href =
+              typeof item.href === "function" ? item.href(user.id) : item.href;
+            const showBadge =
+              item.labelKey === "updates" && hasUnread;
+            return (
+              <NavigationLinkWrapper key={idx}>
+                <Link href={href} onClick={onClick}>
+                  {t(item.labelKey)}
+                </Link>{" "}
+                {showBadge && <NavigationLinkBadge />}
+              </NavigationLinkWrapper>
+            );
+          })}
+          <NavigationLinkWrapper>
+            <Link onClick={logOutHandler} href="/">
+              {t("logOut")}
+            </Link>
+          </NavigationLinkWrapper>
         </>
       ) : (
         <>

@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 import Replicate from "replicate";
 
 import { firestore } from "@/firebase";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, getDocs, doc, setDoc } from "firebase/firestore";
 import { expeditionPresets } from "@/types/expeditions.types";
 import { supabase } from "@/supabase";
 
@@ -120,6 +120,36 @@ export async function POST(req: Request) {
     preset: expeditionPresets[level as keyof typeof expeditionPresets],
     participants: [],
   });
+
+  const usersSnap = await getDocs(collection(firestore, "users"));
+
+  const writePromises = usersSnap.docs.map((userDoc) => {
+    const userId = userDoc.id;
+
+    const notifRef = doc(
+      firestore,
+      "users",
+      userId,
+      "notifications",
+      `new_expedition`
+    );
+
+    return setDoc(notifRef, {
+      type: "new_expedition",
+      createdAt: now,
+      read: false,
+      payload: {
+        type: "expedition",
+        expeditionId: newDoc.id,
+      },
+      message: {
+        ru: "Новая экспедиция началась! Успей присоединиться.",
+        en: "A new expedition has started! Join while you can.",
+      },
+    });
+  });
+
+  await Promise.all(writePromises);
 
   return NextResponse.json({ success: true, id: newDoc.id });
 }
