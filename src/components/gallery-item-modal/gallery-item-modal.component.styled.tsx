@@ -59,8 +59,10 @@ export const GalleryItemModalAccordion = styled.div<{ $expand: boolean }>`
   flex-direction: column;
   gap: 15px;
   transition: 0.45s linear;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
   width: 100%;
+
   ${({ $expand }) => !$expand && "height: 0"};
 `;
 

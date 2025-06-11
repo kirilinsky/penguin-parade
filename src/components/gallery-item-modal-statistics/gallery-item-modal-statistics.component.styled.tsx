@@ -6,7 +6,11 @@ export const GalleryItemModalStatisticsGrid = styled.div`
   grid-template-columns: repeat(4, 1fr);
   width: 100%;
   animation: fadeIn 0.5s ease-in-out;
-
+  > * {
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
   @media (max-width: 888px) {
     grid-template-columns: repeat(2, 1fr);
   }
