@@ -6,6 +6,7 @@ import {
   arrayUnion,
   collection,
   doc,
+  getDoc,
   getDocs,
   increment,
   query,
@@ -132,14 +133,28 @@ export async function POST(req: Request) {
 
     if (data.success) {
       const userRef = doc(firestore, "users", uid);
+      const userSnap = await getDoc(userRef);
+      const userData = userSnap.data();
 
-      /* TODO: check avatar of donated images */
+      if (!userData) throw new Error("User not found");
+
+      const avatarUrl = userData.avatar;
 
       const updateImagePromises = imageIds.map(async (imageId) => {
         const imageRef = doc(firestore, "images", imageId);
+        const imageSnap = await getDoc(imageRef);
+        const imageData = imageSnap.data();
+
+        /* TODO make it as helper function to reuse */
+        if (avatarUrl && imageData?.url === avatarUrl) {
+          await updateDoc(userRef, {
+            avatar: "",
+            avatarScale: "",
+          });
+        }
+
         await updateDoc(imageRef, {
           ownerId: "auction",
-          gift: false,
           auction: true,
           price: price.buy,
           placedForAuctionAt: serverTimestamp(),
@@ -158,6 +173,7 @@ export async function POST(req: Request) {
         "statistics.totalImagesDonated": increment(imageIds.length),
         imageIds: arrayUnion(data.id),
       });
+
       return NextResponse.json({
         success: true,
         payout,

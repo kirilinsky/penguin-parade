@@ -66,7 +66,6 @@ export type User = {
   friendRequests: RequestRecord[];
   sentRequests: RequestRecord[];
   statistics: UserStatistics;
-  /* TODO: add xp system */
   //xp: number;
   imageIds: string[];
   lastGeneratedAt: Date;

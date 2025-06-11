@@ -49,6 +49,7 @@ const HeaderComponent = () => {
     refreshUser();
   }, []);
   return (
+    /* TODO: add badge unread message to mobile menu control */
     <HeaderWrapper>
       {showMobileMenu && (
         <MobileMenuComponent
