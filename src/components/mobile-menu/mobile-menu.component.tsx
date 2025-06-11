@@ -12,9 +12,11 @@ const MobileMenuComponent = ({
   loggedIn,
   logOutHandler,
   closeMoblieMenu,
+  hasUnread,
 }: {
   user: User | null;
   loggedIn: boolean | null;
+  hasUnread: boolean;
   logOutHandler: () => void;
   closeMoblieMenu: () => void;
 }) => {
@@ -26,6 +28,7 @@ const MobileMenuComponent = ({
       <MobileMenuLinksContainer>
         <NavigationLinksComponent
           user={user}
+          hasUnread={hasUnread}
           logOutHandler={logOutHandler}
           loggedIn={loggedIn}
           onClick={closeMoblieMenu}

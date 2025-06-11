@@ -53,6 +53,7 @@ const HeaderComponent = () => {
       {showMobileMenu && (
         <MobileMenuComponent
           user={user}
+          hasUnread={hasUnread}
           closeMoblieMenu={closeMoblieMenu}
           logOutHandler={logOutHandler}
           loggedIn={loggedIn}
