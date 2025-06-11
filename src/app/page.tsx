@@ -7,6 +7,7 @@ import { LinkStyled } from "@/components/link/link.component.styled";
 import NotifictionsBlock from "@/components/notifications-block/notifictions-block.component";
 import { PageContentBlockStyled } from "@/components/page-content-block/page-content-block.component.styled";
 import { PageContentWrapperComponent } from "@/components/page-content-wrapper/page-content-wrapper.component";
+import { PenguinProgressBlock } from "@/components/progress-block/progress-block.component";
 import RandomAuctionBlockComponent from "@/components/random-auction-block/random-auction-block.component";
 import StatisticsBlockComponent from "@/components/statistics-block/statistics-block.component";
 import TopUsersBlock from "@/components/top-users-block/top-users-block.component";
@@ -49,7 +50,8 @@ export default function Home() {
             </LinkStyled>
           </PageContentBlockStyled>
           <CrystalsBlock />
-          <NotifictionsBlock />
+          <PenguinProgressBlock />
+          {/* <NotifictionsBlock /> */}
           <LastCraftedBlockComponent />
           <TotalCountBlockComponent />
           <RandomAuctionBlockComponent />

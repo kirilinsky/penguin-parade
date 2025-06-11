@@ -213,5 +213,13 @@
         "title": "Hey! Look who I just got!",
         "subtitle": "Sign up now and get your own unique penguin too!",
         "signUpButton": "Sign Up"
+    },
+    "progressBlock": {
+        "created": "Created",
+        "penguins": "Penguins",
+        "left": "left to reach the goal",
+        "achieved": "Goal achieved!",
+        "afterTitle": "What will happen then?",
+        "afterDescription": "When the number of penguins reaches goal number, craft and evolution will be stopped. All penguins will be turned into NFT."
     }
 }

@@ -9,7 +9,7 @@ export type RarityCount = Record<string, number>;
 
 export const useGetImages = (
   sortByDate: boolean = false,
-  id?: string | ParamValue | null,
+  id?: "all" | string | ParamValue | null,
   scale?: string
 ) => {
   const { user } = useUserDetails();
@@ -36,8 +36,11 @@ export const useGetImages = (
       setError(null);
 
       try {
+        const constraints = [];
         const baseRef = collection(firestore, "images");
-        const constraints = [where("ownerId", "==", uid)];
+        if (uid !== "all") {
+          constraints.push(where("ownerId", "==", uid));
+        }
 
         if (scale) {
           constraints.push(where("settings.rarity", "==", scale));
