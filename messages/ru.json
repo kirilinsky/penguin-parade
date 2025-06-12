@@ -231,5 +231,40 @@
     "libraryTitle": {
         "my": "Мои",
         "penguins": "Пингвины"
+    },
+    "expeditionStatus": {
+        "minParticipants": "Минимум участников (на человека)",
+        "maxParticipants": "Максимум участников (на человека)",
+        "totalParticipants": "Всего участников",
+        "totalPenguins": "Всего пингвинов в экспедиции",
+        "totalGold": "Всего получено монет",
+        "totalCrystals": "Всего получено кристаллов",
+        "participantLevel": "Уровень участников",
+        "expeditionLevel": "Уровень экспедиции"
+    },
+    "expeditionParticipants": {
+        "yourParticipants": "Ваши участники",
+        "otherParticipants": "Другие участники",
+        "addPenguin": "Добавить пингвина",
+        "showOthers": "Показать других пингвинов",
+        "hideOthers": "Скрыть других пингвинов",
+        "loading": "Загрузка..."
+    },
+    "expeditionPage": {
+        "notEnoughPenguins": "К сожалению, у вас недостаточно пингвинов для участия",
+        "rewardClaimed": "Награда получена!",
+        "claimed": "Получено",
+        "expectRewards": "Ожидаемая награда",
+        "expeditionEndedYouCanClaim": "Поздравляем! Экспедиция завершена, вы можете получить награду и вернуть пингвинов",
+        "expeditionEndedTryNext": "Экспедиция завершена, попробуйте принять участие в следующей!",
+        "resetParticipants": "Сбросить участников",
+        "unsetParticipation": "Отменить участие",
+        "confirmParticipation": "Подтвердить участие",
+        "loadingReward": "Загрузка награды...",
+        "takeReward": "Забрать награду!"
+    },
+    "expeditionCountdown": {
+        "activeEndsIn": "Активная фаза закончится через",
+        "preparationEndsIn": "Фаза подготовки закончится через"
     }
 }

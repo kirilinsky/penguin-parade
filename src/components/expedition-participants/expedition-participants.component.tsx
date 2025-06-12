@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from "react";
 import {
   ExpeditionParticipantsAddItem,
@@ -10,6 +12,7 @@ import { getBaseColorByScale } from "@/helpers/get-base-color-by-rarity/get-base
 import { ImageItem } from "@/types/image.types";
 import { UserExpeditionItemPenguin } from "@/types/user.types";
 import NeonButtonComponent from "../neon-button/neon-button.component";
+import { useTranslations } from "next-intl";
 
 const ExpeditionParticipants = ({
   loading,
@@ -31,13 +34,18 @@ const ExpeditionParticipants = ({
   onAdd: () => void;
 }) => {
   const [showOther, setShowOther] = useState(false);
+  const t = useTranslations("expeditionParticipants");
+
   const participantScaleBorderColor = getBaseColorByScale(participantScale);
+
   return (
     <ExpeditionParticipantsWrap>
-      <h4>Your participants ({penguinsParticipants.length}):</h4>
+      <h4>
+        {t("yourParticipants")} ({penguinsParticipants.length}):
+      </h4>
       <ExpeditionParticipantsStyled>
         {loading
-          ? "loading..."
+          ? t("loading")
           : penguinsParticipants.map((participant) => (
               <ExpeditionParticipantsItem
                 key={participant.id}
@@ -61,19 +69,21 @@ const ExpeditionParticipants = ({
             role="button"
             tabIndex={0}
           >
-            Add penguin
+            {t("addPenguin")}
           </ExpeditionParticipantsAddItem>
         )}
       </ExpeditionParticipantsStyled>
       {!!otherPenguins.length && (
         <NeonButtonComponent
           onClick={() => setShowOther(!showOther)}
-          title={showOther ? "hide other penguins" : "show other penguins"}
+          title={showOther ? t("hideOthers") : t("showOthers")}
         />
       )}
       {showOther && !!otherPenguins.length && (
         <div style={{ marginBlock: "10px" }}>
-          <h4>Other participants ({otherPenguins.length}):</h4>
+          <h4>
+            {t("otherParticipants")} ({otherPenguins.length}):
+          </h4>
           <ExpeditionParticipantsStyled>
             {otherPenguins.map((participant) => (
               <ExpeditionParticipantsItem

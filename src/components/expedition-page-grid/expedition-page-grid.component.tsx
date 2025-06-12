@@ -12,7 +12,7 @@ import {
   ExpeditionRewardResponse,
 } from "@/types/expeditions.types";
 import { getLocalized } from "@/helpers/get-localized/get-localized";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import NeonButtonComponent from "../neon-button/neon-button.component";
 import { getPrevScale } from "@/helpers/get-prev-scale/get-prev-scale";
 import { useGetImages } from "@/hooks/use-get-images";
@@ -37,6 +37,7 @@ const ExpeditionPageGridComponent = ({
   user: User;
 }) => {
   const locale = useLocale();
+  const t = useTranslations("expeditionPage");
 
   const {
     penguins: penguinsParticipants,
@@ -249,8 +250,8 @@ const ExpeditionPageGridComponent = ({
           )}
           {(!!penguinsParticipants.length || !!participants.length) && (
             <div>
-              {claimedReward && <span>Reward claimed!</span>}
-              {claimedReward ? "Claimed" : "Expect rewards"}:{" "}
+              {claimedReward && <span>{t("rewardClaimed")}</span>}
+              {claimedReward ? t("claimed") : t("expectRewards")}:{" "}
               {expedition.preset.goldPerPenguin *
                 (hasJoined
                   ? penguinsParticipants.length
@@ -258,30 +259,28 @@ const ExpeditionPageGridComponent = ({
               coins
             </div>
           )}
-          {expedition.state === "ended" &&
-            (hasJoined ? (
-              <h2>
-                Congratulations! The expedition is over and you can get your
-                award and return your penguins
-              </h2>
-            ) : (
-              <h2>
-                The expedition is over, you can try to participate next one!
-              </h2>
-            ))}
+          {expedition.state === "ended" && (
+            <h2>
+              {t(
+                hasJoined
+                  ? "expeditionEndedYouCanClaim"
+                  : "expeditionEndedTryNext"
+              )}
+            </h2>
+          )}
           <ExpeditionButtons>
             {!!participants.length && !hasJoined && (
               <NeonButtonComponent
                 onClick={resetParticipants}
                 disabled={loading}
-                title="reset my participants"
+                title={t("resetParticipants")}
               />
             )}
             {expedition.state === "preparing" &&
               (hasJoined ? (
                 <NeonButtonComponent
                   onClick={unsetParticipation}
-                  title="Unset participation"
+                  title={t("unsetParticipation")}
                   disabled={loading}
                 />
               ) : (
@@ -292,14 +291,14 @@ const ExpeditionPageGridComponent = ({
                     participants.length < expedition.minParticipants ||
                     participants.length > expedition.maxParticipants
                   }
-                  title="confirm participation"
+                  title={t("confirmParticipation")}
                 />
               ))}
             {expedition.state === "ended" && hasJoined && !claimedReward && (
               <NeonButtonComponent
                 disabled={rewardLoading || loading}
                 onClick={getReward}
-                title={rewardLoading ? "loading reward..." : "Take my reward!"}
+                title={rewardLoading ? t("loadingReward") : t("takeReward")}
               />
             )}
           </ExpeditionButtons>

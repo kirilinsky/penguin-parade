@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { ExpeditionStatus } from "./expedition-status.component.styled";
 import ExpeditionCountdown from "../expedition-countdown/expedition-countdown.component";
@@ -6,6 +7,7 @@ import ExpeditionStatusBadge from "../expedition-status-badge/expedition-status-
 import { ScaleType } from "@/types/scale.types";
 import GalleryItemScaleComponent from "../gallery-item-scale/gallery-item-scale.component";
 import ExpeditionStatusInfo from "../expedition-status-info/expedition-status-info.component";
+import { useTranslations } from "next-intl";
 
 const ExpeditionStatusComponent = ({
   expedition,
@@ -14,50 +16,52 @@ const ExpeditionStatusComponent = ({
   expedition: Expedition;
   participantScale: ScaleType;
 }) => {
+  const t = useTranslations("expeditionStatus");
+
   return (
     <ExpeditionStatus>
       <ExpeditionStatusBadge status={expedition.state} />
       <ExpeditionCountdown expedition={expedition} />
       <ExpeditionStatusInfo
-        title="Min participants (p/person)"
+        title={t("minParticipants")}
         text={expedition.minParticipants}
       />
       <ExpeditionStatusInfo
-        title="Max participants (p/person)"
+        title={t("maxParticipants")}
         text={expedition.maxParticipants}
       />
       {expedition.participantsCount && (
         <ExpeditionStatusInfo
-          title="Total participants"
+          title={t("totalParticipants")}
           text={expedition.participantsCount}
         />
       )}
       {expedition.totalPenguinsCount && (
         <ExpeditionStatusInfo
-          title="Total penguins in expedition"
+          title={t("totalPenguins")}
           text={expedition.totalPenguinsCount}
         />
       )}
       {expedition.state === "ended" && expedition.totalGoldEarned && (
         <ExpeditionStatusInfo
-          title="Total coins earned "
+          title={t("totalGold")}
           text={expedition.totalGoldEarned}
         />
       )}
       {expedition.state === "ended" && expedition.totalCrystals && (
         <ExpeditionStatusInfo
-          title="Total crystals earned "
+          title={t("totalCrystals")}
           text={expedition.totalCrystals}
         />
       )}
       {participantScale && (
         <ExpeditionStatusInfo
-          title="Participants level"
+          title={t("participantLevel")}
           text={<GalleryItemScaleComponent scale={participantScale} />}
         />
-      )}{" "}
+      )}
       <ExpeditionStatusInfo
-        title="Expedition level"
+        title={t("expeditionLevel")}
         text={<GalleryItemScaleComponent scale={expedition.level} />}
       />
     </ExpeditionStatus>

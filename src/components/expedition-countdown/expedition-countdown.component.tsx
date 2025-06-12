@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import { Expedition } from "@/types/expeditions.types";
 import { formatDuration, intervalToDuration, Locale } from "date-fns";
 import { enUS, ru } from "date-fns/locale";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { ExpeditionStatusInfoWrap } from "../expedition-status-info/expedition-status-info.component.styled";
 
 const ExpeditionCountdown = ({ expedition }: { expedition: Expedition }) => {
@@ -16,6 +16,8 @@ const ExpeditionCountdown = ({ expedition }: { expedition: Expedition }) => {
 
   const localeCode = useLocale();
   const locale = localeMap[localeCode] ?? enUS;
+
+  const t = useTranslations("expeditionCountdown");
 
   const isActive = expedition.state === "active";
 
@@ -37,8 +39,10 @@ const ExpeditionCountdown = ({ expedition }: { expedition: Expedition }) => {
 
   return (
     <ExpeditionStatusInfoWrap>
-      <span>⏳ {isActive ? "Active" : "Preparation"} phase ends in</span>
-      <p> {formattedDate}</p>
+      <span>
+        ⏳ {isActive ? t("activeEndsIn") : t("preparationEndsIn")}
+      </span>
+      <p>{formattedDate}</p>
     </ExpeditionStatusInfoWrap>
   );
 };

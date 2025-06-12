@@ -231,5 +231,40 @@
     "libraryTitle": {
         "my": "My",
         "penguins": "Penguins"
+    },
+    "expeditionStatus": {
+        "minParticipants": "Min participants (p/person)",
+        "maxParticipants": "Max participants (p/person)",
+        "totalParticipants": "Total participants",
+        "totalPenguins": "Total penguins in expedition",
+        "totalGold": "Total coins earned",
+        "totalCrystals": "Total crystals earned",
+        "participantLevel": "Participants level",
+        "expeditionLevel": "Expedition level"
+    },
+    "expeditionParticipants": {
+        "yourParticipants": "Your participants",
+        "otherParticipants": "Other participants",
+        "addPenguin": "Add penguin",
+        "showOthers": "Show other penguins",
+        "hideOthers": "Hide other penguins",
+        "loading": "Loading..."
+    },
+    "expeditionPage": {
+        "notEnoughPenguins": "Sorry, you don't have enough Penguins to join",
+        "rewardClaimed": "Reward claimed!",
+        "claimed": "Claimed",
+        "expectRewards": "Expect rewards",
+        "expeditionEndedYouCanClaim": "Congratulations! The expedition is over and you can get your award and return your penguins",
+        "expeditionEndedTryNext": "The expedition is over, you can try to participate in the next one!",
+        "resetParticipants": "Reset my participants",
+        "unsetParticipation": "Unset participation",
+        "confirmParticipation": "Confirm participation",
+        "loadingReward": "Loading reward...",
+        "takeReward": "Take my reward!"
+    },
+    "expeditionCountdown": {
+        "activeEndsIn": "Active phase ends in",
+        "preparationEndsIn": "Preparation phase ends in"
     }
 }

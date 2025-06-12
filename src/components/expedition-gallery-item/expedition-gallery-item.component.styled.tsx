@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { LinkStyled } from "../link/link.component.styled";
 
 export const ExpeditionGalleryItemContainer = styled.div<{
   $borderColor: string;
@@ -7,12 +8,12 @@ export const ExpeditionGalleryItemContainer = styled.div<{
   display: flex;
   border-radius: 1em;
   flex-direction: column;
-  gap: .6em;
+  gap: 0.4em;
   min-height: 50vh;
-  padding: 1em;
+  padding: 0.7em;
   border: 2px solid
     ${({ $ended, $borderColor }) => ($ended ? "#000000d5" : $borderColor)};
-  box-shadow: 0 1px 24px
+  box-shadow: 0 1px 17px
       ${({ $ended, $borderColor }) => ($ended ? "#442929" : $borderColor)},
     0 0 8px rgba(255, 255, 255, 0.05);
   background-color: rgba(10, 20, 18, 0.95);
@@ -27,7 +28,7 @@ export const ExpeditionGalleryItemContainer = styled.div<{
   &:hover {
     box-shadow: 0 0 12px ${({ $borderColor }) => $borderColor}aa,
       0 0 20px ${({ $borderColor }) => $borderColor}55,
-      0 0 8px rgba(255, 255, 255, 0.1);
+      0 0 9px rgba(255, 255, 255, 0.1);
     transition: all 0.3s ease;
   }
   ${({ $ended }) =>
@@ -58,7 +59,7 @@ export const ExpeditionGalleryItemContainer = styled.div<{
 export const ExpeditionGalleryItemSideContainer = styled.div`
   display: flex;
   width: 100%;
-  gap: 1em;
+  gap: 0.6em;
   @media (max-width: 888px) {
     flex-direction: column;
   }
@@ -68,7 +69,7 @@ export const ExpeditionGalleryItemSide = styled.div`
   width: 50%;
   display: flex;
   flex-direction: column;
-  gap: .6em;
+  gap: 0.6em;
   @media (max-width: 888px) {
     width: 100%;
   }
@@ -86,5 +87,21 @@ export const ExpeditionGalleryItemDes = styled.p`
   word-wrap: break-word;
   hyphens: auto;
   text-align: justify;
-  line-height: 1.4;
+  line-height: 1.3;
+`;
+
+export const DetailsButton = styled(LinkStyled)`
+  width: 100%;
+  text-align: center;
+  padding: 0.5em 1.8em; 
+  background: #21d4fd;
+  color: black;
+  border-radius: 0.6em;
+  font-weight: bold;
+  transition: 0.2s ease all;
+
+  &:hover {
+    filter: brightness(1.1);
+    box-shadow: 0 0 6px rgba(255, 255, 255, 0.2);
+  }
 `;

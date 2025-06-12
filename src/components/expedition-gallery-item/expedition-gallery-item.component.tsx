@@ -1,5 +1,6 @@
 import React, { useMemo } from "react";
 import {
+  DetailsButton,
   ExpeditionGalleryItemContainer,
   ExpeditionGalleryItemDes,
   ExpeditionGalleryItemImage,
@@ -15,6 +16,7 @@ import { LinkStyled } from "../link/link.component.styled";
 import ExpeditionStatusBadge from "../expedition-status-badge/expedition-status-badge.component";
 import GalleryItemScaleComponent from "../gallery-item-scale/gallery-item-scale.component";
 import styled from "styled-components";
+import ExpeditionCountdown from "../expedition-countdown/expedition-countdown.component";
 
 const FadeInWrapper = styled.div`
   animation: fadeInUp 0.6s ease both;
@@ -38,12 +40,15 @@ const StatRow = styled.div`
   span:first-child {
     opacity: 0.7;
   }
+  span:last-child {
+    text-align: right;
+  }
 `;
 
 const Divider = styled.hr`
   border: none;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
-  margin: .5em 0;
+  margin: 0.5em 0;
 `;
 
 const ExpeditionGalleryItem = ({ expedition }: { expedition: Expedition }) => {
@@ -62,9 +67,21 @@ const ExpeditionGalleryItem = ({ expedition }: { expedition: Expedition }) => {
       $borderColor={borderColor}
     >
       <FadeInWrapper>
-        <h1 style={{ textAlign: "center", marginBottom: "0.5em" }}>
-          {getLocalized(expedition.settings.title, locale)}
-        </h1>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            padding: ".4em 1em",
+          }}
+        >
+          {" "}
+          <h2 style={{ textAlign: "center", marginBottom: "0.5em" }}>
+            {getLocalized(expedition.settings.title, locale)}
+          </h2>{" "}
+          <ExpeditionStatusBadge status={expedition.state} />
+        </div>
+
         <ExpeditionGalleryItemSideContainer>
           <ExpeditionGalleryItemSide>
             <ExpeditionGalleryItemImage
@@ -73,11 +90,14 @@ const ExpeditionGalleryItem = ({ expedition }: { expedition: Expedition }) => {
             />
           </ExpeditionGalleryItemSide>
           <ExpeditionGalleryItemSide>
-            <ExpeditionStatusBadge status={expedition.state} />
             <ExpeditionGalleryItemDes>
               {getLocalized(expedition.settings.description, locale)}
             </ExpeditionGalleryItemDes>
             <Divider />
+            <StatRow>
+              <span>{t("target")} </span>
+              <span>{getLocalized(expedition.settings.goal, locale)}</span>
+            </StatRow>
             <StatRow>
               <span>{t("theme")} </span>
               <span>{getLocalized(expedition.settings.theme, locale)}</span>
@@ -109,21 +129,20 @@ const ExpeditionGalleryItem = ({ expedition }: { expedition: Expedition }) => {
               <span>{t("participantsCount")} </span>
               <span>{expedition.participantsCount}</span>
             </StatRow>
-            <StatRow>
-              <span>{t("penguinsCount")} </span>
-              <span>{expedition.totalPenguinsCount}</span>
-            </StatRow>
-            <Divider />
-            <div style={{ textAlign: "center", marginTop: "1em" }}>
-              <LinkStyled href={`/expeditions/${expedition.id}`}>
+            {expedition.totalPenguinsCount && (
+              <StatRow>
+                <span>{t("penguinsCount")} </span>
+                <span>{expedition.totalPenguinsCount}</span>
+              </StatRow>
+            )}
+            <ExpeditionCountdown expedition={expedition} />{" "}
+            <div style={{ textAlign: "center", marginTop: ".1em" }}>
+              <DetailsButton href={`/expeditions/${expedition.id}`}>
                 {t("detailsLink")}
-              </LinkStyled>
+              </DetailsButton>
             </div>
           </ExpeditionGalleryItemSide>
         </ExpeditionGalleryItemSideContainer>
-        <h4 style={{ textAlign: "center", marginTop: "1em" }}>
-          {t("target")} {getLocalized(expedition.settings.goal, locale)}
-        </h4>
       </FadeInWrapper>
     </ExpeditionGalleryItemContainer>
   );
