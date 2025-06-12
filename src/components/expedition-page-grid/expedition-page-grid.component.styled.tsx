@@ -4,6 +4,8 @@ export const ExpeditionPageGrid = styled.div`
   color: #ffffff;
   display: flex;
   width: 100%;
+  height: calc(100vh - 100px);
+
   @media (max-width: 768px) {
     flex-direction: column;
     align-items: center;
@@ -13,11 +15,10 @@ export const ExpeditionPageGrid = styled.div`
 export const ExpeditionPageImage = styled.div`
   width: 35%;
   position: sticky;
+
   top: 80px;
-  height: calc(90vh - 100px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  height: calc(100vh - 100px);
+
   img {
     height: 100%;
     width: auto;
@@ -40,7 +41,7 @@ export const ExpeditionContentColumn = styled.div`
   flex-direction: column;
   padding: 1.5rem;
   overflow-y: auto;
-  gap: 1.5rem;
+  gap: 1.3rem;
   @media (max-width: 768px) {
     position: relative;
     top: 0;
