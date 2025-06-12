@@ -10,12 +10,16 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.49.4",
+    "@ton/core": "^0.61.0",
+    "@ton/crypto": "^3.3.0",
+    "@ton/ton": "^15.2.1",
     "date-fns": "^4.1.0",
     "firebase": "^11.7.1",
     "firebase-admin": "^13.4.0",
     "jotai": "^2.12.4",
     "next": "15.3.2",
     "next-intl": "^4.1.0",
+    "nft.storage": "^7.2.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-parallax-tilt": "^1.7.295",
@@ -23,7 +27,7 @@
     "replicate": "^1.0.1",
     "rodal": "^2.1.0",
     "sharp": "^0.34.2",
-    "styled-components": "^6.1.18",
+    "styled-components": "^6.1.18", 
     "uuid": "^11.1.0"
   },
   "devDependencies": {

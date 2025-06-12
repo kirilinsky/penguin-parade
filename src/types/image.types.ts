@@ -19,6 +19,7 @@ export interface ImageItem {
   expedition: string | null;
   expeditions: 0;
   nft: boolean;
+  nftIndex: number | null;
   nftLink: string | null;
   gift: boolean;
   auction: boolean;
