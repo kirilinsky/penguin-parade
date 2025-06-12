@@ -206,6 +206,7 @@ const CountDownPage = () => {
                   src="/come_later.webp"
                   alt="come later"
                 />
+                <br />
                 <p>{t("laterTitle")}</p>
                 <span>
                   {t("comeBackIn")} <b>{leftTime}</b>

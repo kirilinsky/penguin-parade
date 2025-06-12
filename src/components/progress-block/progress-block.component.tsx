@@ -3,6 +3,7 @@ import {
   ProgressBlockBarFill,
   ProgressBlockBarWrapper,
   ProgressBlockContainer,
+  ProgressBlockContent,
   ProgressBlockGoalNote,
   ProgressBlockLabel,
   ProgressBlockWrapper,
@@ -42,10 +43,10 @@ export const PenguinProgressBlock = () => {
             src="/infographics/progress.webp"
           />
         </ProgressBlockWrapper>
-        <div>
+        <ProgressBlockContent>
           <h2>{t("afterTitle")}</h2>
           <p>{t("afterDescription")}</p>
-        </div>
+        </ProgressBlockContent>
       </ProgressBlockContainer>
     </PageContentBlockStyled>
   );

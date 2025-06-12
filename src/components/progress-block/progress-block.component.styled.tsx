@@ -1,9 +1,11 @@
 import styled from "styled-components";
 
 export const ProgressBlockContainer = styled.div`
-  display: flex; padding: 1em;
-  gap: 1em;align-items: center;
-  line-height:1.5;
+  display: flex;
+  padding: 1em;
+  gap: 1em;
+  align-items: center;
+  line-height: 1.5;
 `;
 
 export const ProgressBlockWrapper = styled.div`
@@ -38,6 +40,22 @@ export const ProgressBlockBarFill = styled.div`
   background: linear-gradient(90deg, #1affb3, #3fffa8);
   box-shadow: 0 0 6px rgba(26, 255, 179, 0.6);
   transition: width 0.4s ease-in-out;
+`;
+
+export const ProgressBlockContent = styled.div`
+  font-size: 21px;
+  padding-inline: 0.4em;
+
+  white-space: normal;
+  word-wrap: break-word;
+  hyphens: auto;
+  text-align: justify;
+  line-height: 1.4;
+  color: #e0fefb;
+  text-shadow: 0 0 3px #0ff;
+  p {
+    text-align: center;
+  }
 `;
 
 export const ProgressBlockGoalNote = styled.div`
