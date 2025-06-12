@@ -120,7 +120,7 @@ const GalleryItemComponent = ({
         {img.auction && (
           <p>
             {t("price")} - {img.price}
-            <Image src="/coin.webp" width={18} height={18} alt="coin" />{" "}
+            <Image src="/coin.webp" width={19} height={19} alt="coin" />{" "}
           </p>
         )}
       </GalleryItemContent>

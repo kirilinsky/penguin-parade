@@ -26,6 +26,7 @@ import ExpeditionParticipantModal from "../modals/expedition-participant-modal/e
 import { getIdToken } from "@/helpers/get-token/get-token";
 import ExpeditionRewardModal from "../modals/expedition-reward-modal/expedition-reward-modal.component";
 import { getRewardCall } from "@/helpers/api/get-reward.call";
+import Image from "next/image";
 
 const ExpeditionPageGridComponent = ({
   expedition,
@@ -256,7 +257,7 @@ const ExpeditionPageGridComponent = ({
                 (hasJoined
                   ? penguinsParticipants.length
                   : participants.length)}{" "}
-              coins
+              <Image src="/coin.webp" width={19} height={19} alt="coin" />{" "}
             </div>
           )}
           {expedition.state === "ended" && (
