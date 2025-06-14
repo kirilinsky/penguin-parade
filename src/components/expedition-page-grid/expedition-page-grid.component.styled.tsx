@@ -9,6 +9,7 @@ export const ExpeditionPageGrid = styled.div`
   @media (max-width: 768px) {
     flex-direction: column;
     align-items: center;
+    height: auto;
   }
 `;
 
@@ -31,7 +32,7 @@ export const ExpeditionPageImage = styled.div`
     position: relative;
     top: 0;
     height: auto;
-    width: 70%;
+    width: 100%;
   }
 `;
 
@@ -44,9 +45,10 @@ export const ExpeditionContentColumn = styled.div`
   gap: 1.3rem;
   @media (max-width: 768px) {
     position: relative;
-    top: 0;
+    padding: 0;
     height: auto;
     width: 100%;
+    top: -12vh;
   }
 `;
 
@@ -55,6 +57,10 @@ export const ExpeditionPageTitle = styled.div`
   gap: 0.5em;
   @media (max-width: 768px) {
     font-size: 19px;
+    background: #00000092;
+    width:100%;
+    padding-block:1em;
+    backdrop-filter:blur(3px)
   }
   h1 {
     text-align: center;

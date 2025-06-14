@@ -30,6 +30,9 @@ export const ExpeditionParticipantsStyled = styled.div`
   gap: 1em;
   flex-wrap: wrap;
   padding: 0.5em;
+   @media (max-width: 768px) {
+    padding:   1em 0;
+   }
 `;
 
 export const ExpeditionParticipantsAddItem = styled.div`
