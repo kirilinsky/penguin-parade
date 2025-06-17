@@ -12,6 +12,7 @@ import { ImageItem, ImagesSortType } from "@/types/image.types";
 import { scaleOrder, ScaleType } from "@/types/scale.types";
 
 import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import Rodal from "rodal";
 
 const AuctionPage = () => {
@@ -48,15 +49,15 @@ const AuctionPage = () => {
       const data = await res.json();
 
       if (data.success) {
-        alert("Penguin has been bought");
         refetch();
         refreshUser();
         setDetailsImage(null);
+        toast.success("Penguin has been bought");
       } else {
-        console.error("Buy process failed:", data);
+        throw new Error(data.error);
       }
-    } catch (err) {
-      console.error("Error during buy process:", err);
+    } catch (err: any) {
+      toast.error(err.message);
     } finally {
       setIsLoading(false);
     }

@@ -65,10 +65,6 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Can't buy this" }, { status: 403 });
     }
 
-    if (!buy) {
-      return NextResponse.json({ error: "Can't buy this" }, { status: 403 });
-    }
-
     const buyerUserRef = doc(firestore, "users", uid);
 
     const userDoc = await getDoc(buyerUserRef);
