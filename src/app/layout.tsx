@@ -28,7 +28,7 @@ export default async function RootLayout({
             <ClientHeaderWrapper />
             <PageWrapperStyled>{children}</PageWrapperStyled>
             <FooterComponent />
-            <ToastContainer />
+            <ToastContainer theme="dark" />
           </body>
         </NextIntlClientProvider>
       </html>

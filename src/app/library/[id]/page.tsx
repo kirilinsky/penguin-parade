@@ -16,6 +16,7 @@ import { scaleOrder, ScaleType } from "@/types/scale.types";
 import { getAuth, sendEmailVerification } from "firebase/auth";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import Rodal from "rodal";
 
 const MyLibraryPage = () => {
@@ -126,7 +127,7 @@ const MyLibraryPage = () => {
       const data = await res.json();
 
       if (data.success) {
-        alert("Penguin has been sold");
+        toast.success("Penguin has been sold");
         setDetailsImage(null);
         setLoadingSell(false);
         const imagesDraft = [...images];
@@ -134,7 +135,8 @@ const MyLibraryPage = () => {
       } else {
         console.error("Sell process failed:", data);
       }
-    } catch (err) {
+    } catch (err: any) {
+      toast.error("Error during sell process:", err);
       console.error("Error during sell process:", err);
     }
   };
