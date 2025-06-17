@@ -6,6 +6,7 @@ import FooterComponent from "@/components/footer/footer.component";
 import { PageWrapperStyled } from "@/components/page-wrapper/page-wrapper.component.styled";
 import { getLocale } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
+import { ToastContainer } from "react-toastify";
 
 export const metadata = {
   title: "Penguin Parade",
@@ -27,6 +28,7 @@ export default async function RootLayout({
             <ClientHeaderWrapper />
             <PageWrapperStyled>{children}</PageWrapperStyled>
             <FooterComponent />
+            <ToastContainer />
           </body>
         </NextIntlClientProvider>
       </html>
