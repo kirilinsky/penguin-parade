@@ -6,12 +6,13 @@ import { PageContentBlockStyled } from "@/components/page-content-block/page-con
 import { PageContentWrapperComponent } from "@/components/page-content-wrapper/page-content-wrapper.component";
 import UserListItemComponent from "@/components/user-list-item/user-list-item.component";
 import { firestore } from "@/firebase";
+import { toast } from "react-toastify";
+import { getIdToken } from "@/helpers/get-token/get-token";
 import { useGetFriends } from "@/hooks/use-get-friends";
 import { useUserDetails } from "@/hooks/use-user-details";
 import { FriendData, User } from "@/types/user.types";
 import {
   arrayRemove,
-  arrayUnion,
   collection,
   deleteDoc,
   doc,
@@ -164,19 +165,30 @@ const FriendsPage = () => {
 
   const handleAddFriend = async (user: User) => {
     if (!currentUser) return;
+    try {
+      const token = await getIdToken();
 
-    const timestamp = new Date();
-    const targetUserRef = doc(firestore, "users", user.id);
-    await updateDoc(targetUserRef, {
-      friendRequests: arrayUnion({ id: currentUser.id, sentAt: timestamp }),
-    });
+      const res = await fetch("/api/friends/add-friend", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ targetUserId: user.id }),
+      });
 
-    const currentUserRef = doc(firestore, "users", currentUser.id);
-    await updateDoc(currentUserRef, {
-      sentRequests: arrayUnion({ id: user.id, sentAt: timestamp }),
-    });
+      const data = await res.json();
 
-    friendsRefetch();
+      if (!res.ok) {
+        throw new Error(data?.error || "Failed to send friend request");
+      }
+      toast.success("Friend request sent!");
+      friendsRefetch();
+    } catch (err: any) {
+      toast.error(err?.message || "Failed to send friend request");
+      console.error("addFriend error:", err);
+      return { success: false, error: err.message || "Unknown error" };
+    }
   };
 
   const handleRemoveFriend = async (targetId: string) => {

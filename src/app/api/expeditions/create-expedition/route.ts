@@ -131,7 +131,7 @@ export async function POST(req: Request) {
       "users",
       userId,
       "notifications",
-      `new_expedition`
+      `${newDoc.id}_new_expedition`
     );
 
     return setDoc(notifRef, {

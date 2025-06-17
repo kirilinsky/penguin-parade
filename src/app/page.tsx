@@ -51,7 +51,7 @@ export default function Home() {
           </PageContentBlockStyled>
           <CrystalsBlock />
           <PenguinProgressBlock />
-          {/* <NotifictionsBlock /> */}
+
           <LastCraftedBlockComponent />
           <TotalCountBlockComponent />
           <RandomAuctionBlockComponent />
