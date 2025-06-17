@@ -133,7 +133,7 @@ const MyLibraryPage = () => {
         const imagesDraft = [...images];
         setImagesFiltered(imagesDraft.filter((img) => img.id !== imageId));
       } else {
-        console.error("Sell process failed:", data);
+        toast.error("Error during sell process:", data);
       }
     } catch (err: any) {
       toast.error("Error during sell process:", err);
