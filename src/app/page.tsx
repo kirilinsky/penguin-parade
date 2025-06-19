@@ -61,28 +61,29 @@ export default function Home() {
           <PageContentBlockStyled>
             <h2>Road map</h2>
             <ul>
-              <li>System notifications</li>
+              <li>Friends page design update</li>
               <li>Suspicious gifts ban</li>
-              <li>Allow to craft/expedition notifications</li>
               <li>Gift functionality design update (notification)</li>
               <li>Notification toasts</li>
               <li>Anonymous home page, loggedIn limitations</li>
               <li>NFT Mint preparation</li>
-              <li>Friends page design update</li>
-              <li>Friends Updtes(news)</li>
+              <li>Friends Updtes (news) </li>
               <li>Announcements</li>
               <li>Tutorial page</li>
+              <li>Allow to craft notifications</li>
               <li>Farms functionality</li>
               <li>Mystery eggs</li>
               <li>SignUp/Login via gmail</li>
             </ul>
           </PageContentBlockStyled>
+
           <PageContentBlockStyled>
-            <h2>News</h2>
-          </PageContentBlockStyled>
-          <PageContentBlockStyled>
-            <h2>Info</h2>
-            <Image width="220" height="320" src="/scale-top.jpg" alt="scales" />
+            <Image
+              width="320"
+              height="320"
+              src="/infographics/scales.webp"
+              alt="scales"
+            />
           </PageContentBlockStyled>
         </>
       ) : (
