@@ -3,7 +3,7 @@ import { ScaleType } from "@/types/scale.types";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
-  const randomNumber = Math.floor(Math.random() * 1300);
+  const randomNumber = Math.floor(Math.random() * 1390);
   const randomSettings = Math.floor(Math.random() * themes.length);
 
   let rarity: ScaleType =
@@ -11,15 +11,15 @@ export async function POST(req: Request) {
       ? "emperor"
       : randomNumber < 5
       ? "mystic"
-      : randomNumber < 10
-      ? "ghost"
       : randomNumber < 15
+      ? "ghost"
+      : randomNumber < 20
       ? "divine"
       : randomNumber < 60
       ? "legendary"
-      : randomNumber < 160
+      : randomNumber < 150
       ? "epic"
-      : randomNumber < 420
+      : randomNumber < 400
       ? "rare"
       : "common";
 
