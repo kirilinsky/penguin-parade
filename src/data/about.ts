@@ -2,7 +2,7 @@ export const tutorialBlocks = [
   {
     key: "tutorial.create",
     img: "create",
-    en: "Welcome! After registering, you can immediately create your very first penguin. Each penguin is generated with unique traits, and there's always a chance to get a rare one — even the ultra-rare Emperor!",
+    en: "Welcome! After sign up, you can immediately create your very first penguin. Each penguin is generated with unique traits, and there's always a chance to get a rare one — even the ultra-rare Emperor!",
     ru: "Добро пожаловать! После регистрации ты сразу можешь создать своего первого пингвина. Каждый пингвин уникален — и всегда есть шанс, что тебе повезёт и выпадет редкий, или даже супер-редкий Император!",
   },
   {
