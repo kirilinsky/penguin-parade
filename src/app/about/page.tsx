@@ -1,17 +1,23 @@
 "use client";
 
+import { loggedInAtom } from "@/atoms/user/user.atom";
 import {
   AboutPageContainer,
   AboutPageSectionBlock,
   AboutPageSectionImage,
   AboutPageSectionText,
 } from "@/components/about-page-layout/about-page-layout.styled";
+import { LinkStyled } from "@/components/link/link.component.styled";
 import { tutorialBlocks } from "@/data/about";
+import { useAtomValue } from "jotai";
 import { useLocale } from "next-intl";
 import Image from "next/image";
+import { useTranslations } from "use-intl";
 
 const AboutPage = () => {
+  const t = useTranslations("aboutPage");
   const locale = useLocale();
+  const loggedIn = useAtomValue(loggedInAtom);
   return (
     <AboutPageContainer>
       {tutorialBlocks.map((section, i) => (
@@ -29,6 +35,14 @@ const AboutPage = () => {
           </AboutPageSectionText>
         </AboutPageSectionBlock>
       ))}
+      {!loggedIn && (
+        <AboutPageSectionBlock>
+          <AboutPageSectionText>
+            {t("subtitle")}
+            <LinkStyled href={"/signup"}>{t("signUpLink")}</LinkStyled>
+          </AboutPageSectionText>
+        </AboutPageSectionBlock>
+      )}
     </AboutPageContainer>
   );
 };

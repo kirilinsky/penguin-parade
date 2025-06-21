@@ -6,10 +6,11 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { useSetAtom } from "jotai";
 import { useRouter } from "next/navigation";
-import { useState } from "react"; 
+import { useState } from "react";
 import NeonButtonComponent from "@/components/neon-button/neon-button.component";
 import { useTranslations } from "next-intl";
 import { User } from "@/types/user.types";
+import { LinkStyled } from "@/components/link/link.component.styled";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -51,7 +52,6 @@ export default function Login() {
       <form
         onSubmit={handleLogin}
         style={{
-          
           border: "1px solid #8ebb93",
           margin: "10px",
           padding: "10px",
@@ -81,6 +81,9 @@ export default function Login() {
 
         {error && <p style={{ color: "red" }}>{error}</p>}
         <NeonButtonComponent title={t("loginButton")} type="submit" />
+        <br />
+        <span> {t("subtitle")}</span>
+        <LinkStyled href={"/signup"}>{t("signUpButton")}</LinkStyled>
       </form>
     </div>
   );

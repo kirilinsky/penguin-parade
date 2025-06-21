@@ -22,8 +22,8 @@ export type UserStatistics = {
   totalCrystalsEarned: number;
   totalExpeditionParticipants: number;
   totalCrystalsSpent: number;
-  totalCoinsUsed: number;
-  crystalsUsed: {
+  totalCoinsSpent: number;
+  crystalsUsed?: {
     rare: number;
     epic: number;
     legendry: number;
@@ -34,17 +34,15 @@ export type UserStatistics = {
   totalCrafted: number;
   totalSold: number;
   totalBought: number;
-  lastCrystalAppliedAt: Date;
-  lastEvolutionAt: Date;
-  lastGiftSentAt: Date;
-  lastExpeditionAt: Date;
-  lastLoginAt: Date;
-  lastAuctionPurchaseAt: Date;
-  lastAuctionSellAt: Date;
-  lastSkipToPayAt: Date;
-  totalSkipToPay: number;
-  /* TODO: add totalAmount stat */
-  //totalAmount: Record<string, number>;
+  lastCrystalAppliedAt?: Date;
+  lastEvolutionAt?: Date;
+  lastGiftSentAt?: Date;
+  lastExpeditionAt?: Date;
+  lastLoginAt?: Date;
+  lastAuctionPurchaseAt?: Date;
+  lastAuctionSellAt?: Date;
+  lastSkipToPayAt?: Date;
+  totalSkipToPay?: number;
 };
 /* TODO: add settings */
 export type UserSettings = {
@@ -68,7 +66,7 @@ export type User = {
   statistics: UserStatistics;
   //xp: number;
   imageIds: string[];
-  lastGeneratedAt: Date;
+  lastGeneratedAt: Date | null;
   allowCraftAt: Date;
 };
 

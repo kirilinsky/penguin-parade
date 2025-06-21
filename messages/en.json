@@ -137,7 +137,9 @@
     "loginPage": {
         "title": "Login Page",
         "password": "Password",
-        "loginButton": "Login"
+        "loginButton": "Login",
+        "signUpButton": "Sign Up",
+        "subtitle": "еще нет профиля? Пожалуйста, зарегистрируйтесь сначала"
     },
     "signUpPage": {
         "title": "Sign up and start collecting the Penguins!",
@@ -145,7 +147,12 @@
         "username": "User name",
         "password": "Password",
         "verifyEmailAlert": "Welcome, please follow log in page and don't forget to verify email ",
-        "signUpButton": "Sign Up"
+        "signUpButton": "Sign Up",
+        "emailInfo": "Do not forget to use the real email address to start craft, you will need to confirm your address"
+    },
+    "aboutPage": {
+        "subtitle": "Start crafting your own collection of unique Penguins, each with their own style and story.",
+        "signUpLink": "Sign Up"
     },
     "header": {
         "craft": "Craft!",
