@@ -27,6 +27,7 @@ import { getIdToken } from "@/helpers/get-token/get-token";
 import ExpeditionRewardModal from "../modals/expedition-reward-modal/expedition-reward-modal.component";
 import { getRewardCall } from "@/helpers/api/get-reward.call";
 import Image from "next/image";
+import { toast } from "react-toastify";
 
 const ExpeditionPageGridComponent = ({
   expedition,
@@ -96,26 +97,32 @@ const ExpeditionPageGridComponent = ({
     /* TODO use get id token in other functions */
     const imageIds = participants.map((img) => img.id);
     const token = await getIdToken();
-    setLoading(true);
-    const res = await fetch("/api/expeditions/join-expedition", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-        expeditionId: expedition.id,
-        imageIds,
-      }),
-    });
 
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.error || "Failed to join expedition");
-    refetch();
-    alert("success!");
-    setLoading(false);
+    try {
+      setLoading(true);
+      const res = await fetch("/api/expeditions/join-expedition", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          expeditionId: expedition.id,
+          imageIds,
+        }),
+      });
 
-    return data;
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Failed to join expedition");
+      refetch();
+      toast.success("Success");
+
+      setLoading(false);
+
+      return data;
+    } catch (err: any) {
+      toast.error(err.message);
+    }
   };
 
   const unsetParticipation = async () => {
