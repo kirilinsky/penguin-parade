@@ -16,7 +16,11 @@ export const HeaderLinks = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 18px;
+  gap: 4px;
+  div{
+    text-align: center;
+    font-size: 15px;
+  }
   @media (max-width: 768px) {
     display: none;
   }

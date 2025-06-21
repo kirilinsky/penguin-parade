@@ -35,14 +35,15 @@ const AboutPage = () => {
           </AboutPageSectionText>
         </AboutPageSectionBlock>
       ))}
-      {!loggedIn && (
-        <AboutPageSectionBlock>
-          <AboutPageSectionText>
-            {t("subtitle")}
-            <LinkStyled href={"/signup"}>{t("signUpLink")}</LinkStyled>
-          </AboutPageSectionText>
-        </AboutPageSectionBlock>
-      )}
+
+      <AboutPageSectionBlock>
+        <AboutPageSectionText>
+          {t("goCraftTitle")}
+          <LinkStyled href={loggedIn ? "/countdown" : "/signup"}>
+            {t(loggedIn ? "craftLink" : "signUpLink")}
+          </LinkStyled>
+        </AboutPageSectionText>
+      </AboutPageSectionBlock>
     </AboutPageContainer>
   );
 };
