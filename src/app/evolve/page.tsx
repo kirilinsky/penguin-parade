@@ -18,6 +18,7 @@ import { ImageItem } from "@/types/image.types";
 import { ScaleType } from "@/types/scale.types";
 import { getAuth, sendEmailVerification } from "firebase/auth";
 import React, { useEffect, useMemo, useState } from "react";
+import { toast } from "react-toastify";
 import Rodal from "rodal";
 
 type EvolutionSlot = ImageItem | null;
@@ -93,7 +94,7 @@ const EvolvePage = () => {
     await userCred.reload();
     if (!userCred.emailVerified) {
       await sendEmailVerification(userCred);
-      alert(
+      toast.error(
         `Please verify your email (${userCred.email}) before evolving a penguin.`
       );
       return;

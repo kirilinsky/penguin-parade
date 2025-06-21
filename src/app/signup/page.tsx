@@ -11,6 +11,7 @@ import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 import { LinkStyled } from "@/components/link/link.component.styled";
 import NeonButtonComponent from "@/components/neon-button/neon-button.component";
 import { useTranslations } from "next-intl";
+import { toast } from "react-toastify";
 
 const SignUpPage = () => {
   const t = useTranslations("signUpPage");
@@ -52,7 +53,7 @@ const SignUpPage = () => {
         lastGeneratedAt: null,
       });
 
-      alert(t("verifyEmailAlert") + user.email);
+      toast.error(t("verifyEmailAlert") + user.email);
       setSuccess(true);
 
       setEmail("");

@@ -24,6 +24,7 @@ import { ScaleType } from "@/types/scale.types";
 import { getBaseColorByScale } from "@/helpers/get-base-color-by-rarity/get-base-color-by-rarity";
 import GalleryItemScaleComponent from "@/components/gallery-item-scale/gallery-item-scale.component";
 import { TelegramShareButton } from "@/components/tg-share-button/tg-share-button";
+import { toast } from "react-toastify";
 
 type GenerationResult = {
   downloadURL: string;
@@ -80,11 +81,12 @@ const CountDownPage = () => {
     await userCred.reload();
     if (!userCred.emailVerified) {
       await sendEmailVerification(userCred);
-      alert(
+      toast.info(
         `${t("verifyEmailAlert1")} (${userCred.email}) ${t(
           "verifyEmailAlert2"
         )}`
       );
+
       return;
     }
 
@@ -106,11 +108,11 @@ const CountDownPage = () => {
       const data: GenerateImageReposne = await res.json();
 
       if (res.status === 429) {
-        alert(t("generationInProgress"));
+        toast.error(t("generationInProgress"));
       }
 
       if (res.status === 500) {
-        alert(t("serverError"));
+        toast.error(t("serverError"));
       }
 
       if (data.success) {
@@ -127,7 +129,7 @@ const CountDownPage = () => {
       }
     } catch (err) {
       console.error("Error during generation:", err);
-      alert(t("unexpectedError"));
+      toast.error(t("unexpectedError"));
     } finally {
       setLoading(false);
       checkUserStatus();

@@ -53,7 +53,7 @@ const MyLibraryPage = () => {
 
     if (!userCred.emailVerified) {
       await sendEmailVerification(userCred);
-      alert(
+      toast.error(
         `Please verify your email (${user.email}) before gifting a penguin.`
       );
       return;
@@ -80,15 +80,15 @@ const MyLibraryPage = () => {
       const data = await res.json();
 
       if (data.success) {
-        alert("Gift has been sent");
+        toast.success("Gift has been sent");
         setDetailsImage(null);
         const imagesDraft = [...images];
         setImagesFiltered(imagesDraft.filter((img) => img.id !== imageId));
       } else {
-        console.error("Gift process failed:", data);
+        throw new Error("Gift process failed:", data);
       }
-    } catch (err) {
-      console.error("Error during gift process:", err);
+    } catch (err: any) {
+      toast.error(err.message);
     }
   };
 
@@ -99,14 +99,14 @@ const MyLibraryPage = () => {
 
     if (!userCred.emailVerified) {
       await sendEmailVerification(userCred);
-      alert(
+      toast.error(
         `Please verify your email (${userCred.email}) before selling a penguin.`
       );
       return;
     }
 
     if (!imageId) {
-      alert(`Wrong image Id.`);
+      toast.error(`Wrong image Id.`);
       return;
     }
 

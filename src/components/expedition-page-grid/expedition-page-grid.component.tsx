@@ -131,24 +131,28 @@ const ExpeditionPageGridComponent = ({
     const token = await getIdToken();
     setLoading(true);
 
-    const res = await fetch("/api/expeditions/exit-expedition", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-        expeditionId: expedition.id,
-      }),
-    });
+    try {
+      const res = await fetch("/api/expeditions/exit-expedition", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          expeditionId: expedition.id,
+        }),
+      });
 
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.error || "Failed to exit expedition");
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Failed to exit expedition");
 
-    alert("you're unset!");
-    setLoading(false);
-    refetch();
-    return data;
+      toast.info("You left the expedition!");
+      setLoading(false);
+      refetch();
+      return data;
+    } catch (err: any) {
+      toast.error(err.message);
+    }
   };
 
   const isImageItemArray = (arr: unknown[]): arr is ImageItem[] => {
