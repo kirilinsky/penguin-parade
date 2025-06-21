@@ -67,8 +67,7 @@ export default function Home() {
               <li>Anonymous home page, loggedIn limitations</li>
               <li>NFT Mint preparation</li>
               <li>Friends Updtes (news) </li>
-              <li>Announcements</li>
-              <li>Tutorial page</li>
+              <li>Announcements</li> 
               <li>Allow to craft notifications</li>
               <li>Farms functionality</li>
               <li>Mystery eggs</li>
