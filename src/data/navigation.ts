@@ -5,6 +5,7 @@ type NavItem = {
 };
 
 export const navItems: NavItem[] = [
+  { labelKey: "about", href: "/about" },
   { labelKey: "craft", href: "/countdown" },
   { labelKey: "myPenguins", href: (id) => `/library/${id}` },
   { labelKey: "updates", href: "/updates" },

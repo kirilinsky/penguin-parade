@@ -7,21 +7,23 @@ const fadeIn = keyframes`
 
 export const AboutPageContainer = styled.div`
   padding: 4rem 2rem;
-  max-width: 1200px;
+
   margin: 0 auto;
 `;
 
-export const AboutPageSectionBlock = styled.div<{ reverse?: boolean }>`
+export const AboutPageSectionBlock = styled.div.withConfig({
+  shouldForwardProp: (prop) => prop !== "reverse",
+})<{ reverse?: boolean }>`
   display: flex;
   flex-direction: ${({ reverse }) => (reverse ? "row-reverse" : "row")};
   align-items: center;
   justify-content: space-between;
   margin-bottom: 5rem;
-  gap: 3rem;
+  gap: 2rem;
 
   @media (max-width: 768px) {
     flex-direction: column;
-  }
+  gap: 1px;}
 
   opacity: 0;
   animation: ${fadeIn} 0.8s ease-out forwards;
@@ -35,7 +37,10 @@ export const AboutPageSectionImage = styled.div`
   img {
     width: 50%;
     height: 100%;
-    border-radius: 1.5rem;
+
+    @media (max-width: 768px) {
+      width: 99%;
+    }
   }
 `;
 

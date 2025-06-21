@@ -49,7 +49,7 @@ export const tutorialBlocks = [
   },
   {
     key: "tutorial.rewards",
-    img: "rewards",
+    img: "reward",
     en: "When the expedition ends, you’ll get a notification. Head back to the expedition page to retrieve your penguins and collect your reward. They won’t return automatically — don’t leave them hanging!",
     ru: "Когда экспедиция завершается — ты получишь уведомление. Обязательно зайди на страницу экспедиции, чтобы вернуть своих пингвинов и получить награду. Они сами не вернутся — не забудь!",
   },
