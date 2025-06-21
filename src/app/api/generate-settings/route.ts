@@ -3,23 +3,23 @@ import { ScaleType } from "@/types/scale.types";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
-  const randomNumber = Math.floor(Math.random() * 1390);
+  const randomNumber = Math.random() * 100;
   const randomSettings = Math.floor(Math.random() * themes.length);
 
   let rarity: ScaleType =
-    randomNumber < 2
+    randomNumber < 0.1
       ? "emperor"
-      : randomNumber < 5
+      : randomNumber < 0.3
       ? "mystic"
-      : randomNumber < 15
+      : randomNumber < 0.8
       ? "ghost"
-      : randomNumber < 20
+      : randomNumber < 1.8
       ? "divine"
-      : randomNumber < 60
+      : randomNumber < 4.8
       ? "legendary"
-      : randomNumber < 150
+      : randomNumber < 10.8
       ? "epic"
-      : randomNumber < 400
+      : randomNumber < 22.8
       ? "rare"
       : "common";
 
@@ -32,7 +32,7 @@ export async function POST(req: Request) {
   const presetsObject = {
     common:
       "Keep it grounded or lightly stylized. Title should be related to theme. Backgrounds may include cozy cottages, campfires, village squares, wooden bridges, blue skies with clouds, or garden paths. Title should feel soft, playful, or nostalgic. Effects minimal — perhaps some falling leaves or laundry in the breeze, warm light. Accessories simple. No grandiose titles (avoid'whispering', 'king', 'emperor', etc). Abilities should be subtle and clever.",
-    rare: "Introduce distinct fantasy elements: glowing mushrooms, crystal flowers, enchanted glades, or surreal sunsets. Backgrounds may include floating islands, rainbow-lit waterfalls, or celestial gardens. Accessories may glow or shimmer, carbon. Abilities become unique but not overpowered.",
+    rare: "Add subtle fantasy elements like glowing plants, soft bioluminescent light, or dreamy forest paths. Backgrounds may include misty hills, starry skies, or hidden groves with gentle sparkles. Accessories can have a light shimmer or faint glow. Abilities are distinct but grounded in nature or subtle magic.",
     epic: "Strong visual contrasts and striking scenes. Black shine stones. Environments may feature elemental chaos — volcano temples, storm altars, overgrown mechs, or desert ruins powered by arcane energy, some violet bright colors. Include magical effects like lightning trails or glowing glyphs, crystals. Give the penguin an aura or light. Titles should feel iconic and epic.",
     legendary:
       "Grand and symbolic. Backgrounds may include shattered moons, ruby stones, celestial maps, giant statues, or forgotten kingdoms ablaze with runes and castles. Effects like fire halos, stardust rain, or radiant wings, asteroids. Title evoke ancient greatness, may sound mythic or eternal. Ability is powerful and thematically rich.",
@@ -93,7 +93,7 @@ Title(t) and bg should be related to theme!
         Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
       },
       body: JSON.stringify({
-       model: "gpt-3.5-turbo",
+        model: "gpt-3.5-turbo",
         messages: [
           { role: "system", content: systemPrompt },
           { role: "user", content: userPrompt },
