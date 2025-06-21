@@ -64,7 +64,6 @@ export default function Home() {
               <li>Friends page design update</li>
               <li>Suspicious gifts ban</li>
               <li>Gift functionality design update (notification)</li>
-              <li>Notification toasts</li>
               <li>Anonymous home page, loggedIn limitations</li>
               <li>NFT Mint preparation</li>
               <li>Friends Updtes (news) </li>
