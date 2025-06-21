@@ -1,12 +1,36 @@
-import React from "react";
+"use client";
 
-const Page = () => {
+import {
+  AboutPageContainer,
+  AboutPageSectionBlock,
+  AboutPageSectionImage,
+  AboutPageSectionText,
+} from "@/components/about-page-layout/about-page-layout.styled";
+import { tutorialBlocks } from "@/data/about";
+import { useLocale } from "next-intl";
+import Image from "next/image";
+
+const AboutPage = () => {
+  const locale = useLocale();
   return (
-    <div>
-      about page
-      <span>in development</span>
-    </div>
+    <AboutPageContainer>
+      {tutorialBlocks.map((section, i) => (
+        <AboutPageSectionBlock key={i} reverse={i % 2 !== 0}>
+          <AboutPageSectionImage>
+            <Image
+              width={200}
+              height={250}
+              src={`/tutorial/${section.img}.webp`}
+              alt={`Section ${i + 1}`}
+            />
+          </AboutPageSectionImage>
+          <AboutPageSectionText>
+            {section[locale as "ru" | "en"]}
+          </AboutPageSectionText>
+        </AboutPageSectionBlock>
+      ))}
+    </AboutPageContainer>
   );
 };
 
-export default Page;
+export default AboutPage;
