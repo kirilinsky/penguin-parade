@@ -144,7 +144,7 @@ export async function POST(req: Request) {
     const promptParts: string[] = [];
 
     promptParts.push(
-      `A 2D digital cartoon-style portrait of a penguin character.`,
+      `A 2D digital cartoon-painting-style portrait of a penguin character.`,
       `The penguin is standing in ${en("bg").toLowerCase()}, surrounded by ${en(
         "fx"
       ).toLowerCase()}.`,

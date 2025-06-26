@@ -159,6 +159,7 @@ export const themes = [
   "Neo-futurist scarecrow cult",
   "Giant chessboard run by gods",
   "Swamp traveler",
+  "Underground City Thief",
   "City Urban Hunter",
   "Urban jungle grown from dreams",
   "Ancient cactus civilization",
