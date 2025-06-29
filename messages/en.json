@@ -80,6 +80,7 @@
     },
     "galleryItemModal": {
         "avatarButton": "Set as Avatar",
+        "detailsButton": "Details Page",
         "giftButton": "Gift to friend",
         "sellButton": "Sell on Market for",
         "chooseFriendTitle": "Choose Friend to gift",

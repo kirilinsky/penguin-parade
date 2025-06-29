@@ -25,6 +25,7 @@ import AvatarComponent from "../avatar-component/avatar-component";
 import { useLocale, useTranslations } from "next-intl";
 import { getLocalized } from "@/helpers/get-localized/get-localized";
 import { User } from "@/types/user.types";
+import { useRouter } from "next/navigation";
 
 const tektur = Tektur({
   subsets: ["latin"],
@@ -54,9 +55,16 @@ const GalleryItemModalComponent = ({
   if (!img) return null;
   const t = useTranslations("galleryItemModal");
   const locale = useLocale();
+  const router = useRouter();
   const [giftMode, setGiftMode] = useState(false);
   const [friendRecipient, setFriendRecipient] =
     useState<FriendWithUser | null>();
+
+  const handleRedirect = (imgId: string) => {
+    if (!loading && imgId && user) {
+      router.push(`/library/${user.id}/${imgId}`);
+    }
+  };
 
   const baseColor = useMemo(() => {
     return getBaseColorByScale(img.settings.rarity);
@@ -107,6 +115,11 @@ const GalleryItemModalComponent = ({
                   title={`${t("sellButton")} ${sell} P$`}
                 />
               )}
+              <NeonButtonComponent
+                disabled={loading}
+                onClick={() => handleRedirect(img.id)}
+                title={t("detailsButton")}
+              />
             </GalleryItemModalButtonsContainer>
           )}
         </GalleryItemModalAccordion>

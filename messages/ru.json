@@ -69,6 +69,7 @@
     },
     "galleryItemModal": {
         "avatarButton": "Поставить как аватар",
+        "detailsButton": "Страница Пингвина",
         "giftButton": "Подарить другу",
         "sellButton": "Продать на аукционе за",
         "chooseFriendTitle": "Выбери друга для подарка",
