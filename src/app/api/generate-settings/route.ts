@@ -7,19 +7,19 @@ export async function POST(req: Request) {
   const randomSettings = Math.floor(Math.random() * themes.length);
 
   let rarity: ScaleType =
-    randomNumber < 0.1
+    randomNumber < 0.05
       ? "emperor"
-      : randomNumber < 0.3
+      : randomNumber < 0.15
       ? "mystic"
-      : randomNumber < 0.8
+      : randomNumber < 0.4
       ? "ghost"
-      : randomNumber < 1.8
+      : randomNumber < 1.2
       ? "divine"
-      : randomNumber < 4.8
+      : randomNumber < 3.2
       ? "legendary"
-      : randomNumber < 10.8
+      : randomNumber < 8.2
       ? "epic"
-      : randomNumber < 22.8
+      : randomNumber < 22.2
       ? "rare"
       : "common";
 
