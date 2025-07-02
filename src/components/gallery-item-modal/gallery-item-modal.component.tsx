@@ -76,7 +76,7 @@ const GalleryItemModalComponent = ({
 
   return (
     <GalleryItemModalContainer>
-      <GalleryItemModalContent $frameColor={baseColor}>
+      <GalleryItemModalContent $nft={false} $frameColor={baseColor}>
         <GalleryItemModalImage
           alt={img.title}
           src={img.imageUrl}
