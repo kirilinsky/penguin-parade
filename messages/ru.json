@@ -53,7 +53,7 @@
         "ability": "Способность",
         "loot": "Экипировка",
         "createdAt": "Дата создания",
-        "auctionSince": "На аукционе с",
+        "auctionSince": "На продаже с",
         "price": "Цена",
         "beak": "Цвет клюва",
         "back": "Цвет спины",
@@ -71,7 +71,7 @@
         "avatarButton": "Поставить как аватар",
         "detailsButton": "Страница Пингвина",
         "giftButton": "Подарить другу",
-        "sellButton": "Продать на аукционе за",
+        "sellButton": "Продать на рынок за",
         "chooseFriendTitle": "Выбери друга для подарка",
         "unsetButton": "Убрать",
         "chooseButton": "Выбрать",
@@ -105,8 +105,8 @@
         "removeButton": "Удалить"
     },
     "randomAuctionBlock": {
-        "title": "Случайная сделка на аукционе",
-        "auctionButton": "Перейти на аукцион",
+        "title": "Случайная сделка на рынке",
+        "auctionButton": "Перейти на рынок",
         "emptyTitle": "Увы, сейчас ничего не продаётся!",
         "emptySubtitle": "Загляни позже — вдруг повезёт"
     },
@@ -201,8 +201,8 @@
         "lastExpeditionAt": "Последняя экспедиция",
         "lastLoginAt": "Последний вход",
         "lastGeneratedAt": "Последнее создание",
-        "lastAuctionPurchaseAt": "Последняя покупка на аукционе",
-        "lastAuctionSellAt": "Последняя продажа на аукционе",
+        "lastAuctionPurchaseAt": "Последняя покупка на рынке",
+        "lastAuctionSellAt": "Последняя продажа на рынке",
         "lastSkipToPayAt": "Последний пропуск за монеты",
         "totalSkipToPay": "Пропусков использовано"
     },
