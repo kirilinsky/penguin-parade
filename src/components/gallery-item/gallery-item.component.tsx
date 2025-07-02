@@ -47,7 +47,7 @@ const GalleryItemComponent = ({
 
   const baseColor = useMemo(() => {
     return getBaseColorByScale(img.settings.rarity);
-  }, [img.settings.rarity]); 
+  }, [img.settings.rarity]);
 
   return (
     <Tilt
@@ -71,8 +71,8 @@ const GalleryItemComponent = ({
         )}
         {img.nft && (
           <GalleryItemNftBadge
-            width={44}
-            height={44}
+            width={53}
+            height={50}
             alt="nft"
             src="/nft_badge.webp"
           />
@@ -115,7 +115,6 @@ const GalleryItemComponent = ({
         </GalleryImageWrap>
         <p style={{ textAlign: "center" }} className={tektur.className}>
           {getLocalized(img.settings.t, locale)}
-          {img.nft && "nft 1"}
         </p>
         {img.auction && (
           <p>

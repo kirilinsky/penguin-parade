@@ -84,6 +84,12 @@ const GalleryItemModalStatistics = ({ img }: { img: ImageItem }) => {
         <h3>{t("origin")}</h3>
         <p>{t(img.origin)}</p>
       </GalleryItemModalStatisticsTrait>
+      {img.nft && (
+        <GalleryItemModalStatisticsTrait>
+          <h3>NFT</h3>
+          
+        </GalleryItemModalStatisticsTrait>
+      )}
     </GalleryItemModalStatisticsGrid>
   );
 };

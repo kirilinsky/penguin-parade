@@ -84,7 +84,7 @@ const GalleryItemModalComponent = ({
           style={{ objectFit: "cover" }}
         />
       </GalleryItemModalContent>
-      <GalleryItemModalContent>
+      <GalleryItemModalContent $nft={img.nft}>
         <GalleryItemModalTitle className={tektur.className}>
           {getLocalized(img.settings.t, locale)}
         </GalleryItemModalTitle>
@@ -94,7 +94,7 @@ const GalleryItemModalComponent = ({
 
         <GalleryItemModalAccordion $expand={!giftMode}>
           <GalleryItemModalStatistics img={img} />
-          {user && isMyPage && !img.inExpedition && (
+          {user && isMyPage && !img.inExpedition && !img.nft && (
             <GalleryItemModalButtonsContainer>
               {user.avatar !== img.imageUrl && (
                 <NeonButtonComponent

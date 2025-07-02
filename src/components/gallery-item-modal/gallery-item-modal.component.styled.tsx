@@ -16,11 +16,15 @@ export const GalleryItemModalContainer = styled.div`
   }
 `;
 
-export const GalleryItemModalContent = styled.div<{ $frameColor?: string }>`
+export const GalleryItemModalContent = styled.div<{
+  $frameColor?: string;
+  $nft: boolean;
+}>`
   display: flex;
   flex-direction: column;
   position: relative;
-  color: #fff;
+  color: rgb(230, 222, 222);
+  text-shadow: 1px 1px #000;
   width: 50%;
   overflow: ${({ $frameColor }) => ($frameColor ? "hidden" : "unset")};
   height: 100%;
@@ -28,7 +32,13 @@ export const GalleryItemModalContent = styled.div<{ $frameColor?: string }>`
   border-radius: 1em;
   padding: 10px;
   border: 1.5px solid ${({ $frameColor }) => $frameColor};
-  box-shadow: 0 0 10px ${({ $frameColor }) => $frameColor};
+  box-shadow: 0 0 10px ${({ $frameColor }) => $frameColor}; 
+  ${({ $nft }) =>
+    $nft &&
+    ` background-image: url("/nft_bg.webp");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;`}
   @media (max-width: 768px) {
     width: 99%;
     min-height: 55vh;

@@ -122,8 +122,8 @@ export const GalleryItemNftBadge = styled(Image)`
   position: absolute;
 
   opacity: 0.9;
-  bottom: 2%;
-  left: 2%;
+  bottom: -1%;
+  right: -1%;
 `;
 export const GalleryItemBadBatchBadge = styled(GalleryItemGiftBadge)`
   right: unset;
