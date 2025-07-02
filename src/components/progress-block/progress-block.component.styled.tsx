@@ -19,6 +19,7 @@ export const ProgressBlockWrapper = styled.div`
   color: #b6ffec;
   max-width: 500px;
   margin: 0 auto;
+  text-transform: capitalize;
 `;
 
 export const ProgressBlockLabel = styled.div`

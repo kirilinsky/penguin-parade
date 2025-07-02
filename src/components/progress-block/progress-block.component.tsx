@@ -16,10 +16,12 @@ import { useTranslations } from "next-intl";
 const Goal = 1024;
 
 export const PenguinProgressBlock = () => {
-  const { images } = useGetImages(true, "all");
+  const { images, rarityCount } = useGetImages(true, "all");
   const t = useTranslations("progressBlock");
   const percent = Math.min((images.length / Goal) * 100, 100).toFixed(1);
   const remaining = Goal - images.length;
+  console.log(rarityCount);
+  
   return (
     <PageContentBlockStyled>
       <ProgressBlockContainer>
@@ -42,11 +44,16 @@ export const PenguinProgressBlock = () => {
             height="300"
             src="/infographics/progress.webp"
           />
+          <div>
+            {Object.entries(rarityCount).map(([scaleConfig,count])=>
+            <p>{scaleConfig} - {count}</p>)}
+          </div>
         </ProgressBlockWrapper>
         <ProgressBlockContent>
           <h2>{t("afterTitle")}</h2>
           <p>{t("afterDescription")}</p>
         </ProgressBlockContent>
+       
       </ProgressBlockContainer>
     </PageContentBlockStyled>
   );
