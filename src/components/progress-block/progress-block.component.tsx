@@ -21,7 +21,7 @@ export const PenguinProgressBlock = () => {
   const percent = Math.min((images.length / Goal) * 100, 100).toFixed(1);
   const remaining = Goal - images.length;
   console.log(rarityCount);
-  
+
   return (
     <PageContentBlockStyled>
       <ProgressBlockContainer>
@@ -45,15 +45,17 @@ export const PenguinProgressBlock = () => {
             src="/infographics/progress.webp"
           />
           <div>
-            {Object.entries(rarityCount).map(([scaleConfig,count])=>
-            <p>{scaleConfig} - {count}</p>)}
+            {Object.entries(rarityCount).map(([scaleConfig, count]) => (
+              <p key={scaleConfig}>
+                {scaleConfig} - {count}
+              </p>
+            ))}
           </div>
         </ProgressBlockWrapper>
         <ProgressBlockContent>
           <h2>{t("afterTitle")}</h2>
           <p>{t("afterDescription")}</p>
         </ProgressBlockContent>
-       
       </ProgressBlockContainer>
     </PageContentBlockStyled>
   );
