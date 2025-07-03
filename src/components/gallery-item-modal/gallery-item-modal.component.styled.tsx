@@ -18,7 +18,7 @@ export const GalleryItemModalContainer = styled.div`
 
 export const GalleryItemModalContent = styled.div<{
   $frameColor?: string;
-  $nft: boolean;
+  $nft?: boolean;
 }>`
   display: flex;
   flex-direction: column;
@@ -32,7 +32,7 @@ export const GalleryItemModalContent = styled.div<{
   border-radius: 1em;
   padding: 10px;
   border: 1.5px solid ${({ $frameColor }) => $frameColor};
-  box-shadow: 0 0 10px ${({ $frameColor }) => $frameColor}; 
+  box-shadow: 0 0 10px ${({ $frameColor }) => $frameColor};
   ${({ $nft }) =>
     $nft &&
     ` background-image: url("/nft_bg.webp");
