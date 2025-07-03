@@ -66,7 +66,7 @@ export const useGetImages = (
 
         setAuctionImages(filtered);
 
-        const computed = filtered.reduce((acc, { settings: { rarity } }) => {
+        const computed = list.reduce((acc, { settings: { rarity } }) => {
           acc[rarity] = (acc[rarity] || 0) + 1;
           return acc;
         }, {} as RarityCount);
