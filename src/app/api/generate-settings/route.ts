@@ -63,7 +63,7 @@ Return an object with:
   "ability": {"en": ..., "ru": ...}
 }
 where: 
-  "bg": background behind penguin should be connected with theme and rarity scale, don't leave it too much simple, more details, 
+  "bg": background behind penguin should be connected with theme and rarity scale, don't leave it too much simple, more details, visual art effects
   "theme": given theme,
   "beak": color of penguin's beak,
   "breast": color of penguin's breast,
@@ -77,7 +77,7 @@ where:
 Use Capital first letter for values and spaces between words. Background always connected with title and theme. Same for colors. Be bold and original. Mix elements. Return only JSON.`;
 
   const userPrompt = `
-Generate a completely new penguin variation. Avoid repeating previous themes like moss, whisperer,Whispering, Wanderer explorer or sovereign. Surprise me. Title and background should come from theme its important.
+Generate a completely new penguin variation.  Title and background should come from theme and play and extend it, its important.
 Rarity: ${rarity}
 Theme reference: ${randomlyUpdatedTheme}, Title(t) and bg should be related to theme!
 Guidance:
