@@ -82,7 +82,7 @@ Rarity: ${rarity}
 Theme reference: ${randomlyUpdatedTheme}, Title(t) and bg should be related to theme!
 Guidance:
 ${presetsObject[rarity]}
-Title(t) and bg should be related to theme!
+Title(t) and bg should be related to theme, don't use Whispering Wanderer words in title!
 `;
 
   try {
