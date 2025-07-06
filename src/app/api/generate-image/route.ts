@@ -150,7 +150,7 @@ export async function POST(req: Request) {
       ).toLowerCase()}.`,
       `The penguin detailed and scene is styled as ${en(
         "theme"
-      ).toLowerCase()}, with cinematic lighting and rich background and great penguin accessories details.`
+      ).toLowerCase()}, with cinematic lighting and rich background and great penguin cloth or accessories details.`
     );
 
     promptParts.push(
@@ -160,7 +160,7 @@ export async function POST(req: Request) {
       `and a ${en("back").toLowerCase()} back.`
     );
     promptParts.push(
-      `Highly detailed, vibrant colors, fantasy illustration, attractive and detailed effects,`,
+      `Highly detailed, vibrant colors, fantasy illustration, attractive and detailed effects, art style`,
       `rarity level: ${settings.rarity.toLowerCase()} and picture title is ${en(
         "t"
       )}.`
@@ -173,9 +173,9 @@ export async function POST(req: Request) {
         seed: Math.floor(Math.random() * 10000),
         strength: 0.66,
         negative_prompt:
-          "low quality, 3d, bad quality, lack of details, realism, plain background, washed out",
+          "low quality, 3d, bad quality, lack of details, realism, plain background, washed out, flashing light",
         guidance_scale: 13,
-        num_inference_steps: 52,
+        num_inference_steps: 53,
       },
     });
 
