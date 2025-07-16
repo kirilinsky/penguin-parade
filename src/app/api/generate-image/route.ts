@@ -15,6 +15,7 @@ import {
   arrayUnion,
   getDoc,
   deleteDoc,
+  getCountFromServer,
 } from "firebase/firestore";
 import { supabase } from "@/supabase";
 import { ScaleType } from "@/types/scale.types";
@@ -108,6 +109,19 @@ export async function POST(req: Request) {
     }
   } else {
     evolutionMode = true;
+  }
+
+  const imageCountSnap = await getCountFromServer(
+    collection(firestore, GLOBAL_IMAGES_COLLECTION)
+  );
+
+  const totalImages = imageCountSnap.data().count;
+
+  if (totalImages >= 1024) {
+    return NextResponse.json(
+      { error: "Penguin cap reached. No more can be crafted." },
+      { status: 403 }
+    );
   }
 
   await updateDoc(userRef, {
