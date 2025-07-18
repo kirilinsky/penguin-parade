@@ -70,7 +70,7 @@ where:
   "back": color of penguin's back,
   "fx": picture effects,
   "acc": (max 1-3 words, clothing/hat/accessory, necklace, shirt etc),
-  "t": (max 3 words, title of the penguin),
+  "t": (max 3 words, title of the penguin) surprise me, pretend its movie title,
   "des": story about penguin,its origin, surrounding, legacy, fun facts, in 32-35 words,
   "ability": max 1-3 words, ability of the penguin
 

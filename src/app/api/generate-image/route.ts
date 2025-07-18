@@ -174,7 +174,7 @@ export async function POST(req: Request) {
       `and a ${en("back").toLowerCase()} back.`
     );
     promptParts.push(
-      `Highly detailed, vibrant colors, fantasy illustration, attractive and detailed effects, art style`,
+      `Highly detailed, art style, vibrant colors, fantasy illustration, attractive and detailed effects`,
       `rarity level: ${settings.rarity.toLowerCase()} and picture title is ${en(
         "t"
       )}.`
@@ -187,9 +187,9 @@ export async function POST(req: Request) {
         seed: Math.floor(Math.random() * 10000),
         strength: 0.66,
         negative_prompt:
-          "low quality, 3d, bad quality, lack of details, realism, plain background, washed out, flashing light",
+          "low quality, 3d, bad quality, lack of details, realism, plain background, artefact",
         guidance_scale: 13,
-        num_inference_steps: 53,
+        num_inference_steps: 51,
       },
     });
 
