@@ -115,11 +115,11 @@ const GalleryItemModalComponent = ({
                   title={`${t("sellButton")} ${sell} P$`}
                 />
               )}
-              <NeonButtonComponent
+              {/* <NeonButtonComponent
                 disabled={loading}
                 onClick={() => handleRedirect(img.id)}
                 title={t("detailsButton")}
-              />
+              /> */}
             </GalleryItemModalButtonsContainer>
           )}
         </GalleryItemModalAccordion>
