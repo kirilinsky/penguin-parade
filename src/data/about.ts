@@ -32,8 +32,8 @@ export const tutorialBlocks = [
   {
     key: "tutorial.skip",
     img: "skip",
-    en: "Normally, you can create one penguin per day. But if you can’t wait — you can skip the cooldown for 8 coins and create another right away!",
-    ru: "Обычно ты можешь создать одного пингвина в сутки. Но если очень хочется — можешь пропустить ожидание за 8 монет и сделать ещё одного прямо сейчас!",
+    en: "Normally, you can create one penguin per day. But if you can’t wait — you can skip the cooldown for 7 coins and create another right away!",
+    ru: "Обычно ты можешь создать одного пингвина в сутки. Но если очень хочется — можешь пропустить ожидание за 7 монет и сделать ещё одного прямо сейчас!",
   },
   {
     key: "tutorial.expedition",
