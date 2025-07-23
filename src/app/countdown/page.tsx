@@ -218,11 +218,11 @@ const CountDownPage = () => {
                 <p>{t("payToSkipTitile")}</p>
                 {user && (
                   <NeonButtonComponent
-                    disabled={loadingPayToSkip || user.coins <= 8}
+                    disabled={loadingPayToSkip || user.coins < 7}
                     title={
                       loadingPayToSkip
                         ? t("loading")
-                        : `${t("payToSkipButton")} 8$P`
+                        : `${t("payToSkipButton")} 7$P`
                     }
                     onClick={payToSkip}
                   />

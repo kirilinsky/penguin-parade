@@ -9,7 +9,7 @@ import {
   updateDoc,
 } from "firebase/firestore";
 
-const CRAFT_COST = 8;
+const CRAFT_COST = 7;
 
 export async function POST(req: Request) {
   const authHeader = req.headers.get("Authorization") || "";
