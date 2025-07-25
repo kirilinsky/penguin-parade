@@ -16,10 +16,10 @@ export const MobileMenuWrap = styled.div`
 export const MobileMenuLinksContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 2em;
+  gap: 1em;
   padding: 2em;
   & a {
-    font-size: 2em;
+    font-size: 1.5em;
     text-align: center;
     text-shadow: 2px 2px black;
   }
