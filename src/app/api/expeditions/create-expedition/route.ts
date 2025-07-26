@@ -86,8 +86,8 @@ export async function POST(req: Request) {
     DURATION_RANGES[level as keyof typeof DURATION_RANGES];
   const durationHours =
     Math.floor(Math.random() * (maxDuration - minDuration + 1)) + minDuration;
-  const minParticipants = Math.floor(Math.random() * 3) + 3;
-  const maxParticipants = Math.floor(Math.random() * 4) + 12; // до 16
+  const minParticipants = Math.floor(Math.random() * 3) + 2;
+  const maxParticipants = Math.floor(Math.random() * 4) + 14;
 
   const now = new Date();
 
@@ -143,7 +143,7 @@ export async function POST(req: Request) {
         expeditionId: newDoc.id,
       },
       message: {
-        ru: "Новая экспедиция началась! Успей присоединиться.",
+        ru: "Новая экспедиция началась! Успей присоединиться и заработать.",
         en: "A new expedition has started! Join while you can.",
       },
     });
