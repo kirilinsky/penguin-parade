@@ -24,6 +24,7 @@ export const GalleryImageFrameOverlay = styled.img`
 export const GalleryItemTitle = styled.div`
   display: flex;
   justify-content: space-around;
+  align-items: center;
 `;
 export const GalleryImageExpeditionOverlay = styled.div`
   background: #b75d339f;

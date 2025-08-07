@@ -292,6 +292,7 @@ export async function POST(req: Request) {
       updates.allowCraftAt = new Date(Date.now() + DAY_MS);
       updates[`statistics.crystalsUsed.${crystal}`] = increment(1);
       updates["statistics.totalCrystalsSpent"] = increment(1);
+      updates["statistics.totalCrafted"] = increment(1);
       await burnUserCrystal(uid, crystal);
     } else if (evolutionMode) {
       updates["statistics.lastEvolutionAt"] = new Date();
@@ -299,12 +300,12 @@ export async function POST(req: Request) {
     } else if (eventMode) {
       updates["statistics.lastEventAt"] = new Date();
       updates["statistics.eventsCreated"] = increment(1);
-    } else {
-      updates.allowCraftAt = new Date(Date.now() + DAY_MS);
-      updates.lastGeneratedAt = new Date();
       updates["statistics.totalCrafted"] = increment(1);
     }
 
+    updates.allowCraftAt = new Date(Date.now() + DAY_MS);
+    updates.lastGeneratedAt = new Date();
+    updates["statistics.totalCrafted"] = increment(1);
     await updateDoc(userRef, updates);
     const responsePayload: Record<string, any> = {
       success: true,
