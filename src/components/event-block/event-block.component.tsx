@@ -2,6 +2,7 @@ import React from "react";
 import { PageContentBlockStyled } from "../page-content-block/page-content-block.component.styled";
 import {
   ActionButton,
+  ButtonBlock,
   GlassOverlay,
   InfoBlock,
   LoaderOverlay,
@@ -35,6 +36,7 @@ const EventBlockComponent = ({
 
   return (
     <PageContentBlockStyled noBorder>
+      {canCraft ? "test can craft true" : "test can craft false"}
       <PenguinCard backgroundImage={event.imageUrl}>
         {loading && (
           <LoaderOverlay>
@@ -48,22 +50,21 @@ const EventBlockComponent = ({
           <InfoBlock>
             <p>{getLocalized(event.description, locale)}</p>
           </InfoBlock>
-          <ActionButton>soon</ActionButton>
-          {/*   {canCraft ? (
+          {canCraft ? (
             <ActionButton disabled={loading || !canCraft} onClick={onClick}>
               {getLocalized(event.buttonText, locale)}
             </ActionButton>
           ) : (
-            <InfoBlock>
-              {t("comeBackIn")} <b>{leftTime}</b>{" "}
+            <ButtonBlock>
+              {t("comeBackIn")} <b>{leftTime}</b>
               <ActionButton
                 disabled={loading || enablePayToSkip}
-                onClick={payToSkip}
+               /*  onClick={payToSkip} */
               >
                 {loading ? t("loading") : `${t("payToSkipButton")} 7$P`}
               </ActionButton>
-            </InfoBlock>
-          )} */}
+            </ButtonBlock>
+          )}
         </GlassOverlay>
       </PenguinCard>
     </PageContentBlockStyled>

@@ -72,9 +72,15 @@ export const GlassOverlay = styled.div`
   }
 `;
 
+export const ButtonBlock = styled.div`
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 0.2rem;
+`;
+
 export const InfoBlock = styled.div`
   flex: 1;
-  gap: 0.4rem;
 
   p {
     margin: 0;
@@ -111,7 +117,7 @@ export const ActionButton = styled.button`
 
   &:disabled {
     cursor: not-allowed;
-    opacity: 0.4;
+    opacity: 0.45;
   }
 
   @media (max-width: 480px) {
