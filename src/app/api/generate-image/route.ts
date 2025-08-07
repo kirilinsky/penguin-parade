@@ -87,9 +87,10 @@ export async function POST(req: Request) {
   const generationId = uuidv4();
 
   let evolutionMode = false;
+  let eventMode = false;
   let crystalMode = false;
-
-  const { scale, crystal } = await req.json();
+  let eventData: any = null;
+  const { scale, crystal, event } = await req.json();
 
   if (!scale) {
     const allowCraftAt = userData.allowCraftAt;
@@ -106,6 +107,26 @@ export async function POST(req: Request) {
 
     if (crystal) {
       crystalMode = true;
+    }
+
+    if (event) {
+      const eventRef = doc(firestore, "events", event);
+      const eventSnap = await getDoc(eventRef);
+
+      if (!eventSnap.exists()) {
+        return NextResponse.json({ error: "Event not found" }, { status: 404 });
+      }
+
+      eventData = eventSnap.data();
+
+      if (!eventData.theme || !eventData.value) {
+        return NextResponse.json(
+          { error: "Event data is incomplete" },
+          { status: 500 }
+        );
+      }
+
+      eventMode = true;
     }
   } else {
     evolutionMode = true;
@@ -138,7 +159,13 @@ export async function POST(req: Request) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(
-          evolutionMode ? { scale } : crystalMode ? { scale: crystal } : {}
+          eventMode
+            ? { event: true, theme: eventData.theme, value: eventData.value }
+            : evolutionMode
+            ? { scale }
+            : crystalMode
+            ? { scale: crystal }
+            : {}
         ),
       }
     );
@@ -175,7 +202,7 @@ export async function POST(req: Request) {
     );
     promptParts.push(
       `Highly detailed, art style, vibrant colors, fantasy illustration, attractive and detailed effects`,
-      `rarity level: ${settings.rarity.toLowerCase()} and picture title is ${en(
+      `rarity level: ${settings.rarity.toLowerCase()} and picture title- ${en(
         "t"
       )}.`
     );
@@ -235,6 +262,7 @@ export async function POST(req: Request) {
 
     if (evolutionMode) origin = "evolution";
     if (crystalMode) origin = "crystal craft";
+    if (eventMode) origin = "event";
 
     const imageDoc = await addDoc(
       collection(firestore, GLOBAL_IMAGES_COLLECTION),
@@ -246,6 +274,7 @@ export async function POST(req: Request) {
         origin,
         expeditions: 0,
         inExpedition: false,
+        event: event ?? null,
         expedition: null,
         gift: false,
         settings,
@@ -267,6 +296,9 @@ export async function POST(req: Request) {
     } else if (evolutionMode) {
       updates["statistics.lastEvolutionAt"] = new Date();
       updates["statistics.evolutions"] = increment(1);
+    } else if (eventMode) {
+      updates["statistics.lastEventAt"] = new Date();
+      updates["statistics.eventsCreated"] = increment(1);
     } else {
       updates.allowCraftAt = new Date(Date.now() + DAY_MS);
       updates.lastGeneratedAt = new Date();

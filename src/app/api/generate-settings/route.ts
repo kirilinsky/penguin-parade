@@ -23,10 +23,11 @@ export async function POST(req: Request) {
       ? "rare"
       : "common";
 
-  const { scale } = await req.json();
+  const { scale, event, theme: eventTheme, value } = await req.json();
   if (scale) {
     rarity = scale;
   }
+
   const randomlyUpdatedTheme =
     rarity === "emperor" ? "Ancient rome emperor" : themes[randomSettings];
   const presetsObject = {
@@ -77,12 +78,15 @@ where:
 Use Capital first letter for values and spaces between words. Background always connected with title and theme. Same for colors. Be bold and original. Mix elements. Return only JSON.`;
 
   const userPrompt = `
-Generate a completely new penguin variation.  Title and background should come from theme and play and extend it, its important.
+${event ? eventTheme : ""} 
+Generate a completely new penguin variation. Title and background should come from theme and play and extend it, title must be fancy and fun, its important.
 Rarity: ${rarity}
-Theme reference: ${randomlyUpdatedTheme}, Title(t) and bg should be related to theme!
+Theme reference: ${
+    event ? value : randomlyUpdatedTheme
+  }, Title(t) and bg should be related to theme!
 Guidance:
 ${presetsObject[rarity]}
-Title(t) and bg should be related to theme, don't use Whispering Wanderer words in title!
+Title(t) and bg should be related to theme, use words as for cartoon or movie, more experimental in title!
 `;
 
   try {

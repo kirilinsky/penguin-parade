@@ -25,6 +25,8 @@ import { getBaseColorByScale } from "@/helpers/get-base-color-by-rarity/get-base
 import GalleryItemScaleComponent from "@/components/gallery-item-scale/gallery-item-scale.component";
 import { TelegramShareButton } from "@/components/tg-share-button/tg-share-button";
 import { toast } from "react-toastify";
+import EventBlockComponent from "@/components/event-block/event-block.component";
+import { useGetEvents } from "@/hooks/use-get-events";
 
 type GenerationResult = {
   downloadURL: string;
@@ -45,6 +47,7 @@ const CountDownPage = () => {
   const [result, setResult] = useState<GenerationResult | null>(null);
   const { crystals, loading: crystalsLoading } = useGetUserCrystals();
   const [crystalApplied, setCrystalApplied] = useState<ScaleType | null>(null);
+  const { event } = useGetEvents();
 
   const localeMap: Record<string, Locale> = {
     en: enUS,
@@ -73,7 +76,7 @@ const CountDownPage = () => {
     }
   };
 
-  const craft = async () => {
+  const craft = async (event?: string) => {
     const auth = getAuth();
     const userCred = auth.currentUser;
     if (!userCred || !user) return;
@@ -98,7 +101,7 @@ const CountDownPage = () => {
       const token = await userCred.getIdToken(true);
       const res = await fetch("/api/generate-image", {
         method: "POST",
-        body: JSON.stringify({ crystal: crystalApplied }),
+        body: JSON.stringify({ crystal: crystalApplied, event }),
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
@@ -181,107 +184,119 @@ const CountDownPage = () => {
 
   return (
     <PageContentWrapperComponent>
-      <PageContentBlockStyled>
-        {!loading && !crystalsLoading && !result && (
-          <PageContentBlockFlex>
-            <h1>{t("title")}</h1>
-            {canCraft ? (
-              <>
-                <ArcadeButtonStyled
-                  appliedColor={appliedColor}
-                  onClick={craft}
-                  disabled={loading}
-                />
-                {!!crystals.length && (
-                  <CrystalsSelector
-                    crystalApplied={crystalApplied}
-                    setCrystalApplied={setCrystalApplied}
-                    crystals={crystals}
+      {event && user && !result ? (
+        <EventBlockComponent
+          loading={loading || loadingPayToSkip}
+          event={event}
+          payToSkip={payToSkip}
+          canCraft={canCraft}
+          leftTime={leftTime}
+          onClick={() => craft(event.id)}
+          enablePayToSkip={user.coins < 7}
+        />
+      ) : (
+        <PageContentBlockStyled>
+          {!loading && !crystalsLoading && !result && (
+            <PageContentBlockFlex>
+              <h1>{t("title")}</h1>
+              {canCraft ? (
+                <>
+                  <ArcadeButtonStyled
+                    appliedColor={appliedColor}
+                    onClick={() => craft()}
+                    disabled={loading}
                   />
-                )}
-              </>
-            ) : (
-              <>
-                <Image
-                  width={190}
-                  height={200}
-                  src="/come_later.webp"
-                  alt="come later"
-                />
-                <br />
-                <p>{t("laterTitle")}</p>
-                <span>
-                  {t("comeBackIn")} <b>{leftTime}</b>
-                </span>
-                <br />
-                <br />
-                <p>{t("payToSkipTitile")}</p>
-                {user && (
-                  <NeonButtonComponent
-                    disabled={loadingPayToSkip || user.coins < 7}
-                    title={
-                      loadingPayToSkip
-                        ? t("loading")
-                        : `${t("payToSkipButton")} 7$P`
-                    }
-                    onClick={payToSkip}
+                  {!!crystals.length && (
+                    <CrystalsSelector
+                      crystalApplied={crystalApplied}
+                      setCrystalApplied={setCrystalApplied}
+                      crystals={crystals}
+                    />
+                  )}
+                </>
+              ) : (
+                <>
+                  <Image
+                    width={190}
+                    height={200}
+                    src="/come_later.webp"
+                    alt="come later"
                   />
-                )}
-              </>
-            )}
-          </PageContentBlockFlex>
-        )}
-        {loading && !result && (
-          <PageContentBlockFlex>
-            <Image
-              src="/loader.gif"
-              alt="Loading..."
-              width={169}
-              height={169}
-              style={{ borderRadius: "50%" }}
-              priority
-            />
-            <p>{t("generatingTitle")}</p>
-            <span>{t("waitMessage")}</span>
-          </PageContentBlockFlex>
-        )}
-        {!loading && result && (
-          <PageContentBlockFlex>
-            <h2>
-              {t("newPenguinTitle")} <b>{result.title}!</b>
-            </h2>
-            <p>{t("welcomeNew")}</p>
-            {result.crystal && (
-              <span>You spent 1 {result.crystal} crystal</span>
-            )}
-            <img
-              src={result.downloadURL}
-              alt={result.title}
-              style={{
-                width: 260,
-                borderRadius: "1em",
-                padding: 4,
-                margin: 10,
-                border: `1px solid ${getBaseColorByScale(result.rarity)}`,
-              }}
-            />
-
-            <GalleryItemScaleComponent scale={result.rarity as ScaleType} />
-
-            {user && (
-              <LinkStyled href={`/library/${user.id}`}>
-                {t("myLibraryLink")}
-              </LinkStyled>
-            )}
-            {user && (
-              <TelegramShareButton
-                url={`${process.env.NEXT_PUBLIC_BASE_URL}/share/${user.id}/${result.id}`}
-                text={`🐧 ${t("shareLink")} ${user.username}!`}
+                  <br />
+                  <p>{t("laterTitle")}</p>
+                  <span>
+                    {t("comeBackIn")} <b>{leftTime}</b>
+                  </span>
+                  <br />
+                  <br />
+                  <p>{t("payToSkipTitile")}</p>
+                  {user && (
+                    <NeonButtonComponent
+                      disabled={loadingPayToSkip || user.coins < 7}
+                      title={
+                        loadingPayToSkip
+                          ? t("loading")
+                          : `${t("payToSkipButton")} 7$P`
+                      }
+                      onClick={payToSkip}
+                    />
+                  )}
+                </>
+              )}
+            </PageContentBlockFlex>
+          )}
+          {loading && !result && (
+            <PageContentBlockFlex>
+              <Image
+                src="/loader.gif"
+                alt="Loading..."
+                width={169}
+                height={169}
+                style={{ borderRadius: "50%" }}
+                priority
               />
-            )}
-          </PageContentBlockFlex>
-        )}
-      </PageContentBlockStyled>
+              <p>{t("generatingTitle")}</p>
+              <span>{t("waitMessage")}</span>
+            </PageContentBlockFlex>
+          )}
+          {!loading && result && (
+            <PageContentBlockFlex>
+              <h2>
+                {t("newPenguinTitle")} <b>{result.title}!</b>
+              </h2>
+              <p>{t("welcomeNew")}</p>
+              {result.crystal && (
+                <span>You spent 1 {result.crystal} crystal</span>
+              )}
+              <img
+                src={result.downloadURL}
+                alt={result.title}
+                style={{
+                  width: 260,
+                  borderRadius: "1em",
+                  padding: 4,
+                  margin: 10,
+                  border: `1px solid ${getBaseColorByScale(result.rarity)}`,
+                }}
+              />
+
+              <GalleryItemScaleComponent scale={result.rarity as ScaleType} />
+
+              {user && (
+                <LinkStyled href={`/library/${user.id}`}>
+                  {t("myLibraryLink")}
+                </LinkStyled>
+              )}
+              {user && (
+                <TelegramShareButton
+                  url={`${process.env.NEXT_PUBLIC_BASE_URL}/share/${user.id}/${result.id}`}
+                  text={`🐧 ${t("shareLink")} ${user.username}!`}
+                />
+              )}
+            </PageContentBlockFlex>
+          )}
+        </PageContentBlockStyled>
+      )}
 
       <LastCraftedBlockComponent />
     </PageContentWrapperComponent>

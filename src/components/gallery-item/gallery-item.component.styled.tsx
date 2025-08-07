@@ -132,3 +132,9 @@ export const GalleryItemBadBatchBadge = styled(GalleryItemGiftBadge)`
   transform: rotate(-10deg);
   z-index: 16;
 `;
+export const GalleryItemEventBadge = styled.img`
+  position: absolute;
+  bottom: 1%;
+  left: -1%;
+  z-index: 16;
+`;

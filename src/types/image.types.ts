@@ -3,6 +3,7 @@ import { ScaleType } from "./scale.types";
 
 export type ImageOriginType =
   | "craft"
+  | "event"
   | "crystal craft"
   | "evolution"
   | "bad batch"
@@ -13,6 +14,7 @@ export interface ImageItem {
   imageUrl: string;
   creatorUid: string;
   ownerId: string;
+  event: string | null;
   origin: ImageOriginType;
   title: string;
   inExpedition: boolean;

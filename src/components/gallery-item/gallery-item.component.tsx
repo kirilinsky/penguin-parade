@@ -6,6 +6,7 @@ import {
   GalleryImageWrap,
   GalleryItemBadBatchBadge,
   GalleryItemContent,
+  GalleryItemEventBadge,
   GalleryItemGiftBadge,
   GalleryItemImage,
   GalleryItemNftBadge,
@@ -83,6 +84,14 @@ const GalleryItemComponent = ({
             height={42}
             alt="bad batch"
             src="/badbatch_badge.webp"
+          />
+        )}
+        {img.event && (
+          <GalleryItemEventBadge
+            width={57}
+            height={42}
+            alt="bad batch"
+            src={`https://jbvhrvmqvrgtlwxvabih.supabase.co/storage/v1/object/public/penguins/events/${img.event}.webp`}
           />
         )}
         <GalleryItemScaleComponent scale={img.settings.rarity} />
