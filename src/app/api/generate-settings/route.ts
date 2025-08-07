@@ -65,7 +65,7 @@ Return an object with:
 }
 where: 
   "bg": background behind penguin should be connected with theme and rarity scale, don't leave it too much simple, more details, visual art effects
-  "theme": given theme,
+  "theme": given theme, dont change it!,
   "beak": color of penguin's beak,
   "breast": color of penguin's breast,
   "back": color of penguin's back,
