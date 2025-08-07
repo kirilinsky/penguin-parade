@@ -65,6 +65,7 @@ const SignUpPage = () => {
         sentRequests: [],
         statistics: {
           evolutions: 0,
+          eventsCreated: 0,
           expeditions: 0,
           totalGiftsSent: 0,
           totalGiftsReceived: 0,
