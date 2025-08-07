@@ -48,7 +48,8 @@ const EventBlockComponent = ({
           <InfoBlock>
             <p>{getLocalized(event.description, locale)}</p>
           </InfoBlock>
-          {canCraft ? (
+          <ActionButton>soon</ActionButton>
+          {/*   {canCraft ? (
             <ActionButton disabled={loading || !canCraft} onClick={onClick}>
               {getLocalized(event.buttonText, locale)}
             </ActionButton>
@@ -62,7 +63,7 @@ const EventBlockComponent = ({
                 {loading ? t("loading") : `${t("payToSkipButton")} 7$P`}
               </ActionButton>
             </InfoBlock>
-          )}
+          )} */}
         </GlassOverlay>
       </PenguinCard>
     </PageContentBlockStyled>
