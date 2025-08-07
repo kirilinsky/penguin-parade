@@ -10,6 +10,7 @@ import {
   GalleryItemModalFriendsItem,
   GalleryItemModalFriendsList,
   GalleryItemModalImage,
+  GalleryItemModalImageEvent,
   GalleryItemModalScale,
   GalleryItemModalTitle,
 } from "./gallery-item-modal.component.styled";
@@ -83,6 +84,14 @@ const GalleryItemModalComponent = ({
           fill
           style={{ objectFit: "cover" }}
         />
+        {img.event && (
+          <GalleryItemModalImageEvent
+            width={63}
+            height={63}
+            alt="event"
+            src={`https://jbvhrvmqvrgtlwxvabih.supabase.co/storage/v1/object/public/penguins/events/${img.event}.webp`}
+          />
+        )}
       </GalleryItemModalContent>
       <GalleryItemModalContent $nft={img.nft}>
         <GalleryItemModalTitle className={tektur.className}>

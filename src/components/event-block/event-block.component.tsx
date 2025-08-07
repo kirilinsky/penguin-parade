@@ -36,7 +36,6 @@ const EventBlockComponent = ({
 
   return (
     <PageContentBlockStyled noBorder>
-      {canCraft ? "test can craft true" : "test can craft false"}
       <PenguinCard backgroundImage={event.imageUrl}>
         {loading && (
           <LoaderOverlay>
@@ -59,7 +58,7 @@ const EventBlockComponent = ({
               {t("comeBackIn")} <b>{leftTime}</b>
               <ActionButton
                 disabled={loading || enablePayToSkip}
-               /*  onClick={payToSkip} */
+                onClick={payToSkip}
               >
                 {loading ? t("loading") : `${t("payToSkipButton")} 7$P`}
               </ActionButton>

@@ -21,6 +21,10 @@ export const GalleryImageFrameOverlay = styled.img`
   z-index: 16;
 `;
 
+export const GalleryItemTitle = styled.div`
+  display: flex;
+  justify-content: space-around;
+`;
 export const GalleryImageExpeditionOverlay = styled.div`
   background: #b75d339f;
   backdrop-filter: blur(2px);
@@ -133,8 +137,5 @@ export const GalleryItemBadBatchBadge = styled(GalleryItemGiftBadge)`
   z-index: 16;
 `;
 export const GalleryItemEventBadge = styled.img`
-  position: absolute;
-  bottom: 1%;
-  left: -1%;
-  z-index: 16;
+  z-index: 33;
 `;

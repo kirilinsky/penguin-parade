@@ -11,6 +11,7 @@ import {
   GalleryItemImage,
   GalleryItemNftBadge,
   GalleryItemSkeleton,
+  GalleryItemTitle,
 } from "./gallery-item.component.styled";
 import { ImageItem } from "@/types/image.types";
 import { getBaseColorByScale } from "@/helpers/get-base-color-by-rarity/get-base-color-by-rarity";
@@ -86,14 +87,7 @@ const GalleryItemComponent = ({
             src="/badbatch_badge.webp"
           />
         )}
-        {img.event && (
-          <GalleryItemEventBadge
-            width={57}
-            height={42}
-            alt="bad batch"
-            src={`https://jbvhrvmqvrgtlwxvabih.supabase.co/storage/v1/object/public/penguins/events/${img.event}.webp`}
-          />
-        )}
+
         <GalleryItemScaleComponent scale={img.settings.rarity} />
         <GalleryItemSkeleton loaded={loaded} />
         <GalleryImageWrap>
@@ -122,9 +116,20 @@ const GalleryItemComponent = ({
             loading="lazy"
           />
         </GalleryImageWrap>
-        <p style={{ textAlign: "center" }} className={tektur.className}>
-          {getLocalized(img.settings.t, locale)}
-        </p>
+        <GalleryItemTitle>
+          {img.event && (
+            <GalleryItemEventBadge
+              width={55}
+              height={55}
+              alt="event"
+              src={`https://jbvhrvmqvrgtlwxvabih.supabase.co/storage/v1/object/public/penguins/events/${img.event}.webp`}
+            />
+          )}
+          <p style={{ textAlign: "center" }} className={tektur.className}>
+            {getLocalized(img.settings.t, locale)}
+          </p>
+        </GalleryItemTitle>
+
         {img.auction && (
           <p>
             {t("price")} - {img.price}

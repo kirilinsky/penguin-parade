@@ -58,6 +58,16 @@ export const GalleryItemModalImage = styled(Image)`
   }
 `;
 
+export const GalleryItemModalImageEvent = styled.img`
+  position: absolute;
+  background: #1a1919;
+  bottom: 10px;
+  padding: 3px;
+  border-radius: 1em;
+  right: 10px;
+  box-shadow: 0 0 2px #fff;
+`;
+
 export const GalleryItemModalTitle = styled.h2`
   text-align: center;
   margin-bottom: 10px;
