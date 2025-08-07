@@ -198,6 +198,8 @@
         "totalBought": "Куплено",
         "lastCrystalAppliedAt": "Последнее применение кристалла",
         "lastEvolutionAt": "Последняя эволюция",
+        "lastEventAt": "Последнее Событие",
+        "eventsCreated": "Пингвинов событий",
         "lastGiftSentAt": "Последний отправленный подарок",
         "lastExpeditionAt": "Последняя экспедиция",
         "lastLoginAt": "Последний вход",

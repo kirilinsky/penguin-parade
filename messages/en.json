@@ -198,6 +198,8 @@
         "totalBought": "Bought",
         "lastCrystalAppliedAt": "Last Crystal Used",
         "lastEvolutionAt": "Last Evolution",
+        "lastEventAt": "Last Event",
+        "eventsCreated": "Penguin Events",
         "lastGiftSentAt": "Last Gift Sent",
         "lastExpeditionAt": "Last Expedition",
         "lastLoginAt": "Last Login",

@@ -15,6 +15,7 @@ export type UserCrystal = {
 
 export type UserStatistics = {
   evolutions: number;
+  eventsCreated: number;
   expeditions: number;
   totalGiftsSent: number;
   totalGiftsReceived: number;
@@ -36,6 +37,7 @@ export type UserStatistics = {
   totalBought: number;
   lastCrystalAppliedAt?: Date;
   lastEvolutionAt?: Date;
+  lastEventAt?: Date;
   lastGiftSentAt?: Date;
   lastExpeditionAt?: Date;
   lastLoginAt?: Date;
