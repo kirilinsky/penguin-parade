@@ -49,7 +49,7 @@ const EventBlockComponent = ({
             <p>{getLocalized(event.description, locale)}</p>
           </InfoBlock>
           {canCraft ? (
-            <ActionButton disabled={loading} onClick={onClick}>
+            <ActionButton disabled={loading || !canCraft} onClick={onClick}>
               {getLocalized(event.buttonText, locale)}
             </ActionButton>
           ) : (
