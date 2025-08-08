@@ -1,31 +1,58 @@
 import React from "react";
 import AvatarComponent from "../avatar-component/avatar-component";
-import { LibraryTitleWrapper } from "./library-title.component.styled";
+import {
+  LibraryTitleWrapper,
+  LeftBlock,
+  RightBlock,
+} from "./library-title.component.styled";
 import { useTranslations } from "next-intl";
+import TotalCountBlockComponent from "../total-count-block/total-count-block.component";
+import { RarityCount } from "@/hooks/use-get-images";
+import {
+  TotalCountBlockItem,
+  TotalCountBlockItemNumber,
+} from "../total-count-block/total-count-block.component.styled";
+import GalleryItemScaleComponent from "../gallery-item-scale/gallery-item-scale.component";
+import { ScaleType } from "@/types/scale.types";
 
 const LibraryTitleComponent = ({
   user,
   imagesCount,
   isMyPage,
+  rarityCount,
 }: {
   user: any;
   imagesCount: number;
   isMyPage: boolean;
+  rarityCount: RarityCount;
 }) => {
   const t = useTranslations("libraryTitle");
   if (!user) {
     return null;
   }
+
   return (
     <LibraryTitleWrapper>
-      <AvatarComponent
-        username={user?.username}
-        avatarUrl={user?.avatar}
-        avatarScale={user?.avatarScale}
-      />
-      <h1>
-        {isMyPage ? t("my") : user?.username} {t("penguins")} ({imagesCount})
-      </h1>
+      <LeftBlock>
+        <AvatarComponent
+          username={user?.username}
+          avatarUrl={user?.avatar}
+          avatarScale={user?.avatarScale}
+        />
+        <h1>
+          {isMyPage ? t("my") : user?.username} {t("penguins")} ({imagesCount})
+        </h1>
+      </LeftBlock>
+      <RightBlock>
+        {Object.entries(rarityCount).map(([key, value]) => {
+          return (
+            <TotalCountBlockItem key={key}>
+              <GalleryItemScaleComponent scale={key as ScaleType} />
+              <TotalCountBlockItemNumber>{value}</TotalCountBlockItemNumber>
+            </TotalCountBlockItem>
+          );
+        })}
+      </RightBlock>
     </LibraryTitleWrapper>
   );
 };

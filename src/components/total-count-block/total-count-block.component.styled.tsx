@@ -19,5 +19,5 @@ export const TotalCountBlockItem = styled.div`
   aspect-ratio: 1 / 1;
 `;
 export const TotalCountBlockItemNumber = styled.h2`
-  font-size: 7vmax
+  font-size: 6vmax
 `;

@@ -209,6 +209,7 @@ const MyLibraryPage = () => {
         <LibraryTitleComponent
           user={isMyPage ? user : pageUser}
           imagesCount={images.length}
+          rarityCount={rarityCount}
           isMyPage={isMyPage}
         />
       )}
