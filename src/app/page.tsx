@@ -60,7 +60,6 @@ export default function Home() {
           <PageContentBlockStyled>
             <h2>Road map</h2>
             <ul>
-              <li>Friends page design update</li>
               <li>Suspicious gifts ban</li>
               <li>Gift functionality design update (notification)</li>
               <li>Anonymous home page, loggedIn limitations</li>

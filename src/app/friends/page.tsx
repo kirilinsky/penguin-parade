@@ -26,6 +26,13 @@ import {
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import React, { useState } from "react";
+import {
+  AsideSection,
+  FriendsGalleryWrapper,
+  GallerySection,
+} from "@/components/friends-gallery/friends-gallery.component.styled";
+import FriendSearchComponent from "@/components/friend-search/friend-search.component";
+import FriendRequestsBlock from "@/components/friend-requests-block/friend-requests-block.component";
 
 const FriendsPage = () => {
   const { user: currentUser } = useUserDetails();
@@ -208,100 +215,42 @@ const FriendsPage = () => {
     friendsRefetch();
   };
   return (
-    <PageContentWrapperComponent>
-      <FriendsListBlockComponent
-        onRemove={handleRemoveFriend}
-        friends={friends}
-        friendsLoading={friendsLoading}
-      />
-      <PageContentBlockStyled>
-        <h2>{t("addFriendTitle")}</h2>
-        <input
-          type="text"
-          style={{ padding: "10px", marginBlock: "10px" }}
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          placeholder={t("searchFriendPlaceholder")}
+    <FriendsGalleryWrapper>
+      <GallerySection>
+        <FriendsListBlockComponent
+          onRemove={handleRemoveFriend}
+          friends={friends}
+          friendsLoading={friendsLoading}
         />
-        <NeonButtonComponent title={t("searchButton")} onClick={handleSearch} />
+      </GallerySection>
 
-        {searchResults.length > 0 && (
-          <div>
-            <h2>{t("searchResultsTitle")}</h2>
-            <ul>
-              {searchResults.map((user) => (
-                <li
-                  key={user.id}
-                  style={{ display: "flex", marginBottom: "1rem" }}
-                >
-                  <Image
-                    src={user.avatar ?? "/template.png"}
-                    alt={user.username}
-                    width={45}
-                    height={45}
-                    style={{ borderRadius: "50%" }}
-                    unoptimized={!!user.avatar}
-                  />
-                  <div>
-                    <strong>{user.username}</strong>
-                    <br />
-                    {hasSentRequest(user.id) ? (
-                      <>
-                        <span>{t("spanRequested")}</span>
-                        <br />
-                        <button onClick={() => handleCancelRequest(user)}>
-                          {t("cancelRequrestButton")}
-                        </button>
-                      </>
-                    ) : (
-                      <button onClick={() => handleAddFriend(user)}>
-                        {t("addFriendButton")}
-                      </button>
-                    )}
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-      </PageContentBlockStyled>
+      <AsideSection>
+        <FriendSearchComponent
+          searchValue={search}
+          onSearchChange={(searchValue) => setSearch(searchValue)}
+          onSearchClick={handleSearch}
+          searchResults={searchResults}
+          hasSentRequest={hasSentRequest}
+          onCancelRequest={(user) => handleCancelRequest(user)}
+          onAddFriend={(user) => handleAddFriend(user)}
+        />
+        <FriendRequestsBlock
+          requests={incomingRequests}
+          incoming={true}
+          onCancel={handleCancelRequest}
+          onDecline={handleDeclineRequest}
+          onAccept={handleAcceptRequest}
+        />
 
-      <PageContentBlockStyled>
-        <h2>
-          {t("incomingRequestsTitle")} ({incomingRequests.length})
-        </h2>
-        <ul>
-          {incomingRequests.map((req) => (
-            <UserListItemComponent
-              onCancel={() => handleCancelRequest(req)}
-              onDecline={() => handleDeclineRequest(req)}
-              onAccept={() => handleAcceptRequest(req)}
-              key={req.id}
-              incoming={true}
-              user={req}
-            />
-          ))}
-        </ul>
-      </PageContentBlockStyled>
-
-      <PageContentBlockStyled>
-        <h2>
-          {t("sentRequestsTitle")} ({sentRequests.length})
-        </h2>
-        <ul>
-          {sentRequests.map((req) => (
-            <UserListItemComponent
-              onCancel={() => handleCancelRequest(req)}
-              onDecline={() => handleDeclineRequest(req)}
-              onAccept={() => handleAcceptRequest(req)}
-              key={req.id}
-              incoming={false}
-              user={req}
-            />
-          ))}
-        </ul>
-      </PageContentBlockStyled>
-    </PageContentWrapperComponent>
+        <FriendRequestsBlock
+          requests={sentRequests}
+          incoming={false}
+          onCancel={handleCancelRequest}
+          onDecline={handleDeclineRequest}
+          onAccept={handleAcceptRequest}
+        />
+      </AsideSection>
+    </FriendsGalleryWrapper>
   );
 };
 
