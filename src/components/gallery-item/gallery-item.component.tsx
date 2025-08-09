@@ -120,7 +120,7 @@ const GalleryItemComponent = ({
           {img.event && (
             <GalleryItemEventBadge
               width={55}
-              height={55}
+              height={50}
               alt="event"
               src={`https://jbvhrvmqvrgtlwxvabih.supabase.co/storage/v1/object/public/penguins/events/${img.event}.webp`}
             />
