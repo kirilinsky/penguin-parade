@@ -11,7 +11,11 @@ import { useGetFriends } from "@/hooks/use-get-friends";
 import { useGetImages } from "@/hooks/use-get-images";
 import { useGetUserCredentials } from "@/hooks/use-get-user-credentials";
 import { useUserDetails } from "@/hooks/use-user-details";
-import { ImageItem, ImagesSortType } from "@/types/image.types";
+import {
+  ImageItem,
+  ImageOriginType,
+  ImagesSortType,
+} from "@/types/image.types";
 import { scaleOrder, ScaleType } from "@/types/scale.types";
 import { getAuth, sendEmailVerification } from "firebase/auth";
 import { useParams } from "next/navigation";
@@ -29,12 +33,15 @@ const MyLibraryPage = () => {
   const [detailsImage, setDetailsImage] = useState<ImageItem | null>(null);
   const [sortOption, setSortOption] = useState<ImagesSortType>("newest");
   const [filterOption, setFilterOption] = useState<"all" | ScaleType>("all");
+  const [originOption, setOriginOption] = useState<"all" | ImageOriginType>(
+    "all"
+  );
 
   const { data: pageUser } = useGetUserCredentials(
     isMyPage ? undefined : (pageId as string)
   );
 
-  const { images, loading, rarityCount } = useGetImages(true, pageId);
+  const { images, loading, rarityCount, origins } = useGetImages(true, pageId);
   const { friends } = useGetFriends();
 
   const handleOnClick = (img: ImageItem) => {
@@ -148,8 +155,19 @@ const MyLibraryPage = () => {
     setFilterOption(option);
   };
 
+  const onOriginOptionClick = (option: "all" | ImageOriginType) => {
+    if (option === filterOption) {
+      option = "all";
+    }
+    setOriginOption(option);
+  };
+
   useEffect(() => {
     let filtered = [...images];
+
+    if (originOption !== "all") {
+      filtered = filtered.filter((img) => img.origin === originOption);
+    }
 
     if (filterOption !== "all") {
       filtered = filtered.filter((img) => img.settings.rarity === filterOption);
@@ -171,7 +189,7 @@ const MyLibraryPage = () => {
         break;
     }
     setImagesFiltered(filtered);
-  }, [images, sortOption, filterOption]);
+  }, [images, sortOption, filterOption, originOption]);
 
   useEffect(() => {
     const idIsEqual = pageId === user?.id;
@@ -217,11 +235,14 @@ const MyLibraryPage = () => {
       {!!images.length && (
         <GalleryFilterComponent
           isAuction={false}
+          origins={origins}
           sortOption={sortOption}
           rarityCount={rarityCount}
           filterOption={filterOption}
+          originOption={originOption}
           setSortOption={setSortOption}
           onFilterOptionClick={onFilterOptionClick}
+          onOriginOptionClick={onOriginOptionClick}
         />
       )}
       <GalleryComponent>

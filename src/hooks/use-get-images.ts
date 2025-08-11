@@ -19,6 +19,7 @@ export const useGetImages = (
   const [images, setImages] = useState<ImageItem[]>([]);
   const [auctionImages, setAuctionImages] = useState<ImageItem[]>([]);
   const [rarityCount, setRarityCount] = useState<RarityCount>({});
+  const [origins, setOrigins] = useState<string[]>([]); // NEW
   const [total, setTotal] = useState<number>(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<unknown>(null);
@@ -41,7 +42,6 @@ export const useGetImages = (
         if (uid !== "all") {
           constraints.push(where("ownerId", "==", uid));
         }
-
         if (scale) {
           constraints.push(where("settings.rarity", "==", scale));
         }
@@ -58,20 +58,24 @@ export const useGetImages = (
             (a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0)
           );
         }
+
         setLastCrafted(list[0]);
         setImages(list);
         setTotal(list.length);
 
         const filtered = list.filter((img) => !img.inExpedition && !img.gift);
-
         setAuctionImages(filtered);
 
         const computed = list.reduce((acc, { settings: { rarity } }) => {
           acc[rarity] = (acc[rarity] || 0) + 1;
           return acc;
         }, {} as RarityCount);
-
         setRarityCount(computed);
+
+        const uniqueOrigins = Array.from(
+          new Set(list.map((i) => i.origin))
+        ).sort();
+        setOrigins(uniqueOrigins);
       } catch (err) {
         console.error("Error fetching images:", err);
         setError(err);
@@ -88,6 +92,7 @@ export const useGetImages = (
     auctionImages,
     lastCrafted,
     rarityCount,
+    origins,
     uid,
     total,
     loading,

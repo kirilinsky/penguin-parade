@@ -6,7 +6,7 @@ import {
 } from "./gallery-filter-component.styled";
 import GalleryItemScaleComponent from "../gallery-item-scale/gallery-item-scale.component";
 import { ScaleType } from "@/types/scale.types";
-import { ImagesSortType } from "@/types/image.types";
+import { ImageOriginType, ImagesSortType } from "@/types/image.types";
 import { RarityCount } from "@/hooks/use-get-images";
 import { useTranslations } from "next-intl";
 
@@ -14,15 +14,21 @@ const GalleryFilterComponent = ({
   isAuction,
   sortOption,
   setSortOption,
+  origins,
   rarityCount,
+  originOption,
   filterOption,
+  onOriginOptionClick,
   onFilterOptionClick,
 }: {
   isAuction: boolean;
   sortOption: ImagesSortType;
   rarityCount: RarityCount;
+  origins: string[];
   setSortOption: (sortType: ImagesSortType) => void;
   filterOption: ScaleType | "all";
+  originOption: ImageOriginType | "all";
+  onOriginOptionClick: (option: "all" | ImageOriginType) => void;
   onFilterOptionClick: (option: "all" | ScaleType) => void;
 }) => {
   const t = useTranslations("filter");
@@ -40,6 +46,20 @@ const GalleryFilterComponent = ({
           <option value="newest">{t("newest")}</option>
           <option value="oldest">{t("oldest")}</option>
           <option value="rarity">{t("rarity")}</option>
+        </select>
+      </GalleryFilterComponentSide>
+      <GalleryFilterComponentSide>
+        {t("origin")}
+        <select
+          value={originOption}
+          onChange={(e) => onOriginOptionClick(e.target.value as any)}
+        >
+          <option value={"all"}> {t("all")}</option>
+          {origins.map((origin) => (
+            <option key={origin} value={origin}>
+              {t(origin)}
+            </option>
+          ))}
         </select>
       </GalleryFilterComponentSide>
       <GalleryFilterComponentSide>
