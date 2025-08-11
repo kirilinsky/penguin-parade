@@ -181,8 +181,7 @@ const CountDownPage = () => {
   const appliedColor = useMemo(() => {
     if (crystalApplied) return getBaseColorByScale(crystalApplied);
   }, [crystalApplied]);
-  console.log(event,'event');
-  
+
   return (
     <PageContentWrapperComponent>
       {event && user && !result ? (

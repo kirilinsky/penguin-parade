@@ -8,7 +8,11 @@ import AuctionItemModalComponent from "@/components/modals/auction-item-modal/au
 import { getIdToken } from "@/helpers/get-token/get-token";
 import { useGetImages } from "@/hooks/use-get-images";
 import { useUserDetails } from "@/hooks/use-user-details";
-import { ImageItem, ImagesSortType } from "@/types/image.types";
+import {
+  ImageItem,
+  ImageOriginType,
+  ImagesSortType,
+} from "@/types/image.types";
 import { scaleOrder, ScaleType } from "@/types/scale.types";
 
 import React, { useEffect, useState } from "react";
@@ -16,7 +20,7 @@ import { toast } from "react-toastify";
 import Rodal from "rodal";
 
 const AuctionPage = () => {
-  const { images, refetch, rarityCount, loading } = useGetImages(
+  const { images, refetch, rarityCount, origins, loading } = useGetImages(
     true,
     "auction"
   );
@@ -27,6 +31,9 @@ const AuctionPage = () => {
   const [imagesFiltered, setImagesFiltered] = useState<ImageItem[]>([]);
   const [sortOption, setSortOption] = useState<ImagesSortType>("expensive");
   const [filterOption, setFilterOption] = useState<"all" | ScaleType>("all");
+  const [originOption, setOriginOption] = useState<"all" | ImageOriginType>(
+    "all"
+  );
 
   const buyImage = async (imageId: string) => {
     setIsLoading(true);
@@ -70,8 +77,19 @@ const AuctionPage = () => {
     setFilterOption(option);
   };
 
+  const onOriginOptionClick = (option: "all" | ImageOriginType) => {
+    if (option === filterOption) {
+      option = "all";
+    }
+    setOriginOption(option);
+  };
+
   useEffect(() => {
     let filtered = [...images];
+
+    if (originOption !== "all") {
+      filtered = filtered.filter((img) => img.origin === originOption);
+    }
 
     if (filterOption !== "all") {
       filtered = filtered.filter((img) => img.settings.rarity === filterOption);
@@ -99,7 +117,7 @@ const AuctionPage = () => {
         break;
     }
     setImagesFiltered(filtered);
-  }, [images, sortOption, filterOption]);
+  }, [images, sortOption, originOption, filterOption]);
 
   return (
     <div>
@@ -119,11 +137,14 @@ const AuctionPage = () => {
       {images.length && (
         <GalleryFilterComponent
           isAuction
+          origins={origins}
           sortOption={sortOption}
           rarityCount={rarityCount}
+          originOption={originOption}
           filterOption={filterOption}
           setSortOption={setSortOption}
           onFilterOptionClick={onFilterOptionClick}
+          onOriginOptionClick={onOriginOptionClick}
         />
       )}
       {loading ? (

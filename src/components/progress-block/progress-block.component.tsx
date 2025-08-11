@@ -20,7 +20,6 @@ export const PenguinProgressBlock = () => {
   const t = useTranslations("progressBlock");
   const percent = Math.min((images.length / Goal) * 100, 100).toFixed(1);
   const remaining = Goal - images.length;
-  console.log(rarityCount);
 
   return (
     <PageContentBlockStyled>

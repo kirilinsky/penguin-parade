@@ -55,8 +55,8 @@ const GalleryFilterComponent = ({
           onChange={(e) => onOriginOptionClick(e.target.value as any)}
         >
           <option value={"all"}> {t("all")}</option>
-          {origins.map((origin) => (
-            <option key={origin} value={origin}>
+          {origins.filter(x=>!!x).map((origin) => (
+            <option key={origin + "origin"} value={origin}>
               {t(origin)}
             </option>
           ))}
