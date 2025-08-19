@@ -1,10 +1,9 @@
 "use client";
 
-import { ImageItem } from "@/types/image.types";
-import Image from "next/image";
+ import Image from "next/image";
 import React from "react";
-import { LinkStyled } from "../ui/link/link.component.styled";
-import { useTranslations } from "next-intl";
+ import { useTranslations } from "next-intl";
+import { LinkStyled } from "@/components/ui/link/link.component.styled";
 
 const ShareComponent = ({
   imageUrl,
