@@ -1,8 +1,13 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { useTranslations } from "next-intl";
 import { useUserGame } from "@/hooks/use-user-game";
+import { GameRoundContainer } from "@/components/pages/games/game-round-container/game-round-container.styled";
+import { GuessThemeGame } from "@/components/pages/games/guess-theme-game/guess-theme-game.component";
+import { toast } from "react-toastify";
+import { getIdToken } from "@/helpers/get-token/get-token";
+import { GuessThemeRoundData } from "@/types/games.types";
 
 export default function GuessThemePage() {
   const t = useTranslations("guessThemePage");
@@ -15,6 +20,34 @@ export default function GuessThemePage() {
     hasActiveSession,
     cooldownMs,
   } = useUserGame("guess-theme");
+
+  const [loadingRound, setLoadingRound] = useState(false);
+  const [roundData, setRoundData] = useState<GuessThemeRoundData | null>(null);
+
+  const fetchRoundData = async () => {
+    setLoadingRound(true);
+
+    const token = await getIdToken();
+    try {
+      const res = await fetch("/api/games/guess-theme/get-round-data", {
+        method: "GET",
+
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      const data = await res.json();
+      if (data) {
+        setRoundData(data);
+      }
+    } catch (err: any) {
+      toast.error(err.message);
+    } finally {
+      setLoadingRound(false);
+    }
+  };
 
   if (loading) {
     return <div>{t("loading")}</div>;
@@ -31,6 +64,14 @@ export default function GuessThemePage() {
   return (
     <div style={{ padding: "2rem" }}>
       <h1>{t("title")}</h1>
+      <section>
+        <h3>{t("session.activeTitle")}</h3>
+        <GameRoundContainer>
+          <GuessThemeGame roundData={roundData} loading={loadingRound} />
+        </GameRoundContainer>
+        <button onClick={fetchRoundData}>load round</button>
+        <button disabled>{t("session.continue")}</button>
+      </section>
 
       {!progressExists && (
         <section>

@@ -44,3 +44,9 @@ export type GameSession = {
   successRounds: number;
   win?: boolean;
 };
+
+export type GuessThemeRoundData = {
+  correctId: string;
+  imageUrl: string;
+  options: Record<string, string>;
+};
