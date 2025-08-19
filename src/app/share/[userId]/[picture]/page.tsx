@@ -3,9 +3,9 @@ import { firestore } from "@/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import Image from "next/image";
 import type { Metadata } from "next";
-import ShareComponent from "@/components/share-component/share-component.component";
 import { ImageItem } from "@/types/image.types";
 import { getBaseColorByScale } from "@/helpers/get-base-color-by-rarity/get-base-color-by-rarity";
+import ShareComponent from "@/components/pages/share/share-component/share-component.component";
 export async function generateMetadata({ params }: any): Promise<Metadata> {
   const { userId, picture } = params;
 
