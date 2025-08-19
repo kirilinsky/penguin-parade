@@ -1,7 +1,7 @@
 "use client";
 
-import ExpeditionGalleryItem from "@/components/expedition-gallery-item/expedition-gallery-item.component";
-import ExpeditionGallery from "@/components/expedition-gallery/expedition-gallery.component";
+import ExpeditionGalleryItem from "@/components/pages/expedition/expedition-gallery-item/expedition-gallery-item.component";
+import ExpeditionGallery from "@/components/pages/expedition/expedition-gallery/expedition-gallery.component";
 import { useGetExpeditions } from "@/hooks/use-get-expeditions";
 import React from "react";
 

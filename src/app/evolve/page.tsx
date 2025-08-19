@@ -1,15 +1,15 @@
 "use client";
 
-import { EvolutionEffect } from "@/components/evolution-effect/evolution-effect";
-import EvolutionGridContainer from "@/components/evolution-grid-container/evolution-grid-container.component";
-import EvolutionGridItem from "@/components/evolution-grid-item/evolution-grid-item.component";
+import { EvolutionEffect } from "@/components/pages/evolution/evolution-effect/evolution-effect";
+import EvolutionGridContainer from "@/components/pages/evolution/evolution-grid-container/evolution-grid-container.component";
+import EvolutionGridItem from "@/components/pages/evolution/evolution-grid-item/evolution-grid-item.component";
 import {
   EvolutionGridItemCenterStyled,
   EvolutionGridItemCenterWrap,
-} from "@/components/evolution-grid-item/evolution-grid-item.component.styled";
-import EvolutionModalComponent from "@/components/evolution-modal/evolution-modal.component";
-import { LinkStyled } from "@/components/link/link.component.styled";
-import NeonButtonComponent from "@/components/neon-button/neon-button.component";
+} from "@/components/pages/evolution/evolution-grid-item/evolution-grid-item.component.styled";
+import EvolutionModalComponent from "@/components/pages/evolution/evolution-modal/evolution-modal.component";
+import { LinkStyled } from "@/components/ui/link/link.component.styled";
+import NeonButtonComponent from "@/components/ui/neon-button/neon-button.component";
 import { getBaseColorByScale } from "@/helpers/get-base-color-by-rarity/get-base-color-by-rarity";
 import { getNextScale } from "@/helpers/get-next-scale/get-next-scale";
 import { useGetImages } from "@/hooks/use-get-images";

@@ -1,9 +1,9 @@
 "use client";
 
-import GalleryFilterComponent from "@/components/gallery-filter-component/gallery-filter-component";
+import GalleryFilterComponent from "@/components/pages/gallery/gallery-filter-component/gallery-filter-component";
 
-import GalleryItemComponent from "@/components/gallery-item/gallery-item.component";
-import GalleryComponent from "@/components/gallery/gallery.component";
+import GalleryItemComponent from "@/components/pages/gallery/gallery-item/gallery-item.component";
+import GalleryComponent from "@/components/pages/gallery/gallery/gallery.component";
 import AuctionItemModalComponent from "@/components/modals/auction-item-modal/auction-item-modal.component";
 import { getIdToken } from "@/helpers/get-token/get-token";
 import { useGetImages } from "@/hooks/use-get-images";

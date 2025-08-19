@@ -12,7 +12,7 @@ import { UserNotification } from "@/types/notification.types";
 import { format } from "date-fns";
 import { getLocalized } from "@/helpers/get-localized/get-localized";
 import { useLocale, useTranslations } from "next-intl";
-import { LinkStyled } from "../link/link.component.styled";
+import { LinkStyled } from "../ui/link/link.component.styled";
 import { getNotificationLink } from "@/helpers/get-notification-link-payload/get-notification-link-payload";
 
 const NotifictionItem = ({

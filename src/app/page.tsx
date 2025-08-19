@@ -1,21 +1,21 @@
 "use client";
 
 import { loggedInAtom } from "@/atoms/user/user.atom";
-import CrystalsBlock from "@/components/crystals-block/crystals-block.component";
-import LastCraftedBlockComponent from "@/components/last-crafted-block/last-crafted-block.component";
-import { LinkStyled } from "@/components/link/link.component.styled";
-import { PageContentBlockStyled } from "@/components/page-content-block/page-content-block.component.styled";
-import { PageContentWrapperComponent } from "@/components/page-content-wrapper/page-content-wrapper.component";
-import { PenguinProgressBlock } from "@/components/progress-block/progress-block.component";
-import RandomAuctionBlockComponent from "@/components/random-auction-block/random-auction-block.component";
-import StatisticsBlockComponent from "@/components/statistics-block/statistics-block.component";
-import TopUsersBlock from "@/components/top-users-block/top-users-block.component";
-import TotalCountBlockComponent from "@/components/total-count-block/total-count-block.component";
+import { LinkStyled } from "@/components/ui/link/link.component.styled";
+import { PageContentBlockStyled } from "@/components/ui/page-content-block/page-content-block.component.styled";
+import { PageContentWrapperComponent } from "@/components/ui/page-content-wrapper/page-content-wrapper.component";
+import TopUsersBlock from "@/components/pages/main/top-users-block/top-users-block.component";
 import { useUserDetails } from "@/hooks/use-user-details";
 import { useAtomValue } from "jotai";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { useEffect } from "react";
+import CrystalsBlock from "@/components/pages/main/crystals-block/crystals-block.component";
+import { PenguinProgressBlock } from "@/components/pages/main/progress-block/progress-block.component";
+import LastCraftedBlockComponent from "@/components/pages/main/last-crafted-block/last-crafted-block.component";
+import TotalCountBlockComponent from "@/components/pages/main/total-count-block/total-count-block.component";
+import RandomAuctionBlockComponent from "@/components/pages/main/random-auction-block/random-auction-block.component";
+import StatisticsBlockComponent from "@/components/pages/main/statistics-block/statistics-block.component";
 
 export default function Home() {
   const { user, refreshUser } = useUserDetails();
@@ -50,16 +50,16 @@ export default function Home() {
           </PageContentBlockStyled>
           <CrystalsBlock />
           <PenguinProgressBlock />
-
           <LastCraftedBlockComponent />
           <TotalCountBlockComponent />
           <RandomAuctionBlockComponent />
           <TopUsersBlock />
           <StatisticsBlockComponent user={user} />
-
           <PageContentBlockStyled>
             <h2>Road map</h2>
             <ul>
+              <li>Mini games</li>
+              <li>Events page</li>
               <li>Suspicious gifts ban</li>
               <li>Gift functionality design update (notification)</li>
               <li>Anonymous home page, loggedIn limitations</li>

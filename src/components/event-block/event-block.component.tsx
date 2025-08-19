@@ -1,5 +1,5 @@
 import React from "react";
-import { PageContentBlockStyled } from "../page-content-block/page-content-block.component.styled";
+import { PageContentBlockStyled } from "../ui/page-content-block/page-content-block.component.styled";
 import {
   ActionButton,
   ButtonBlock,

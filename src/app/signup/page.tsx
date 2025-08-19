@@ -8,8 +8,8 @@ import {
 import React, { useEffect, useState } from "react";
 import { auth, firestore } from "../../firebase";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
-import { LinkStyled } from "@/components/link/link.component.styled";
-import NeonButtonComponent from "@/components/neon-button/neon-button.component";
+import { LinkStyled } from "@/components/ui/link/link.component.styled";
+import NeonButtonComponent from "@/components/ui/neon-button/neon-button.component";
 import { useTranslations } from "next-intl";
 import { toast } from "react-toastify";
 import { useAtom, useSetAtom } from "jotai";

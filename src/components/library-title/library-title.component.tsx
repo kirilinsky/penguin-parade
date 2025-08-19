@@ -1,19 +1,19 @@
 import React, { useMemo } from "react";
-import AvatarComponent from "../avatar-component/avatar-component";
+import AvatarComponent from "../ui/avatar-component/avatar-component";
 import {
   LibraryTitleWrapper,
   LeftBlock,
   RightBlock,
 } from "./library-title.component.styled";
 import { useTranslations } from "next-intl";
-import TotalCountBlockComponent from "../total-count-block/total-count-block.component";
 import { RarityCount } from "@/hooks/use-get-images";
+
+import GalleryItemScaleComponent from "../pages/gallery/gallery-item-scale/gallery-item-scale.component";
+import { scaleOrder, ScaleType } from "@/types/scale.types";
 import {
   TotalCountBlockItem,
   TotalCountBlockItemNumber,
-} from "../total-count-block/total-count-block.component.styled";
-import GalleryItemScaleComponent from "../gallery-item-scale/gallery-item-scale.component";
-import { scaleOrder, ScaleType } from "@/types/scale.types";
+} from "../pages/main/total-count-block/total-count-block.component.styled";
 
 const LibraryTitleComponent = ({
   user,

@@ -8,6 +8,9 @@ import { getBaseColorByScale } from "@/helpers/get-base-color-by-rarity/get-base
 
 import { useTranslations } from "next-intl";
 import { User } from "@/types/user.types";
+
+import GalleryItemScaleComponent from "@/components/pages/gallery/gallery-item-scale/gallery-item-scale.component";
+import NeonButtonComponent from "@/components/ui/neon-button/neon-button.component";
 import {
   GalleryItemModalButtonsContainer,
   GalleryItemModalContainer,
@@ -15,10 +18,8 @@ import {
   GalleryItemModalImage,
   GalleryItemModalScale,
   GalleryItemModalTitle,
-} from "@/components/gallery-item-modal/gallery-item-modal.component.styled";
-import GalleryItemScaleComponent from "@/components/gallery-item-scale/gallery-item-scale.component";
-import GalleryItemModalStatistics from "@/components/gallery-item-modal-statistics/gallery-item-modal-statistics.component";
-import NeonButtonComponent from "@/components/neon-button/neon-button.component";
+} from "../gallery-item-modal/gallery-item-modal.component.styled";
+import GalleryItemModalStatistics from "../gallery-item-modal-statistics/gallery-item-modal-statistics.component";
 
 const tektur = Tektur({
   subsets: ["latin"],

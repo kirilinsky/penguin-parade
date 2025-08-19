@@ -6,8 +6,8 @@ import {
   AboutPageSectionBlock,
   AboutPageSectionImage,
   AboutPageSectionText,
-} from "@/components/about-page-layout/about-page-layout.styled";
-import { LinkStyled } from "@/components/link/link.component.styled";
+} from "@/components/pages/about/about-page-layout/about-page-layout.styled";
+import { LinkStyled } from "@/components/ui/link/link.component.styled";
 import { tutorialBlocks } from "@/data/about";
 import { useAtomValue } from "jotai";
 import { useLocale } from "next-intl";

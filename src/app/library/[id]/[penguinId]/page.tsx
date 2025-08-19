@@ -1,6 +1,6 @@
 "use client";
 
-import PenguinDetailsComponent from "@/components/penguin-details/penguin-details.component";
+import PenguinDetailsComponent from "@/components/pages/details/penguin-details/penguin-details.component";
 import React from "react";
 import { useParams } from "next/navigation";
 

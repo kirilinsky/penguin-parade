@@ -1,12 +1,10 @@
 "use client";
 
-import AvatarComponent from "@/components/avatar-component/avatar-component";
-import GalleryFilterComponent from "@/components/gallery-filter-component/gallery-filter-component";
-import GalleryItemModalComponent from "@/components/gallery-item-modal/gallery-item-modal.component";
-import GalleryItemComponent from "@/components/gallery-item/gallery-item.component";
-import GalleryComponent from "@/components/gallery/gallery.component";
+import GalleryFilterComponent from "@/components/pages/gallery/gallery-filter-component/gallery-filter-component";
+import GalleryItemComponent from "@/components/pages/gallery/gallery-item/gallery-item.component";
+import GalleryComponent from "@/components/pages/gallery/gallery/gallery.component";
 import LibraryTitleComponent from "@/components/library-title/library-title.component";
-import { LinkStyled } from "@/components/link/link.component.styled";
+import { LinkStyled } from "@/components/ui/link/link.component.styled";
 import { useGetFriends } from "@/hooks/use-get-friends";
 import { useGetImages } from "@/hooks/use-get-images";
 import { useGetUserCredentials } from "@/hooks/use-get-user-credentials";
@@ -22,6 +20,7 @@ import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import Rodal from "rodal";
+import GalleryItemModalComponent from "@/components/modals/gallery-item-modal/gallery-item-modal.component";
 
 const MyLibraryPage = () => {
   const { id: pageId } = useParams();

@@ -1,13 +1,12 @@
-import CoinItemComponent from "@/components/coin-item/coin-item.component";
-import CrystalItemComponent from "@/components/crystal-item/crystal-item.component";
+import CoinItemComponent from "@/components/ui/coin-item/coin-item.component";
 import { ExpeditionRewardResponse } from "@/types/expeditions.types";
-import { ImageItem } from "@/types/image.types";
 import { ScaleType } from "@/types/scale.types";
 import React from "react";
 import Rodal from "rodal";
 import { ExpeditionRewardModalContainer } from "./expedition-reward-modal.component.styled";
-import NeonButtonComponent from "@/components/neon-button/neon-button.component";
-import { ConfettiEffect } from "@/components/confetti-effect/confetti-effect.component";
+import NeonButtonComponent from "@/components/ui/neon-button/neon-button.component";
+import { ConfettiEffect } from "@/components/ui/confetti-effect/confetti-effect.component";
+import CrystalItemComponent from "@/components/pages/main/crystal-item/crystal-item.component";
 
 const ExpeditionRewardModal = ({
   showModal,

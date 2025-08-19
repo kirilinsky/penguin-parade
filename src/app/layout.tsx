@@ -1,12 +1,12 @@
 import "./globals.css";
 import "./rodal.css";
 import { Provider as JotaiProvider } from "jotai";
-import ClientHeaderWrapper from "@/components/client-header-wrapper/client-header-wrapper.component";
-import FooterComponent from "@/components/footer/footer.component";
-import { PageWrapperStyled } from "@/components/page-wrapper/page-wrapper.component.styled";
+import ClientHeaderWrapper from "@/components/ui/client-header-wrapper/client-header-wrapper.component";
+import { PageWrapperStyled } from "@/components/ui/page-wrapper/page-wrapper.component.styled";
 import { getLocale } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
 import { ToastContainer } from "react-toastify";
+import FooterComponent from "@/components/ui/footer/footer.component";
 
 export const metadata = {
   title: "Penguin Parade",

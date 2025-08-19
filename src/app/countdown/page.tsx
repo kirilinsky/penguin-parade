@@ -3,30 +3,30 @@
 import { GenerateImageReposne } from "@/types/api.types";
 import Image from "next/image";
 import React, { useEffect, useMemo, useState } from "react";
-import { LinkStyled } from "@/components/link/link.component.styled";
-import { PageContentWrapperComponent } from "@/components/page-content-wrapper/page-content-wrapper.component";
+import { LinkStyled } from "@/components/ui/link/link.component.styled";
+import { PageContentWrapperComponent } from "@/components/ui/page-content-wrapper/page-content-wrapper.component";
 import {
   PageContentBlockFlex,
   PageContentBlockStyled,
-} from "@/components/page-content-block/page-content-block.component.styled";
-import LastCraftedBlockComponent from "@/components/last-crafted-block/last-crafted-block.component";
+} from "@/components/ui/page-content-block/page-content-block.component.styled";
 import { getUserAllowCraftedAt } from "@/helpers/get-user-allow-crafted-at/get-user-allow-crafted-at";
-import { ArcadeButtonStyled } from "@/components/arcade-button/arcade-button.component.styled";
-import NeonButtonComponent from "@/components/neon-button/neon-button.component";
+import { ArcadeButtonStyled } from "@/components/ui/arcade-button/arcade-button.component.styled";
+import NeonButtonComponent from "@/components/ui/neon-button/neon-button.component";
 import { getAuth, sendEmailVerification } from "firebase/auth";
 import { formatDuration, intervalToDuration, isBefore, Locale } from "date-fns";
 import { useUserDetails } from "@/hooks/use-user-details";
 import { useLocale, useTranslations } from "next-intl";
 import { enUS, ru } from "date-fns/locale";
 import { useGetUserCrystals } from "@/hooks/use-get-crystals";
-import CrystalsSelector from "@/components/crystals-selector/crystals-selector.component";
 import { ScaleType } from "@/types/scale.types";
 import { getBaseColorByScale } from "@/helpers/get-base-color-by-rarity/get-base-color-by-rarity";
-import GalleryItemScaleComponent from "@/components/gallery-item-scale/gallery-item-scale.component";
-import { TelegramShareButton } from "@/components/tg-share-button/tg-share-button";
+import GalleryItemScaleComponent from "@/components/pages/gallery/gallery-item-scale/gallery-item-scale.component";
+import { TelegramShareButton } from "@/components/ui/tg-share-button/tg-share-button";
 import { toast } from "react-toastify";
 import EventBlockComponent from "@/components/event-block/event-block.component";
 import { useGetEvents } from "@/hooks/use-get-events";
+import CrystalsSelector from "@/components/pages/main/crystals-selector/crystals-selector.component";
+import LastCraftedBlockComponent from "@/components/pages/main/last-crafted-block/last-crafted-block.component";
 
 type GenerationResult = {
   downloadURL: string;

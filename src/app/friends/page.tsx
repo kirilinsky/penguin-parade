@@ -1,10 +1,5 @@
 "use client";
 
-import FriendsListBlockComponent from "@/components/friends-list-block/friends-list-block.component";
-import NeonButtonComponent from "@/components/neon-button/neon-button.component";
-import { PageContentBlockStyled } from "@/components/page-content-block/page-content-block.component.styled";
-import { PageContentWrapperComponent } from "@/components/page-content-wrapper/page-content-wrapper.component";
-import UserListItemComponent from "@/components/user-list-item/user-list-item.component";
 import { firestore } from "@/firebase";
 import { toast } from "react-toastify";
 import { getIdToken } from "@/helpers/get-token/get-token";
@@ -24,15 +19,16 @@ import {
   where,
 } from "firebase/firestore";
 import { useTranslations } from "next-intl";
-import Image from "next/image";
 import React, { useState } from "react";
+
+import FriendsListBlockComponent from "@/components/pages/friends/friends-list-block/friends-list-block.component";
 import {
   AsideSection,
   FriendsGalleryWrapper,
   GallerySection,
-} from "@/components/friends-gallery/friends-gallery.component.styled";
-import FriendSearchComponent from "@/components/friend-search/friend-search.component";
-import FriendRequestsBlock from "@/components/friend-requests-block/friend-requests-block.component";
+} from "@/components/pages/friends/friends-gallery/friends-gallery.component.styled";
+import FriendSearchComponent from "@/components/pages/friends/friend-search/friend-search.component";
+import FriendRequestsBlock from "@/components/pages/friends/friend-requests-block/friend-requests-block.component";
 
 const FriendsPage = () => {
   const { user: currentUser } = useUserDetails();

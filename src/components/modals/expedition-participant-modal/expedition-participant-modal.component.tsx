@@ -2,8 +2,8 @@ import {
   EvolutionModalContainer,
   EvolutionModalGallery,
   EvolutionModalGalleryItem,
-} from "@/components/evolution-modal/evolution-modal.component.styled";
-import GalleryItemScaleComponent from "@/components/gallery-item-scale/gallery-item-scale.component";
+} from "@/components/pages/evolution/evolution-modal/evolution-modal.component.styled";
+import GalleryItemScaleComponent from "@/components/pages/gallery/gallery-item-scale/gallery-item-scale.component";
 import { ImageItem } from "@/types/image.types";
 import React from "react";
 import Rodal from "rodal";

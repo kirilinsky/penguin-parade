@@ -7,10 +7,10 @@ import { doc, getDoc } from "firebase/firestore";
 import { useSetAtom } from "jotai";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import NeonButtonComponent from "@/components/neon-button/neon-button.component";
+import NeonButtonComponent from "@/components/ui/neon-button/neon-button.component";
 import { useTranslations } from "next-intl";
 import { User } from "@/types/user.types";
-import { LinkStyled } from "@/components/link/link.component.styled";
+import { LinkStyled } from "@/components/ui/link/link.component.styled";
 
 export default function Login() {
   const [email, setEmail] = useState("");
