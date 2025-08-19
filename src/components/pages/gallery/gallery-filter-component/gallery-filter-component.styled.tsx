@@ -1,16 +1,16 @@
 import styled from "styled-components";
 
 export const GalleryFilterComponentContainer = styled.div`
-  height: 35px;
-  margin-block: 26px;
-  padding: 20px;
+  min-height: 35px;
+  margin-block: 1.2rem;
+  padding: 1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   background: rgba(22, 60, 30, 0.85);
   border: 1px solid #2de191;
   border-radius: 8px;
-  font-size: 18px;
+  font-size: 1rem;
   box-shadow: 0 0 12px rgba(45, 225, 145, 0.25);
 
   @media (max-width: 960px) {
@@ -28,10 +28,16 @@ export const GalleryFilterComponentSide = styled.div`
   display: flex;
   align-items: center;
   gap: .4em;
+   @media (max-width: 1160px) {
+   flex-wrap:wrap;
+  }
   @media (max-width: 960px) {
     flex-wrap: wrap;
     gap: 15px;
     justify-content: end;
+  }
+  select {
+    max-width: 75px;
   }
 `;
 
