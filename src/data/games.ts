@@ -58,12 +58,29 @@ export const gameTiles: GameTile[] = [
       en: "Guess the Theme",
       ru: "Угадай тему",
     },
-    slug: "#",
+    slug: "/games/guess-theme",
     description: {
       en: "See a random penguin, choose the correct theme out of 12 in 5 seconds.",
       ru: "Случайный пингвин: выбери его тему из 12 вариантов за 5 секунд.",
     },
     image: "/games/guess-theme.webp",
+    cta: {
+      en: "Let me try",
+      ru: "Попробовать",
+    },
+  },
+  {
+    id: "clicker",
+    title: {
+      en: "Clicker",
+      ru: "Кликер",
+    },
+    slug: "#",
+    description: {
+      en: "Choose your penguin and click on it.",
+      ru: "Выбери пингвина и кликай по нему",
+    },
+    image: "/games/clicker.webp",
     cta: {
       en: "Soon",
       ru: "Скоро",
