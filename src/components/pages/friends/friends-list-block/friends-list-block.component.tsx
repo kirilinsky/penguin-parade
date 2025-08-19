@@ -8,11 +8,10 @@ import {
   FriendsHeader,
   TitleRow,
   CountPill,
-  LoaderGrid,
-  ShimmerCard,
   EmptyState,
 } from "./friends-list-block.component.styled";
 import { useTranslations } from "next-intl";
+import { LoaderGrid, ShimmerCard } from "@/components/ui/skeleton-grid/skeleton-grid.styled";
 
 type Props = {
   onRemove: (targetId: string) => Promise<void>;

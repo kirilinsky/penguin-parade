@@ -1,4 +1,8 @@
 {
+    "gamesPage": {
+        "title": "Games",
+        "subtitle": "Mini‑games, expeditions and evolution — earn coins & crystals."
+    },
     "homePage": {
         "welcome": "Welcome",
         "subtitle": "Start crafting your own collection of unique Penguins, each with their own style and story.",
@@ -169,8 +173,7 @@
         "craft": "Craft!",
         "friends": "Friends",
         "myPenguins": "My Penguins",
-        "expeditions": "Expeditions",
-        "evolve": "Evolve",
+        "games": "Games",
         "updates": "Updates",
         "about": "About",
         "auction": "Market",
