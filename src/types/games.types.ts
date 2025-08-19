@@ -19,7 +19,8 @@ export type GameTile = {
 
 export type GameId = "guess-own" | "guess-theme" | "clicker";
 
-type GuessThemeProgress = {
+export type GameProgress = {
+  id: GameId;
   totalPlays: number;
   totalWins: number;
   lastWasWin: boolean;
@@ -33,7 +34,7 @@ type GuessThemeProgress = {
   nextAvailableAt: Timestamp;
 };
 
-type GuessThemeSession = {
+export type GameSession = {
   gameId: "guess-theme";
   state: "active" | "completed";
   createdAt: Timestamp;

@@ -3,6 +3,22 @@
         "title": "Games",
         "subtitle": "Mini‑games, expeditions and evolution — earn coins & crystals."
     },
+    "guessThemePage": {
+        "title": "Guess the Theme",
+        "loading": "Loading…",
+        "error": "Error:",
+        "neverPlayed": "You haven’t played yet.",
+        "playFirstTime": "Play for the first time",
+        "progress": {
+            "title": "Progress"
+        },
+        "session": {
+            "activeTitle": "Active session",
+            "continue": "Continue"
+        },
+        "cooldown": "Next play available in {seconds} sec.",
+        "startNew": "Start a new game"
+    },
     "homePage": {
         "welcome": "Welcome",
         "subtitle": "Start crafting your own collection of unique Penguins, each with their own style and story.",
