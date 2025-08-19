@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import AvatarComponent from "../avatar-component/avatar-component";
 import {
   LibraryTitleWrapper,
@@ -13,7 +13,7 @@ import {
   TotalCountBlockItemNumber,
 } from "../total-count-block/total-count-block.component.styled";
 import GalleryItemScaleComponent from "../gallery-item-scale/gallery-item-scale.component";
-import { ScaleType } from "@/types/scale.types";
+import { scaleOrder, ScaleType } from "@/types/scale.types";
 
 const LibraryTitleComponent = ({
   user,
@@ -31,6 +31,14 @@ const LibraryTitleComponent = ({
     return null;
   }
 
+  const counts = useMemo(() => {
+    return Object.entries(rarityCount).sort(
+      ([keyA], [keyB]) =>
+        scaleOrder.indexOf(keyA as ScaleType) -
+        scaleOrder.indexOf(keyB as ScaleType)
+    );
+  }, [rarityCount]);
+
   return (
     <LibraryTitleWrapper>
       <LeftBlock>
@@ -44,7 +52,7 @@ const LibraryTitleComponent = ({
         </h1>
       </LeftBlock>
       <RightBlock>
-        {Object.entries(rarityCount).map(([key, value]) => {
+        {counts.map(([key, value]) => {
           return (
             <TotalCountBlockItem key={key}>
               <GalleryItemScaleComponent scale={key as ScaleType} />
