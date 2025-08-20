@@ -51,7 +51,7 @@ export default function GuessThemePage() {
 
   const onStartHandle = async () => {
     const token = await getIdToken();
-    const res = await fetch("/api/games/guess-theme/playedTodayget-progress", {
+    const res = await fetch("/api/games/get-progress?game=guess-theme", {
       headers: { Authorization: `Bearer ${token}` },
     });
     console.log(res, "res start");

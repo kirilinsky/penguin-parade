@@ -4,10 +4,7 @@ import { firestore } from "@/firebase";
 import { doc, getDoc, setDoc, serverTimestamp } from "firebase/firestore";
 import { GameId } from "@/types/games.types";
 
-export async function GET(
-  req: NextRequest,
-  { params }: { params: { gameId: GameId } }
-) {
+export async function GET(req: NextRequest) {
   try {
     const authHeader = req.headers.get("Authorization") || "";
     const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
@@ -16,7 +13,13 @@ export async function GET(
     }
     const { uid } = await adminAuth.verifyIdToken(token);
 
-    const { gameId } = params;
+    const gameId = req.nextUrl.searchParams.get("game") as GameId | null;
+    if (!gameId) {
+      return NextResponse.json(
+        { error: "Missing ?game param" },
+        { status: 400 }
+      );
+    }
     if (!gameId) {
       return NextResponse.json({ error: "Missing gameId" }, { status: 400 });
     }
@@ -31,7 +34,7 @@ export async function GET(
         id: gameId,
         totalPlays: 0,
         totalWins: 0,
-        lastWasWin: false, 
+        lastWasWin: false,
         sessionId: null,
         currentStrike: 0,
         bestStrike: 0,
