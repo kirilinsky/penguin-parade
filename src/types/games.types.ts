@@ -24,8 +24,7 @@ export type GameProgress = {
   totalPlays: number;
   totalWins: number;
   lastWasWin: boolean;
-  playedToday: boolean;
-  finishedToday: boolean;
+  sessionId: null | string;
   currentStrike: number;
   bestStrike: number;
   lastCoinsEarned: number;

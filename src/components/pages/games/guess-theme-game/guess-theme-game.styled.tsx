@@ -4,8 +4,8 @@ import styled, { keyframes, css } from "styled-components";
 export const GameWrapper = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
-  min-height: 100vh;
+  justify-content: space-between;
+  
   gap: 2rem;
   font-family: "Frutiger", "Segoe UI", sans-serif;
   position: relative;
@@ -22,9 +22,9 @@ export const OptionsColumn = styled.div<{ side: "left" | "right" }>`
 `;
 
 const glow = keyframes`
-  0% { box-shadow: 0 0 6px rgba(255,255,255,0.2); }
-  50% { box-shadow: 0 0 20px rgba(255,255,255,0.8); }
-  100% { box-shadow: 0 0 6px rgba(255,255,255,0.2); }
+  0% { box-shadow: 0 0 4px rgba(255,255,255,0.2); }
+  50% { box-shadow: 0 0 10px rgba(255,255,255,0.8); }
+  100% { box-shadow: 0 0 3px rgba(255,255,255,0.2); }
 `;
 
 export const OptionButton = styled.button<{ $status?: "correct" | "wrong" }>`
@@ -39,28 +39,28 @@ export const OptionButton = styled.button<{ $status?: "correct" | "wrong" }>`
 
   &:hover {
     background: rgba(255, 255, 255, 0.15);
-    animation: ${glow} 1.5s infinite;
+     box-shadow: 0 0 3px #ccc;
   }
 
   ${({ $status }) =>
     $status === "correct" &&
     css`
-      background: rgba(0, 200, 0, 0.3);
+      background: rgba(0, 200, 0, 0.525);
       border: 2px solid #00ff99;
-      animation: ${glow} 1s infinite;
+      animation: ${glow} 1s infinite ease-in;
     `}
 
   ${({ $status }) =>
     $status === "wrong" &&
     css`
-      background: rgba(200, 0, 0, 0.3);
+      background: rgba(200, 0, 0, 0.56);
       border: 2px solid #ff4444;
-      animation: ${glow} 0.5s infinite;
+      animation: ${glow} .8s infinite ease-out;
     `}
 `;
 
 export const PenguinImage = styled.div`
-  flex: 0 0 300px;
+   height: 50vh; 
   display: flex;
   justify-content: center;
 
@@ -68,14 +68,14 @@ export const PenguinImage = styled.div`
     max-width: 100%;
     height: auto;
     border-radius: 20px;
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
   }
 `;
 
 const blink = keyframes`
   0% { opacity: 1; }
-  50% { opacity: 0.4; }
-  100% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: .9; }
 `;
 
 export const Countdown = styled.div`

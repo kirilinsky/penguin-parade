@@ -49,6 +49,14 @@ export default function GuessThemePage() {
     }
   };
 
+  const onStartHandle = async () => {
+    const token = await getIdToken();
+    const res = await fetch("/api/games/guess-theme/playedTodayget-progress", {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    console.log(res, "res start");
+  };
+
   if (loading) {
     return <div>{t("loading")}</div>;
   }
@@ -70,6 +78,8 @@ export default function GuessThemePage() {
           <GuessThemeGame roundData={roundData} loading={loadingRound} />
         </GameRoundContainer>
         <button onClick={fetchRoundData}>load round</button>
+        <br />
+        <button onClick={onStartHandle}>start game</button>
         <button disabled>{t("session.continue")}</button>
       </section>
 
