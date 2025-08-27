@@ -259,7 +259,7 @@
         "left": "left to reach the goal",
         "achieved": "Goal achieved!",
         "afterTitle": "What will happen then?",
-        "afterDescription": "When the number of penguins reaches goal number, craft and evolution will be stopped. All penguins will be turned into NFT."
+        "afterDescription": "When the number of penguins reaches goal number, craft and evolution will be stopped. You will be able to turn your penguins into NFT."
     },
     "notificationItem": {
         "expedition_complete": "The expedition has ended!",
