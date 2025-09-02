@@ -222,7 +222,7 @@ const MyLibraryPage = () => {
           />
         </Rodal>
       )}
-      {(user || pageUser) && (
+      {(isMyPage ? user : pageUser) && (
         <LibraryTitleComponent
           user={isMyPage ? user : pageUser}
           imagesCount={images.length}
