@@ -11,13 +11,13 @@ export async function POST(req: Request) {
       ? "emperor"
       : randomNumber < 0.15
       ? "mystic"
-      : randomNumber < 0.4
+      : randomNumber < 0.6
       ? "ghost"
-      : randomNumber < 1.2
+      : randomNumber < 1.4
       ? "divine"
-      : randomNumber < 3.2
+      : randomNumber < 3.52
       ? "legendary"
-      : randomNumber < 8.2
+      : randomNumber < 8.9
       ? "epic"
       : randomNumber < 22.2
       ? "rare"
@@ -71,9 +71,9 @@ where:
   "back": color of penguin's back,
   "fx": picture effects,
   "acc": (max 1-3 words, clothing/hat/accessory, necklace, shirt etc),
-  "t": (max 3 words, title of the penguin) surprise me, pretend its movie title,
-  "des": story about penguin,its origin, surrounding, legacy, fun facts, in 32-35 words,
-  "ability": max 1-3 words, ability of the penguin
+  "t": (max 3 words, title of the penguin) surprise me, pretend its movie title, no words 'whisper'
+  "des": story about penguin,its origin, surrounding, legacy, fun facts, in 31-35 words,
+  "ability": max 1-3 words, ability of the penguin related to theme. smth fun 
 
 Use Capital first letter for values and spaces between words. Background always connected with title and theme. Same for colors. Be bold and original. Mix elements. Return only JSON.`;
 
