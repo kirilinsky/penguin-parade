@@ -71,7 +71,7 @@ where:
   "back": color of penguin's back,
   "fx": picture effects,
   "acc": (max 1-3 words, clothing/hat/accessory, necklace, shirt etc),
-  "t": (max 3 words, title of the penguin) surprise me, pretend its movie title, no words 'whisper'
+  "t": (max 3 words, title of the penguin) surprise me, pretend its movie title about theme, !no words 'whisper', 'Whispering' etc!
   "des": story about penguin,its origin, surrounding, legacy, fun facts, in 31-35 words,
   "ability": max 1-3 words, ability of the penguin related to theme. smth fun 
 
