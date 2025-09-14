@@ -12,8 +12,33 @@ export const LibraryTitleWrapper = styled.div`
 export const LeftBlock = styled.div`
   flex: 1;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+
   gap: 0.4rem;
+`;
+
+export const AvatarTitleWrap = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+`;
+export const EventsBlock = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+`;
+export const EventsList = styled.div`
+  display: flex;
+  gap: 0.35rem;
+  img {
+    transition: linear 0.25s;
+    box-shadow: 0 0 2px #dff;
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 6px #dff;
+      transition: linear 0.15s;
+    }
+  }
 `;
 
 export const RightBlock = styled.div`

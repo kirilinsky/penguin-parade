@@ -27,6 +27,7 @@ const MyLibraryPage = () => {
   const { user, updateUser } = useUserDetails();
 
   const [imagesFiltered, setImagesFiltered] = useState<ImageItem[]>([]);
+  const [eventsId, setEventsId] = useState<string[]>([]);
   const [isMyPage, setIsMyPage] = useState(false);
   const [loadingSell, setLoadingSell] = useState(false);
   const [detailsImage, setDetailsImage] = useState<ImageItem | null>(null);
@@ -187,6 +188,17 @@ const MyLibraryPage = () => {
         );
         break;
     }
+    const eventIds = new Set<string>();
+    const imagesWithEvent: typeof filtered = [];
+
+    for (const img of filtered) {
+      if (img.event) {
+        eventIds.add(img.event as string);
+        imagesWithEvent.push(img);
+      }
+    }
+
+    setEventsId(Array.from(eventIds));
     setImagesFiltered(filtered);
   }, [images, sortOption, filterOption, originOption]);
 
@@ -228,6 +240,7 @@ const MyLibraryPage = () => {
           imagesCount={images.length}
           rarityCount={rarityCount}
           isMyPage={isMyPage}
+          eventsId={eventsId}
         />
       )}
 

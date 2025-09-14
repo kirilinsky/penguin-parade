@@ -279,6 +279,7 @@
     },
     "libraryTitle": {
         "my": "Мои",
+        "events": "ивенты",
         "penguins": "Пингвины"
     },
     "expeditionStatus": {

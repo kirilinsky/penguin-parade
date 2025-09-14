@@ -2,6 +2,7 @@
 
 import { ActionButton } from "@/components/event-block/event-block.component.styled";
 import {
+  AvatarTitleWrap,
   LeftBlock,
   LibraryTitleWrapper,
 } from "@/components/library-title/library-title.component.styled";
@@ -9,7 +10,6 @@ import { EventDivider } from "@/components/pages/events/event-divider/event-divi
 import GalleryItemComponent from "@/components/pages/gallery/gallery-item/gallery-item.component";
 import GalleryComponent from "@/components/pages/gallery/gallery/gallery.component";
 import AvatarComponent from "@/components/ui/avatar-component/avatar-component";
-import { LinkStyled } from "@/components/ui/link/link.component.styled";
 import { getLocalized } from "@/helpers/get-localized/get-localized";
 import { useGetEventDetails } from "@/hooks/use-get-event-details";
 import { useUserDetails } from "@/hooks/use-user-details";
@@ -50,32 +50,35 @@ const Page = () => {
     <>
       <LibraryTitleWrapper>
         <LeftBlock>
-          <AvatarComponent
-            username={"event"}
-            avatarUrl={`https://jbvhrvmqvrgtlwxvabih.supabase.co/storage/v1/object/public/penguins/events/${event?.id}.webp`}
-            avatarScale={null}
-          />
-          <div>
-            <h1>{getLocalized(event?.title, locale)}</h1>
-            <h3>
-              {t("penguinsCreated")}: {allImages.length}
-            </h3>
-            <span>
-              {event?.startDate &&
-                new Intl.DateTimeFormat(locale, {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                }).format(new Date(event.startDate))}
-              -{" "}
-              {event?.endDate &&
-                new Intl.DateTimeFormat(locale, {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                }).format(new Date(event.endDate))}
-            </span>
-          </div>
+          <AvatarTitleWrap>
+            {" "}
+            <AvatarComponent
+              username={"event"}
+              avatarUrl={`https://jbvhrvmqvrgtlwxvabih.supabase.co/storage/v1/object/public/penguins/events/${event?.id}.webp`}
+              avatarScale={null}
+            />
+            <div>
+              <h1>{getLocalized(event?.title, locale)}</h1>
+              <h3>
+                {t("penguinsCreated")}: {allImages.length}
+              </h3>
+              <span>
+                {event?.startDate &&
+                  new Intl.DateTimeFormat(locale, {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  }).format(new Date(event.startDate))}
+                -{" "}
+                {event?.endDate &&
+                  new Intl.DateTimeFormat(locale, {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  }).format(new Date(event.endDate))}
+              </span>
+            </div>
+          </AvatarTitleWrap>
         </LeftBlock>
       </LibraryTitleWrapper>
       {!!myPenguins.length && (
