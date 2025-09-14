@@ -28,7 +28,6 @@ export const useGetEvents = () => {
           }
         }
         setEvents(eventsArray);
-        setEvent(null);
       } catch (err) {
         setError(err);
       } finally {
