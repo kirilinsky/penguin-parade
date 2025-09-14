@@ -1,5 +1,6 @@
 "use client";
 
+import { ActionButton } from "@/components/event-block/event-block.component.styled";
 import {
   LeftBlock,
   LibraryTitleWrapper,
@@ -8,11 +9,13 @@ import { EventDivider } from "@/components/pages/events/event-divider/event-divi
 import GalleryItemComponent from "@/components/pages/gallery/gallery-item/gallery-item.component";
 import GalleryComponent from "@/components/pages/gallery/gallery/gallery.component";
 import AvatarComponent from "@/components/ui/avatar-component/avatar-component";
+import { LinkStyled } from "@/components/ui/link/link.component.styled";
 import { getLocalized } from "@/helpers/get-localized/get-localized";
 import { useGetEventDetails } from "@/hooks/use-get-event-details";
 import { useUserDetails } from "@/hooks/use-user-details";
 import { ImageItem } from "@/types/image.types";
 import { useLocale } from "next-intl";
+import Link from "next/link";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { useTranslations } from "use-intl";
@@ -23,6 +26,7 @@ const Page = () => {
   const { event, allImages } = useGetEventDetails(eventId as string);
   const [myPenguins, setMyPenguins] = useState<ImageItem[]>([]);
   const [remainPenguins, setRemainPenguins] = useState<ImageItem[]>([]);
+  const [salePenguins, setSalePenguins] = useState<ImageItem[]>([]);
   const locale = useLocale();
   const t = useTranslations("eventPage");
 
@@ -31,11 +35,15 @@ const Page = () => {
       const myPenguinsArray = allImages.filter(
         (img) => img.ownerId === user?.id
       );
+      const salePenguinsArray = allImages.filter(
+        (img) => img.ownerId === "auction"
+      );
       const remainPenguinsArray = allImages.filter(
-        (img) => img.ownerId !== user?.id
+        (img) => img.ownerId !== user?.id && img.ownerId !== "auction"
       );
       setRemainPenguins(remainPenguinsArray);
       setMyPenguins(myPenguinsArray);
+      setSalePenguins(salePenguinsArray);
     }
   }, [allImages]);
   return (
@@ -73,7 +81,7 @@ const Page = () => {
       {!!myPenguins.length && (
         <>
           <EventDivider>
-            <h2>{t('myPenguins')}</h2>
+            <h2>{t("myPenguins")}</h2>
           </EventDivider>
           <GalleryComponent>
             {myPenguins.map((img: ImageItem) => (
@@ -83,13 +91,28 @@ const Page = () => {
         </>
       )}
       <EventDivider>
-        <h2>{t('othersPenguins')}</h2>
+        <h2>{t("othersPenguins")}</h2>
       </EventDivider>
       <GalleryComponent>
         {remainPenguins.map((img: ImageItem) => (
           <GalleryItemComponent key={img.id} img={img} />
         ))}
       </GalleryComponent>
+      {!!salePenguins.length && (
+        <>
+          <EventDivider>
+            <h2>{t("onSale")}</h2>{" "}
+            <Link href={"/market"}>
+              <ActionButton>{t("visitMarket")}</ActionButton>
+            </Link>
+          </EventDivider>
+          <GalleryComponent>
+            {salePenguins.map((img: ImageItem) => (
+              <GalleryItemComponent key={img.id} img={img} />
+            ))}
+          </GalleryComponent>
+        </>
+      )}
     </>
   );
 };

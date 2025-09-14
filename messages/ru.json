@@ -5,6 +5,8 @@
     "eventPage": {
         "penguinsCreated": "Пингвинов создано",
         "myPenguins": "Мои Пингвины",
+        "onSale": "В продаже",
+        "visitMarket": "Посетить Рынок",
         "othersPenguins": "Чужие пингвины"
     },
     "gamesPage": {

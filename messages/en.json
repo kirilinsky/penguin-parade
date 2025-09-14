@@ -5,6 +5,8 @@
     "eventPage": {
         "penguinsCreated": "Penguins created",
         "myPenguins": "My Penguins",
+        "onSale": "On Sale",
+        "visitMarket": "Visit Market",
         "othersPenguins": "Others' Penguins"
     },
     "gamesPage": {

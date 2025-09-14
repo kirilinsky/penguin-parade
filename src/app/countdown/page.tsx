@@ -27,6 +27,8 @@ import EventBlockComponent from "@/components/event-block/event-block.component"
 import { useGetEvents } from "@/hooks/use-get-events";
 import CrystalsSelector from "@/components/pages/main/crystals-selector/crystals-selector.component";
 import LastCraftedBlockComponent from "@/components/pages/main/last-crafted-block/last-crafted-block.component";
+import GameCardComponent from "@/components/pages/games/game-card/game-card.component";
+import { gameTiles } from "@/data/games";
 
 type GenerationResult = {
   downloadURL: string;
@@ -297,7 +299,7 @@ const CountDownPage = () => {
           )}
         </PageContentBlockStyled>
       )}
-
+      {!event && <GameCardComponent tile={gameTiles[2]} />}
       <LastCraftedBlockComponent />
     </PageContentWrapperComponent>
   );
