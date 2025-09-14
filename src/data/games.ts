@@ -36,6 +36,23 @@ export const gameTiles: GameTile[] = [
     },
   },
   {
+    id: "events",
+    title: {
+      en: "Events",
+      ru: "События",
+    },
+    slug: "/events",
+    description: {
+      en: "Look for the past events.",
+      ru: "Взгляни на прошедшие игровые ивенты.",
+    },
+    image: "/games/events.webp",
+    cta: {
+      en: "Take a look",
+      ru: "Посмотреть",
+    },
+  },
+  {
     id: "guess-theme",
     title: {
       en: "Guess the Theme",
