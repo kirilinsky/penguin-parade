@@ -25,7 +25,6 @@ export const useGetEvents = () => {
 
           if (now >= start && now <= end) {
             setEvent({ ...data, startDate: start, endDate: end });
-            return;
           }
         }
         setEvents(eventsArray);

@@ -10,24 +10,25 @@ import { useGetEvents } from "@/hooks/use-get-events";
 import React from "react";
 
 const Route = () => {
-  const { events } = useGetEvents();
+  const { events, loading } = useGetEvents();
+console.log(events,'events');
 
-  return (
+  return (  
     <>
-      {!events ? (
-        <LoaderGrid>
+      {loading ? (
+        <GridSystem>
           <ShimmerCard />
           <ShimmerCard />
           <ShimmerCard />
-          <ShimmerCard />
-        </LoaderGrid>
+          <ShimmerCard /> <ShimmerCard />
+        </GridSystem>
       ) : (
         <GridSystem>
           {events.map((event) => (
             <EventCardComponent event={event} key={event.id} />
           ))}
         </GridSystem>
-      )}{" "}
+      )}
     </>
   );
 };
