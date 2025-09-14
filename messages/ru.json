@@ -1,4 +1,12 @@
 {
+    "eventsGallery": {
+        "checkLink": "Взглянуть"
+    },
+    "eventPage": {
+        "penguinsCreated": "Пингвинов создано",
+        "myPenguins": "Мои Пингвины",
+        "othersPenguins": "Чужие пингвины"
+    },
     "gamesPage": {
         "title": "Игры",
         "subtitle": "Мини-игры, экспедиции и эволюция — зарабатывай монеты и кристаллы."

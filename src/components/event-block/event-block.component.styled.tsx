@@ -63,24 +63,27 @@ export const GlassOverlay = styled.div`
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 0.7rem;
+  flex-wrap: nowrap;
 
   @media (max-width: 768px) {
     flex-direction: column;
+    justify-content: center;
     align-items: flex-start;
-    padding: 1rem;
+    padding: 0.6rem;
   }
 `;
 
 export const ButtonBlock = styled.div`
   display: flex;
+  flex-grow: 1;
   flex-direction: column;
   text-align: center;
   gap: 0.2rem;
 `;
 
 export const InfoBlock = styled.div`
-  flex: 1;
+  flex-grow: 1;
 
   p {
     margin: 0;

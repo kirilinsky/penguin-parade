@@ -5,7 +5,7 @@ export const GridSystem = styled.section`
   width: 100%;
   margin: 0 auto;
   display: grid;
-  gap: 1.3rem;
+  gap: 1.2rem;
 
   grid-template-columns: repeat(auto-fill, minmax(350px, 2fr));
 

@@ -1,4 +1,12 @@
 {
+    "eventsGallery": {
+        "checkLink": "Take a look"
+    },
+    "eventPage": {
+        "penguinsCreated": "Penguins created",
+        "myPenguins": "My Penguins",
+        "othersPenguins": "Others' Penguins"
+    },
     "gamesPage": {
         "title": "Games",
         "subtitle": "Mini‑games, expeditions and evolution — earn coins & crystals."
