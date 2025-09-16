@@ -7,7 +7,7 @@ import {
 } from "./clicker-game.component.styled";
 import { ClickerGameData, CurrentPenguin } from "@/types/clicker.types";
 
-const ClickerGameComponent = () => {
+const ClickerGameComponent = ({ onModalOpen }: { onModalOpen: () => void }) => {
   const currentPenguin: CurrentPenguin = {
     id: "id1",
     imgUrl: "https://...",
@@ -52,13 +52,15 @@ const ClickerGameComponent = () => {
       </ClickerHeader>
 
       <ClickerCanvas>
-        {currentPenguin ? (
+        {!currentPenguin ? (
           <div className="penguin">
             <img src="/penguin.png" alt="Selected penguin" />
           </div>
         ) : (
           <div>
-            <button className="select-btn">Select clicker candidate</button>
+            <button onClick={onModalOpen} className="select-btn">
+              Select clicker candidate
+            </button>
             <div className="hint">Tip: level will be saved</div>
           </div>
         )}
