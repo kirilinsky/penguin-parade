@@ -92,7 +92,7 @@ export const gameTiles: GameTile[] = [
       en: "Clicker",
       ru: "Кликер",
     },
-    slug: "#",
+    slug: "/games/clicker",
     description: {
       en: "Choose your penguin and click on it.",
       ru: "Выбери пингвина и кликай по нему",

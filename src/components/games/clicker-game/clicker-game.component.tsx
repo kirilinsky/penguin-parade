@@ -1,0 +1,79 @@
+import React from "react";
+import {
+  ClickerCanvas,
+  ClickerFooter,
+  ClickerHeader,
+  ClickerWrap,
+} from "./clicker-game.component.styled";
+import { ClickerGameData, CurrentPenguin } from "@/types/clicker.types";
+
+const currentPenguin: CurrentPenguin | null = null;
+
+const gameData: ClickerGameData | null = null;
+
+const ClickerGameComponent = () => {
+  return (
+    <ClickerWrap>
+      <ClickerHeader>
+        <div className="metrics">
+          <div className="stat">
+            <span className="label">clicks</span>
+            {currentPenguin && (
+              <span className="value">{currentPenguin?.clicks}</span>
+            )}
+          </div>
+          <div className="stat">
+            <span className="label">current level</span>
+            <span className="value">{currentPenguin?.level}</span>
+          </div>
+          <div className="stat">
+            <span className="label">next level</span>
+            <span className="value">{currentPenguin?.nextLevelAt}</span>
+          </div>
+          <div className="stat">
+            <span className="label">multiplier</span>
+            <span className="value">x{currentPenguin?.multiplier}</span>
+          </div>
+          <div className="stat">
+            <span className="label">daily income (total)</span>
+            <span className="value">+{gameData?.totalIncome} / day</span>
+          </div>
+        </div>
+
+        <div className="levelbar">
+          <div className="fill" />
+        </div>
+      </ClickerHeader>
+
+      <ClickerCanvas>
+        {currentPenguin ? (
+          <div className="penguin">
+            <img src="/penguin.png" alt="Selected penguin" />
+          </div>
+        ) : (
+          <div>
+            <button className="select-btn">Select clicker candidate</button>
+            <div className="hint">Tip: level will be saved</div>
+          </div>
+        )}
+      </ClickerCanvas>
+      <ClickerFooter>
+        <div className="avatar-list">
+          <button className="avatar selected">
+            <img src="/a1.jpg" alt="Penguin A" />
+            <span className="lvl">12</span>
+          </button>
+          <button className="avatar">
+            <img src="/a2.jpg" alt="Penguin B" />
+            <span className="lvl">7</span>
+          </button>
+        </div>
+        <div className="footer-top">
+          <button className="swap-btn">Change penguin</button>
+        </div>
+      </ClickerFooter>
+    </ClickerWrap>
+  );
+};
+
+export default ClickerGameComponent;
