@@ -7,16 +7,15 @@ import {
 } from "./clicker-game.component.styled";
 import { ClickerGameData, CurrentPenguin } from "@/types/clicker.types";
 
-const ClickerGameComponent = ({ onModalOpen }: { onModalOpen: () => void }) => {
-  const currentPenguin: CurrentPenguin = {
-    id: "id1",
-    imgUrl: "https://...",
-    scale: "common",
-    clicks: 12,
-    nextLevelAt: 1000,
-    level: 1,
-    multiplier: 1,
-  };
+const ClickerGameComponent = ({
+  onModalOpen,
+  gameData,
+  currentPenguin,
+}: {
+  gameData: ClickerGameData | null;
+  currentPenguin: CurrentPenguin | null;
+  onModalOpen: () => void;
+}) => {
   // const gameData: ClickerGameData = null;
   return (
     <ClickerWrap>
@@ -42,7 +41,7 @@ const ClickerGameComponent = ({ onModalOpen }: { onModalOpen: () => void }) => {
           </div>
           <div className="stat">
             <span className="label">daily income (total)</span>
-            <span className="value">+TOTAL INC / day</span>
+            <span className="value">{gameData?.totalIncome} / day</span>
           </div>
         </div>
 
@@ -52,9 +51,9 @@ const ClickerGameComponent = ({ onModalOpen }: { onModalOpen: () => void }) => {
       </ClickerHeader>
 
       <ClickerCanvas>
-        {!currentPenguin ? (
+        {currentPenguin ? (
           <div className="penguin">
-            <img src="/penguin.png" alt="Selected penguin" />
+            <img src={currentPenguin.imgUrl} alt="Selected penguin" />
           </div>
         ) : (
           <div>
@@ -67,14 +66,12 @@ const ClickerGameComponent = ({ onModalOpen }: { onModalOpen: () => void }) => {
       </ClickerCanvas>
       <ClickerFooter>
         <div className="avatar-list">
-          <button className="avatar selected">
-            <img src="/a1.jpg" alt="Penguin A" />
-            <span className="lvl">12</span>
-          </button>
-          <button className="avatar">
-            <img src="/a2.jpg" alt="Penguin B" />
-            <span className="lvl">7</span>
-          </button>
+          {gameData?.penguins.map((item) => (
+            <div className="avatar selected" key={item.id}>
+              <img src={item.imgUrl} alt="Penguin A" />
+              <span className="lvl">{item.level}</span>
+            </div>
+          ))}
         </div>
         <div className="footer-top">
           <button className="swap-btn">Change penguin</button>
