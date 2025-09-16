@@ -7,20 +7,26 @@ import {
 } from "./clicker-game.component.styled";
 import { ClickerGameData, CurrentPenguin } from "@/types/clicker.types";
 
-const currentPenguin: CurrentPenguin | null = null;
-
-const gameData: ClickerGameData | null = null;
-
 const ClickerGameComponent = () => {
+  const currentPenguin: CurrentPenguin = {
+    id: "id1",
+    imgUrl: "https://...",
+    scale: "common",
+    clicks: 12,
+    nextLevelAt: 1000,
+    level: 1,
+    multiplier: 1,
+  };
+  // const gameData: ClickerGameData = null;
   return (
     <ClickerWrap>
       <ClickerHeader>
         <div className="metrics">
           <div className="stat">
             <span className="label">clicks</span>
-            {currentPenguin && (
-              <span className="value">{currentPenguin?.clicks}</span>
-            )}
+            <span className="value">
+              {currentPenguin && currentPenguin.clicks}
+            </span>
           </div>
           <div className="stat">
             <span className="label">current level</span>
@@ -36,7 +42,7 @@ const ClickerGameComponent = () => {
           </div>
           <div className="stat">
             <span className="label">daily income (total)</span>
-            <span className="value">+{gameData?.totalIncome} / day</span>
+            <span className="value">+TOTAL INC / day</span>
           </div>
         </div>
 

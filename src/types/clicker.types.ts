@@ -8,7 +8,7 @@ export type CurrentPenguin = {
   level: number;
   nextLevelAt: number;
   multiplier: number;
-  inGameAt: Date;
+  inGameAt?: Date;
 };
 
 export type ClickerGameData = {
