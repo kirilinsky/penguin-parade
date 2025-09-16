@@ -3,14 +3,16 @@
 import ClickerScreen from "@/components/games/clicker-game/clicker-game.component";
 import ClickerModal from "@/components/modals/clicker-modal/clicker-modal.component";
 import { getIdToken } from "@/helpers/get-token/get-token";
+import { useClickerState } from "@/hooks/use-clicker-state";
 import { useGetImages } from "@/hooks/use-get-images";
 import { ClickerGameData, CurrentPenguin } from "@/types/clicker.types";
 import { ImageItem } from "@/types/image.types";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const Page = () => {
   const [showModal, setShowModal] = useState(false);
   const { images, loading: imagesLoading } = useGetImages(true, null);
+  const { current, game, loading, error, refresh } = useClickerState();
 
   const [gameData, setGameData] = useState<ClickerGameData | null>(null);
   const [currentPenguin, setCurrentPenguin] = useState<CurrentPenguin | null>(
@@ -39,6 +41,15 @@ const Page = () => {
     return data;
   };
 
+  useEffect(() => {
+    console.log(current,game,'134');
+    
+    setCurrentPenguin(current);
+    setGameData(game);
+  }, [game, current]);
+  if(loading){
+    return 'loading...'
+  }
   return (
     <>
       <ClickerScreen

@@ -1,8 +1,19 @@
-import { getAuth } from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 export async function getIdToken(): Promise<string | null> {
   const auth = getAuth();
-  const user = auth.currentUser;
+  const user =
+    auth.currentUser ||
+    (await new Promise<any>((res, rej) => {
+      const unsub = onAuthStateChanged(
+        auth,
+        (u) => {
+          unsub();
+          u ? res(u) : rej(new Error("Not signed in"));
+        },
+        rej
+      );
+    }));
 
   if (!user) return null;
 
