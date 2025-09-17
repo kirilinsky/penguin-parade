@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   ChangePenguinBtn,
   ClickerCanvas,
@@ -13,6 +13,9 @@ import ConfettiEdgeWrapper from "../clicker-wrap/clicker-wrap.component";
 import ArcadeCounter from "../clicker-stat-number/clicker-stat-number.component";
 import { usePlayAudio } from "@/hooks/use-play-audio";
 import { Volume2, VolumeX } from "lucide-react";
+import { clickerIsCrit } from "@/helpers/clicker-is-crit/clicker-is-crit";
+import { useClickerBubbles } from "@/hooks/use-clicker-bubbles";
+import CritBubbleLayer from "../clicker-bubbles/clicker-bubbles.component";
 
 const ClickerGameComponent = ({
   onModalOpen,
@@ -26,17 +29,34 @@ const ClickerGameComponent = ({
   const baseColor = currentPenguin
     ? getBaseColorByScale(currentPenguin.scale)
     : "#fff";
-  const { play } = usePlayAudio("/sounds/click.wav", { volume: 0.2, pool: 6 });
+  const penguinRef = useRef<HTMLDivElement>(null);
+  const { bubbles, emit } = useClickerBubbles(penguinRef, {
+    durationMs: 600,
+    maxBubbles: 6,
+  });
+
+  const { play: playClick } = usePlayAudio("/sounds/click.wav", {
+    volume: 0.2,
+    pool: 6,
+  });
+  const { play: playCrit } = usePlayAudio("/sounds/crit.wav", {
+    volume: 0.3,
+    pool: 6,
+  });
 
   const [_clicks, set_Clicks] = useState(0);
   const [muted, setMuted] = useState(false);
 
-  const onClick = () => {
-    set_Clicks(
-      (prev) => prev + (currentPenguin ? currentPenguin.multiplier : 0)
-    );
+  const onClick = (e: React.MouseEvent) => {
+    const { isCrit, critX } = clickerIsCrit(currentPenguin?.scale);
+    let baseMultiplier = currentPenguin ? currentPenguin.multiplier : 1;
+    if (isCrit) {
+      emit(`CRIT +${critX}`, { clientX: e.clientX, clientY: e.clientY }, baseColor);
+      baseMultiplier = baseMultiplier * critX;
+    }
+    set_Clicks((prev) => prev + baseMultiplier);
     if (!muted) {
-      play();
+      isCrit ? playCrit() : playClick();
     }
   };
 
@@ -87,7 +107,12 @@ const ClickerGameComponent = ({
       <ClickerCanvas>
         {currentPenguin ? (
           <ConfettiEdgeWrapper color={baseColor}>
-            <ClickerSelectedImage borderColor={baseColor} onClick={onClick}>
+            <CritBubbleLayer bubbles={bubbles} />
+            <ClickerSelectedImage
+              borderColor={baseColor}
+              ref={penguinRef}
+              onClick={onClick}
+            >
               <img src={currentPenguin.imgUrl} alt="Selected penguin" />
             </ClickerSelectedImage>
           </ConfettiEdgeWrapper>
