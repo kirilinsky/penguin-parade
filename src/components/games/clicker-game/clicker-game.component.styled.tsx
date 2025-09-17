@@ -121,7 +121,9 @@ export const ClickerHeader = styled(GlassBlock).attrs({ as: "header" })`
     }
   }
 `;
-export const ClickerSelectedImage = styled.div<{ borderColor: string }>`
+export const ClickerSelectedImage = styled.div.withConfig({
+  shouldForwardProp: (prop) => prop !== "borderColor",
+})<{ borderColor: string }>`
   position: relative;
   display: grid;
   place-items: center;

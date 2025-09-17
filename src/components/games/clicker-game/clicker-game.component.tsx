@@ -11,6 +11,7 @@ import { ClickerGameData, CurrentPenguin } from "@/types/clicker.types";
 import { getBaseColorByScale } from "@/helpers/get-base-color-by-rarity/get-base-color-by-rarity";
 import ConfettiEdgeWrapper from "../clicker-wrap/clicker-wrap.component";
 import ArcadeCounter from "../clicker-stat-number/clicker-stat-number.component";
+import { usePlayAudio } from "@/hooks/use-play-audio";
 
 const ClickerGameComponent = ({
   onModalOpen,
@@ -24,6 +25,7 @@ const ClickerGameComponent = ({
   const baseColor = currentPenguin
     ? getBaseColorByScale(currentPenguin.scale)
     : "#fff";
+  const { play } = usePlayAudio("/sounds/click.wav", { volume: 0.2, pool: 6 });
 
   const [_clicks, set_Clicks] = useState(0);
 
@@ -31,6 +33,7 @@ const ClickerGameComponent = ({
     set_Clicks(
       (prev) => prev + (currentPenguin ? currentPenguin.multiplier : 0)
     );
+    play();
   };
 
   useEffect(() => {
