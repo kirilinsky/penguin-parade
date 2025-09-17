@@ -12,6 +12,7 @@ import { getBaseColorByScale } from "@/helpers/get-base-color-by-rarity/get-base
 import ConfettiEdgeWrapper from "../clicker-wrap/clicker-wrap.component";
 import ArcadeCounter from "../clicker-stat-number/clicker-stat-number.component";
 import { usePlayAudio } from "@/hooks/use-play-audio";
+import { Volume2, VolumeX } from "lucide-react";
 
 const ClickerGameComponent = ({
   onModalOpen,
@@ -28,12 +29,15 @@ const ClickerGameComponent = ({
   const { play } = usePlayAudio("/sounds/click.wav", { volume: 0.2, pool: 6 });
 
   const [_clicks, set_Clicks] = useState(0);
+  const [muted, setMuted] = useState(false);
 
   const onClick = () => {
     set_Clicks(
       (prev) => prev + (currentPenguin ? currentPenguin.multiplier : 0)
     );
-    play();
+    if (!muted) {
+      play();
+    }
   };
 
   useEffect(() => {
@@ -106,6 +110,13 @@ const ClickerGameComponent = ({
           ))}
         </div>
         <div className="footer-top">
+          <button
+            title={!muted ? "Mute" : "Unmute"}
+            className="swap-btn"
+            onClick={() => setMuted(!muted)}
+          >
+            {muted ? <VolumeX size={17} /> : <Volume2 size={17} />}
+          </button>
           <button className="swap-btn" onClick={onModalOpen}>
             Change penguin
           </button>
