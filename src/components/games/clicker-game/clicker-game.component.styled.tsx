@@ -94,6 +94,7 @@ export const ClickerHeader = styled(GlassBlock).attrs({ as: "header" })`
       font-size: 12px;
       letter-spacing: 0.4px;
       color: var(--muted);
+      text-align: center;
       text-transform: uppercase;
     }
     .value {

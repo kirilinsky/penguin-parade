@@ -52,7 +52,11 @@ const ClickerGameComponent = ({
           </div>
           <div className="stat">
             <span className="label">current level</span>
-            <span className="value">{currentPenguin?.level}</span>
+            <ArcadeCounter
+              className="value"
+              value={currentPenguin ? currentPenguin?.level : 0}
+              color={baseColor}
+            />
           </div>
           <div className="stat">
             <span className="label">next level</span>
