@@ -52,7 +52,7 @@ export const gameTiles: GameTile[] = [
       ru: "Посмотреть",
     },
   },
-  {
+ /*  {
     id: "guess-theme",
     title: {
       en: "Guess the Theme",
@@ -85,22 +85,22 @@ export const gameTiles: GameTile[] = [
       en: "Soon",
       ru: "Скоро",
     },
-  },
+  }, */
   {
     id: "clicker",
     title: {
-      en: "Clicker",
-      ru: "Кликер",
+      en: "Pinguicker",
+      ru: "Пингвикер",
     },
     slug: "/games/clicker",
     description: {
-      en: "Choose your penguin and click on it.",
-      ru: "Выбери пингвина и кликай по нему",
+      en: "Choose your penguin and earn coins clicking on it.",
+      ru: "Выбери своего пингвина и зарабатывай кликая по нему",
     },
     image: "/games/clicker.webp",
     cta: {
-      en: "Soon",
-      ru: "Скоро",
+      en: "In test",
+      ru: "Тестирование",
     },
   },
 ];
