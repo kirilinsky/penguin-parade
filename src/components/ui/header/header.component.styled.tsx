@@ -5,10 +5,10 @@ export const HeaderWrapper = styled.header`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  height: 77px;
+  height: 72px;
   background-color: #214d26d4;
   @media (max-width: 468px) {
-    height: 60px;
+    height: 57px;
   }
 `;
 
