@@ -8,8 +8,9 @@ export const navItems: NavItem[] = [
   { labelKey: "craft", href: "/countdown" },
   { labelKey: "games", href: "/games" },
   { labelKey: "myPenguins", href: (id) => `/library/${id}` },
-  { labelKey: "updates", href: "/updates" },
+
   { labelKey: "friends", href: "/friends" },
 
   { labelKey: "auction", href: "/market" },
+  { labelKey: "updates", href: "/updates" },
 ];

@@ -7,6 +7,7 @@ import {
   NavigationLinkWrapper,
 } from "./navigation-links.component.styled";
 import { navItems } from "@/data/navigation";
+import { LogOut } from "lucide-react";
 
 const NavigationLinksComponent = ({
   user,
@@ -29,8 +30,7 @@ const NavigationLinksComponent = ({
           {navItems.map((item, idx) => {
             const href =
               typeof item.href === "function" ? item.href(user.id) : item.href;
-            const showBadge =
-              item.labelKey === "updates" && hasUnread;
+            const showBadge = item.labelKey === "updates" && hasUnread;
             return (
               <NavigationLinkWrapper key={idx}>
                 <Link href={href} onClick={onClick}>
@@ -41,8 +41,8 @@ const NavigationLinksComponent = ({
             );
           })}
           <NavigationLinkWrapper>
-            <Link onClick={logOutHandler} href="/">
-              {t("logOut")}
+            <Link onClick={logOutHandler} href="/" title={t("logOut")}>
+              <LogOut size={17} />
             </Link>
           </NavigationLinkWrapper>
         </>
