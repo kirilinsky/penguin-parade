@@ -31,6 +31,7 @@
     },
     "homePage": {
         "welcome": "Welcome",
+        "waitForUpdatesText": "Wait for updates about mining NFT",
         "subtitle": "Start crafting your own collection of unique Penguins, each with their own style and story.",
         "actionText": "Show them off, trade with another users, or send as surprise gifts to friends.",
         "linkCraftPage": "Go to Craft page!",
@@ -172,7 +173,9 @@
         "verifyEmailAlert2": "before generating a penguin.",
         "generationInProgress": "Generation is already in progress. Please wait for it to complete.",
         "serverError": "The server took too long to respond. Please try again later.",
-        "unexpectedError": "An unexpected error occurred. Please try again."
+        "unexpectedError": "An unexpected error occurred. Please try again.",
+        "endCraftTitle": "Attention, free penguin crafting has ended",
+        "endCraftText": "Stay tuned for updates — soon you might be able to create penguins during special events"
     },
     "loginPage": {
         "title": "Login Page",
@@ -269,7 +272,7 @@
         "left": "left to reach the goal",
         "achieved": "Goal achieved!",
         "afterTitle": "What will happen then?",
-        "afterDescription": "When the number of penguins reaches goal number, craft and evolution will be stopped. You will be able to turn your penguins into NFT."
+        "afterDescription": "Сraft and evolution have been stopped. You will be able to turn your penguins into NFT soon."
     },
     "notificationItem": {
         "expedition_complete": "The expedition has ended!",

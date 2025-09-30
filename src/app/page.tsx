@@ -34,9 +34,9 @@ export default function Home() {
             <h1>
               {t("welcome")}, {user.username}!
             </h1>
-            <p style={{ width: "75%", textAlign: "center" }}>{t("subtitle")}</p>
+           {/*  <p style={{ width: "75%", textAlign: "center" }}>{t("subtitle")}</p> */}
             <br />
-            <span>{t("actionText")}</span>
+            <span>{t("waitForUpdatesText")}</span>
 
             <Image
               alt="nofriends"
@@ -44,9 +44,9 @@ export default function Home() {
               width="130"
               height="140"
             />
-            <LinkStyled title="Craft page" href={"/countdown"}>
+           {/*  <LinkStyled title="Craft page" href={"/countdown"}>
               {t("linkCraftPage")}
-            </LinkStyled>
+            </LinkStyled> */}
           </PageContentBlockStyled>
           <CrystalsBlock />
           <PenguinProgressBlock />

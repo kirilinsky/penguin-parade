@@ -41,14 +41,14 @@ type GenerationResult = {
 const CountDownPage = () => {
   const t = useTranslations("craftPage");
   const localeCode = useLocale();
-  const { user, refreshUser } = useUserDetails();
+  //  const { user, refreshUser } = useUserDetails();
   const [canCraft, setCanCraft] = useState<boolean>(false);
   const [loading, setLoading] = useState(false);
   const [loadingPayToSkip, setLoadingPayToSkip] = useState(false);
-  const [leftTime, setLeftTime] = useState<string>("");
+  //const [leftTime, setLeftTime] = useState<string>("");
   const [result, setResult] = useState<GenerationResult | null>(null);
-  const { crystals, loading: crystalsLoading } = useGetUserCrystals();
-  const [crystalApplied, setCrystalApplied] = useState<ScaleType | null>(null);
+  //const { crystals, loading: crystalsLoading } = useGetUserCrystals();
+  // const [crystalApplied, setCrystalApplied] = useState<ScaleType | null>(null);
   const { event } = useGetEvents();
 
   const localeMap: Record<string, Locale> = {
@@ -56,9 +56,9 @@ const CountDownPage = () => {
     ru: ru,
   };
   const locale = localeMap[localeCode] ?? enUS;
-
-  const checkUserStatus = async () => {
-    /* TODO: think about useUserDetails refresh */
+  /* TODO: think about useUserDetails refresh */
+  /*   const checkUserStatus = async () => {
+   
     if (!user) return;
     const allowUserCraftedAt = await getUserAllowCraftedAt(user);
     if (allowUserCraftedAt) {
@@ -76,9 +76,9 @@ const CountDownPage = () => {
       });
       setLeftTime(formattedDate);
     }
-  };
+  }; 
 
-  const craft = async (event?: string) => {
+     const craft = async (event?: string) => {
     const auth = getAuth();
     const userCred = auth.currentUser;
     if (!userCred || !user) return;
@@ -139,9 +139,9 @@ const CountDownPage = () => {
       setLoading(false);
       checkUserStatus();
     }
-  };
+  }; 
 
-  const payToSkip = async () => {
+ const payToSkip = async () => {
     setLoadingPayToSkip(true);
     if (canCraft) return;
     try {
@@ -174,19 +174,28 @@ const CountDownPage = () => {
     } finally {
       setLoadingPayToSkip(false);
     }
-  };
+  }; 
 
-  useEffect(() => {
+  /* useEffect(() => {
     user && checkUserStatus();
-  }, [user]);
+  }, [user]); */
 
-  const appliedColor = useMemo(() => {
+  /*   const appliedColor = useMemo(() => {
     if (crystalApplied) return getBaseColorByScale(crystalApplied);
-  }, [crystalApplied]);
+  }, [crystalApplied]); */
 
   return (
     <PageContentWrapperComponent>
-      {event && user && !result ? (
+      <PageContentBlockStyled>
+        <PageContentBlockFlex>
+          <h1>{t("endCraftTitle")}</h1>
+          <br />
+          <p>
+          {t("endCraftText")}
+          </p>
+        </PageContentBlockFlex>
+      </PageContentBlockStyled>
+      {/*     {event && user && !result ? (
         <EventBlockComponent
           loading={loading || loadingPayToSkip}
           event={event}
@@ -298,7 +307,7 @@ const CountDownPage = () => {
             </PageContentBlockFlex>
           )}
         </PageContentBlockStyled>
-      )}
+      )} */}
       {!event && <GameCardComponent tile={gameTiles[2]} />}
       <LastCraftedBlockComponent />
     </PageContentWrapperComponent>

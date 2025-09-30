@@ -189,7 +189,7 @@ const EvolvePage = () => {
     setExpectingRarityScale(nextScale);
     setFilteredImages(filteredImagesDraft);
   }, [currentRarityScale]);
-
+  return <span>Evolution is on pause</span>;
   return (
     <>
       <Rodal
@@ -253,13 +253,13 @@ const EvolvePage = () => {
                 alignItems: "center",
               }}
             >
-              And here is your new {resultTitle}!<b>Welcome buddy</b>
+              {/*  And here is your new {resultTitle}!<b>Welcome buddy</b>
               <br />
               {result && user && (
                 <LinkStyled href={`/library/${user.id}`}>
                   Go to My Penguins
                 </LinkStyled>
-              )}
+              )} */}
             </div>
           )}
         </EvolutionGridItemCenterWrap>

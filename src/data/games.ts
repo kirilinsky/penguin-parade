@@ -1,7 +1,7 @@
 import { GameTile } from "@/types/games.types";
 
 export const gameTiles: GameTile[] = [
-  {
+/*   {
     id: "evolution",
     title: {
       en: "Evolution",
@@ -17,7 +17,7 @@ export const gameTiles: GameTile[] = [
       en: "Evolve",
       ru: "Эволюционировать",
     },
-  },
+  }, */
   {
     id: "expeditions",
     title: {
