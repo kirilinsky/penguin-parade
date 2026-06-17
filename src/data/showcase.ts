@@ -21,8 +21,30 @@ export interface ShowcaseEvent {
   imageUrl: string;
 }
 
+// JSON can't carry Firestore Timestamp methods. Some shared components call
+// `.toDate()` on date fields, so we rehydrate them with a compatible shim.
+type TsLike = { seconds: number; nanoseconds?: number } | null | undefined;
+const reviveTs = (t: TsLike) => {
+  if (!t || typeof t.seconds !== "number") return undefined;
+  const seconds = t.seconds;
+  return {
+    seconds,
+    nanoseconds: t.nanoseconds ?? 0,
+    toDate: () => new Date(seconds * 1000),
+    toMillis: () => seconds * 1000,
+  };
+};
+
+const reviveImage = (i: Record<string, unknown>) => ({
+  ...i,
+  createdAt: reviveTs(i.createdAt as TsLike),
+  placedForAuctionAt: reviveTs(i.placedForAuctionAt as TsLike),
+});
+
 export const showcaseStats = raw.stats as ShowcaseStats;
-export const showcaseImages = raw.images as unknown as ImageItem[];
+export const showcaseImages = (raw.images as Record<string, unknown>[]).map(
+  reviveImage
+) as unknown as ImageItem[];
 export const showcaseExpeditions = raw.expeditions as unknown as Expedition[];
 export const showcaseEvents = raw.events as unknown as ShowcaseEvent[];
 export const showcaseGeneratedAt = raw.generatedAt as string | null;

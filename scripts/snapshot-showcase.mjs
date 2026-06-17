@@ -62,6 +62,7 @@ const slimImages = images.map((i) => ({
   ownerId: i.ownerId ?? null,
   creatorUid: i.creatorUid ?? null,
   createdAt: ts(i.createdAt),
+  placedForAuctionAt: ts(i.placedForAuctionAt),
   settings: i.settings ?? null,
 }));
 
