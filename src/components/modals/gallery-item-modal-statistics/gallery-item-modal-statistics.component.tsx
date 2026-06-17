@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import {
   GalleryItemModalStatisticsDes,
   GalleryItemModalStatisticsExpedition,
@@ -12,14 +11,19 @@ import { ImageItem } from "@/types/image.types";
 import { format } from "date-fns";
 import { useTranslations, useLocale } from "next-intl";
 import { getLocalized } from "@/helpers/get-localized/get-localized";
+import { getBaseColorByScale } from "@/helpers/get-base-color-by-rarity/get-base-color-by-rarity";
 import { LinkStyled } from "@/components/ui/link/link.component.styled";
+import type { CSSProperties } from "react";
 
 const GalleryItemModalStatistics = ({ img }: { img: ImageItem }) => {
   const t = useTranslations("galleryItemModalStatistics");
   const locale = useLocale();
+  const accent = getBaseColorByScale(img.settings.rarity);
 
   return (
-    <GalleryItemModalStatisticsGrid>
+    <GalleryItemModalStatisticsGrid
+      style={{ "--accent": accent } as CSSProperties}
+    >
       <GalleryItemModalStatisticsDes>
         {getLocalized(img.settings.des, locale)}
       </GalleryItemModalStatisticsDes>
