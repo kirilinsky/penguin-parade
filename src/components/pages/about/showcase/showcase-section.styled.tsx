@@ -502,6 +502,45 @@ export const CrystalStat = styled.div`
   }
 `;
 
+export const TechBlock = styled.div`
+  max-width: 820px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2em;
+`;
+
+export const TechGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5em;
+`;
+
+export const TechGroupTitle = styled.div`
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  opacity: 0.5;
+`;
+
+export const TechChips = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5em;
+`;
+
+export const TechChip = styled.span`
+  font-size: 0.84rem;
+  border: 1px solid rgba(45, 225, 145, 0.28);
+  border-radius: 8px;
+  padding: 0.38em 0.85em;
+  background: rgba(255, 255, 255, 0.04);
+  color: #d9fff1;
+`;
+
 export const AvatarGrid = styled.div`
   display: flex;
   flex-wrap: wrap;
