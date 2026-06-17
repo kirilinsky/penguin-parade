@@ -1,95 +1,94 @@
 "use client";
 
-import { loggedInAtom } from "@/atoms/user/user.atom";
-import { LinkStyled } from "@/components/ui/link/link.component.styled";
-import { PageContentBlockStyled } from "@/components/ui/page-content-block/page-content-block.component.styled";
-import { PageContentWrapperComponent } from "@/components/ui/page-content-wrapper/page-content-wrapper.component";
-import TopUsersBlock from "@/components/pages/main/top-users-block/top-users-block.component";
-import { useUserDetails } from "@/hooks/use-user-details";
-import { useAtomValue } from "jotai";
-import { useTranslations } from "next-intl";
+import Link from "next/link";
 import Image from "next/image";
-import { useEffect } from "react";
-import CrystalsBlock from "@/components/pages/main/crystals-block/crystals-block.component";
-import { PenguinProgressBlock } from "@/components/pages/main/progress-block/progress-block.component";
-import LastCraftedBlockComponent from "@/components/pages/main/last-crafted-block/last-crafted-block.component";
-import TotalCountBlockComponent from "@/components/pages/main/total-count-block/total-count-block.component";
-import RandomAuctionBlockComponent from "@/components/pages/main/random-auction-block/random-auction-block.component";
-import StatisticsBlockComponent from "@/components/pages/main/statistics-block/statistics-block.component";
+import { useLocale } from "next-intl";
+import ShowcaseHero from "@/components/pages/about/showcase/showcase-hero.component";
+import { useL } from "@/components/pages/about/showcase/showcase-l10n";
+import {
+  ExploreCard,
+  ExploreCardCount,
+  ExploreCardTitle,
+  ExploreGrid,
+  ShowcaseSection,
+  ShowcaseSectionTitle,
+} from "@/components/pages/about/showcase/showcase-section.styled";
+import {
+  AboutPageContainer,
+  AboutPageSectionBlock,
+  AboutPageSectionImage,
+  AboutPageSectionText,
+} from "@/components/pages/about/about-page-layout/about-page-layout.styled";
+import { showcaseStats } from "@/data/showcase";
+import { tutorialBlocks } from "@/data/about";
 
 export default function Home() {
-  const { user, refreshUser } = useUserDetails();
-  const loggedIn = useAtomValue(loggedInAtom);
-  const t = useTranslations("homePage");
+  const locale = useLocale();
+  const L = useL();
 
-  useEffect(() => {
-    refreshUser();
-  }, []);
+  const cards = [
+    {
+      href: "/catalog",
+      title: L("Catalog", "Каталог"),
+      count: `${showcaseStats.totalPenguins} ${L("penguins", "пингвинов")}`,
+    },
+    {
+      href: "/market",
+      title: L("Market", "Рынок"),
+      count: `${showcaseStats.onMarket} ${L("offers", "лотов")}`,
+    },
+    {
+      href: "/evolution",
+      title: L("Evolution", "Эволюция"),
+      count: L("visual demo", "визуал-демо"),
+    },
+    {
+      href: "/expeditions",
+      title: L("Expeditions", "Экспедиции"),
+      count: `${showcaseStats.totalExpeditions} ${L("runs", "ходок")}`,
+    },
+  ];
 
   return (
-    <PageContentWrapperComponent>
-      {user && loggedIn ? (
-        <>
-          <PageContentBlockStyled>
-            <h1>
-              {t("welcome")}, {user.username}!
-            </h1>
-           {/*  <p style={{ width: "75%", textAlign: "center" }}>{t("subtitle")}</p> */}
-            <br />
-            <span>{t("waitForUpdatesText")}</span>
+    <>
+      <ShowcaseHero />
 
-            <Image
-              alt="nofriends"
-              src="/infographics/welcome.webp"
-              width="130"
-              height="140"
-            />
-           {/*  <LinkStyled title="Craft page" href={"/countdown"}>
-              {t("linkCraftPage")}
-            </LinkStyled> */}
-          </PageContentBlockStyled>
-          <CrystalsBlock />
-          <PenguinProgressBlock />
-          <LastCraftedBlockComponent />
-          <TotalCountBlockComponent />
-          <RandomAuctionBlockComponent />
-          <TopUsersBlock />
-          <StatisticsBlockComponent user={user} />
-          <PageContentBlockStyled>
-            <h2>Road map</h2>
-            <ul>
-              <li>Mini games</li>
-              <li>Events page</li>
-              <li>Suspicious gifts ban</li>
-              <li>Gift functionality design update (notification)</li>
-              <li>Anonymous home page, loggedIn limitations</li>
-              <li>NFT Mint preparation</li>
-              <li>Friends Updtes (news) </li>
-              <li>Announcements</li>
-              <li>Allow to craft notifications</li>
-              <li>Farms functionality</li>
-              <li>Mystery eggs</li>
-              <li>SignUp/Login via gmail</li>
-            </ul>
-          </PageContentBlockStyled>
+      <ShowcaseSection>
+        <ShowcaseSectionTitle>{L("Explore", "Разделы")}</ShowcaseSectionTitle>
+        <ExploreGrid>
+          {cards.map((c) => (
+            <Link key={c.href} href={c.href} style={{ textDecoration: "none" }}>
+              <ExploreCard>
+                <ExploreCardTitle>{c.title}</ExploreCardTitle>
+                <ExploreCardCount>{c.count}</ExploreCardCount>
+              </ExploreCard>
+            </Link>
+          ))}
+        </ExploreGrid>
+      </ShowcaseSection>
 
-          <PageContentBlockStyled>
-            <Image
-              width="320"
-              height="320"
-              src="/infographics/scales.webp"
-              alt="scales"
-            />
-          </PageContentBlockStyled>
-        </>
-      ) : (
-        <PageContentBlockStyled>
-          <h2>{t("anonTitle")}</h2>
-          <p>
-            <LinkStyled href="/login">{t("loginButton")}</LinkStyled>
-          </p>
-        </PageContentBlockStyled>
-      )}
-    </PageContentWrapperComponent>
+      <ShowcaseSection>
+        <ShowcaseSectionTitle>
+          {L("How it worked", "Как это работало")}
+        </ShowcaseSectionTitle>
+        <AboutPageContainer>
+          {tutorialBlocks.map((section, i) => (
+            <AboutPageSectionBlock key={i} reverse={i % 2 !== 0}>
+              <AboutPageSectionImage>
+                <Image
+                  width={200}
+                  height={250}
+                  src={`/tutorial/${section.img}.webp`}
+                  alt={`Section ${i + 1}`}
+                />
+              </AboutPageSectionImage>
+              <AboutPageSectionText>
+                {section[locale as "ru" | "en"]}
+              </AboutPageSectionText>
+            </AboutPageSectionBlock>
+          ))}
+        </AboutPageContainer>
+      </ShowcaseSection>
+    </>
   );
 }

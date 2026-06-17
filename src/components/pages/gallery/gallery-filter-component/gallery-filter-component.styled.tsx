@@ -2,11 +2,14 @@ import styled from "styled-components";
 
 export const GalleryFilterComponentContainer = styled.div`
   min-height: 35px;
-  margin-block: 1.2rem;
+  margin: 1.2rem auto;
+  max-width: 900px;
   padding: 1rem;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 0.8em 2em;
   background: rgba(22, 60, 30, 0.85);
   border: 1px solid #2de191;
   border-radius: 8px;
@@ -16,11 +19,8 @@ export const GalleryFilterComponentContainer = styled.div`
   @media (max-width: 960px) {
     width: 100%;
     padding: 10px;
-    flex-direction: column-reverse;
-    height: auto;
     gap: 1em;
-    align-items: flex-end;
-    font-size: 20px;
+    font-size: 18px;
   }
 `;
 
