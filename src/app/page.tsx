@@ -84,7 +84,7 @@ export default function Home() {
     },
     {
       label: L("AI generation", "AI-генерация"),
-      items: ["Replicate · SDXL ControlNet", "OpenAI GPT — события"],
+      items: ["Replicate · SDXL ControlNet", "OpenAI GPT"],
     },
     {
       label: L("Media & storage", "Медиа · хранилище"),
