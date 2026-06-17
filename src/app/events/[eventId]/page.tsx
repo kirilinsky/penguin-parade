@@ -13,6 +13,7 @@ import AvatarComponent from "@/components/ui/avatar-component/avatar-component";
 import { getLocalized } from "@/helpers/get-localized/get-localized";
 import { useGetEventDetails } from "@/hooks/use-get-event-details";
 import { useUserDetails } from "@/hooks/use-user-details";
+import { IMAGE_CDN_BASE } from "@/constants/cdn";
 import { ImageItem } from "@/types/image.types";
 import { useLocale } from "next-intl";
 import Link from "next/link";
@@ -54,7 +55,7 @@ const Page = () => {
             {" "}
             <AvatarComponent
               username={"event"}
-              avatarUrl={`https://jbvhrvmqvrgtlwxvabih.supabase.co/storage/v1/object/public/penguins/events/${event?.id}.webp`}
+              avatarUrl={`${IMAGE_CDN_BASE}/events/${event?.id}.webp`}
               avatarScale={null}
             />
             <div>

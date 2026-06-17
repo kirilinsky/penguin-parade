@@ -10,6 +10,7 @@ import {
 } from "./library-title.component.styled";
 import { useTranslations } from "next-intl";
 import { RarityCount } from "@/hooks/use-get-images";
+import { IMAGE_CDN_BASE } from "@/constants/cdn";
 
 import GalleryItemScaleComponent from "../pages/gallery/gallery-item-scale/gallery-item-scale.component";
 import { scaleOrder, ScaleType } from "@/types/scale.types";
@@ -69,7 +70,7 @@ const LibraryTitleComponent = ({
                   <AvatarComponent
                     username={"event"}
                     mini
-                    avatarUrl={`https://jbvhrvmqvrgtlwxvabih.supabase.co/storage/v1/object/public/penguins/events/${eventId}.webp`}
+                    avatarUrl={`${IMAGE_CDN_BASE}/events/${eventId}.webp`}
                     avatarScale={null}
                   />
                 </Link>

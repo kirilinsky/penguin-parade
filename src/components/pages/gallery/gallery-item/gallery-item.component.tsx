@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from "react";
 import Tilt from "react-parallax-tilt";
+import { IMAGE_CDN_BASE } from "@/constants/cdn";
 import {
   GalleryImageExpeditionOverlay,
   GalleryImageFrameOverlay,
@@ -122,7 +123,7 @@ const GalleryItemComponent = ({
               width={55}
               height={50}
               alt="event"
-              src={`https://jbvhrvmqvrgtlwxvabih.supabase.co/storage/v1/object/public/penguins/events/${img.event}.webp`}
+              src={`${IMAGE_CDN_BASE}/events/${img.event}.webp`}
             />
           )}
           <p style={{ textAlign: "center" }} className={tektur.className}>

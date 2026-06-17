@@ -1,6 +1,7 @@
 "use client";
 
 import { ImageItem } from "@/types/image.types";
+import { IMAGE_CDN_BASE } from "@/constants/cdn";
 import React, { useMemo, useState } from "react";
 import {
   GalleryItemModalAccordion,
@@ -89,7 +90,7 @@ const GalleryItemModalComponent = ({
             width={63}
             height={63}
             alt="event"
-            src={`https://jbvhrvmqvrgtlwxvabih.supabase.co/storage/v1/object/public/penguins/events/${img.event}.webp`}
+            src={`${IMAGE_CDN_BASE}/events/${img.event}.webp`}
           />
         )}
       </GalleryItemModalContent>

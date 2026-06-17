@@ -8,7 +8,11 @@ const nextConfig: NextConfig = {
     styledComponents: true,
   },
   images: {
-    domains: ["jbvhrvmqvrgtlwxvabih.supabase.co"],
+    remotePatterns: [
+      { protocol: "https", hostname: "cdn.jsdelivr.net" },
+      // kept during cutover; safe to drop once all URLs are migrated
+      { protocol: "https", hostname: "jbvhrvmqvrgtlwxvabih.supabase.co" },
+    ],
   },
 };
 
