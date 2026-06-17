@@ -14,6 +14,8 @@ const HeaderComponent = () => {
     { href: "/market", label: L("Market", "Рынок") },
     { href: "/evolution", label: L("Evolution", "Эволюция") },
     { href: "/expeditions", label: L("Expeditions", "Экспедиции") },
+    { href: "/events", label: L("Events", "Ивенты") },
+    { href: "/crystals", label: L("Crystals", "Кристаллы") },
   ];
 
   return (

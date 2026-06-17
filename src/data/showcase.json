@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-17T18:57:19.937Z",
+  "generatedAt": "2026-06-17T19:09:51.979Z",
   "stats": {
     "totalPenguins": 1024,
     "totalExpeditions": 14,
@@ -64752,6 +64752,56 @@
       "totalPenguinsCount": 18,
       "totalGoldEarned": 108,
       "totalCrystals": 2,
+      "preset": {
+        "allowedTypes": [
+          "rare"
+        ],
+        "goldPerPenguin": 6,
+        "durationBoost": 0.06,
+        "baseCrystalChance": 0.07,
+        "perPenguinBonus": 0.008,
+        "maxCrystalChance": 0.15
+      },
+      "participants": [
+        {
+          "userId": "MA1UKPOCUvUEYH4l4iqHDrJeJC22",
+          "penguinIds": [
+            "8ggqeZKApCsPIqVdI3VO",
+            "QP4g8HP6p8LVbwKmXUKt",
+            "xU08A6gjYz7d5nhq1Zg5",
+            "dFQ77eIKDQ13Fr2lBUar",
+            "HRoWUNh2j03v3x6Xv4n9",
+            "LEjLmrP5GE5cspQsMRlV",
+            "A7yaejKpIZNWoBhxySU2"
+          ]
+        },
+        {
+          "userId": "qCzT9z58osSEdGSTwlYmeBpcP142",
+          "penguinIds": [
+            "2hbB4OmShgBAuSbSO57n",
+            "HMQETaqZ8GVzo0fTEHoq",
+            "LCIEai64tqGnFloNFSt1"
+          ]
+        },
+        {
+          "userId": "yzFOKz6yTeUgfLPRQmh1sDw4I5J3",
+          "penguinIds": [
+            "qHxUnTyvQip5AGg3mknl",
+            "iqbwmhqr6z6iCMvvuIqc",
+            "5KfdBfZ46GQoyDQUyBou",
+            "RFU7jUtZ4mycUOPmkjOR",
+            "IkV7Y0rJJt2Fgtz6eE4d",
+            "f7wM2GiV8bGBlg7qbw1h"
+          ]
+        },
+        {
+          "userId": "3otGdgr7btThlWkfZRrcSbRFTJy1",
+          "penguinIds": [
+            "ld6wJPUTQgweI2gMMQs3",
+            "xxxP1y8iiPwn0VTUvCBn"
+          ]
+        }
+      ],
       "createdAt": {
         "seconds": 1748877979,
         "nanoseconds": 531000000
@@ -64787,6 +64837,185 @@
       "totalPenguinsCount": 122,
       "totalGoldEarned": 610,
       "totalCrystals": 4,
+      "preset": {
+        "allowedTypes": [
+          "common"
+        ],
+        "goldPerPenguin": 5,
+        "durationBoost": 0.05,
+        "baseCrystalChance": 0.1,
+        "perPenguinBonus": 0.01,
+        "maxCrystalChance": 0.25
+      },
+      "participants": [
+        {
+          "userId": "MA1UKPOCUvUEYH4l4iqHDrJeJC22",
+          "penguinIds": [
+            "Qg1YgPqQCxZEfLYZk4h2",
+            "kzsdx06cUBMhxCRHbpnI",
+            "pH4TksEw90oCviuhlGmL",
+            "DiHMAY6DvVhwcVqHmyx7",
+            "qe1cIJ7bEFQm6RmUUOLx",
+            "DmWvLhSzKv5KB9M5DU3y",
+            "HSnPQYImhZhqQR8kSkBR",
+            "icmXYtuxG6ZFCerWejn7",
+            "Y9L33SUUN8SDMibai6B0",
+            "F3wj8JBEy5aY0eGi1fQH",
+            "PUE4gSb3h0TUo8q6Jdb5",
+            "3I8XzlGrLQpXOMhsyQnt",
+            "c2qC0htmyhbQwCOvDQWX",
+            "H9HJh29CekDSSa8ji8pJ",
+            "ZAbYx9Q6o7QwhmOu0tpt",
+            "7RbdIn7dm54KBL2gv7Yk"
+          ]
+        },
+        {
+          "userId": "IaUOTnYMFnMeXGJGHfbHCsJldLk2",
+          "penguinIds": [
+            "l1Y0liCTtTYZCyou8XFT",
+            "Spw8hLhT44NwDG8rI5hQ",
+            "l5p6es24jDTJeoTkwWfU",
+            "SCJUpza97jEHdjg0HiqY",
+            "nsGbLysPTi9e9eDqItsF",
+            "jigfAJIqTbFxU77CYayL",
+            "qg8QAlORIILd3ij8mLRU"
+          ]
+        },
+        {
+          "userId": "PUnyxooX1JXWQM0EHoT8KPwRiIk1",
+          "penguinIds": [
+            "UAZItQMTM24zCleAFUho",
+            "Ed7GwIZby7OqRNZZxyT6",
+            "x0HsvOhdJzfpzjJTBfzm",
+            "wmdmWkE41uKbVPfq9IgG",
+            "gh3dYGHAwDMYVpLqTQto",
+            "N0tBbQMmlyGt3rGEkecP",
+            "XIpp8yK23AqN130tsFAk",
+            "OWop6KxLO6s7dwF7cJF2",
+            "1vPl0rt3WB6o6kmxqOtT",
+            "KEt3SlX8l4BquN1U2VMU",
+            "8jpXm5xQfZV9sY4V8kbP",
+            "aNpzOyFh8mI4wDpq2WLq",
+            "sddb8BeiFgnZ0kdj7jmR",
+            "EvD8xtUk0HVxDrwdZtcN",
+            "kN3iALLnhcevO7DWzZf9",
+            "WWapGLjH5Lvs4H5957rF"
+          ]
+        },
+        {
+          "userId": "zDDWzDNwtwcP42YjdXxDVRq2e1k1",
+          "penguinIds": [
+            "i7YOvVFNFHmivLEb4KPH",
+            "eR92eU8dWUKlyEkL2Z48",
+            "gg8LWjsbjKhzELXF7XUp",
+            "yO78KIDUOcI28T5eSd1A",
+            "aVKucncnPUeOo2P628Jb",
+            "nx5xknuDN4hcnol0lfT9",
+            "qzxJpGewRJ5xJ5Xs2cvU",
+            "sul6pOi5yEjrTaHh9RJk",
+            "lbhqOj3u5uAOnMAKIiH0",
+            "0cMuJC6tgN9KaPpDDGHH",
+            "UXk7PSjhm0fDUpeyBA9c",
+            "WsvONPEdEssKy9VYZXHt",
+            "fJYgkIaJozVR6zY7dgB2",
+            "qA4vhF9z37KhDQ1bKqYP",
+            "buG5sl02V47zuEbgYn1N",
+            "PUZhtrbtNcHIrJQ236u4"
+          ]
+        },
+        {
+          "userId": "qCzT9z58osSEdGSTwlYmeBpcP142",
+          "penguinIds": [
+            "DNrMwPvJUjUMFvQQwYlA",
+            "vrdmxL1RW05bZWQVMh0F",
+            "rGAKzi8PNhrE7fEbzwAX",
+            "3JBTRSXNwXjgq9VyLPUi",
+            "jkWasY7U5FGn9XbAlPcG",
+            "Nk4CwZDHDklLBCenFgGp",
+            "EI7nTQQVCpV63EfkyAbK",
+            "PkrEAm53P8dZwixVBKYh",
+            "8iapUM1euTZ05FqTeu3i",
+            "rqGQ9ljIVmnwEdCGGZ1w",
+            "xDb3sZ4uZs4EtY2t45qd",
+            "rNCxHzG7uIFNIUwLQ2JE",
+            "6Rc9VNEeSzRbRSqdlIA4",
+            "Tz9qtgobG8hXb0Uad0Sj",
+            "fNCASrCgRbfZmkmbekBx",
+            "ZiBjFtizacjMskn5nnGa"
+          ]
+        },
+        {
+          "userId": "zaKtdXEddce8VNNg5W5HIEvYC5W2",
+          "penguinIds": [
+            "8nRUb8khIjy6Ns4ZdspA",
+            "5cu3EVZq0uKunrJ9DdkM",
+            "c79Zbmd7ufdRDo7Q94aK",
+            "lsnEx9ollumcs4Vvv6lr",
+            "ekfBPg5v3NPwuHe7035E",
+            "os3JDwCCGfcJP6ms7V3w",
+            "6IS7KCPZvb7x5cB518lN",
+            "ZLOJlnPl4Y63oJDZlzj1",
+            "3wmRdAjlLEll1FOahNXl",
+            "yXGOKntfF6bkqjaBi69i",
+            "s0MWRcSCAmvZFFIsakQv",
+            "utYtrdniaT6xCJBmg0eO",
+            "Zh8VcTH1Roab7pJ7vRNt",
+            "cbot9b3XDc359ou6weF4",
+            "vej7RsFG3GkBT9cnQMLv",
+            "4N7uP1W4VvnaAbSnnWWu"
+          ]
+        },
+        {
+          "userId": "UdyUDA6aDlWV5ERpZIQ4B1LuOe83",
+          "penguinIds": [
+            "eaGqWbEzosA1ATNNxOG7",
+            "SEyq4QI9dRanmPjtuMiV",
+            "CF8XbyZbx2l4Pkw0XD3k",
+            "fz5zWMGDusJ2iQVJNF2c",
+            "Sw60dGIyLp1IvpCFSax9",
+            "zMCM23XnxPuTWzgULukZ",
+            "QXNJTvXARnNUo9B6sFBf",
+            "8aMD11wv032vz8ihOO2B",
+            "qoe49SgPjnAux3tEcKOv",
+            "WUOnvpirbbzIb5euu9w2",
+            "TwjSZiF4TEqdh0JIicqW",
+            "USOPL2mfWFoVp3PSkq5t",
+            "O5vukA4uCuFnksJqSriK",
+            "JDIwfU0J5kqq5UknvTH1",
+            "A3MCYHBgfY5LXq3SOHUp",
+            "Nb6MD2Goo8gYaCq8tdnW"
+          ]
+        },
+        {
+          "userId": "uSRU4HC29tUGCD5WKC1UjLECLLt1",
+          "penguinIds": [
+            "kRlzMK4QZmbhAWTp0h3y",
+            "hcwZUQHWntBSTRaPrtlK",
+            "kD1OeloOaOASk8RbRiUK",
+            "jZPj8IvrdVDfSiP7OdtM",
+            "eIgd8i3WvoOLMNSJqjJw",
+            "QTW6HfB55fCiIJ4FkPYz",
+            "hjamxzRDZNn0cx29uATd",
+            "h0NoYLwzJLsrWvYdptZj",
+            "0ZSTSFtcBI9maFBUSrwS",
+            "uZOhGNRdfyzHwy1PSLxr",
+            "mNIFcIXdoBR5gWRYBULN",
+            "htxB6OMnDZoD3mi9jBXg",
+            "a1Eqv7Z8bHh21TzcuFuN",
+            "IcKnIc3HH4o0D3K6gCQd",
+            "GJ3YWDuR82nEeH15fEaA",
+            "vhCP1EbUzOuWIJW6z3bI"
+          ]
+        },
+        {
+          "userId": "Qm3bY02mdsaVh8ZMeo0SgfJxPQL2",
+          "penguinIds": [
+            "A9L85iGGn2TJfg456BQT",
+            "i4rqHbGBEmxBiUz2zMsB",
+            "nq5ZqJNtLvOTPM7UVgHe"
+          ]
+        }
+      ],
       "createdAt": {
         "seconds": 1758108077,
         "nanoseconds": 488000000
@@ -64822,6 +65051,116 @@
       "totalPenguinsCount": 68,
       "totalGoldEarned": 340,
       "totalCrystals": 0,
+      "preset": {
+        "goldPerPenguin": 5,
+        "allowedTypes": [
+          "common"
+        ],
+        "maxCrystalChance": 0.25,
+        "baseCrystalChance": 0.1,
+        "perPenguinBonus": 0.01,
+        "durationBoost": 0.05
+      },
+      "participants": [
+        {
+          "userId": "qCzT9z58osSEdGSTwlYmeBpcP142",
+          "penguinIds": [
+            "HoZ2hgqjfheQsWFC89GH",
+            "FOaviFg4GNTQyFcke6gu",
+            "LDzMCc0gqfgFQuYrV7CW",
+            "2OdSP6KKwNXKuwU1KXAi",
+            "9FY5wIpfODh7CEf3lwCB",
+            "FqSAiZ2LKPg59KaCcTTU",
+            "Yw5uatc9a8X1U980oG1r",
+            "0wdEueeOm5LgLT5ONB7P",
+            "mueO2fk86WIuDBNOpkS2",
+            "Nk4CwZDHDklLBCenFgGp",
+            "icmXYtuxG6ZFCerWejn7",
+            "UqlCu1KMzFnU1jYFfNhD",
+            "R59TblmdTbKZQRtoWIEa",
+            "A105WzZDIQpQ0OckwuBf"
+          ]
+        },
+        {
+          "userId": "yzFOKz6yTeUgfLPRQmh1sDw4I5J3",
+          "penguinIds": [
+            "yj1AMG5IAwoiwnnqJY6n",
+            "UrvbSDm1FOkrvD8Wva6y",
+            "jggHbTzQtSJjOAeK3EYu",
+            "fqUkscdRweijZGL0yUrI",
+            "UWVQ4EleNiqOojip9Oho",
+            "D7w9cwevXnjDpOZ8vqcQ",
+            "qP3Sfg3MggDZ4b6B0Wli",
+            "ZH1eWUobdAvmzzefa8qM",
+            "8oKTjmOZ2PJM0aQB4Irw",
+            "NkfVXkP0vbpGs9KitAdH",
+            "L1pVQmjJUsy5Fhys00lB",
+            "gNKZidrJ6e9toNVvbALk",
+            "dEFTUYqGGzkZEyWzymhh",
+            "GBfMdNSYfbsAxTdfKvNr"
+          ]
+        },
+        {
+          "userId": "MA1UKPOCUvUEYH4l4iqHDrJeJC22",
+          "penguinIds": [
+            "c2GlNJN2LUJfjGfcHjR5",
+            "UJf3ArD61FzSGro0LZdS",
+            "4DwjD1klQNOOenb1fwk4",
+            "g2aAl3DAXpnADPlPhqhW",
+            "oOVnMRImqPmeEEtTsAJ8",
+            "Cykva04hgrzkPbwuHLZJ",
+            "FcXbOMRPQBqezRNkumKi",
+            "0N7KLElFPutS6VXj55QR",
+            "Y9L33SUUN8SDMibai6B0",
+            "F3wj8JBEy5aY0eGi1fQH",
+            "3ff4MPdPzqfzOJVyJqHH",
+            "TVmlJLk4GfUFftHrXrZ2",
+            "4HxAzzDX1DjfbOiwyzl7",
+            "PzJYPPNv7Thnz1YRQa0U"
+          ]
+        },
+        {
+          "userId": "zaKtdXEddce8VNNg5W5HIEvYC5W2",
+          "penguinIds": [
+            "BRGhy0daaMjFzFQ6ZaTy",
+            "MNX3XaOv2cNxziUKRyhq",
+            "sa0XYSe8qpuvQOZy9RUP",
+            "s2xFgNHEndWoVGL6N6Pj",
+            "7uJcogcytssi6FVhWjMm",
+            "XIyIqOeetK3RJI1O0h6K",
+            "Jq4vIZJcHT4YyMbIpAau",
+            "Spw8hLhT44NwDG8rI5hQ",
+            "U9Uhuk6in5RyF9IflwNl"
+          ]
+        },
+        {
+          "userId": "vwF1mW7UioOhkxxmsOO7mgLKmac2",
+          "penguinIds": [
+            "zPkJH2xvmMyEmqpQbfBL",
+            "GfPs6v1CC2JkBphMrgje",
+            "Ct5uNglS9tTwtN6ZRAUf",
+            "RMCnrpJRmZPdCx3BuHVs",
+            "5HPyOcsOqKsIRAHxKqvH",
+            "jkWasY7U5FGn9XbAlPcG",
+            "qkFErIE3pB9osqZ2gpGk",
+            "h3HN6i4zdZYPFSekewW2"
+          ]
+        },
+        {
+          "userId": "2iM3cI9q66OVg9qDZHBtBe1c1aN2",
+          "penguinIds": [
+            "QfjDLcZoBqp4OxnQGGMa",
+            "6qHuEpPTnCuRSg6lq03M",
+            "NipDzvuOq5jyhpcODtDn",
+            "hD1SMyu3vfGhvOWxc9OT",
+            "GFHkbMy2k1N91DAQTPLa",
+            "21tUzainZAeJck8cPV2l",
+            "7Zfkwq5MWUuUo4N4kkJP",
+            "0Y2alTkb47Si5kyeHIir",
+            "howROFz5J8TQ8VlOLBc2"
+          ]
+        }
+      ],
       "createdAt": {
         "seconds": 1749664571,
         "nanoseconds": 441000000
@@ -64857,6 +65196,81 @@
       "totalPenguinsCount": 33,
       "totalGoldEarned": 264,
       "totalCrystals": 0,
+      "preset": {
+        "allowedTypes": [
+          "epic"
+        ],
+        "goldPerPenguin": 8,
+        "durationBoost": 0.07,
+        "baseCrystalChance": 0.05,
+        "perPenguinBonus": 0.006,
+        "maxCrystalChance": 0.12
+      },
+      "participants": [
+        {
+          "userId": "MA1UKPOCUvUEYH4l4iqHDrJeJC22",
+          "penguinIds": [
+            "nHragQAqaNtg6Mz3G0yu",
+            "OFA2fgK2txUypYMU8syg",
+            "sCxDIywPnwJD6hVinh7v",
+            "TlM4pPONaoyPiu481KRe",
+            "dN9scy4FGTKwFWipzCFK",
+            "hNTMBFm29McnR6w2u5T5",
+            "TnzR92CnhHaAxINAPumJ",
+            "MF3M54hRzrJayBfD8WMG"
+          ]
+        },
+        {
+          "userId": "zDDWzDNwtwcP42YjdXxDVRq2e1k1",
+          "penguinIds": [
+            "lZC2mYZOq3uXX5QHkXLs",
+            "5P7eUAYLlzEJUi9tul30"
+          ]
+        },
+        {
+          "userId": "yzFOKz6yTeUgfLPRQmh1sDw4I5J3",
+          "penguinIds": [
+            "Anvp5sW0fM63XMpJFus1",
+            "CqmyjOTw7PtNHZoLvUkC",
+            "lfHESQq1EU31zTwgUC6A",
+            "exf5HCwKe1gnhWwfNryo",
+            "6RsRYXRhNheP86EHaMAo",
+            "rxEy4DMY1ScV4ENUvSVy",
+            "C0EYpelNSQQ5MK5sXsfD",
+            "D1wQdlPDeiInQzZfNtGH",
+            "dcSbdGMxhrk2vP2CDN6E",
+            "1NJluxqXcwP3s27CsImX",
+            "dRnYzrdLHqkKaz7qHhzM",
+            "6n4DTaWXcZQExc3rP88b",
+            "mO26sjjgWTERLoKUVUuq"
+          ]
+        },
+        {
+          "userId": "qCzT9z58osSEdGSTwlYmeBpcP142",
+          "penguinIds": [
+            "YW1d3i8jPz22vMMR756J",
+            "DMPK7ewqmTuyRhOLjRTu",
+            "mcpoFeIrbIYXftgXRrWl",
+            "u9sV3Y1pzdL26V72Uyjv",
+            "MygGdlZJZN4PxADWoOqv"
+          ]
+        },
+        {
+          "userId": "vwF1mW7UioOhkxxmsOO7mgLKmac2",
+          "penguinIds": [
+            "B09CJen99TyKqYzRanq1",
+            "1u0kyYp5uEo9JQmzpDA8"
+          ]
+        },
+        {
+          "userId": "UdyUDA6aDlWV5ERpZIQ4B1LuOe83",
+          "penguinIds": [
+            "2utej11OzoU1qkH5yebC",
+            "5dG1o8mYZ8IB36LLHjPH",
+            "zv72cUMEpm3CR8bimDA6"
+          ]
+        }
+      ],
       "createdAt": {
         "seconds": 1752821398,
         "nanoseconds": 288000000
@@ -64892,6 +65306,150 @@
       "totalPenguinsCount": 92,
       "totalGoldEarned": 460,
       "totalCrystals": 2,
+      "preset": {
+        "allowedTypes": [
+          "common"
+        ],
+        "durationBoost": 0.05,
+        "baseCrystalChance": 0.1,
+        "maxCrystalChance": 0.25,
+        "perPenguinBonus": 0.03,
+        "goldPerPenguin": 7
+      },
+      "participants": [
+        {
+          "userId": "MA1UKPOCUvUEYH4l4iqHDrJeJC22",
+          "penguinIds": [
+            "O7JFqXQ2q5xGLvAY6IFT",
+            "37CUEJAX2uPObxzyp68n",
+            "VhtGtS84jJF0xH79vv3h",
+            "7RbdIn7dm54KBL2gv7Yk",
+            "zPkJH2xvmMyEmqpQbfBL",
+            "DmWvLhSzKv5KB9M5DU3y",
+            "TVmlJLk4GfUFftHrXrZ2",
+            "Y9L33SUUN8SDMibai6B0",
+            "F3wj8JBEy5aY0eGi1fQH",
+            "cQSUiTdB7DMd1ZMNZlTB",
+            "FcXbOMRPQBqezRNkumKi",
+            "PzJYPPNv7Thnz1YRQa0U",
+            "HSnPQYImhZhqQR8kSkBR",
+            "tXQuywzwddPPAUQj2l5C"
+          ]
+        },
+        {
+          "userId": "zDDWzDNwtwcP42YjdXxDVRq2e1k1",
+          "penguinIds": [
+            "dh6hU5VVGMKNgMetanQP",
+            "hSPzwUm1wyNVC9z5mxHF",
+            "iJCldaUlCzNEjBgfZC8N",
+            "eR92eU8dWUKlyEkL2Z48",
+            "TBJppScnKTSf44pWr2M0",
+            "87r4SGVpDig3fTs8xXAY",
+            "1CKMHmDa6NuBIb4wcidX",
+            "BRGhy0daaMjFzFQ6ZaTy",
+            "CGp8lFx2iG6HDo8OF86m",
+            "gg8LWjsbjKhzELXF7XUp",
+            "JvTDrvV5H86gf4scQh8v",
+            "uwXOqyb4jsXh39yM2fbl",
+            "1vPl0rt3WB6o6kmxqOtT",
+            "yjj9mLLtcH6yuhqlsNI9"
+          ]
+        },
+        {
+          "userId": "PUnyxooX1JXWQM0EHoT8KPwRiIk1",
+          "penguinIds": [
+            "N0tBbQMmlyGt3rGEkecP",
+            "OWop6KxLO6s7dwF7cJF2",
+            "BjrQSpSL4hkwqrssPkSO",
+            "XIpp8yK23AqN130tsFAk"
+          ]
+        },
+        {
+          "userId": "yzFOKz6yTeUgfLPRQmh1sDw4I5J3",
+          "penguinIds": [
+            "1LeFvmbu0jLNZwfnepp2",
+            "Wq80ShqGjy6wGLnwgoNb",
+            "tKXj58636oVEyjJbnrXI",
+            "aVdhle7uRFbAegE9Ob8v",
+            "yECQX5Tgwg2DqZYGzZpK",
+            "6GamcDmt6lNt3sEWj0rA",
+            "qZYmBAhcADN1vGhbAWb3",
+            "tRTwWS9oLsZgubGq7i2g",
+            "1ApSkEkxv9jt9tiDvuUt",
+            "Ep9ebyYXMOYtMBxYyopF",
+            "6Zebrh5M23HDpUPqRzJ2",
+            "80UqbIX26ECc1yq4AfPy",
+            "AQSXJ1j4zYE7xaLB99L9",
+            "IuQgcZXRckj59seujWu0"
+          ]
+        },
+        {
+          "userId": "qCzT9z58osSEdGSTwlYmeBpcP142",
+          "penguinIds": [
+            "cwbcJ9bEbSmr2Yzno9tZ",
+            "rqGQ9ljIVmnwEdCGGZ1w",
+            "jigfAJIqTbFxU77CYayL",
+            "fbe8ZcwuELtahuKCSFOy",
+            "xDb3sZ4uZs4EtY2t45qd",
+            "Tz9qtgobG8hXb0Uad0Sj",
+            "8iapUM1euTZ05FqTeu3i",
+            "6Rc9VNEeSzRbRSqdlIA4",
+            "uAmv2SPvgbW93o7Za8oR",
+            "fLof1REgOKU9mRtcKQQ1",
+            "rNCxHzG7uIFNIUwLQ2JE",
+            "eUjOtCZXuHkkQyprOvrj",
+            "jHRtXmXLYNWIBMr5RgsZ",
+            "ZiBjFtizacjMskn5nnGa"
+          ]
+        },
+        {
+          "userId": "uSRU4HC29tUGCD5WKC1UjLECLLt1",
+          "penguinIds": [
+            "tcOSvExAK1zr2H7JBd3B",
+            "7TMgalgSIko7y6PkppAL",
+            "TbgEP5SQGTGMNU6i3IuY",
+            "U8qX1exvRdzclKAq9xT8",
+            "LdYYnBbhoa5RDCumZgIL",
+            "UNT5WzMkBPuZfZcN4IMM",
+            "BkjqGxrIL0ZqiGc7WUsf",
+            "uRMxE4ZEZotIZ0xqmkEI",
+            "Vcv8Avc2ZrxvgMiJn57c",
+            "NganxX3cHnP5P9CJ839S",
+            "cA63nSzp7SvnNLMiyNqo",
+            "iaAh12Gr22inHgfQPxvS",
+            "sVyaEk2jfUNEXyupALvg",
+            "r0LwvLoWa97GIhYP2AhB"
+          ]
+        },
+        {
+          "userId": "vwF1mW7UioOhkxxmsOO7mgLKmac2",
+          "penguinIds": [
+            "thWeq6ZGqBBieW8AuS2K",
+            "Dy1NfhpqAr1poJr0AndE",
+            "zbj1oZal5Wz3KspRc6xi",
+            "hBfMMEYdLsVmhlTppEmU",
+            "X1ZiuXsfHMos2PCYSYF0",
+            "jNxRBMHkRXWJ34gtMp1j",
+            "MqHh3GJCgcDsuVTtBUC9",
+            "Cf4Gy2vKA1cJNnW6kiDh",
+            "PQBwe5WBl53MlSBs3DtJ"
+          ]
+        },
+        {
+          "userId": "UdyUDA6aDlWV5ERpZIQ4B1LuOe83",
+          "penguinIds": [
+            "tkyhmnmcVBIA7LrjD3C6",
+            "8jpXm5xQfZV9sY4V8kbP",
+            "NYNdhYI4tdEscEOQRH9Q",
+            "fkbb8SAQaa7jkLGU3xel",
+            "A3MCYHBgfY5LXq3SOHUp",
+            "8jnEkmXtJo32SPFmwfSo",
+            "wxNZbgGdUKXbt2j1qyd1",
+            "FfZC59uYbBgA0n3b25n0",
+            "Nb6MD2Goo8gYaCq8tdnW"
+          ]
+        }
+      ],
       "createdAt": {
         "seconds": 1753523263,
         "nanoseconds": 521000000
@@ -64927,6 +65485,73 @@
       "totalPenguinsCount": 35,
       "totalGoldEarned": 175,
       "totalCrystals": 1,
+      "preset": {
+        "allowedTypes": [
+          "common"
+        ],
+        "goldPerPenguin": 5,
+        "durationBoost": 0.05,
+        "baseCrystalChance": 0.1,
+        "perPenguinBonus": 0.01,
+        "maxCrystalChance": 0.25
+      },
+      "participants": [
+        {
+          "userId": "MA1UKPOCUvUEYH4l4iqHDrJeJC22",
+          "penguinIds": [
+            "FJDyanGRvDEWl5gEBXRT",
+            "G1kAAFuZurF0PO7YMPa2",
+            "4DwjD1klQNOOenb1fwk4",
+            "Y9L33SUUN8SDMibai6B0",
+            "TVmlJLk4GfUFftHrXrZ2",
+            "DmWvLhSzKv5KB9M5DU3y",
+            "jkWasY7U5FGn9XbAlPcG",
+            "YSfgrNFvRmlmcF6Cnf04",
+            "Cykva04hgrzkPbwuHLZJ",
+            "g2aAl3DAXpnADPlPhqhW",
+            "BjrQSpSL4hkwqrssPkSO",
+            "cQSUiTdB7DMd1ZMNZlTB",
+            "PzJYPPNv7Thnz1YRQa0U"
+          ]
+        },
+        {
+          "userId": "UdyUDA6aDlWV5ERpZIQ4B1LuOe83",
+          "penguinIds": [
+            "tRTwWS9oLsZgubGq7i2g",
+            "Nb6MD2Goo8gYaCq8tdnW",
+            "DmHwfvNPDAAcJWO0NpMs",
+            "JrsZV8ko3y5uXhP0o5Dv",
+            "6pTeaiNWiXHXSiLWGSZg"
+          ]
+        },
+        {
+          "userId": "uSRU4HC29tUGCD5WKC1UjLECLLt1",
+          "penguinIds": [
+            "ZgB22JoY5eNcx5seNzyO",
+            "xYgAbuh0tGCUbUfitpia",
+            "zKUuw2iYxHu6ZA4qn25X",
+            "MHadO7V7DraASFeBT8ET"
+          ]
+        },
+        {
+          "userId": "yzFOKz6yTeUgfLPRQmh1sDw4I5J3",
+          "penguinIds": [
+            "ZHLaDFx3Cp0jAI9vg8eE",
+            "yj1AMG5IAwoiwnnqJY6n",
+            "UWVQ4EleNiqOojip9Oho",
+            "8oKTjmOZ2PJM0aQB4Irw",
+            "D7w9cwevXnjDpOZ8vqcQ",
+            "Th7oVl7YAR2ohb71p5mw",
+            "IuQgcZXRckj59seujWu0",
+            "dZfNzk8m11kZkKdhNlxX",
+            "jiXQepv6TEMTIZkjJbFl",
+            "wi7bSHqaz5brNvlHwo1H",
+            "QEBQOvkBhmvyQBZncA8I",
+            "fqUkscdRweijZGL0yUrI",
+            "GBfMdNSYfbsAxTdfKvNr"
+          ]
+        }
+      ],
       "createdAt": {
         "seconds": 1750395471,
         "nanoseconds": 931000000
@@ -64962,6 +65587,58 @@
       "totalPenguinsCount": 25,
       "totalGoldEarned": 125,
       "totalCrystals": 2,
+      "preset": {
+        "allowedTypes": [
+          "common"
+        ],
+        "goldPerPenguin": 5,
+        "durationBoost": 0.05,
+        "baseCrystalChance": 0.1,
+        "perPenguinBonus": 0.01,
+        "maxCrystalChance": 0.25
+      },
+      "participants": [
+        {
+          "userId": "MA1UKPOCUvUEYH4l4iqHDrJeJC22",
+          "penguinIds": [
+            "g2aAl3DAXpnADPlPhqhW",
+            "8adU52Q4IqL8nUe31mo5",
+            "0N7KLElFPutS6VXj55QR",
+            "cQSUiTdB7DMd1ZMNZlTB",
+            "3Ej00xwp2dQB3g7NxRU0",
+            "YC5QACZtKmsxGYSi3p2D"
+          ]
+        },
+        {
+          "userId": "yzFOKz6yTeUgfLPRQmh1sDw4I5J3",
+          "penguinIds": [
+            "GBfMdNSYfbsAxTdfKvNr",
+            "ZH1eWUobdAvmzzefa8qM",
+            "fqUkscdRweijZGL0yUrI",
+            "gNKZidrJ6e9toNVvbALk",
+            "QEBQOvkBhmvyQBZncA8I",
+            "7sU0xvprOKrv6PltCMYl",
+            "e6QtYlL6gERmoYR9fx3O",
+            "6Zebrh5M23HDpUPqRzJ2",
+            "1ApSkEkxv9jt9tiDvuUt",
+            "xEdLu0WW2s1rrQ91Y5w9",
+            "AQSXJ1j4zYE7xaLB99L9",
+            "wjZlDKKIs2YGkzPXZihG",
+            "b13GLM0UzNBlZAf7eK06",
+            "80UqbIX26ECc1yq4AfPy",
+            "IuQgcZXRckj59seujWu0"
+          ]
+        },
+        {
+          "userId": "qCzT9z58osSEdGSTwlYmeBpcP142",
+          "penguinIds": [
+            "mueO2fk86WIuDBNOpkS2",
+            "Nk4CwZDHDklLBCenFgGp",
+            "52XAYe1RnMZWJw9652cT",
+            "nx5xknuDN4hcnol0lfT9"
+          ]
+        }
+      ],
       "createdAt": {
         "seconds": 1746050400,
         "nanoseconds": 554000000
@@ -64997,6 +65674,39 @@
       "totalPenguinsCount": 11,
       "totalGoldEarned": 110,
       "totalCrystals": 0,
+      "preset": {
+        "allowedTypes": [
+          "legendary"
+        ],
+        "goldPerPenguin": 10,
+        "durationBoost": 0.08,
+        "baseCrystalChance": 0.03,
+        "perPenguinBonus": 0.005,
+        "maxCrystalChance": 0.1
+      },
+      "participants": [
+        {
+          "userId": "MA1UKPOCUvUEYH4l4iqHDrJeJC22",
+          "penguinIds": [
+            "BYAdsKGOIIdIQSXiWTF5",
+            "JypJz21qUSfeFIJQY0ix",
+            "kNoaEuey9k5hljkE8rTN",
+            "VLG88d0LM3f2r9MBnzCQ"
+          ]
+        },
+        {
+          "userId": "yzFOKz6yTeUgfLPRQmh1sDw4I5J3",
+          "penguinIds": [
+            "mKM7IpZOuOysiNxGsACN",
+            "q9s0StSACCOFg9Yc7wD5",
+            "TWHThxDIShGCNDb4W9nW",
+            "sLEqM74n552COnBJSKmT",
+            "FGVc3p1Rfgv0q5gPNvTx",
+            "35UMNPmYS3bQjSwjkqqX",
+            "4MyN1xPYSpD9zOyhhapB"
+          ]
+        }
+      ],
       "createdAt": {
         "seconds": 1750946736,
         "nanoseconds": 263000000
@@ -65032,6 +65742,140 @@
       "totalPenguinsCount": 82,
       "totalGoldEarned": 492,
       "totalCrystals": 2,
+      "preset": {
+        "allowedTypes": [
+          "rare"
+        ],
+        "goldPerPenguin": 6,
+        "durationBoost": 0.06,
+        "baseCrystalChance": 0.07,
+        "perPenguinBonus": 0.008,
+        "maxCrystalChance": 0.15
+      },
+      "participants": [
+        {
+          "userId": "MA1UKPOCUvUEYH4l4iqHDrJeJC22",
+          "penguinIds": [
+            "qaof4CEPUujE0ktGozlc",
+            "g3qYq8aINOx3tR6X5XYN",
+            "es8ER4iJrgmiylVqmrqa",
+            "dFQ77eIKDQ13Fr2lBUar",
+            "QP4g8HP6p8LVbwKmXUKt",
+            "8znBO1Tr7MWouWIv1vty"
+          ]
+        },
+        {
+          "userId": "PUnyxooX1JXWQM0EHoT8KPwRiIk1",
+          "penguinIds": [
+            "j4MxP6AbzdI1y9EfAfUw",
+            "bZuPutxqKBv3EdFHO23O",
+            "HRoWUNh2j03v3x6Xv4n9",
+            "soXgydZgq8tbZgtCq5oS",
+            "tHxVASjJ1VQLKIdhxIgS"
+          ]
+        },
+        {
+          "userId": "yzFOKz6yTeUgfLPRQmh1sDw4I5J3",
+          "penguinIds": [
+            "E8W0wxA2oGhkrkicl1kF",
+            "DUUmpI0XjFp3hla4R91m",
+            "nhGuP7rn5IRClmgY9mYZ",
+            "DCWaMcF3K0WzizfevQzO",
+            "Y8RFvO4SkW8qunKJAzUi",
+            "YPn7DSXuTm0uGzMHRFNI",
+            "f7wM2GiV8bGBlg7qbw1h",
+            "8ggqeZKApCsPIqVdI3VO",
+            "qHxUnTyvQip5AGg3mknl",
+            "hPeUNecOOGtRavcutEzS",
+            "SPKVV65DVeMVc3QO5c3J",
+            "5KfdBfZ46GQoyDQUyBou",
+            "40iZwT0uQULF6yfVCrhy",
+            "6MLNXDaex314Cm4riovv",
+            "hIW0CkwBItduYhtHbgMf",
+            "UMItKapXR4NxQ45FmqMD"
+          ]
+        },
+        {
+          "userId": "qCzT9z58osSEdGSTwlYmeBpcP142",
+          "penguinIds": [
+            "BOZwzzm8BgUZWXGElYlS",
+            "ckfa4YVcvIjjV9fjKQBh",
+            "A7yaejKpIZNWoBhxySU2",
+            "HfinXpbOzx3iG3LbB1vF",
+            "PFAnGdZZmiX9V8gb0Rdb",
+            "LCIEai64tqGnFloNFSt1",
+            "fnybxtXxvvIQlSsmZTN1",
+            "zXVRlUTBPPXcMrxwBkNx",
+            "2hbB4OmShgBAuSbSO57n",
+            "uFFbgc584WtI0lJtWxJD",
+            "kDM1OiAYdCMYopD2ubu8",
+            "4zh65rAex53w9MH2X45O"
+          ]
+        },
+        {
+          "userId": "zDDWzDNwtwcP42YjdXxDVRq2e1k1",
+          "penguinIds": [
+            "yt24H7sWDOnI7RzxXx39",
+            "trfcLqQEhwx40DXqfT63",
+            "MGa24cFHuztpEb2dH98V",
+            "Oyq4SH22Nddvq6UthjrN",
+            "9Yu2hVnO95c03YklKhqe",
+            "Ipluo2t8vzq2TWckvXUb",
+            "4f96iOvwEmkx8Zd3ISPh",
+            "tRaAvlfIsFMFOjfINlhq",
+            "eO93MaxzHJv6uZjIU7Eg",
+            "qNln78leNu2RYQVTOc6N",
+            "eLf1rmwxDsQ2zIqsZcm5"
+          ]
+        },
+        {
+          "userId": "zaKtdXEddce8VNNg5W5HIEvYC5W2",
+          "penguinIds": [
+            "2GN1QKY0hnu1ZMu18aiQ",
+            "cbcpxc15vbP4owXdv1ag",
+            "j0z2BMDuNO2iHq35mbiL",
+            "KYxqr9ycc1teBcTGzTix",
+            "DiqKzV8fPvLHrl1RDLmu",
+            "kXLmRQcolx7X7GZvNeqD",
+            "GDZqshaEeYKMVp8ftUCo",
+            "1IfPfEgvDOWuRvi7Ydt8",
+            "ZGTxSAP5SSPI6S7LXzQT",
+            "Qvk8aR5kAjeOKk1rGsrj",
+            "DWgO59dhPH6pPCc4z3rE",
+            "fqAyAaKxnFBmNi92wSej",
+            "0yjxiqGfl6UMiNGISZK6",
+            "HlMq6wQLZEzf0ZCBmhKq"
+          ]
+        },
+        {
+          "userId": "UdyUDA6aDlWV5ERpZIQ4B1LuOe83",
+          "penguinIds": [
+            "NZ83cduS9oaDPZTXQvP0",
+            "gbUFp43GFxYeX4KhDlgD",
+            "pue4cjiYBYf8eJSYRuIA",
+            "AtK7JCSngE9rZne8m0Z2",
+            "3xqaWrLX9lYA3A02PenO",
+            "dy1fTd8SeytT4Q3vmEpN",
+            "Bw2cDIZSmoGJc3RhIflt",
+            "cvMKvV5rfOlxuqCUDLeN"
+          ]
+        },
+        {
+          "userId": "vwF1mW7UioOhkxxmsOO7mgLKmac2",
+          "penguinIds": [
+            "HqZiMXIOLvX6z6s6Z7qu",
+            "U4VV2yKPLxGY4YtDPmwR",
+            "1VZmow1rA31VUmMpAXwx",
+            "cWJYNT9hbu1LSIdj0e6w",
+            "rifRJzH0h63cT4O2FsVq",
+            "5vMLoUIRFFfTqm8MaZig",
+            "AgP4UpNGtiOb0psHlU38",
+            "f1foCdaEq6HfVPOiOSKN",
+            "P4vVuW2hxVx9X3u0vqW7",
+            "QSvm1B3Tl2l8bO3jSvCU"
+          ]
+        }
+      ],
       "createdAt": {
         "seconds": 1754387793,
         "nanoseconds": 696000000
@@ -65067,6 +65911,72 @@
       "totalPenguinsCount": 19,
       "totalGoldEarned": 190,
       "totalCrystals": 0,
+      "preset": {
+        "allowedTypes": [
+          "legendary"
+        ],
+        "goldPerPenguin": 10,
+        "durationBoost": 0.08,
+        "baseCrystalChance": 0.03,
+        "perPenguinBonus": 0.005,
+        "maxCrystalChance": 0.1
+      },
+      "participants": [
+        {
+          "userId": "PUnyxooX1JXWQM0EHoT8KPwRiIk1",
+          "penguinIds": [
+            "HPaPcTxvfQgcR5Qx0smU"
+          ]
+        },
+        {
+          "userId": "zDDWzDNwtwcP42YjdXxDVRq2e1k1",
+          "penguinIds": [
+            "RxJlhmMNq9DLSiwwJtGk"
+          ]
+        },
+        {
+          "userId": "MA1UKPOCUvUEYH4l4iqHDrJeJC22",
+          "penguinIds": [
+            "fHyODSiPEiNx7LdoZUx5",
+            "JypJz21qUSfeFIJQY0ix",
+            "30ogFPxWUMyIMErjqbpW"
+          ]
+        },
+        {
+          "userId": "yzFOKz6yTeUgfLPRQmh1sDw4I5J3",
+          "penguinIds": [
+            "6NTuqpf2jx5UYo7XHdMg",
+            "mKM7IpZOuOysiNxGsACN",
+            "BYAdsKGOIIdIQSXiWTF5",
+            "q9s0StSACCOFg9Yc7wD5",
+            "4MyN1xPYSpD9zOyhhapB",
+            "sLEqM74n552COnBJSKmT",
+            "35UMNPmYS3bQjSwjkqqX",
+            "TWHThxDIShGCNDb4W9nW",
+            "NfpAjPDy350vOZ9CJT9p"
+          ]
+        },
+        {
+          "userId": "zaKtdXEddce8VNNg5W5HIEvYC5W2",
+          "penguinIds": [
+            "snw6R233wmNkvL8oXE4K",
+            "qIQTpKnFbdf9NFBmlz3l",
+            "plaXK1wB158jBbvnZgiy"
+          ]
+        },
+        {
+          "userId": "vwF1mW7UioOhkxxmsOO7mgLKmac2",
+          "penguinIds": [
+            "hGTArnS9kHGr5ac1DB6x"
+          ]
+        },
+        {
+          "userId": "uSRU4HC29tUGCD5WKC1UjLECLLt1",
+          "penguinIds": [
+            "6ZJEGvBiNndUpTkbqWlj"
+          ]
+        }
+      ],
       "createdAt": {
         "seconds": 1756372586,
         "nanoseconds": 226000000
@@ -65102,6 +66012,117 @@
       "totalPenguinsCount": 69,
       "totalGoldEarned": 414,
       "totalCrystals": 1,
+      "preset": {
+        "goldPerPenguin": 6,
+        "allowedTypes": [
+          "rare"
+        ],
+        "perPenguinBonus": 0.008,
+        "maxCrystalChance": 0.15,
+        "durationBoost": 0.06,
+        "baseCrystalChance": 0.07
+      },
+      "participants": [
+        {
+          "userId": "MA1UKPOCUvUEYH4l4iqHDrJeJC22",
+          "penguinIds": [
+            "XzbSgx9uVsZR61mOANyD",
+            "ZTsnR4wVbbBEWZ69zq8K",
+            "QP4g8HP6p8LVbwKmXUKt",
+            "dFQ77eIKDQ13Fr2lBUar",
+            "NArRCXEf0lDqE6R9hKwK",
+            "23vpOhONqDVTxdmKoILa",
+            "g3qYq8aINOx3tR6X5XYN",
+            "uFFbgc584WtI0lJtWxJD",
+            "6Of2RdVFST3PV8wUwrRW",
+            "rAR9r7B6vwHrzf0vqC7T",
+            "NPuKkaT9PznH3su9y8sy",
+            "P6amaC6FnWx26oLnNeMN",
+            "fwkR3qBZjtVOW7PBxM5p",
+            "es8ER4iJrgmiylVqmrqa",
+            "5i3JcatiiUIF1YD0ZHUJ"
+          ]
+        },
+        {
+          "userId": "IaUOTnYMFnMeXGJGHfbHCsJldLk2",
+          "penguinIds": [
+            "x3OAKfePO6SK9KAAcR5Z",
+            "otHBWC8Qho8k1S5SVcQY",
+            "he2J3eRpFsvGFngYMOic",
+            "Lm3DksEi8yOuKseY9KrK"
+          ]
+        },
+        {
+          "userId": "zDDWzDNwtwcP42YjdXxDVRq2e1k1",
+          "penguinIds": [
+            "HhKlpzFyVxMptoXfQSLP",
+            "trfcLqQEhwx40DXqfT63",
+            "Ipluo2t8vzq2TWckvXUb",
+            "pWJ0Te07XSb0PsLrLAJX",
+            "USbVs5F4p6u9i2D49Wmm"
+          ]
+        },
+        {
+          "userId": "yzFOKz6yTeUgfLPRQmh1sDw4I5J3",
+          "penguinIds": [
+            "c1OT8HpYhEiIyeGKBIHy",
+            "o3RLwOL8gELHiDliOLHE",
+            "tRaAvlfIsFMFOjfINlhq",
+            "6tdL43BEQvKWed8Qje97",
+            "SHS3XlsOmXnaBAph8mjF",
+            "hIW0CkwBItduYhtHbgMf",
+            "8F1RLXYWaUoyxPrYMWDL",
+            "LvovRtG5j3oqCupXApug",
+            "E8W0wxA2oGhkrkicl1kF",
+            "1Ref5VByCRQtpH7syjLI",
+            "wbOab9G8xbB2VQTWh0Yi",
+            "cYWfrrcVJ6e9atY9XTZT",
+            "8znBO1Tr7MWouWIv1vty",
+            "iqbwmhqr6z6iCMvvuIqc",
+            "1wdDAWde92X7EqmZs7T7"
+          ]
+        },
+        {
+          "userId": "zaKtdXEddce8VNNg5W5HIEvYC5W2",
+          "penguinIds": [
+            "sWVyzDAELeVF3pM0dlxQ",
+            "mtf6jGKKsYXa2CCfIFGn",
+            "zg0djYsLWruQrNG19tSK",
+            "silGIoJtf9klceEpG4a9",
+            "vAPwwYZyH6P748ugewNq",
+            "2GN1QKY0hnu1ZMu18aiQ",
+            "1IfPfEgvDOWuRvi7Ydt8",
+            "j0z2BMDuNO2iHq35mbiL",
+            "Qvk8aR5kAjeOKk1rGsrj",
+            "DiqKzV8fPvLHrl1RDLmu",
+            "HlMq6wQLZEzf0ZCBmhKq",
+            "0yjxiqGfl6UMiNGISZK6",
+            "KYxqr9ycc1teBcTGzTix",
+            "ZGTxSAP5SSPI6S7LXzQT",
+            "GDZqshaEeYKMVp8ftUCo"
+          ]
+        },
+        {
+          "userId": "UdyUDA6aDlWV5ERpZIQ4B1LuOe83",
+          "penguinIds": [
+            "vtsUVzwyIWol40ieChUf",
+            "DP4G1jAe5miSPPSDZUpL",
+            "zjehlrcef9jlDnutzgKk",
+            "E9PUmKCBoEqBJUNcIbZ9",
+            "CcrZTkk8r9dSYck6T1Jf",
+            "mNDhfj5YqDK17ac2vOK7",
+            "QZ6qdEboUVzzAFIQL6U8",
+            "kZcHbjS8uNWA7tB8WQ53",
+            "RALrFwW4glipY7j2lHL4",
+            "NZ83cduS9oaDPZTXQvP0",
+            "gbUFp43GFxYeX4KhDlgD",
+            "pue4cjiYBYf8eJSYRuIA",
+            "AtK7JCSngE9rZne8m0Z2",
+            "3xqaWrLX9lYA3A02PenO",
+            "dy1fTd8SeytT4Q3vmEpN"
+          ]
+        }
+      ],
       "createdAt": {
         "seconds": 1759387770,
         "nanoseconds": 86000000
@@ -65137,6 +66158,151 @@
       "totalPenguinsCount": 93,
       "totalGoldEarned": 465,
       "totalCrystals": 2,
+      "preset": {
+        "allowedTypes": [
+          "common"
+        ],
+        "goldPerPenguin": 5,
+        "durationBoost": 0.05,
+        "baseCrystalChance": 0.1,
+        "perPenguinBonus": 0.01,
+        "maxCrystalChance": 0.25
+      },
+      "participants": [
+        {
+          "userId": "MA1UKPOCUvUEYH4l4iqHDrJeJC22",
+          "penguinIds": [
+            "sKfKm17beioJBowa5bHe",
+            "7RbdIn7dm54KBL2gv7Yk",
+            "MH0znZmCiG6TOPxhZbWV",
+            "3I8XzlGrLQpXOMhsyQnt",
+            "KUCUhsyDFepuisLdbiCD",
+            "ZAbYx9Q6o7QwhmOu0tpt",
+            "G1kAAFuZurF0PO7YMPa2",
+            "MNX3XaOv2cNxziUKRyhq",
+            "Cykva04hgrzkPbwuHLZJ",
+            "DmWvLhSzKv5KB9M5DU3y",
+            "Y9L33SUUN8SDMibai6B0",
+            "3ff4MPdPzqfzOJVyJqHH",
+            "4HxAzzDX1DjfbOiwyzl7",
+            "F3wj8JBEy5aY0eGi1fQH",
+            "PzJYPPNv7Thnz1YRQa0U"
+          ]
+        },
+        {
+          "userId": "yzFOKz6yTeUgfLPRQmh1sDw4I5J3",
+          "penguinIds": [
+            "vnjcItVraOpUN5dggl7h",
+            "u4EQap5HfJOzPxbyBFXM",
+            "Ypbd6sIT7aFSLrG9R2oU",
+            "8oKTjmOZ2PJM0aQB4Irw",
+            "UrvbSDm1FOkrvD8Wva6y",
+            "qkFErIE3pB9osqZ2gpGk",
+            "D7w9cwevXnjDpOZ8vqcQ",
+            "ZH1eWUobdAvmzzefa8qM",
+            "e6QtYlL6gERmoYR9fx3O",
+            "jpaBZrKzH4rrqnnTMTPK",
+            "LpiyfFpmyepcQTuZ0RPR",
+            "YongLtg1H6kdPMHdA39g",
+            "QEBQOvkBhmvyQBZncA8I",
+            "NkfVXkP0vbpGs9KitAdH",
+            "qZYmBAhcADN1vGhbAWb3"
+          ]
+        },
+        {
+          "userId": "vwF1mW7UioOhkxxmsOO7mgLKmac2",
+          "penguinIds": [
+            "jy2hqASwildtPbCUPYUU",
+            "CK5OB4Pt564ozt07CC7o",
+            "l5p6es24jDTJeoTkwWfU",
+            "u0mhaoXxRshIzmqPvQjg",
+            "MPhxDsOOGazvEvht5p8M",
+            "EXCNIJqYrrM4e3UMfzK2"
+          ]
+        },
+        {
+          "userId": "UdyUDA6aDlWV5ERpZIQ4B1LuOe83",
+          "penguinIds": [
+            "Nb6MD2Goo8gYaCq8tdnW",
+            "pwA734GF0XoqjaTR1iDP",
+            "uq5mgGmpSJkpxs5pLWyd",
+            "v61mR1Arnj8Ls3LfkmNF",
+            "FfZC59uYbBgA0n3b25n0",
+            "qGtcNmnz8QMdCYB5r24s"
+          ]
+        },
+        {
+          "userId": "qCzT9z58osSEdGSTwlYmeBpcP142",
+          "penguinIds": [
+            "Tz9qtgobG8hXb0Uad0Sj",
+            "6Rc9VNEeSzRbRSqdlIA4",
+            "uAmv2SPvgbW93o7Za8oR",
+            "rNCxHzG7uIFNIUwLQ2JE",
+            "fLof1REgOKU9mRtcKQQ1",
+            "eUjOtCZXuHkkQyprOvrj",
+            "jHRtXmXLYNWIBMr5RgsZ",
+            "ZiBjFtizacjMskn5nnGa",
+            "JrsZV8ko3y5uXhP0o5Dv",
+            "qolBsfTbDWiG7aWVKbHv",
+            "adiKZzmssKGcsqPsAcv3",
+            "HoZ2hgqjfheQsWFC89GH",
+            "NVC571ybiNERrKaYjolm",
+            "FOaviFg4GNTQyFcke6gu",
+            "LDzMCc0gqfgFQuYrV7CW"
+          ]
+        },
+        {
+          "userId": "zDDWzDNwtwcP42YjdXxDVRq2e1k1",
+          "penguinIds": [
+            "BRGhy0daaMjFzFQ6ZaTy",
+            "pv7xaVObzqrHxrgNCIsE",
+            "eR92eU8dWUKlyEkL2Z48",
+            "XztgwHJ985nLjd3Ke76v",
+            "APotdLVHhxkPflxYhWNA",
+            "gg8LWjsbjKhzELXF7XUp",
+            "cx6yNRRyYNzZZf12gtWU"
+          ]
+        },
+        {
+          "userId": "zaKtdXEddce8VNNg5W5HIEvYC5W2",
+          "penguinIds": [
+            "64moGyjwQGrxXR35NGg0",
+            "T5jiKtvYs8OSJJEOdJg5",
+            "ZsZLS8NDfhbhhvYXzQ8N",
+            "FVFhXt4JeWLpU3K72eFs",
+            "JOLNfqArfXJTutx5uBzN",
+            "9kP6nBUhpXkKv9dr4RQe",
+            "g6TU7gPEuDAwDTrV88EJ",
+            "w2F4vMjhWsHozPU4uKfA",
+            "8adU52Q4IqL8nUe31mo5",
+            "Jq4vIZJcHT4YyMbIpAau",
+            "XIyIqOeetK3RJI1O0h6K",
+            "s2xFgNHEndWoVGL6N6Pj",
+            "U9Uhuk6in5RyF9IflwNl",
+            "7uJcogcytssi6FVhWjMm"
+          ]
+        },
+        {
+          "userId": "uSRU4HC29tUGCD5WKC1UjLECLLt1",
+          "penguinIds": [
+            "BkjqGxrIL0ZqiGc7WUsf",
+            "uRMxE4ZEZotIZ0xqmkEI",
+            "YnMb68ClFkjm5SmiT77h",
+            "Vcv8Avc2ZrxvgMiJn57c",
+            "NganxX3cHnP5P9CJ839S",
+            "cA63nSzp7SvnNLMiyNqo",
+            "iaAh12Gr22inHgfQPxvS",
+            "vKvJhOBa093GAAxaV9YN",
+            "tC7nq8OWF6Xeab8aJPmZ",
+            "1jb5fGLXjJybd72HeZf6",
+            "3ytqtqKV1malm3Htn21n",
+            "yFHCtpI32jSYXeUxL99K",
+            "DfuKxGRqzEPB4Lyyn4gO",
+            "BWvjQUnDYVoSuIhsaLWK",
+            "1EFRG79ZJbAswqKPf8mQ"
+          ]
+        }
+      ],
       "createdAt": {
         "seconds": 1752069811,
         "nanoseconds": 388000000
@@ -65172,6 +66338,125 @@
       "totalPenguinsCount": 72,
       "totalGoldEarned": 360,
       "totalCrystals": 0,
+      "preset": {
+        "allowedTypes": [
+          "common"
+        ],
+        "goldPerPenguin": 5,
+        "durationBoost": 0.05,
+        "baseCrystalChance": 0.1,
+        "maxCrystalChance": 0.25,
+        "perPenguinBonus": 0.02
+      },
+      "participants": [
+        {
+          "userId": "MA1UKPOCUvUEYH4l4iqHDrJeJC22",
+          "penguinIds": [
+            "3I8XzlGrLQpXOMhsyQnt",
+            "7RbdIn7dm54KBL2gv7Yk",
+            "qe1cIJ7bEFQm6RmUUOLx",
+            "2Y1Qh13I75c4KTXhtEPx",
+            "ZAbYx9Q6o7QwhmOu0tpt",
+            "qLDqzZpSrlHx2vWEwNPA",
+            "3xy5j0qgOJgWzdl4JpOW",
+            "c2qC0htmyhbQwCOvDQWX",
+            "UMSWL32PWHdGncQEuzXw",
+            "FJDyanGRvDEWl5gEBXRT",
+            "G1kAAFuZurF0PO7YMPa2",
+            "DmWvLhSzKv5KB9M5DU3y",
+            "Y9L33SUUN8SDMibai6B0",
+            "3Ej00xwp2dQB3g7NxRU0"
+          ]
+        },
+        {
+          "userId": "yzFOKz6yTeUgfLPRQmh1sDw4I5J3",
+          "penguinIds": [
+            "qZYmBAhcADN1vGhbAWb3",
+            "N0tBbQMmlyGt3rGEkecP",
+            "RlME0aKrCc8W4bvAuTVT",
+            "0gKbetSqHAdIq9Z8dOhf",
+            "ZHLaDFx3Cp0jAI9vg8eE",
+            "Th7oVl7YAR2ohb71p5mw",
+            "LGeAz2tC3wRmRsFokJia",
+            "QEBQOvkBhmvyQBZncA8I",
+            "wjZlDKKIs2YGkzPXZihG",
+            "GBfMdNSYfbsAxTdfKvNr",
+            "1ApSkEkxv9jt9tiDvuUt",
+            "52XAYe1RnMZWJw9652cT",
+            "Ep9ebyYXMOYtMBxYyopF",
+            "80UqbIX26ECc1yq4AfPy"
+          ]
+        },
+        {
+          "userId": "zaKtdXEddce8VNNg5W5HIEvYC5W2",
+          "penguinIds": [
+            "9kP6nBUhpXkKv9dr4RQe",
+            "JOLNfqArfXJTutx5uBzN",
+            "w2F4vMjhWsHozPU4uKfA",
+            "g6TU7gPEuDAwDTrV88EJ",
+            "U9Uhuk6in5RyF9IflwNl",
+            "Jq4vIZJcHT4YyMbIpAau",
+            "s2xFgNHEndWoVGL6N6Pj",
+            "XIyIqOeetK3RJI1O0h6K",
+            "7uJcogcytssi6FVhWjMm"
+          ]
+        },
+        {
+          "userId": "qCzT9z58osSEdGSTwlYmeBpcP142",
+          "penguinIds": [
+            "rNCxHzG7uIFNIUwLQ2JE",
+            "fLof1REgOKU9mRtcKQQ1",
+            "eUjOtCZXuHkkQyprOvrj",
+            "ZiBjFtizacjMskn5nnGa",
+            "qolBsfTbDWiG7aWVKbHv",
+            "adiKZzmssKGcsqPsAcv3",
+            "HoZ2hgqjfheQsWFC89GH",
+            "NVC571ybiNERrKaYjolm",
+            "FOaviFg4GNTQyFcke6gu",
+            "LDzMCc0gqfgFQuYrV7CW",
+            "2OdSP6KKwNXKuwU1KXAi",
+            "9FY5wIpfODh7CEf3lwCB",
+            "FqSAiZ2LKPg59KaCcTTU",
+            "Yw5uatc9a8X1U980oG1r"
+          ]
+        },
+        {
+          "userId": "UdyUDA6aDlWV5ERpZIQ4B1LuOe83",
+          "penguinIds": [
+            "uq5mgGmpSJkpxs5pLWyd",
+            "pwA734GF0XoqjaTR1iDP",
+            "Nb6MD2Goo8gYaCq8tdnW"
+          ]
+        },
+        {
+          "userId": "zDDWzDNwtwcP42YjdXxDVRq2e1k1",
+          "penguinIds": [
+            "APotdLVHhxkPflxYhWNA",
+            "cXylCcjgzHYnjPI4Vf8Q",
+            "gg8LWjsbjKhzELXF7XUp",
+            "H9HJh29CekDSSa8ji8pJ"
+          ]
+        },
+        {
+          "userId": "uSRU4HC29tUGCD5WKC1UjLECLLt1",
+          "penguinIds": [
+            "3ytqtqKV1malm3Htn21n",
+            "yFHCtpI32jSYXeUxL99K",
+            "DfuKxGRqzEPB4Lyyn4gO",
+            "BWvjQUnDYVoSuIhsaLWK",
+            "1EFRG79ZJbAswqKPf8mQ",
+            "zTGWwH4gcIWWqnJIopDE",
+            "TJe8lAXdCGX6fs0B7hAA",
+            "Mg3LkJ3LvXWR6n9MNuNi",
+            "eTmoUei9VDf9LWy8Q25b",
+            "5uF4U5IyKuAsHua9Vfgx",
+            "ZgB22JoY5eNcx5seNzyO",
+            "zKUuw2iYxHu6ZA4qn25X",
+            "xYgAbuh0tGCUbUfitpia",
+            "MHadO7V7DraASFeBT8ET"
+          ]
+        }
+      ],
       "createdAt": {
         "seconds": 1751386034,
         "nanoseconds": 245000000
@@ -65207,6 +66492,102 @@
       "totalPenguinsCount": 49,
       "totalGoldEarned": 392,
       "totalCrystals": 0,
+      "preset": {
+        "allowedTypes": [
+          "epic"
+        ],
+        "goldPerPenguin": 8,
+        "durationBoost": 0.07,
+        "baseCrystalChance": 0.05,
+        "perPenguinBonus": 0.006,
+        "maxCrystalChance": 0.12
+      },
+      "participants": [
+        {
+          "userId": "MA1UKPOCUvUEYH4l4iqHDrJeJC22",
+          "penguinIds": [
+            "JBJ6mbJlnDr4q0iEu3El",
+            "sCxDIywPnwJD6hVinh7v",
+            "idbiLibq3L0AQ7DppNF9",
+            "9gYJYcweMTCEZ2nNAsHJ",
+            "OFA2fgK2txUypYMU8syg",
+            "dPf6vk0H9Jbk1azXncYy"
+          ]
+        },
+        {
+          "userId": "zDDWzDNwtwcP42YjdXxDVRq2e1k1",
+          "penguinIds": [
+            "2X53QeeqFo8jLN3rViV2",
+            "5P7eUAYLlzEJUi9tul30",
+            "ProJxVnMJ3iVAQZHXblB",
+            "lZC2mYZOq3uXX5QHkXLs",
+            "e6qyRQEpqf6BJy9BoQ6z"
+          ]
+        },
+        {
+          "userId": "uSRU4HC29tUGCD5WKC1UjLECLLt1",
+          "penguinIds": [
+            "ARolt453N78NdRjE9fjF",
+            "LIi9RtDuoiPwnG2IWyNh",
+            "hqpLo7tvuk7zHUpacyWJ",
+            "60Ry5mofa3b1KuGHZdZt",
+            "Qb3KHimessCWgnSz5XZU",
+            "UDtN2Ws22ZA7UwT1TRXH",
+            "Yz7kX7VLbVSTpFhvGCtP",
+            "Opeh0F4XCUKm5ESuvZJM"
+          ]
+        },
+        {
+          "userId": "vwF1mW7UioOhkxxmsOO7mgLKmac2",
+          "penguinIds": [
+            "B09CJen99TyKqYzRanq1",
+            "1u0kyYp5uEo9JQmzpDA8"
+          ]
+        },
+        {
+          "userId": "yzFOKz6yTeUgfLPRQmh1sDw4I5J3",
+          "penguinIds": [
+            "MF3M54hRzrJayBfD8WMG",
+            "UHirrUvCYsOlOCtUiGuC",
+            "dcSbdGMxhrk2vP2CDN6E",
+            "Anvp5sW0fM63XMpJFus1",
+            "0coalpNX5yQNnAxoGMx2",
+            "6RsRYXRhNheP86EHaMAo",
+            "dRnYzrdLHqkKaz7qHhzM",
+            "QSzHipmgT4C0mACJvILa",
+            "exf5HCwKe1gnhWwfNryo",
+            "lfHESQq1EU31zTwgUC6A",
+            "CqmyjOTw7PtNHZoLvUkC",
+            "a7iU4bMWWtLP6DMiG1qH",
+            "0wbUdpSqcGLEqr0wXeEy",
+            "mO26sjjgWTERLoKUVUuq",
+            "6n4DTaWXcZQExc3rP88b",
+            "D1wQdlPDeiInQzZfNtGH",
+            "rxEy4DMY1ScV4ENUvSVy"
+          ]
+        },
+        {
+          "userId": "UdyUDA6aDlWV5ERpZIQ4B1LuOe83",
+          "penguinIds": [
+            "JVeaNthCKgzNcbuvgVsx",
+            "2utej11OzoU1qkH5yebC",
+            "5dG1o8mYZ8IB36LLHjPH",
+            "zv72cUMEpm3CR8bimDA6"
+          ]
+        },
+        {
+          "userId": "zaKtdXEddce8VNNg5W5HIEvYC5W2",
+          "penguinIds": [
+            "rg0s1bpYuZHqvtGilHro",
+            "dN9scy4FGTKwFWipzCFK",
+            "WtbF6OQzWfM8PIQVm2Ty",
+            "qyTBiWMH0t90UmqpoxbS",
+            "5irdTf60FGwuYEcp0ZHD",
+            "hNTMBFm29McnR6w2u5T5",
+            "nHHyv11l1iqiIMZIMQMc"
+          ]
+        }
+      ],
       "createdAt": {
         "seconds": 1755520168,
         "nanoseconds": 364000000
@@ -65222,6 +66603,16 @@
       },
       "theme": "Embrace the magical aura of a lunar eclipse as penguins don mystical cloaks adorned with star patterns and glowing lunar crystals. Deep blue, violet, and black feathers glisten alongside accents of silver and blood red, reminiscent of the eclipsed moon. The cosmic night sky is filled with constellations, glowing orbs, and an otherworldly eclipse aura, creating a mysterious and celestial ambiance.",
       "value": "Crimson Moon",
+      "description": {
+        "en": "Experience the mystical dance of penguins under the shadow of the eclipsed moon in this celestial event.",
+        "ru": "Почувствуйте мистический танец пингвинов под тенью затмения луны на этом небесном событии."
+      },
+      "subText": {
+        "en": "Unravel the secrets of the lunar eclipse with our mysterious penguin guides.",
+        "ru": "Раскройте секреты лунного затмения вместе с нашими таинственными пингвинами-наставниками."
+      },
+      "startDate": "2025-09-07T12:45:43.257Z",
+      "endDate": "2025-09-09T10:00:43.257Z",
       "imageUrl": "https://cdn.jsdelivr.net/gh/kirilinsky/penguin-archive@v1/events/1757249146943_Crimson%20Moon.webp"
     },
     {
@@ -65232,6 +66623,16 @@
       },
       "theme": "Immerse yourself in a whimsical autumn apple festival where lush orchards burst with red and green apples. Feel the warmth of golden sunlight peeking through the trees as you enjoy traditional treats like warm apple pies and caramel apples. The atmosphere is one of joy, harvest, and togetherness, with a color palette of rich reds, fresh greens, and warm golds creating a cinematic, detailed, cozy, and inviting setting. cider, apples, trees. bottles. avoid words 'whisper' anywhere! use fun names and titles",
       "value": "Apple Season",
+      "description": {
+        "en": "Step into a cozy autumn apple festival filled with joy and harvest delights!",
+        "ru": "Окунитесь в уютный осенний яблочный праздник, полный радости и урожайных удовольствий!"
+      },
+      "subText": {
+        "en": "Gather your friends and family for a memorable day among the apple orchards.",
+        "ru": "Соберите своих друзей и семью для незабываемого дня среди яблоневых садов."
+      },
+      "startDate": "2025-09-02T10:13:05.682Z",
+      "endDate": "2025-09-05T10:13:05.682Z",
       "imageUrl": "https://cdn.jsdelivr.net/gh/kirilinsky/penguin-archive@v1/events/1756807991030_Apple%20Season.webp"
     },
     {
@@ -65242,6 +66643,16 @@
       },
       "theme": "Imagine a lively farm festival where farmers ride tractors, wear charming hats, and celebrate the harvest. The scene is adorned with warm autumn colors like golden yellows, rich oranges, and deep reds. Wheat sheaves,  vegetables, freshly baked bread, and an abundance of fruits add to the festive atmosphere.",
       "value": "Harvest Festival",
+      "description": {
+        "en": "Join the fun at our Harvest Havoc festival! Celebrate the bounty of the season with us.",
+        "ru": "Присоединяйтесь к веселью нашего урожайного фестиваля! Празднуйте изобилие сезона вместе с нами."
+      },
+      "subText": {
+        "en": "Get ready for a day filled with farm games, delicious food, and joyful celebrations.",
+        "ru": "Готовьтесь к дню, полному фермерских игр, вкусной еды и радостных празднований."
+      },
+      "startDate": "2025-08-22T15:51:48.235Z",
+      "endDate": "2025-08-25T15:51:48.235Z",
       "imageUrl": "https://cdn.jsdelivr.net/gh/kirilinsky/penguin-archive@v1/events/1755877912469_Harvest%20Festival.webp"
     },
     {
@@ -65252,6 +66663,16 @@
       },
       "theme": "A festive autumn scene with energetic penguin chefs in a cooking contest among pumpkins. The atmosphere is colorful, cozy, and humorous, resembling a mix of a cooking show and a harvest festival. The setting is highly detailed, vibrant, and whimsical, with a cinematic style.",
       "value": "Pumpkin Feast",
+      "description": {
+        "en": "Join the whimsical world of penguin chefs for a pumpkin cooking extravaganza!",
+        "ru": "Присоединяйтесь к фантастическому миру пингвинов-поваров на кулинарном празднике тыкв!"
+      },
+      "subText": {
+        "ru": "Готовы ли вы приготовить волшебство из тыкв?",
+        "en": "Are you ready to cook up some pumpkin magic?"
+      },
+      "startDate": "2025-09-25T06:18:04.410Z",
+      "endDate": "2025-09-28T13:18:04.410Z",
       "imageUrl": "https://cdn.jsdelivr.net/gh/kirilinsky/penguin-archive@v1/events/1758781087691_Pumpkin%20Feast.webp"
     },
     {
@@ -65262,6 +66683,16 @@
       },
       "theme": "Experience the thrill of the dark side as our Sith Penguin dominates the cosmic scene with its sinister presence. Immerse yourself in a world of red and black hues, crackling energy, and the ominous glow of a crimson moon. Join now for an epic journey into mystery and power!",
       "value": "The Chosen One",
+      "description": {
+        "ru": "Это последний Избранный Пингвин! ",
+        "en": "This is the last chose penguin!"
+      },
+      "subText": {
+        "ru": "Только для смелых и отважных!",
+        "en": "Only for the brave and bold!"
+      },
+      "startDate": "2025-09-30T12:09:54.764Z",
+      "endDate": "2025-10-01T12:09:54.764Z",
       "imageUrl": "https://cdn.jsdelivr.net/gh/kirilinsky/penguin-archive@v1/events/1759234197939_The%20Chosen%20One.webp"
     },
     {
@@ -65272,6 +66703,16 @@
       },
       "theme": "The event features a whimsical blend of autumn colors like warm oranges, back to school season, title should be related to learning etc, deep reds, and golden yellows. Penguins in glasses, backpacks, and cozy sweaters or school uniforms hold books and science instruments amidst falling leaves, school walls, professors, laboratories, music instruments, and pencils, creating a playful and educational atmosphere. theme always - \"School Bus' !",
       "value": "School Bus",
+      "description": {
+        "ru": "Отправляйтесь в уютное осеннее путешествие с нашим пингвином-новичком!  ",
+        "en": "Embark on a cozy autumn journey with our newbie penguin student!  "
+      },
+      "subText": {
+        "en": "Get ready for a fun-filled learning adventure!",
+        "ru": "Приготовьтесь к полному веселья учебному приключению!"
+      },
+      "startDate": "2025-08-10T11:11:47.977Z",
+      "endDate": "2025-08-12T11:11:47.977Z",
       "imageUrl": "https://cdn.jsdelivr.net/gh/kirilinsky/penguin-archive@v1/events/1754824312707_School%20Bus.webp"
     },
     {
@@ -65282,6 +66723,16 @@
       },
       "theme": "A magical autumn forest setting where penguins dressed as explorers venture out after rain to hunt for mushrooms. The atmosphere is cozy and mysterious with glowing fantasy mushrooms, real edible fungi, and gentle mist creating an enchanting experience. The scene is detailed, cinematic, and filled with secrets, perfect for an adventure themed around mushroom-related abilities and titles.",
       "value": "Mushroom Hunters",
+      "description": {
+        "ru": "Присоединяйтесь к пингвинам-исследователям в охоте на грибы в осеннем лесу.",
+        "en": "Join the penguin explorers on a mushroom hunt in the enchanted autumn forest."
+      },
+      "subText": {
+        "en": "Discover hidden treasures and uncover the magical secrets of the forest.",
+        "ru": "Обнаружите скрытые сокровища и раскройте волшебные секреты леса."
+      },
+      "startDate": "2025-09-14T14:05:24.879Z",
+      "endDate": "2025-09-15T22:05:24.879Z",
       "imageUrl": "https://cdn.jsdelivr.net/gh/kirilinsky/penguin-archive@v1/events/1757858732901_Mushroom%20Hunters.webp"
     },
     {
@@ -65292,6 +66743,16 @@
       },
       "theme": "Imagine a vibrant setting with neon lights casting a colorful glow over swaying palm trees and penguins in hawaiian shirts, great culture, surfing, jeans, warm and bright, yachts. The atmosphere is filled with retro vibes, reminiscent of Miami's 80s end-of-summer parties, beach and palms, monstera leaves. Like GTA Vice City art",
       "value": "End of Summer '25",
+      "description": {
+        "en": "Join us for a retro adventure in a neon-lit Miami 80s paradise at the end of summer!",
+        "ru": "Присоединяйтесь к нам на ретро-приключение в неоновом раю Майами 80-х на закате лета!"
+      },
+      "subText": {
+        "en": "Get ready for a nostalgic journey back in time!",
+        "ru": "Приготовьтесь к ностальгическому путешествию в прошлое!"
+      },
+      "startDate": "2025-08-07T15:42:28.342Z",
+      "endDate": "2025-08-10T10:45:28.342Z",
       "imageUrl": "https://cdn.jsdelivr.net/gh/kirilinsky/penguin-archive@v1/events/1754581354610_End%20of%20Summer%20'25.webp"
     }
   ]

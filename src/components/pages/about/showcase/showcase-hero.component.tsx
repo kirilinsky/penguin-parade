@@ -1,5 +1,7 @@
 "use client";
+import { CSSProperties } from "react";
 import GalleryItemScaleComponent from "@/components/pages/gallery/gallery-item-scale/gallery-item-scale.component";
+import { getBaseColorByScale } from "@/helpers/get-base-color-by-rarity/get-base-color-by-rarity";
 import { ScaleType, scaleOrder } from "@/types/scale.types";
 import { showcaseStats } from "@/data/showcase";
 import { useL } from "./showcase-l10n";
@@ -77,7 +79,14 @@ const ShowcaseHero = () => {
           <StatGroupLabel>{L("By rarity", "По редкости")}</StatGroupLabel>
           <RarityRow>
             {rarities.map(([rarity, count]) => (
-              <RarityChip key={rarity}>
+              <RarityChip
+                key={rarity}
+                style={
+                  {
+                    "--accent": getBaseColorByScale(rarity as ScaleType),
+                  } as CSSProperties
+                }
+              >
                 <GalleryItemScaleComponent scale={rarity as ScaleType} />
                 <strong>{count}</strong>
               </RarityChip>

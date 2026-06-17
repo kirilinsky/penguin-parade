@@ -1,14 +1,15 @@
 import styled from "styled-components";
 
 export const HeaderWrapper = styled.header`
-  width: 100vw;
+  width: 100%;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   height: 72px;
   background-color: #214d26d4;
-  @media (max-width: 468px) {
-    height: 57px;
+  @media (max-width: 768px) {
+    height: auto;
+    padding: 8px 6px;
   }
 `;
 
@@ -16,13 +17,21 @@ export const HeaderLinks = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 4px;
-  div{
+  flex-wrap: wrap;
+  gap: 4px 6px;
+  div {
     text-align: center;
     font-size: 15px;
   }
   @media (max-width: 768px) {
-    display: none;
+    div {
+      font-size: 14px;
+    }
+  }
+  @media (max-width: 420px) {
+    div {
+      font-size: 13px;
+    }
   }
 `;
 

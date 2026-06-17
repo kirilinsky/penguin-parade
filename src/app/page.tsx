@@ -8,6 +8,7 @@ import { useL } from "@/components/pages/about/showcase/showcase-l10n";
 import {
   ExploreCard,
   ExploreCardCount,
+  ExploreCardCta,
   ExploreCardTitle,
   ExploreGrid,
   ShowcaseSection,
@@ -19,7 +20,7 @@ import {
   AboutPageSectionImage,
   AboutPageSectionText,
 } from "@/components/pages/about/about-page-layout/about-page-layout.styled";
-import { showcaseStats } from "@/data/showcase";
+import { showcaseStats, showcaseCrystalsObtained } from "@/data/showcase";
 import { tutorialBlocks } from "@/data/about";
 
 export default function Home() {
@@ -47,6 +48,16 @@ export default function Home() {
       title: L("Expeditions", "Экспедиции"),
       count: `${showcaseStats.totalExpeditions} ${L("runs", "ходок")}`,
     },
+    {
+      href: "/events",
+      title: L("Events", "Ивенты"),
+      count: `${showcaseStats.totalEvents} ${L("events", "ивентов")}`,
+    },
+    {
+      href: "/crystals",
+      title: L("Crystals", "Кристаллы"),
+      count: `${showcaseCrystalsObtained} ${L("obtained", "получено")}`,
+    },
   ];
 
   return (
@@ -61,6 +72,9 @@ export default function Home() {
               <ExploreCard>
                 <ExploreCardTitle>{c.title}</ExploreCardTitle>
                 <ExploreCardCount>{c.count}</ExploreCardCount>
+                <ExploreCardCta className="ce-cta">
+                  {L("Open", "Открыть")} <span className="arrow">→</span>
+                </ExploreCardCta>
               </ExploreCard>
             </Link>
           ))}

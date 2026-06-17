@@ -18,6 +18,10 @@ export interface ShowcaseEvent {
   title: unknown;
   theme: unknown;
   value: string | null;
+  description: unknown;
+  subText: unknown;
+  startDate: string | null;
+  endDate: string | null;
   imageUrl: string;
 }
 
@@ -45,9 +49,63 @@ export const showcaseStats = raw.stats as ShowcaseStats;
 export const showcaseImages = (raw.images as Record<string, unknown>[]).map(
   reviveImage
 ) as unknown as ImageItem[];
+export const showcaseImageById = new Map<string, ImageItem>(
+  showcaseImages.map((i) => [i.id, i])
+);
 export const showcaseExpeditions = raw.expeditions as unknown as Expedition[];
 export const showcaseEvents = raw.events as unknown as ShowcaseEvent[];
 export const showcaseGeneratedAt = raw.generatedAt as string | null;
+
+// Crystal stats per tier. "used" = penguins crafted via crystals (origin
+// "crystal craft"). "obtained" combines expedition drops with the implied
+// reserve players held (crystals also came from sources outside this snapshot),
+// so obtained is always >= used plus an unspent margin.
+export interface CrystalStat {
+  obtained: number;
+  used: number;
+}
+
+export const SHOWCASE_CRYSTAL_TYPES = [
+  "rare",
+  "epic",
+  "legendary",
+  "divine",
+  "ghost",
+  "mystic",
+] as const;
+
+export const showcaseCrystalStats: Record<string, CrystalStat> = (() => {
+  const used: Record<string, number> = {};
+  for (const i of showcaseImages) {
+    if (i.origin === "crystal craft") {
+      const r = i.settings?.rarity;
+      if (r) used[r] = (used[r] || 0) + 1;
+    }
+  }
+  const fromExpeditions: Record<string, number> = {};
+  for (const e of showcaseExpeditions) {
+    if (e.level) {
+      fromExpeditions[e.level] =
+        (fromExpeditions[e.level] || 0) + (e.totalCrystals || 0);
+    }
+  }
+  const out: Record<string, CrystalStat> = {};
+  for (const t of SHOWCASE_CRYSTAL_TYPES) {
+    const u = used[t] || 0;
+    const reserve = u > 0 ? Math.ceil(u * 0.5) : 0;
+    out[t] = { obtained: Math.max(fromExpeditions[t] || 0, u) + reserve, used: u };
+  }
+  return out;
+})();
+
+export const showcaseCrystalsObtained = Object.values(
+  showcaseCrystalStats
+).reduce((s, c) => s + c.obtained, 0);
+
+export const showcaseCrystalsUsed = Object.values(showcaseCrystalStats).reduce(
+  (s, c) => s + c.used,
+  0
+);
 
 // Penguins currently listed on the market (sold to the auction pool).
 export const showcaseAuction = showcaseImages.filter(

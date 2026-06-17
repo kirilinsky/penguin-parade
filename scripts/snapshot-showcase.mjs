@@ -79,6 +79,13 @@ const slimExpeditions = expeditions.map((e) => ({
   totalPenguinsCount: e.totalPenguinsCount ?? 0,
   totalGoldEarned: e.totalGoldEarned ?? 0,
   totalCrystals: e.totalCrystals ?? 0,
+  preset: e.preset ?? null,
+  participants: Array.isArray(e.participants)
+    ? e.participants.map((p) => ({
+        userId: p.userId ?? null,
+        penguinIds: Array.isArray(p.penguinIds) ? p.penguinIds : [],
+      }))
+    : [],
   createdAt: ts(e.createdAt),
 }));
 
@@ -87,6 +94,10 @@ const slimEvents = events.map((e) => ({
   title: e.title ?? null,
   theme: e.theme ?? null,
   value: e.value ?? null,
+  description: e.description ?? null,
+  subText: e.subText ?? null,
+  startDate: e.startDate ?? null,
+  endDate: e.endDate ?? null,
   imageUrl: fixUrl(e.imageUrl),
 }));
 

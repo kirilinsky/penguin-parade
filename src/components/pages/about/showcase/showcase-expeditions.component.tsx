@@ -1,5 +1,5 @@
 "use client";
-import { useMemo } from "react";
+import { CSSProperties, useMemo } from "react";
 import { useLocale } from "next-intl";
 import ExpeditionStatusBadge from "@/components/pages/expedition/expedition-status-badge/expedition-status-badge.component";
 import GalleryItemScaleComponent from "@/components/pages/gallery/gallery-item-scale/gallery-item-scale.component";
@@ -9,10 +9,13 @@ import { showcaseExpeditions } from "@/data/showcase";
 import { useL } from "./showcase-l10n";
 import {
   ExpeditionCard,
+  ExpeditionCardBadge,
   ExpeditionCardBody,
   ExpeditionCardDesc,
   ExpeditionCardHead,
   ExpeditionCardImage,
+  ExpeditionCardImageWrap,
+  ExpeditionDetailsButton,
   ExpeditionGrid,
   ExpeditionStatRow,
   ShowcaseSection,
@@ -50,12 +53,21 @@ const ShowcaseExpeditions = () => {
         {expeditions.map((e) => {
           const color = getBaseColorByScale(e.level);
           return (
-            <ExpeditionCard key={e.id} $borderColor={color}>
+            <ExpeditionCard
+              key={e.id}
+              $borderColor={color}
+              style={{ "--accent": color } as CSSProperties}
+            >
               {e.imageUrl && (
-                <ExpeditionCardImage
-                  src={e.imageUrl}
-                  alt={getLocalized(e.settings?.title, locale)}
-                />
+                <ExpeditionCardImageWrap>
+                  <ExpeditionCardImage
+                    src={e.imageUrl}
+                    alt={getLocalized(e.settings?.title, locale)}
+                  />
+                  <ExpeditionCardBadge>
+                    <GalleryItemScaleComponent scale={e.level} />
+                  </ExpeditionCardBadge>
+                </ExpeditionCardImageWrap>
               )}
               <ExpeditionCardBody>
                 <ExpeditionCardHead>
@@ -67,10 +79,6 @@ const ShowcaseExpeditions = () => {
                     {getLocalized(e.settings.description, locale)}
                   </ExpeditionCardDesc>
                 )}
-                <ExpeditionStatRow>
-                  <span>{L("Level", "Уровень")}</span>
-                  <GalleryItemScaleComponent scale={e.level} />
-                </ExpeditionStatRow>
                 <ExpeditionStatRow>
                   <span>{L("Participants", "Участников")}</span>
                   <span>
@@ -93,6 +101,10 @@ const ShowcaseExpeditions = () => {
                   <span>{L("Duration", "Длительность")}</span>
                   <span>{e.durationHours}h</span>
                 </ExpeditionStatRow>
+
+                <ExpeditionDetailsButton href={`/expeditions/${e.id}`}>
+                  {L("View details", "Смотреть детали")} →
+                </ExpeditionDetailsButton>
               </ExpeditionCardBody>
             </ExpeditionCard>
           );
